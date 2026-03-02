@@ -1,0 +1,128 @@
+.HomeScreen_statSection__2npwm {
+    background-color: var(--primary-color);
+    background-position: 0;
+    background-repeat: no-repeat;
+    background-size: 410px;
+    padding: 100px 0;
+    width: 100%;
+}
+
+.HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE {
+    grid-column-gap: 30px;
+    column-gap: 30px;
+    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0;
+    width: 100%;
+}
+
+.HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE>div {
+    align-items: center;
+    break-inside: avoid-column;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+}
+
+.HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE>div span {
+    color: #181818;
+    font-size: 60px;
+    font-weight: 800;
+    line-height: 62px;
+    margin: 0 0 20px;
+}
+
+.HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE>div p {
+    color: #181818;
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+@media only screen and (max-width: 1419px) {
+    .HomeScreen_statSection__2npwm {
+        background-size: 270px;
+        padding: 60px 0;
+    }
+
+    .HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE>div span {
+        font-size: 50px;
+        line-height: 52px;
+    }
+}
+
+@media only screen and (max-width: 1231px) {
+    .HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE {
+        max-width: 960px;
+    }
+
+    .HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE>div span {
+        font-size: 45px;
+        line-height: 47px;
+    }
+
+    .HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE>div p {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .HomeScreen_statSection__2npwm {
+        background-image: none !important;
+    }
+
+    .HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE {
+        max-width: 720px;
+    }
+
+    .HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE>div span {
+        font-size: 38px;
+        line-height: 40px;
+        margin-bottom: 13px;
+    }
+
+    .HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE>div p {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    .HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 34px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE {
+        max-width: 650px;
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .HomeScreen_statSection__2npwm {
+        background-position: 0 100%;
+        background-size: 280px;
+        padding: 31px 0 36px;
+    }
+
+    .HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE>div p {
+        white-space: pre-wrap;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .HomeScreen_statSection__2npwm .HomeScreen_statsContainer__ah6rE {
+        grid-template-columns: 1fr;
+        width: 90%;
+    }
+}

@@ -1,0 +1,91 @@
+.NotFound_wrapper__kaIf6 {
+  background: #f2f2f2;
+  overflow: hidden;
+  position: relative;
+}
+
+.NotFound_wrapper__kaIf6:after {
+  background: #fff;
+  border-radius: 50%;
+  content: "";
+  height: 100vh;
+  left: 0;
+  margin: auto;
+  opacity: .5;
+  position: absolute;
+  right: 0;
+  top: -240px;
+  width: 70%;
+  z-index: 1;
+}
+
+.NotFound_wrapper__kaIf6 .NotFound_container__gxkP1 {
+  margin: auto;
+  max-width: 1200px;
+  padding: 150px 30px 150px 120px;
+  position: relative;
+  z-index: 2;
+}
+
+.NotFound_wrapper__kaIf6 .NotFound_container__gxkP1 .NotFound_heading1__5SPIO {
+  color: initial;
+  color: var(--primary-color);
+  font-size: 27px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.NotFound_wrapper__kaIf6 .NotFound_container__gxkP1 .NotFound_heading2__kSDqo {
+  color: initial;
+  color: var(--secondary-color);
+  font-size: 55.8px;
+  font-weight: 800;
+  margin: 5px 0;
+  text-transform: uppercase;
+}
+
+.NotFound_wrapper__kaIf6 .NotFound_container__gxkP1 .NotFound_para__nRriz {
+  color: #464646;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.NotFound_wrapper__kaIf6 .NotFound_container__gxkP1 .NotFound_button__5O4fA {
+  background: initial;
+  background: var(--secondary-color);
+  border-radius: 2px;
+  color: #fff;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 800;
+  margin-right: 8px;
+  padding: 13px 42px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.NotFound_wrapper__kaIf6 .NotFound_container__gxkP1 .NotFound_button__5O4fA.NotFound_yellow__hkEXr {
+  background: initial;
+  background: var(--primary-color);
+  color: initial;
+  color: var(--secondary-color);
+}
+
+@media only screen and (max-width: 768px) {
+  .NotFound_wrapper__kaIf6:after {
+    top: 0;
+    width: 100%;
+  }
+
+  .NotFound_wrapper__kaIf6 .NotFound_container__gxkP1 {
+    padding: 150px 40px;
+  }
+}
+
+@media only screen and (max-width: 639px) {
+  .NotFound_wrapper__kaIf6 .NotFound_container__gxkP1 .NotFound_button__5O4fA {
+    display: block;
+    margin-bottom: 8px;
+  }
+}

@@ -1,0 +1,435 @@
+.HomeScreen_registerSection__LKEHw {
+    background-color: var(--primary-color);
+    background-position: 100%;
+    background-repeat: no-repeat;
+    padding: 100px 0;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    max-width: 385px;
+    width: 100%;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n h1 {
+    color: var(--secondary-color);
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 26px;
+    margin: 0 0 50px;
+    text-transform: uppercase;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 310px;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo>div>div {
+    background-color: #fff;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 0;
+    padding: 21.5px;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo>div>div h4 {
+    color: #232323;
+    font-size: 16px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo>div>div p {
+    color: #484848;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 4px 0 0;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n a {
+    align-items: center;
+    color: var(--secondary-color);
+    display: flex;
+    font-size: 16px;
+    font-weight: 800;
+    margin-top: 25px;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n a svg {
+    height: 15px;
+    margin-left: 10px;
+    width: 25px;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_listContainer__AQf28 {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+    max-width: 385px;
+    width: 100%;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n h1 {
+    color: var(--secondary-color);
+    color: var(--secondary-color);
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 26px;
+    margin: 0 0 50px;
+    text-transform: uppercase;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n h2 {
+    color: var(--secondary-color);
+    color: var(--secondary-color);
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 26px;
+    margin: 0 0 50px;
+    text-transform: uppercase;
+}
+
+.ListCard_listContainer__dQYSB {
+    background-color: #fff;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    max-width: 385px;
+    min-height: 310px;
+    overflow-y: auto;
+    padding: 27px 20px 15px;
+    width: 100%;
+}
+
+.ListCard_listContainer__dQYSB .ListCard_listItems__-IQDE {
+    align-items: flex-start;
+    display: flex;
+    margin: 0 0 3px;
+    padding: 0;
+}
+
+.ListCard_listContainer__dQYSB .ListCard_listItems__-IQDE p {
+    color: #232323;
+    font-size: 16px;
+    font-weight: 800;
+    margin: 0 0 5px;
+    padding: 0;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl input {
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl {
+    background-color: #fff;
+    border-radius: 2px;
+    height: 100%;
+    min-height: 310px;
+    padding: 35px 20px 30px;
+    width: 100%;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl .HomeScreen_subscribeForm__t-7s7 {
+    margin: 0;
+    width: 100%;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl input {
+    background-color: #eef1f4;
+    border: none;
+    border-radius: 2px;
+    height: 50px;
+    margin: 10px 0;
+    outline: none;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl button {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 700;
+    height: 50px;
+    margin-top: 15px;
+    padding: 0 20px;
+    text-transform: uppercase;
+    transition: .3s;
+    width: 100%;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl button:hover {
+    background-color: #fff !important;
+    border: 1px solid var(--primary-color);
+    border-color: initial;
+    color: var(--primary-color);
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl h3 {
+    color: #181818;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin: 0 0 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_hiddentext__QHgxf {
+    margin: 0px 0 51px;
+    visibility: hidden;
+}
+
+@media only screen and (max-width: 1419px) {
+    .HomeScreen_registerSection__LKEHw {
+        padding: 60px 0;
+    }
+}
+
+@media only screen and (max-width: 1231px) {
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n {
+        max-width: 960px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo {
+        max-width: 320px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo>div>div h4 {
+        font-size: 13px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo>div>div p {
+        font-size: 13px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n h1 {
+        font-size: 24px;
+    }
+
+    .HomeScreen_wholeContainer__oE8Au .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n h2 {
+        font-size: 24px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n a {
+        font-size: 14px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_listContainer__AQf28 {
+        max-width: 320px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl {
+        padding: 23px 20px 30px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl h3 {
+        font-size: 18px;
+    }
+
+    .ListCard_listContainer__dQYSB .ListCard_listItems__-IQDE p {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 1231px) and (max-width: 991px) {
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl h3 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_hiddentext__QHgxf {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1231px) and (max-width: 639px) {
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl h3 {
+        font-size: 22px;
+        margin-bottom: 10px;
+        margin-top: 16px;
+    }
+}
+
+@media only screen and (max-width: 1231px) and (max-width: 430px) {
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl h3 {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo>div {
+        min-height: 290px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo>div>div h4 {
+        font-size: 13px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo>div>div p {
+        font-size: 13px;
+    }
+
+    .ListCard_listContainer__dQYSB {
+        min-height: 290px;
+        padding: 15px 20px;
+    }
+
+
+    .ListCard_listContainer__dQYSB .ListCard_listItems__-IQDE {
+        margin: 0px 0 0px;
+    }
+
+    .ListCard_listContainer__dQYSB .ListCard_listItems__-IQDE p {
+        font-size: 14px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl {
+        min-height: 290px;
+        padding-top: 25px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl h3 {
+        font-size: 15px;
+        margin: 0px 0 10px;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (max-width: 991px) {
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl {
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (max-width: 639px) {
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl {
+        padding: 20px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n {
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 720px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo {
+        max-width: none;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n h1 {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n h2 {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n a {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_listContainer__AQf28 {
+        margin-top: 30px;
+        max-width: none;
+    }
+
+    .ListCard_listContainer__dQYSB {
+        max-width: none;
+        min-height: auto;
+    }
+
+    .ListCard_listContainer__dQYSB .ListCard_listItems__-IQDE p {
+        font-size: 16px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q {
+        margin-top: 26px;
+        max-width: none;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n {
+        max-width: 650px;
+        width: 90%;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_listContainer__AQf28 {
+        margin-top: 20px;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .HomeScreen_registerSection__LKEHw {
+        padding: 40px 0;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo>div {
+        min-height: auto;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_expertSpeakers__Zs1Eo>div>div {
+        margin-bottom: 20px;
+        padding: 16px 21.5px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n a svg {
+        height: 10px;
+        width: 18px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_listContainer__AQf28 {
+        margin-top: 11px;
+    }
+
+    .HomeScreen_registerSection__LKEHw .HomeScreen_registerContainer__X9V4n .HomeScreen_cardContainer__dWb-Q .HomeScreen_card__eORgl button {
+        font-size: 16.53px;
+        margin-bottom: 18px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .ListCard_listContainer__dQYSB .ListCard_listItems__-IQDE p {
+        font-size: 14px;
+    }
+}

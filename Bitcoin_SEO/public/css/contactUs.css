@@ -1,0 +1,208 @@
+.ContactUs_bg__MKqvU {
+    background-color: #f1f1f1;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 100px 0 80px;
+    width: 100%;
+}
+
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 {
+    color: #181818;
+    display: flex;
+    font-size: 36px;
+    font-weight: 800;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 img {
+    height: auto;
+    margin-right: 20px;
+    width: 58px;
+}
+
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 span {
+    color: #181818;
+    margin: 5px 0 0;
+    padding: 0;
+}
+
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD p {
+    color: #181818;
+    font-size: 16px;
+    font-weight: 500;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 38px auto 43px;
+    text-align: center;
+    width: 91%;
+}
+
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1240px;
+    width: 100%;
+}
+
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv {
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    padding: 45px;
+    width: 49%;
+}
+
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv h5 {
+    color: var(--primary-color);
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0 0 30px;
+    padding: 0;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv h6 {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0 0 5px;
+    padding: 0;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv p {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 18px;
+    padding: 0;
+    text-align: left;
+}
+
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv a {
+    align-items: center;
+    color: #fff;
+    display: flex;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv a img {
+    margin-right: 15px;
+}
+
+
+@media only screen and (max-width: 1419px) {
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD {
+        padding: 60px 0;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 1231px) {
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD {
+        flex-wrap: wrap;
+        max-width: 960px;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv {
+        padding: 35px;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv h5 {
+        font-size: 20px;
+        margin-bottom: 25px;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv h6 {
+        font-size: 18px;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv p {
+        font-size: 15px;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv a {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD {
+        max-width: 720px;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 {
+        font-size: 28px;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym {
+        flex-direction: column;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD {
+        max-width: 650px;
+        width: 90%;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 img {
+        width: 45px;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD {
+        padding: 40px 0 20px;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 {
+        font-size: 22px;
+        line-height: 25px;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 img {
+        width: 33px;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD p {
+        line-height: 25px;
+        margin: 15px auto 18px;
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv h5 {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD .ContactUs_emailCardContainer__Kg2ym .ContactUs_emailCard__YpEIv h6 {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+}

@@ -1,0 +1,443 @@
+/* Main wrapper */
+.leader-slider-section {
+    padding: 3rem 0;
+    background-color: #2c2c2c;
+    position: relative;
+    overflow: visible !important;
+}
+
+.leader-slider-section .container {
+    position: relative;
+    overflow: visible !important;
+    z-index: 1;
+}
+
+/* Section title */
+.leader-title {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 3rem;
+}
+
+/* Leader card */
+.leader-card {
+    background: white;
+    height: 250px;
+    min-height: 250px;
+    max-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    margin: 1rem;
+    border-radius: 2px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+/* Image inside card */
+.leader-img {
+    max-height: 80px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Swiper arrows color */
+.swiper-button-next,
+.swiper-button-prev {
+    color: white;
+}
+
+
+.swiper-button-prev {
+    left: -70px;
+    /* move further if needed */
+}
+
+.swiper-button-next {
+    right: -70px;
+}
+
+/* new css */
+
+.PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX {
+    background-color: #f1f1f1;
+    padding: 92px 0 100px;
+}
+
+.PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX h1 {
+    color: #181818;
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA {
+    margin-top: 40px;
+}
+
+.PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs {
+    grid-gap: 20px;
+    display: grid !important;
+    grid-template-columns: repeat(3, 385px);
+    grid-template-rows: repeat(4, 250px);
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs .PastAttendees_card__vhIWG {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 3px 5px 14px -5px #00000026;
+    -webkit-box-shadow: 3px 5px 14px -5px #00000026;
+    -moz-box-shadow: 3px 5px 14px -5px #00000026;
+    break-inside: avoid-column;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs .PastAttendees_card__vhIWG img {
+    max-height: 50%;
+    object-fit: contain;
+    width: 50%;
+}
+
+.PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs .PastAttendees_card__vhIWG .PastAttendees_overlay__IOoZm {
+    align-items: center;
+    background-color: #464646;
+    border-radius: 2px;
+    color: #000000;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    opacity: 0;
+    padding: 0 10px;
+    position: absolute;
+    top: 0;
+    transition: opacity .2s ease;
+    width: 100%;
+}
+
+.PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs .PastAttendees_card__vhIWG:hover .PastAttendees_overlay__IOoZm {
+    opacity: 1;
+    color: var(--primary-color);
+    font-size: 30px;
+    font-weight: 700;
+    text-shadow: 3px 3px 8px #00000099;
+    text-align: center;
+}
+
+.Operators_container__Pn2Qp {
+    background-color: #181818;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw {
+    margin: 0 auto;
+    max-width: 1920px;
+    padding: 92px 0 100px;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw h1 {
+    color: #181818;
+    color: #fff;
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 40px auto 0;
+    padding: 0;
+    width: 75%;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD button {
+    background: #0000;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD button svg {
+    height: 35px;
+    width: 35px;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD div {
+    width: 100%;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S {
+    grid-gap: 20px;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S:last-child {
+    margin-bottom: 0;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S .Operators_card__YB2Bt {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 3px;
+    break-inside: avoid-column;
+    cursor: pointer;
+    display: flex;
+    height: 250px;
+    justify-content: center;
+    position: relative;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S .Operators_card__YB2Bt img {
+    max-height: 50%;
+    object-fit: contain;
+    width: 50%;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S .Operators_card__YB2Bt .Operators_overlay__A7m4i {
+    align-items: center;
+    background-color: #464646;
+    border-radius: 3px;
+    color: #fff;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: opacity .3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S .Operators_card__YB2Bt:hover .Operators_overlay__A7m4i {
+    opacity: 1;
+    color: var(--primary-color);
+    font-size: 30px;
+    font-weight: 700;
+    text-shadow: 3px 3px 8px #00000099;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1619px) {
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div {
+        margin: 0 20px;
+    }
+}
+
+@media only screen and (max-width: 1419px) {
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX {
+        padding: 60px 0;
+    }
+
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX h1 {
+        font-size: 30px;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw {
+        padding: 60px 0;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw h1 {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 1339px) {
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 1231px) {
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs {
+        grid-template-columns: repeat(3, 300px);
+        max-width: 960px;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S {
+        max-width: 960px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX h1 {
+        font-size: 28px;
+    }
+
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs {
+        grid-template-columns: repeat(3, 225px);
+        grid-template-rows: repeat(4, 200px);
+        max-width: 720px;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw h1 {
+        font-size: 28px;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S {
+        max-width: 720px;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S .Operators_card__YB2Bt {
+        height: 200px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 180px);
+        max-width: 650px;
+        width: 90%;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S {
+        max-width: 650px;
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX {
+        padding: 36px 0 40px;
+    }
+
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX h1 {
+        font-size: 22px;
+        line-height: 25px;
+    }
+
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA {
+        margin: 13px 20px 0;
+    }
+
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs {
+        grid-template-columns: repeat(2, 200px);
+        grid-template-rows: repeat(3, 134px);
+        margin-bottom: 0;
+        width: 90%;
+    }
+
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs .PastAttendees_card__vhIWG:hover .PastAttendees_overlay__IOoZm {
+        font-size: 17px;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw {
+        padding-bottom: 60px;
+        padding-top: 36px;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw h1 {
+        font-size: 22px;
+        line-height: 25px;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD {
+        margin-top: 14px;
+        position: relative;
+        width: 90%;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD button {
+        bottom: -47.5px;
+        position: absolute;
+        right: 0;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD button:first-child {
+        right: 8%;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD button svg {
+        height: 30px;
+        width: 30px;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S .Operators_card__YB2Bt {
+        height: 132px;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S .Operators_card__YB2Bt:hover .Operators_overlay__A7m4i {
+        font-size: 17px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD button {
+        right: -10px;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S .Operators_card__YB2Bt {
+        height: 120px;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs {
+        grid-template-columns: repeat(2, 180px);
+        grid-template-rows: repeat(3, 120px);
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 150px);
+    }
+
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs .PastAttendees_card__vhIWG {
+        min-width: 300px;
+        width: 100%;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S {
+        display: flex !important;
+        flex-wrap: wrap;
+    }
+
+    .Operators_container__Pn2Qp .Operators_AttendeesContainer__ZP8rw .Operators_cardContainerOuter__A0koD>div .Operators_cardContainerInner__Cmd5S .Operators_card__YB2Bt {
+        height: 100px;
+        width: calc(50% - 10px);
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .PastAttendees_container__DHaT5 .PastAttendees_AttendeesContainer__BeIwX .PastAttendees_cardContainerOuter__yeePA .PastAttendees_cardContainerInner__i-ICs .PastAttendees_card__vhIWG {
+        min-width: auto;
+    }
+}

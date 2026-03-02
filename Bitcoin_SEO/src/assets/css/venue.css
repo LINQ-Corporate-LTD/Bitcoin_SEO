@@ -1,0 +1,1016 @@
+.venue-container {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+
+.venue-image {
+  height: 800px;
+  object-fit: cover;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.venue-content {
+  padding: 60px 40px;
+  background-color: #f5f5f5;
+  height: 723px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 24px;
+  margin-left: 10px;
+}
+
+.conact_set {
+  padding: 60px 40px;
+
+  height: 523px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 24px;
+  margin-left: 10px;
+}
+
+.venue-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  z-index: 2;
+
+}
+
+.venue-subtitle {
+  font-size: 20px;
+  font-weight: 800;
+  font-weight: 600;
+  color: #2c2c2c;
+  margin-bottom: 2rem;
+}
+
+.venue-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4a4a4a;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-family: Montserrat, sans-serif;
+}
+
+.venue-link {
+  color: #2c2c2c;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.venue-link:hover {
+  color: #000;
+}
+
+.more-info-btn {
+  background-color: #2c2c2c;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 25px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-top: 4rem;
+  transition: all 0.3s ease;
+}
+
+.more-info-btn:hover {
+  background-color: #e6e6e6;
+  color: #000;
+
+}
+
+.venue-cta {
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .venue-content {
+    padding: 40px 30px;
+    height: auto;
+  }
+
+
+
+  .venue-title {
+    font-size: 28px;
+    font-weight: 800;
+    z-index: 2;
+
+  }
+
+  .venue-image {
+    height: 300px;
+  }
+
+  .venue-cta {
+    z-index: 2;
+  }
+}
+
+@media (max-width: 576px) {
+  .venue-title {
+    font-size: 2rem;
+  }
+
+  .venue-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .venue-content {
+    padding: 30px 20px;
+  }
+}
+
+
+
+
+
+
+
+
+
+.venue-gallery {
+  background-color: #1a1a1a;
+  padding: 60px 0;
+  min-height: 100vh;
+}
+
+.gallery-title {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 50px;
+  letter-spacing: 2px;
+}
+
+.gallery-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  /* Changed to accommodate row 2 reverse layout */
+  grid-template-rows: auto auto auto;
+  gap: 15px;
+  height: 700px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+  /* transition: transform 0.3s ease; */
+}
+
+.gallery-item:hover {
+  /* transform: scale(1.02); */
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* transition: transform 0.3s ease; */
+}
+
+.gallery-item:hover img {
+  /* transform: scale(1.1); */
+}
+
+/* First Row: Large left, Small right */
+.item-1 {
+  grid-column: 1 / 3;
+  /* Span both columns */
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 15px;
+}
+
+/* Second Row: Small left, Large right (reverse of row 1) */
+.item-2 {
+  grid-column: 1 / 3;
+  /* Span both columns */
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 15px;
+}
+
+/* Third Row: Large left, Small right */
+.item-3 {
+  grid-column: 1 / 3;
+  /* Span both columns */
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 15px;
+}
+
+.row-item {
+  position: relative;
+  height: 275px;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+  /* transition: transform 0.3s ease; */
+}
+
+.row-item:hover {
+  /* transform: scale(1.02); */
+}
+
+.row-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* transition: transform 0.3s ease; */
+}
+
+.row-item:hover img {
+  /* transform: scale(1.1); */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+
+  /* .gallery-item{
+              display: block;
+            } */
+
+  /* .img_70{
+              width: 70%;
+            }
+            .img_30{
+              width: 30%;
+            } */
+  .gallery-grid {
+    height: auto;
+  }
+
+  .item-1 {
+    display: block;
+  }
+
+  .item-2 {
+    display: block;
+  }
+
+  .item-3 {
+    display: block;
+  }
+
+  .row-item {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .venue-gallery {
+    padding: 40px 0;
+  }
+
+  .gallery-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+
+  .gallery-container {
+    padding: 0 15px;
+  }
+}
+
+
+
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.venue-contact {
+  position: relative;
+  background-image: url("https://www.frac-sand-conference.com/static/media/venue-image.ad9c328038bb8cdfb219.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 523px;
+}
+
+.venue-contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(1px);
+}
+
+.venue-container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+}
+
+.venue-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  font-weight: 800;
+  text-align: left;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.venue-card-wrapper {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.venue-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 2rem;
+  border-radius: 4px;
+  flex: 1 1 320px;
+  max-width: 450px;
+}
+
+.venue-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.venue-location,
+.venue-contact-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.venue-location i,
+.venue-contact-item i {
+  color: #333;
+  margin-top: 4px;
+}
+
+.venue-contact-item a {
+  color: #555;
+  text-decoration: none;
+}
+
+.venue-contact-item a:hover {
+  color: #000;
+}
+
+.venue-cta {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.venue-btn {
+  background-color: #333;
+  color: white;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.venue-btn:hover {
+  background-color: #222;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+  .venue-contact {
+
+    height: 990px;
+  }
+
+  .venue-content h1 {
+    font-size: 24px;
+    text-align: left;
+    font-weight: 800;
+
+  }
+
+  .venue-content h2 {
+    font-size: 28px;
+    font-weight: 800;
+  }
+
+  .venue-content p {
+    line-height: 26px;
+    font-weight: 600;
+  }
+
+  .des_set {
+    width: 79%;
+  }
+
+  .des_set a {
+    width: 100%;
+    margin-left: 4px;
+  }
+
+  .venue-card-title {
+    font-size: 24px;
+    font-weight: 800;
+  }
+
+  .venue-location-info {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .venue-card-wrapper {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .venue-card {
+    max-width: 100%;
+    /* height: 400px; */
+  }
+}
+
+@media (max-width: 480px) {
+  .venue-title {
+    font-size: 1.5rem;
+  }
+
+  .venue-btn {
+    padding: 0.8rem 2rem;
+    font-size: 0.95rem;
+  }
+}
+
+
+/* new css */
+
+.Venue_container__Lol8U {
+  margin: 0px auto;
+  width: 100%;
+}
+
+.DetailsContainer_wholeContainer__385Iv {
+  background-color: rgb(241, 241, 241);
+}
+
+.DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX {
+  align-items: stretch;
+  display: flex;
+  margin: 0px auto;
+  max-width: 1920px;
+}
+
+.DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_imageContainer__ncJwH {
+  background-color: rgb(229, 229, 229);
+  background-position: 50% center;
+  background-repeat: no-repeat;
+  background-size: 60%;
+  height: auto;
+  min-height: 590px;
+  width: 50%;
+}
+
+.DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 92px 125px 100px;
+  width: 50%;
+}
+
+.DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF h1 {
+  color: rgb(24, 24, 24);
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0px;
+  text-transform: uppercase;
+}
+
+.DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF .DetailsContainer_innerContent__6NQGR {
+  margin: 35px 0px 45px;
+  padding: 0px;
+}
+
+.DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF .DetailsContainer_innerContent__6NQGR h4 {
+  margin-bottom: 50px !important;
+}
+
+.DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF .DetailsContainer_innerContent__6NQGR h4 {
+  color: rgb(24, 24, 24);
+  font-size: 20px;
+  font-weight: 800;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+  text-transform: capitalize;
+  margin-bottom: 37px !important;
+}
+
+.DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF .DetailsContainer_innerContent__6NQGR p {
+  color: rgb(24, 24, 24);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 28px;
+  margin: 0px 0px 30px;
+  padding: 0px;
+}
+
+.DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF .DetailsContainer_innerContent__6NQGR a {
+  color: #181818;
+  display: block;
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: underline !important;
+}
+
+.DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF button {
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 2px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 800;
+  height: 84px;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF button:hover {
+  background-color: #e4e4e4;
+  color: var(--secondary-color);
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.LightBox_fluid__uvDPj {
+  background-color: var(--secondary-color);
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod {
+  margin: 0px auto;
+  max-width: 1920px;
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 {
+  display: flex;
+  flex-direction: column;
+  margin: 0px auto;
+  max-width: 1200px;
+  padding: 96px 0px 100px;
+  width: 100%;
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 h2 {
+  color: rgb(255, 255, 255);
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 40px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242>div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242>div img {
+  border-radius: 2px;
+  cursor: pointer;
+  height: 275px;
+  object-fit: cover;
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_top__L68\+7 {
+  padding-bottom: 20px;
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_top__L68\+7 img {
+  width: 68%;
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_top__L68\+7 img:nth-child(2) {
+  width: 30%;
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_middle__k7r70 {
+  padding-bottom: 20px;
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_middle__k7r70 img:first-child {
+  width: 30%;
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_middle__k7r70 img {
+  width: 68%;
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_bottom__x1J0A img {
+  width: 68%;
+}
+
+.LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_bottom__x1J0A img:nth-child(2) {
+  width: 30%;
+}
+
+.Venue_container__Lol8U .Venue_contact__jdZNn {
+  align-items: center;
+  background-image: url("https://www.frac-sand-conference.com/static/media/venue-map.80be872b7b97e3143370.png");
+  background-position: 50% center;
+  background-size: cover;
+  display: flex;
+  flex-flow: column;
+  padding-bottom: 104px;
+  padding-top: 95px;
+}
+
+.Venue_container__Lol8U .Venue_contact__jdZNn h2 {
+  color: rgb(24, 24, 24);
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 80%;
+}
+
+.Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R {
+  display: flex;
+  justify-content: center;
+  margin: 42px 0px 50px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R>div {
+  background-color: rgb(255, 255, 255);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  margin: 0px 35px;
+  min-height: 204px;
+  padding: 45px 40px 38.21px;
+  width: 500px;
+}
+
+.Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R>div:first-child {
+  margin-left: 0px;
+}
+
+.Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R>div h5 {
+  color: var(--secondary-color);
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0px 0px 27px;
+  text-transform: uppercase;
+}
+
+.Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R>div p {
+  align-items: flex-start;
+  color: var(--secondary-color);
+  display: flex;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 32px;
+  margin: 0px;
+  padding: 0px;
+  white-space: nowrap;
+}
+
+.Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R>div p a {
+  color: var(--secondary-color);
+}
+
+.Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R>div p img {
+  margin: 5px 10px 0px 0px;
+  padding: 0px;
+  width: 18px;
+}
+
+.Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R>div:last-child {
+  margin-right: 0px;
+}
+
+.Venue_container__Lol8U .Venue_contact__jdZNn>a {
+  align-items: center;
+  background-color: var(--secondary-color);
+  border: 1px solid #0000;
+  border-radius: 2px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  font-size: 20px;
+  font-weight: 800;
+  height: 50px;
+  justify-content: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: .3s;
+  width: 280px;
+}
+
+.Venue_container__Lol8U .Venue_contact__jdZNn>a:hover {
+  background-color: #e4e4e4;
+  border: 1px solid #0000;
+  color: var(--secondary-color);
+}
+
+@media only screen and (max-width: 1619px) {
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF {
+    padding: 60px 100px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 {
+    max-width: 1200px;
+  }
+}
+
+@media only screen and (max-width: 1419px) {
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF {
+    padding: 40px 70px;
+  }
+
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF h1 {
+    font-size: 28px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 {
+    padding: 60px 0px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 h2 {
+    font-size: 30px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn {
+    padding: 60px 0px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn h2 {
+    font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 1339px) {
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF {
+    padding: 40px 50px;
+  }
+
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF {
+    padding: 40px 50px;
+  }
+
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF button {
+    height: 77px;
+  }
+}
+
+@media only screen and (max-width: 1231px) {
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 {
+    max-width: 960px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R {
+    justify-content: space-between;
+    max-width: 960px;
+  }
+}
+
+@media only screen and (max-width: 1179px) {
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF button {
+    height: 65px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF h1 {
+    font-size: 28px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 {
+    max-width: 720px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 h2 {
+    font-size: 28px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn h2 {
+    font-size: 28px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R {
+    align-items: center;
+    flex-direction: column;
+    max-width: 720px;
+    padding: 0px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R>div {
+    width: 100%;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R>div:first-child {
+    margin: auto auto 20px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R>div:last-child {
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 940px) {
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX {
+    flex-direction: column;
+  }
+
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_imageContainer__ncJwH {
+    height: 65vh;
+    max-height: 550px;
+    min-height: 400px;
+    width: 100%;
+  }
+
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF {
+    padding: 40px 20px;
+    width: 100%;
+  }
+
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF button {
+    font-size: 16.5px;
+    height: 52px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF h1 {
+    font-size: 24px;
+  }
+
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF .DetailsContainer_innerContent__6NQGR {
+    margin: 36px 0px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 {
+    max-width: 650px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R {
+    max-width: 650px;
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 639px) {
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_imageContainer__ncJwH {
+    max-height: 400px;
+  }
+
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF h1 {
+    font-size: 22px;
+    line-height: 25px;
+  }
+
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF .DetailsContainer_innerContent__6NQGR {
+    margin: 10px 0px 20px;
+  }
+
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF .DetailsContainer_innerContent__6NQGR h4 {
+    line-height: 25px;
+    margin-bottom: 10px !important;
+  }
+
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF .DetailsContainer_innerContent__6NQGR h4 {
+    font-size: 18px;
+    margin-bottom: 5px !important;
+  }
+
+  .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textVenueContainer__XnUJF .DetailsContainer_innerContent__6NQGR p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod {
+    padding: 0px 20px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 {
+    padding: 38px 0px 40px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 h2 {
+    font-size: 22px;
+    line-height: 25px;
+    margin-bottom: 25px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242>div {
+    flex-direction: column;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242>div img {
+    object-fit: cover;
+    padding-bottom: 22px;
+    width: 100% !important;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_top__L68\+7 {
+    padding-bottom: 0px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_top__L68\+7 img:first-child {
+    padding-right: 0px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_middle__k7r70 {
+    padding-bottom: 0px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_middle__k7r70 img:first-child {
+    padding-right: 0px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_bottom__x1J0A img:first-child {
+    padding-right: 0px;
+  }
+
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_bottom__x1J0A img:nth-child(2) {
+    padding-bottom: 0px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn {
+    padding: 35px 0px 40px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn h2 {
+    font-size: 22px;
+    line-height: 25px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R {
+    margin: 13px 0px 20px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R>div h5 {
+    margin-bottom: 20px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn>a {
+    font-size: 16.5px;
+    width: calc(100% - 40px);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .LightBox_fluid__uvDPj .LightBox_container__pMpod .LightBox_images__L7242 .LightBox_bottom__x1J0A img:first-child {
+    padding-bottom: 20px;
+  }
+
+  .Venue_container__Lol8U .Venue_contact__jdZNn .Venue_cardsContainer__U8T\+R>div {
+    padding: 32px 20px;
+  }
+}

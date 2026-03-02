@@ -1,0 +1,481 @@
+/* new css */
+
+.HomeScreen_wholeContainer__oE8Au {
+    margin: 0 auto;
+}
+
+.home-banner-container {
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    padding: 100px 0 0;
+    position: relative;
+}
+
+.home-banner-container .videoContainer {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+.home-banner-container .videoContainer>div {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.home-banner-container .videoContainer>div .overlay {
+    background: var(--linearGradient-color);
+    height: 100%;
+    left: 0;
+    opacity: .8;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.home-banner-container .videoContainer>div .video {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.home-banner-container .innerContainer {
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    justify-content: space-between;
+    justify-content: flex-end;
+    max-height: 900px;
+    max-width: 1920px;
+    position: relative;
+    width: 100%;
+}
+
+.home-banner-container .innerContainer .upper {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.home-banner-container .innerContainer .upper .graphic {
+    align-items: center;
+    background-position-x: 16%;
+    background-repeat: no-repeat;
+    background-size: 480px;
+    display: flex;
+    min-height: 372px;
+    position: relative;
+    width: 100%;
+}
+
+.home-banner-container .innerContainer .upper .graphic .text {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding-left: 43px;
+    position: relative !important;
+    width: 90%;
+}
+
+.home-banner-container .innerContainer .upper .graphic .text:before {
+    height: 419px;
+    left: -137px;
+    top: -97px;
+}
+
+.custom-style-header-text::before {
+    content: "";
+    background-image: var(--header-image);
+}
+
+.home-banner-container .innerContainer .upper .graphic .text:before {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: "";
+    height: 479px;
+    left: -177px;
+    position: absolute;
+    top: -90px;
+    width: 630px;
+    z-index: -1;
+}
+
+body .home-banner-container .innerContainer .upper .graphic .text:before {
+    height: 419px;
+    left: -137px;
+    top: -97px;
+}
+
+body .home-banner-container .innerContainer .upper .graphic .text h1 {
+    color: #fff;
+    max-width: 752px;
+}
+
+.home-banner-container .innerContainer .upper .graphic .text h1 {
+    color: initial;
+    color: var(--primary-color);
+    font-size: 60px;
+    font-weight: 800;
+    line-height: 60px;
+    margin: 0;
+    max-width: 597px;
+    text-shadow: 4px 4px 9px #00000080;
+    text-transform: uppercase;
+    transform: scalex(.9);
+    transform-origin: left center;
+}
+
+.home-banner-container .innerContainer .upper .graphic .text span {
+    color: var(--primary-color);
+}
+
+.home-banner-container .innerContainer .upper .graphic .text p {
+    color: #fff;
+    font-size: 23.4px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    white-space: nowrap;
+}
+
+.home-banner-container .innerContainer .upper .graphic .text .HeaderTextSm {
+    display: none;
+}
+
+.home-banner-container .innerContainer .lower {
+    width: 100%;
+    z-index: 2;
+}
+
+.home-banner-container .innerContainer .lower .lowerContainer .buttonContainer {
+    background-color: rgba(0, 0, 0, .431);
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 10px;
+    width: 90%;
+}
+
+.home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button {
+    align-items: flex-start;
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+    max-width: 370px;
+    min-height: 80px;
+    padding: 0 20px;
+    transition: all .3s ease;
+    width: 100%;
+}
+
+.home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button:hover {
+    background-color: #ffffff;
+}
+
+.home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button h4 {
+    align-items: center;
+    color: #fff;
+    display: flex;
+    font-size: 20px;
+    font-weight: 768;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    transition: all .3s ease;
+}
+
+.home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button:hover h4 {
+    color: var(--secondary-color);
+}
+
+.home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button h4 img {
+    margin-left: 15px;
+    transition: all .1s ease;
+    width: 15px;
+}
+
+.home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button:hover h4 img {
+    content: url('https://www.desalination-resource-recovery.com/images/icons/up-arrow-hover.png');
+}
+
+.home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button p {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all .3s ease;
+}
+
+.home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button:hover p {
+    color: var(--secondary-color);
+}
+
+@media only screen and (max-width: 1460px) {
+    .home-banner-container .innerContainer .upper .graphic .text:before {
+        height: 329px;
+        left: -89px;
+        top: -45px;
+        width: 391px;
+    }
+
+    body .home-banner-container .innerContainer .upper .graphic .text:before {
+        height: 329px;
+        left: -42px;
+        top: -89px;
+    }
+
+
+    body .home-banner-container .innerContainer .upper .graphic .text h1 {
+        color: #fff;
+        max-width: 410px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text h1 {
+        font-size: 50px;
+        font-size: 40px;
+        line-height: 50px;
+        line-height: 40px;
+        margin-top: 0;
+        max-width: 418px;
+        width: 100%;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text p {
+        font-size: 21px;
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 1366px) {
+    .home-banner-container .innerContainer .upper .graphic .text:before {
+        height: 329px;
+        left: -89px;
+        top: -45px;
+        width: 391px;
+    }
+}
+
+@media only screen and (max-width: 1179px) {
+    .home-banner-container .innerContainer .upper .graphic .text p {
+        font-size: 20px;
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 1080px) {
+    .home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button h4 {
+        font-size: 18px;
+    }
+
+    .home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button p {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    .home-banner-container .innerContainer {
+        height: auto;
+        min-height: 665px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text {
+        padding-left: 50px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text:before {
+        height: 329px;
+        left: -89px;
+        top: -45px;
+        width: 391px;
+    }
+
+    body .home-banner-container .innerContainer .upper .graphic .text:before {
+        height: 306px;
+        left: -42px;
+        top: -87px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text h1 {
+        font-size: 35px;
+        line-height: 35px;
+        max-width: 380px;
+        width: 100%;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text p {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .home-banner-container .innerContainer .lower .lowerContainer .buttonContainer {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button {
+        margin: 0 auto 10px;
+        max-width: none;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 1000px) {
+    .home-banner-container .innerContainer {
+        height: 67.5vh;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .home-banner-container .innerContainer .lower .lowerContainer .buttonContainer {
+        padding: 15px;
+    }
+
+    .home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button {
+        height: 70px;
+    }
+
+    .home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button h4 {
+        font-size: 20px;
+    }
+
+    .home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button p {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .home-banner-container .innerContainer {
+        min-height: 658px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text {
+        padding-left: 60px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text:before {
+        height: 257px;
+        left: -100px;
+        top: -21px;
+        width: 391px;
+    }
+
+    body .home-banner-container .innerContainer .upper .graphic .text:before {
+        left: -32px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .home-banner-container .innerContainer .upper .graphic .text {
+        padding-left: 60px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text:before {
+        height: 280px;
+        left: -100px;
+        top: -21px;
+        width: 391px;
+    }
+
+    body .home-banner-container .innerContainer .upper .graphic .text:before {
+        top: -80px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text h1 {
+        max-width: 349px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text p {
+        margin-top: 10px;
+        white-space: pre-wrap;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text .HeaderTextLg {
+        display: none;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text .HeaderTextSm {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button {
+        height: 65px;
+    }
+
+    .home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button h4 {
+        font-size: 16px;
+    }
+
+    .home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button h4 img {
+        margin-left: 12px;
+        width: 12px;
+    }
+
+    .home-banner-container .innerContainer .lower .lowerContainer .buttonContainer .button p {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 517px) {
+    .home-banner-container .innerContainer .upper .graphic .text {
+        padding-left: 55px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text:before {
+        height: 249px;
+        left: -100px;
+        top: -21px;
+        width: 391px;
+    }
+
+    body .home-banner-container .innerContainer .upper .graphic .text:before {
+        height: 276px;
+        left: -42px;
+        top: -75px;
+    }
+
+
+    body .home-banner-container .innerContainer .upper .graphic .text h1 {
+        color: #fff;
+        max-width: 410px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text h1 {
+        font-size: 27px;
+        line-height: 27px;
+        max-width: 313px;
+        text-shadow: 3px 4px 5px #00000080;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .home-banner-container .innerContainer {
+        min-height: 600px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic {
+        min-height: 320px;
+    }
+
+    .home-banner-container .innerContainer .upper .graphic .text p {
+        font-size: 14px;
+        letter-spacing: 0;
+        margin-top: 25px;
+    }
+
+    body .home-banner-container .innerContainer .upper .graphic .text p {
+        margin-top: 10px;
+    }
+}

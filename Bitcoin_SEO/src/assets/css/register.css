@@ -1,0 +1,1384 @@
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+
+html {
+  font-family: "Montserrat", sans-serif;
+} */
+
+/* .container {
+    max-width: 1320px !important;
+} */
+
+.registration-section-fluid {
+  max-width: 1320px !important;
+}
+
+.register_page {
+  background-color: rgb(255, 255, 255);
+}
+
+.active_bird_top {
+  background-color: var(--dark-color);
+}
+
+.btn-1 {
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 2px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 800;
+  height: 84px;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.registration-section {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0px 0px 0px 0px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.registration-title {
+  font-size: 2.3rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.delegate-package {
+  color: #00bfff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.package-description {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 4rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.feature-container {
+  text-align: center;
+}
+
+.feature-item {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  justify-content: flex-start;
+  /* padding: 2rem 1rem; */
+}
+
+.feature-item img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.feature-icon {
+  font-size: 4rem;
+  color: white;
+  margin-bottom: 1.5rem;
+  display: block;
+  box-sizing: border-box;
+}
+
+.feature-text {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Custom icons using CSS */
+.icon-conference::before {
+  content: "👥";
+  font-size: 4rem;
+}
+
+.icon-presentation::before {
+  content: "📊";
+  font-size: 4rem;
+}
+
+.icon-networking::before {
+  content: "🔄";
+  font-size: 4rem;
+}
+
+.icon-reception::before {
+  content: "🍸";
+  font-size: 4rem;
+}
+
+/* Alternative using Font Awesome icons */
+.fa-users-gear {
+  position: relative;
+}
+
+.fa-users-gear::after {
+  content: "\f085";
+  font-family: "Font Awesome 6 Free";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 0.6em;
+}
+
+@media (max-width: 768px) {
+  .registration-title {
+    font-size: 2.5rem;
+  }
+
+  .feature-item {
+    margin-bottom: 2rem;
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+  }
+}
+
+.bird_card {
+  padding: 60px 0px;
+}
+
+.pricing-card {
+  border-radius: 2px;
+  overflow: hidden;
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  margin-bottom: 30px;
+  background: white;
+}
+
+.pricing-header {
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.super-early-bird {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-color));
+}
+
+.early-bird {
+  background: #8e8e8e;
+}
+
+.regular-price {
+  background: #6e6e6e;
+}
+
+.pricing-amount {
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
+
+.pricing-body {
+  padding: 30px 20px;
+  background: #f5f5f5;
+  text-align: center;
+}
+
+.delegate-selector {
+  margin-bottom: 30px;
+}
+
+.delegate-selector h6 {
+  color: #666;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.quantity-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #bbb;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-btn:hover {
+  background: #999;
+}
+
+.quantity-input {
+  width: 60px;
+  height: 40px;
+  text-align: center !important;
+  border: 2px solid #ddd;
+  font-size: 16px;
+  font-weight: bold;
+  box-sizing: border-box;
+  padding: 0;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.pricing-footer {
+  position: relative;
+}
+
+.pricing-footer::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #333;
+}
+
+.pricing-footer.coming-soon::before {
+  border-bottom-color: #8e8e8e;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 20px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  color: white;
+}
+
+.register-now {
+  background: #333;
+}
+
+.register-now:hover {
+  background: #555;
+}
+
+.coming-soon {
+  background: #8e8e8e;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .pricing-amount {
+    font-size: 36px;
+    padding: 30px 20px;
+  }
+
+  .pricing-header {
+    font-size: 16px;
+    padding: 15px;
+  }
+}
+
+.banner-container_head {
+  background-color: #e7e7e7;
+  padding: 30px;
+}
+
+.banner-container {
+  background-color: #ffffff;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px auto;
+  max-width: 1320px;
+  border-radius: 2px;
+  /* box-shadow: 0 2px 5px rgba(37, 37, 37, 0.1); */
+}
+
+.silhouette-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* gap: -10px; */
+}
+
+.silhouette {
+  width: 80px;
+  height: 80px;
+  border-radius: 50% 50% 0 0;
+  position: relative;
+  margin: 0 -5px;
+}
+
+.silhouette-1 {
+  background-color: #888888;
+  z-index: 1;
+}
+
+.silhouette-2 {
+  background-color: #333333;
+  z-index: 3;
+  transform: scale(1.1);
+}
+
+.silhouette-3 {
+  background-color: #888888;
+  z-index: 1;
+}
+
+.silhouette::before {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 60px;
+  background-color: inherit;
+  border-radius: 10px 10px 0 0;
+}
+
+.silhouette::after {
+  content: "";
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: #ffffff;
+  border: 3px solid inherit;
+  border-radius: 50%;
+}
+
+.content-text {
+  font-weight: bold;
+  color: #333333;
+  line-height: 1.2;
+}
+
+.main-heading {
+  font-size: 2rem;
+  margin-bottom: 0;
+  font-weight: 800;
+}
+
+.sub-heading {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.group-pass-btn {
+  background-color: #333333;
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 800;
+  height: 50px;
+  margin-top: 35px;
+  transition: 0.3s;
+  width: 355px;
+}
+
+.group-pass-btn:hover {
+  background-color: #f1f1f1;
+  color: #333333;
+}
+
+@media (max-width: 768px) {
+  .banner-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+    margin: 20px;
+  }
+
+  .main-heading,
+  .sub-heading {
+    font-size: 2rem;
+  }
+
+  .silhouette {
+    width: 60px;
+    height: 60px;
+  }
+
+  .silhouette::before {
+    width: 80px;
+    height: 50px;
+    bottom: -35px;
+  }
+}
+
+/* new css */
+
+.RegisterNow_container__Hy2rO {
+  background-color: var(--secondary-color);
+  padding: 95px 0;
+}
+
+.RegisterNow_container__Hy2rO > div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.RegisterNow_container__Hy2rO > div h1 {
+  color: #181818;
+  color: #fff;
+  font-size: 34px;
+  font-weight: 800;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.RegisterNow_container__Hy2rO > div > p {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 37px 0 50px;
+  max-width: 585px;
+  padding: 0;
+  text-align: center;
+  width: 60%;
+  line-height: 20px;
+}
+
+.RegisterNow_container__Hy2rO > div > p span {
+  color: var(--primary-color);
+  display: block;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.RegisterNow_container__Hy2rO > div .RegisterNow_registerCards__tVJkv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.RegisterNow_container__Hy2rO
+  > div
+  .RegisterNow_registerCards__tVJkv
+  .RegisterNow_registerCard__Aryct {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 200px;
+}
+
+.RegisterNow_container__Hy2rO
+  > div
+  .RegisterNow_registerCards__tVJkv
+  .RegisterNow_registerCard__Aryct
+  > div {
+  height: 75px;
+}
+
+.RegisterNow_container__Hy2rO
+  > div
+  .RegisterNow_registerCards__tVJkv
+  .RegisterNow_registerCard__Aryct
+  p {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 18px 0 0;
+  padding: 0 7px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.BookingLanding_discountCards__RBbvs {
+  background-color: #fff;
+  padding: 100px 0;
+}
+
+.BookingLanding_discountCards__RBbvs > div {
+  grid-column-gap: 30px;
+  column-gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.DiscountCard_card__vmnqL {
+  height: 542px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.DiscountCard_card__vmnqL h3 {
+  align-items: center;
+  background-color: var(--dark-color);
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  color: #fff;
+  display: flex;
+  font-size: 24px;
+  font-weight: 800;
+  height: 70px;
+  justify-content: center;
+  margin: 0;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.DiscountCard_card__vmnqL h3 svg {
+  bottom: -18px;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  right: 0;
+}
+
+.DiscountCard_card__vmnqL h2 {
+  align-items: center;
+  background-color: var(--primary-color);
+  color: #181818;
+  color: #fff;
+  display: flex;
+  font-size: 48px;
+  font-weight: 800;
+  height: 176px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.DiscountCard_card__vmnqL h2 sub,
+.DiscountCard_card__vmnqL h2 sup {
+  color: #fff;
+  font-size: 0.6em;
+  margin: 0 5px;
+}
+
+.DiscountCard_card__vmnqL h2 sup {
+  margin-top: -18px;
+}
+
+.DiscountCard_card__vmnqL > div {
+  align-content: center;
+  background-color: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  height: 230px;
+  justify-content: center;
+  margin: 0;
+}
+
+.DiscountCard_card__vmnqL > div > p {
+  color: #181818;
+  color: #484848;
+  font-size: 16px;
+  font-weight: 500;
+  font-weight: 700;
+  text-align: center;
+}
+
+.DiscountCard_card__vmnqL > div .DiscountCard_counter__BHW0i {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 0;
+  padding: 0;
+}
+
+.DiscountCard_card__vmnqL > div .DiscountCard_counter__BHW0i button {
+  background-color: #b0b0b0;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: 700;
+  padding: 0 15px;
+}
+
+.DiscountCard_card__vmnqL
+  > div
+  .DiscountCard_counter__BHW0i
+  button:first-child {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+
+.DiscountCard_card__vmnqL > div .DiscountCard_counter__BHW0i p {
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.212);
+  display: flex;
+  font-size: 16px;
+  font-weight: 700;
+  height: 100%;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 74px;
+}
+
+.DiscountCard_card__vmnqL .DiscountCard_btn__PcdQu {
+  background-color: var(--secondary-color);
+  border: none;
+  border-bottom: 5px solid #0b122c;
+  border-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 800;
+  height: 66px;
+  position: relative;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.DiscountCard_card__vmnqL .DiscountCard_btn__PcdQu svg {
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  right: 0;
+  rotate: 180deg;
+  top: -17px;
+  width: 21px;
+}
+
+.DiscountCard_card__vmnqL .DiscountCard_btn__PcdQu:disabled svg {
+  fill: gray;
+}
+
+.BookingLanding_operators__28yhC {
+  background-color: #f1f1f1;
+  max-height: 460px;
+  padding: 100px 0;
+}
+
+.BookingLanding_operators__28yhC > div {
+  align-items: center;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 50px 20px;
+  width: 100%;
+}
+
+.BookingLanding_operators__28yhC > div img {
+  height: 140px;
+  width: 296px;
+}
+
+.BookingLanding_operators__28yhC > div > div {
+  margin-left: 85px;
+  width: 350px;
+}
+
+.BookingLanding_operators__28yhC > div > div h2 {
+  color: #181818;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 36px;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  text-transform: none;
+}
+
+.BookingLanding_operators__28yhC > div > div button {
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 800;
+  height: 50px;
+  margin-top: 35px;
+  transition: 0.3s;
+  width: 355px;
+}
+
+.BookingLanding_operators__28yhC > div > div button:hover {
+  background-color: #e4e4e4 !important;
+  border: 1px solid #0000;
+  color: var(--secondary-color);
+}
+
+.BookingLanding_modalBox__VQ10Q {
+  background-color: #000;
+  border: 1px solid #585a5e;
+  border-radius: 2px;
+  bottom: auto;
+  left: 50%;
+  margin-right: -50%;
+  max-width: 1150px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 54px 40px 0;
+  position: absolute;
+  right: auto;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+}
+
+.BookingLanding_topBar__3rx3v {
+  align-items: center;
+  display: flex;
+  height: 20px;
+  justify-content: flex-end;
+  position: fixed;
+  right: 40px;
+}
+
+.BookingLanding_topBar__3rx3v button {
+  background-color: #0000;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.BookingLanding_topBar__3rx3v button svg {
+  fill: var(--primary-color);
+  height: 20px;
+  width: 20px;
+}
+
+.BookingLanding_modalContainer__5foGo {
+  max-height: 80vh;
+  padding: 0;
+}
+
+.BookingLanding_modalContainer__5foGo > h2 {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.BookingLanding_modalContainer__5foGo form {
+  margin-top: 30px;
+}
+
+.BookingLanding_modalContainer__5foGo form > div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.BookingLanding_modalContainer__5foGo form > div > div {
+  align-items: center;
+  flex-direction: column;
+  width: 49%;
+}
+
+.BookingLanding_modalContainer__5foGo form > div > div input {
+  background-color: #fff;
+  border: none;
+  border-radius: 3px;
+  color: #777;
+  font-size: 15px;
+  font-weight: 700;
+  height: 48px;
+  outline: none;
+  padding: 0 23px;
+  width: 100%;
+}
+
+.BookingLanding_modalContainer__5foGo form > div:nth-child(2) {
+  margin-bottom: 22px;
+  margin-top: 22px;
+}
+
+.BookingLanding_modalContainer__5foGo form > div:nth-child(3) {
+  margin-bottom: 22px;
+  margin-top: 22px;
+}
+
+.BookingLanding_modalContainer__5foGo form > div:nth-child(4) {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.BookingLanding_modalContainer__5foGo form > div > div > div {
+  margin-top: 8px;
+}
+
+.BookingLanding_modalContainer__5foGo form > div > div > div {
+  color: red;
+}
+
+.BookingLanding_modalContainer__5foGo form > div > div select {
+  background-color: #fff;
+  border: none;
+  border-radius: 3px;
+  color: #777;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  height: 48px;
+  outline: none;
+  padding: 0 23px !important;
+  width: 100%;
+}
+
+.BookingLanding_modalContainer__5foGo form > div > div select option {
+  color: #777;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.BookingLanding_modalContainer__5foGo form textarea {
+  background-color: #fff;
+  border: none;
+  border-radius: 3px;
+  color: #777;
+  font-size: 15px;
+  font-weight: 700;
+  height: 185px;
+  outline: none;
+  padding: 20px 23px;
+  resize: none;
+  width: 100%;
+}
+
+.BookingLanding_modalBox__VQ10Q .BookingLanding_notice__vNnfd {
+  margin-top: 20px;
+}
+
+.BookingLanding_modalBox__VQ10Q .BookingLanding_notice__vNnfd p {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 23px;
+}
+
+.BookingLanding_modalContainer__5foGo form .BookingLanding_formCheck__vu-QU {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.BookingLanding_modalContainer__5foGo
+  form
+  .BookingLanding_formCheck__vu-QU
+  > div {
+  align-items: flex-start;
+  color: red;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.BookingLanding_modalContainer__5foGo
+  form
+  .BookingLanding_formCheck__vu-QU
+  > div
+  label {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 0 20px;
+  padding: 0;
+}
+
+.BookingLanding_modalContainer__5foGo
+  form
+  .BookingLanding_formCheck__vu-QU
+  > div
+  input {
+  cursor: pointer;
+  height: 15px;
+  margin: 2px 0 0;
+  width: 15px;
+}
+
+.BookingLanding_modalContainer__5foGo
+  form
+  .BookingLanding_btnContainer__C\+nke {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.BookingLanding_modalContainer__5foGo
+  form
+  .BookingLanding_btnContainer__C\+nke
+  .BookingLanding_button__YtJxy {
+  align-items: center;
+  background-color: var(--primary-color);
+  border: 1px solid #0000;
+  border-radius: 2px;
+  color: var(--secondary-color);
+  cursor: pointer;
+  display: flex;
+  font-size: 20px;
+  font-weight: 800;
+  height: 50px;
+  justify-content: center;
+  margin-bottom: 60px;
+  padding: 0 20px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  width: 200px;
+}
+
+.BookingLanding_modalContainer__5foGo
+  form
+  .BookingLanding_btnContainer__C\+nke
+  .BookingLanding_button__YtJxy:hover {
+  background-color: #0000;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.BookingLanding_modalBox__VQ10Q::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  cursor: pointer;
+}
+
+.BookingLanding_modalBox__VQ10Q::-webkit-scrollbar {
+  width: 2px;
+}
+
+.no-arrows::-webkit-inner-spin-button,
+.no-arrows::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-arrows {
+  -moz-appearance: textfield;
+}
+
+@media only screen and (max-width: 1619px) {
+  .RegisterNow_container__Hy2rO {
+    max-height: -webkit-max-content;
+    max-height: max-content;
+  }
+}
+
+@media only screen and (max-width: 1419px) {
+  .RegisterNow_container__Hy2rO {
+    padding: 60px 0;
+  }
+
+  .RegisterNow_container__Hy2rO > div h1 {
+    font-size: 30px;
+  }
+
+  .BookingLanding_discountCards__RBbvs {
+    padding: 60px 0;
+  }
+
+  .BookingLanding_operators__28yhC {
+    max-height: auto;
+    padding: 60px 0;
+  }
+
+  .BookingLanding_operators__28yhC > div > div h2 {
+    font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 1231px) {
+  .RegisterNow_container__Hy2rO > div {
+    max-width: 960px;
+  }
+
+  .BookingLanding_discountCards__RBbvs > div {
+    max-width: 960px;
+  }
+
+  .DiscountCard_card__vmnqL h3 {
+    font-size: 20px;
+  }
+
+  .DiscountCard_card__vmnqL h2 {
+    font-size: 40px;
+  }
+
+  .DiscountCard_card__vmnqL .DiscountCard_btn__PcdQu {
+    font-size: 18px;
+  }
+
+  .BookingLanding_operators__28yhC > div {
+    max-width: 960px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .RegisterNow_container__Hy2rO > div {
+    max-width: 720px;
+  }
+
+  .RegisterNow_container__Hy2rO > div h1 {
+    font-size: 28px;
+  }
+
+  .RegisterNow_container__Hy2rO > div .RegisterNow_registerCards__tVJkv {
+    grid-column-gap: 60px;
+    grid-row-gap: 40px;
+    column-gap: 60px;
+    display: grid;
+    grid-template-columns: repeat(2, 250px);
+    justify-content: center;
+    row-gap: 40px;
+  }
+
+  .RegisterNow_container__Hy2rO
+    > div
+    .RegisterNow_registerCards__tVJkv
+    .RegisterNow_registerCard__Aryct {
+    max-width: none;
+  }
+
+  .BookingLanding_discountCards__RBbvs > div {
+    column-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 720px;
+    row-gap: 20px;
+  }
+
+  .BookingLanding_operators__28yhC > div {
+    max-width: 720px;
+  }
+
+  .BookingLanding_operators__28yhC > div > div {
+    margin-left: 25px;
+  }
+
+  .BookingLanding_operators__28yhC > div > div h2 {
+    font-size: 24px;
+    line-height: 22px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .RegisterNow_container__Hy2rO > div {
+    max-width: 650px;
+    width: 90%;
+  }
+
+  .BookingLanding_discountCards__RBbvs > div {
+    column-gap: 0;
+    grid-template-columns: 1fr;
+    max-width: 650px;
+    row-gap: 20px;
+    width: 90%;
+  }
+
+  .BookingLanding_operators__28yhC > div {
+    flex-wrap: wrap;
+    max-width: 650px;
+    padding: 40px 0;
+    width: 90%;
+  }
+
+  .BookingLanding_operators__28yhC > div img {
+    height: 125px;
+    width: 265px;
+  }
+
+  .BookingLanding_operators__28yhC > div > div {
+    margin-left: 0;
+    width: 90%;
+  }
+
+  .BookingLanding_operators__28yhC > div > div h2 {
+    margin: 40px 0;
+    text-align: center;
+  }
+
+  .BookingLanding_operators__28yhC > div > div button {
+    font-size: 16.5px;
+    margin-top: 0;
+    max-height: auto;
+    width: 100%;
+  }
+
+  .BookingLanding_modalBox__VQ10Q {
+    max-width: 90%;
+    padding: 34px 20px 0;
+  }
+
+  .BookingLanding_topBar__3rx3v {
+    right: 20px;
+  }
+
+  .BookingLanding_modalContainer__5foGo {
+    max-height: 70vh;
+  }
+
+  .BookingLanding_modalContainer__5foGo > h2 {
+    font-size: 20px;
+  }
+
+  .BookingLanding_modalContainer__5foGo form > div {
+    flex-direction: column;
+  }
+
+  .BookingLanding_modalContainer__5foGo form > div > div {
+    margin-bottom: 20px;
+  }
+
+  .BookingLanding_modalContainer__5foGo form > div > div {
+    width: 100%;
+  }
+
+  .BookingLanding_modalContainer__5foGo form > div > div input {
+    width: 100%;
+  }
+
+  .BookingLanding_modalContainer__5foGo form > div:nth-child(2) {
+    margin: 0;
+  }
+
+  .BookingLanding_modalContainer__5foGo form > div:nth-child(3) {
+    margin: 0;
+  }
+
+  .BookingLanding_modalContainer__5foGo form .BookingLanding_formCheck__vu-QU {
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+
+  .BookingLanding_modalContainer__5foGo
+    form
+    .BookingLanding_btnContainer__C\+nke
+    .BookingLanding_button__YtJxy {
+    margin-bottom: 40px;
+  }
+
+  .BookingLanding_modalContainer__5foGo
+    form
+    .BookingLanding_btnContainer__C\+nke
+    .BookingLanding_button__YtJxy {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 639px) {
+  .RegisterNow_container__Hy2rO {
+    padding: 37px 0;
+  }
+
+  .RegisterNow_container__Hy2rO > div h1 {
+    font-size: 22px;
+    line-height: 25px;
+  }
+
+  .RegisterNow_container__Hy2rO > div > p {
+    margin-bottom: 30px;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .RegisterNow_container__Hy2rO > div .RegisterNow_registerCards__tVJkv {
+    grid-template-columns: repeat(2, 190px);
+  }
+
+  .BookingLanding_discountCards__RBbvs {
+    padding: 40px 0 20px;
+  }
+
+  .DiscountCard_card__vmnqL h3 {
+    font-size: 22px;
+    height: 60px;
+  }
+
+  .DiscountCard_card__vmnqL h3 svg {
+    width: 25px;
+  }
+
+  .DiscountCard_card__vmnqL h2 {
+    font-size: 48px;
+    padding: 68px 0;
+  }
+
+  .DiscountCard_card__vmnqL > div {
+    padding: 87px 0;
+  }
+
+  .DiscountCard_card__vmnqL .DiscountCard_btn__PcdQu {
+    font-size: 18px;
+    height: 55px;
+  }
+
+  .BookingLanding_operators__28yhC {
+    padding: 40px 0;
+  }
+
+  .BookingLanding_operators__28yhC > div > div h2 {
+    font-size: 22px;
+    line-height: 25px;
+  }
+
+  .BookingLanding_modalBox__VQ10Q {
+    max-width: 100%;
+    padding-top: 24px;
+  }
+
+  .BookingLanding_topBar__3rx3v {
+    position: relative;
+    right: 0;
+  }
+
+  .BookingLanding_modalContainer__5foGo > h2 {
+    font-size: 18px;
+  }
+
+  .BookingLanding_modalContainer__5foGo
+    form
+    .BookingLanding_btnContainer__C\+nke
+    .BookingLanding_button__YtJxy {
+    margin-bottom: 30px;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .RegisterNow_container__Hy2rO
+    > div
+    .RegisterNow_registerCards__tVJkv
+    .RegisterNow_registerCard__Aryct
+    p {
+    padding: 0;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .BookingLanding_modalContainer__5foGo form > div > div input {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .BookingLanding_modalContainer__5foGo form textarea {
+    font-size: 13px;
+    font-weight: 600;
+    height: 264px;
+  }
+
+  .BookingLanding_modalBox__VQ10Q .BookingLanding_notice__vNnfd p {
+    font-size: 14px;
+  }
+
+  .BookingLanding_modalContainer__5foGo
+    form
+    .BookingLanding_formCheck__vu-QU
+    > div
+    label {
+    font-size: 14px;
+    margin-left: 15px;
+  }
+
+  .BookingLanding_modalContainer__5foGo
+    form
+    .BookingLanding_formCheck__vu-QU
+    > div
+    input {
+    height: 13px;
+    width: 13px;
+  }
+
+  .BookingLanding_modalContainer__5foGo
+    form
+    .BookingLanding_btnContainer__C\+nke
+    .BookingLanding_button__YtJxy {
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .RegisterNow_container__Hy2rO > div .RegisterNow_registerCards__tVJkv {
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .BookingLanding_operators__28yhC > div > div h2 {
+    font-size: 18px;
+    margin: 20px 0;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .RegisterNow_container__Hy2rO > div .RegisterNow_registerCards__tVJkv {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .BookingLanding_operators__28yhC > div img {
+    height: auto;
+    max-width: 265px;
+    width: 90%;
+  }
+}
+
+.BookingLanding_operators__28yhC > div img {
+  height: auto;
+  max-width: 265px;
+  width: 90%;
+}
+
+.BookingLanding_modalContainer__5foGo form > div > div > div {
+  color: red;
+  margin-top: 8px;
+}

@@ -1,0 +1,244 @@
+.TopicSection_topicSection__Tc8jF {
+    padding: 92px 0 100px;
+}
+
+.TopicSection_topicSection__Tc8jF h2 {
+    color: #181818;
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0 auto;
+    max-width: 1200px;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb {
+    grid-column-gap: 35px;
+    grid-row-gap: 20px;
+    column-gap: 35px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    margin: 35px auto 44px;
+    max-width: 1200px;
+    row-gap: 20px;
+    width: 100%;
+}
+
+.TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb .TopicSection_topic__dNISv {
+    break-inside: avoid-column;
+    margin: 0;
+    padding: 0;
+}
+
+.TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb .TopicSection_topic__dNISv h4 {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 28px;
+    margin: 0 0 20px;
+    padding: 0;
+    text-align: start;
+}
+
+.TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb .TopicSection_topic__dNISv p {
+    color: #484848;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+    margin: 0;
+    padding: 0;
+    text-align: start;
+}
+
+.TopicSection_topicSection__Tc8jF .TopicSection_btn__0YjT\+ {
+    transition: 3s;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1230px;
+    width: 75%;
+}
+
+.TopicSection_topicSection__Tc8jF .TopicSection_btn__0YjT\+ button {
+    background-color: #0000;
+    background-color: #e4e4e4;
+    border: none;
+    border-radius: 2px;
+    color: #181818;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 800;
+    height: 50px;
+    height: 60px;
+    text-transform: uppercase;
+    transition: .3s;
+    width: 395px;
+}
+
+.TopicSection_topicSection__Tc8jF .TopicSection_btn__0YjT\+ button:hover {
+    background-color: #181818;
+    color: #e4e4e4;
+}
+
+@media only screen and (max-width: 1619px) {
+    .TopicSection_topicSection__Tc8jF .TopicSection_btn__0YjT\+ {
+        width: 90%;
+    }
+}
+
+
+@media only screen and (max-width: 1419px) {
+    .TopicSection_topicSection__Tc8jF {
+        padding: 60px 0;
+    }
+
+    .TopicSection_topicSection__Tc8jF h2 {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 1231px) {
+    .TopicSection_topicSection__Tc8jF h2 {
+        max-width: 960px;
+    }
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb {
+        max-width: 960px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb .TopicSection_topic__dNISv h4 {
+        font-size: 17px;
+        line-height: 26px;
+        margin-bottom: 10px;
+    }
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb .TopicSection_topic__dNISv p {
+        font-size: 17px;
+        line-height: 26px;
+    }
+}
+
+
+
+@media only screen and (max-width: 991px) {
+    .TopicSection_topicSection__Tc8jF h2 {
+        font-size: 28px;
+        max-width: 720px;
+    }
+
+    /* .TopicSection_topicSection__Tc8jF h2 {
+        max-width: 720px;
+    } */
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb {
+        column-gap: 25px;
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 720px;
+        row-gap: 20px;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    .TopicSection_topicSection__Tc8jF h2 {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .TopicSection_topicSection__Tc8jF h2 {
+        max-width: 650px;
+        width: 90%;
+    }
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb {
+        max-width: 650px;
+        width: 90%;
+    }
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb .TopicSection_topic__dNISv p {
+        font-size: 16px;
+        line-height: 25px;
+        width: 98%;
+    }
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_btn__0YjT\+ button {
+        font-size: 16.5px;
+    }
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_btn__0YjT\+ button {
+        font-size: 16px;
+        max-width: 650px;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .TopicSection_topicSection__Tc8jF {
+        padding: 37px 0 42px;
+    }
+
+    .TopicSection_topicSection__Tc8jF h2 {
+        font-size: 22px;
+        line-height: 25px;
+    }
+
+    .TopicSection_topicSection__Tc8jF h2 {
+        font-size: 24px;
+        padding-left: 0;
+    }
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb {
+        display: flex;
+        flex-direction: column;
+        margin: 17px auto;
+        row-gap: 10px;
+    }
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb .TopicSection_topic__dNISv h4 {
+        font-size: 16px;
+        line-height: 25px;
+        margin-bottom: 0;
+    }
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_btn__0YjT\+ button {
+        font-size: 16.5px;
+        height: 50px;
+        margin-top: 25px;
+        padding: 0;
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width: 480px) {
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb .TopicSection_topic__dNISv h4 {
+        font-size: 15px;
+        line-height: 24px;
+    }
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb .TopicSection_topic__dNISv p {
+        font-size: 15px;
+        line-height: 24px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb .TopicSection_topic__dNISv h4 {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .TopicSection_topicSection__Tc8jF .TopicSection_topicsContainer__-dntb .TopicSection_topic__dNISv p {
+        font-size: 14px;
+        line-height: 22px;
+    }
+}

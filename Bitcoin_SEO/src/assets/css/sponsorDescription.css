@@ -1,0 +1,140 @@
+.SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk {
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_image__1-WuC {
+    background-color: #f2f2f2;
+    padding: 100px 0;
+    width: 100%;
+}
+
+.SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_image__1-WuC .SponsorBio_imageContainer__Utz5Q {
+    align-items: center;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_image__1-WuC .SponsorBio_imageContainer__Utz5Q a {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_image__1-WuC .SponsorBio_imageContainer__Utz5Q a img {
+    height: auto;
+    max-height: 250px;
+    max-width: 520px;
+    min-height: 200px;
+    object-fit: contain;
+    width: 100%;
+}
+
+.SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_textContainer__YsXyt {
+    align-items: center;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: 100px;
+    width: 100%;
+}
+
+.SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_textContainer__YsXyt p {
+    color: #181818;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 0 0 30px;
+    max-width: 1240px;
+    padding: 0;
+    text-align: center;
+    width: 64%;
+    width: 100%;
+}
+
+.SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_textContainer__YsXyt button {
+    background-color: initial;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 800;
+    max-width: 610px;
+    min-height: 84px;
+    text-transform: uppercase;
+    transition: .3s;
+    width: 100%;
+}
+
+.SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_textContainer__YsXyt button:hover {
+    background-color: #e4e4e4 !important;
+    color: initial;
+    color: var(--secondary-color);
+}
+
+@media only screen and (max-width: 1460px) {
+    .SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_textContainer__YsXyt {
+        padding-bottom: 90px;
+    }
+}
+
+@media only screen and (max-width: 1339px) {
+    .SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_textContainer__YsXyt {
+        padding-bottom: 70px;
+    }
+
+    .SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_textContainer__YsXyt button {
+        min-height: 77px;
+    }
+}
+
+@media only screen and (max-width: 1179px) {
+    .SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_image__1-WuC {
+        padding: 50px 0;
+    }
+
+    .SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_textContainer__YsXyt {
+        padding-bottom: 50px;
+    }
+
+    .SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_textContainer__YsXyt button {
+        min-height: 65px;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    .SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_image__1-WuC {
+        padding: 30px 0;
+    }
+
+    .SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_image__1-WuC .SponsorBio_imageContainer__Utz5Q {
+        width: 80%;
+    }
+
+    .SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_textContainer__YsXyt {
+        margin: 0 auto;
+        padding-bottom: 38px;
+        width: 100%;
+    }
+
+    .SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_textContainer__YsXyt button {
+        font-size: 16.5px;
+        min-height: 50px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .SponsorBio_container__pvxrT .SponsorBio_wholeContainer__r-7Lk .SponsorBio_image__1-WuC .SponsorBio_imageContainer__Utz5Q {
+        min-height: 100px;
+    }
+}

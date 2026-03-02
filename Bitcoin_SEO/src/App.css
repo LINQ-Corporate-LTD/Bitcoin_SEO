@@ -1,0 +1,109 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+:root {
+  --primary-color: #f6b000;
+  --secondary-color: #080808;
+  --dark-color: #dd9f04;
+  --light-color: #ffffff;
+  --linearGradient-color: linear-gradient(107deg, rgba(0, 0, 0, 0.60) -2.13%, rgba(0, 0, 0, 0.60) 35.42%, rgb(242, 176, 27, 0.60) 77.97%, rgb(242, 176, 27, 0.60) 125.13%);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.speaker-h1-name {
+  font-size: 36px !important;
+  font-weight: 800 !important;
+}
+
+.slick-slide {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.operatorSlider .slick-slide {
+  padding: 10px;
+}
+
+.ratingCard .slick-slide {
+  padding: 10px !important;
+}
+
+.ReactModal__Overlay {
+  background-color: #000000b3 !important;
+  z-index: 21;
+}
+
+.flagInputContainer .flagInput {
+  margin-top: 0;
+}
+
+.flagInputContainer .flagInput input {
+  height: 48px;
+  width: 100%;
+}
+
+.end-user-modal-container .react-tel-input .form-control {
+  padding-left: 56px;
+}
+
+.end-user-modal-container .flag-dropdown .selected-flag {
+  width: 50px;
+}
+
+.end-user-modal-container .flag-dropdown .selected-flag .flag {
+  left: 13px;
+}
+
+.end-user-modal-container .flag-dropdown .selected-flag .arrow {
+  left: 22px;
+}
+
+.operator_select {
+  cursor: pointer;
+  position: relative;
+}
+
+.operator_select:before {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAICAYAAAAvOAWIAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAh0lEQVQYlYXPsYkCARQE0LeLPRymgmVofIKJRdiAyW4JE5nbiA1cAxcrRiYGgmIkJmu0uArqZMN/DPyiqqoNftB4nwLHHs4YfoBt9iXGuHyBN4zKJFdMv+BZklMJSf6wfANXSdZQNM3jr7qudxh04CFJvy3ly8rvS590yxNOssUcByyS/Hfvd95+I14inFBLAAAAAElFTkSuQmCC);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+  height: 8px;
+  position: absolute;
+  right: 16px;
+  top: 20px;
+  width: 11px;
+}
+
+.react-tel-input .country-list .country-name {
+  color: #080808;
+}
+
+@media screen and (max-width: 768px) {
+  .speaker-h1-name {
+    font-size: 28px !important;
+  }
+}
+
+html[lang="de"] .navLinksContainer li a,
+html[lang="ru"] .navLinksContainer li a,
+html[lang="ru"] .register_btn button,
+html[lang="ru"] .BookingLanding_button__YtJxy {
+  font-size: 14px !important;
+}
+
+html[lang="de"] body .navLinksContainer ul li {
+  margin-right: 3% !important;
+}
+
+html[lang="ru"] body .navLinksContainer ul li {
+  margin-right: 1% !important;
+}

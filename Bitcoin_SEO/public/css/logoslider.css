@@ -1,0 +1,163 @@
+/* .logo-slider-container {
+  width: 100%;
+  max-width: 1900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
+} */
+
+/* Remove background and box shadow from slick slider */
+/* .slick-slider {
+  background: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+} */
+
+/* .slick-track {
+  background: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+} */
+
+/* .slick-list {
+  background: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+} */
+
+/* Remove any borders or outlines */
+/* .slick-slider,
+.slick-track,
+.slick-list {
+  border: none !important;
+  outline: none !important;
+} */
+
+/* Additional override for any container backgrounds */
+/* .logo-slider-container .slick-slider {
+  background: transparent !important;
+}
+
+.logo-slider-container .slick-track {
+  background: transparent !important;
+}
+
+.logo-slider-container .slick-list {
+  background: transparent !important;
+} */
+
+
+.logo-slider {
+  margin: 0 auto;
+}
+
+/* .logo-slider .slick-track {
+  align-items: center;
+  display: flex;
+} */
+
+/* .slick-slide {
+  display: flex !important;
+  justify-content: center !important;
+} */
+
+.LogoSlider_container__KG1H5 {
+  background-color: #fff;
+  padding: 101px 0;
+}
+
+.LogoSlider_container__KG1H5 h2 {
+  color: #181818;
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0 auto 82px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.LogoSlider_container__KG1H5 .LogoSlider_innerContainer__Z\+wZ7 {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1840px;
+  padding-left: 40px;
+  padding-right: 40px;
+  width: 100%;
+}
+
+.LogoSlider_container__KG1H5 .LogoSlider_innerContainer__Z\+wZ7 button {
+  background-color: #0000;
+  border: none;
+  cursor: pointer;
+}
+
+.LogoSlider_container__KG1H5 .LogoSlider_innerContainer__Z\+wZ7 button img {
+  height: 29px;
+  width: 16px;
+}
+
+.LogoSlider_container__KG1H5 .LogoSlider_innerContainer__Z\+wZ7>div {
+  width: 95%;
+}
+
+.LogoSlider_container__KG1H5 .LogoSlider_innerContainer__Z\+wZ7>div img {
+  height: auto;
+  max-height: 90px;
+  max-width: 210px;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1419px) {
+  .LogoSlider_container__KG1H5 h2 {
+    font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .LogoSlider_container__KG1H5 h2 {
+    font-size: 28px;
+  }
+}
+
+@media only screen and (max-width: 940px) {
+  .LogoSlider_container__KG1H5 h2 {
+    margin-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width: 639px) {
+  .LogoSlider_container__KG1H5 {
+    padding: 46.51px 0;
+  }
+
+  .LogoSlider_container__KG1H5 h2 {
+    font-size: 22px;
+    line-height: 25px;
+  }
+
+  .LogoSlider_container__KG1H5 h2 {
+    margin-top: -12px;
+    padding: 0 25px;
+  }
+
+  .LogoSlider_container__KG1H5 .LogoSlider_innerContainer__Z\+wZ7 {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .LogoSlider_container__KG1H5 h2+.LogoSlider_innerContainer__Z\+wZ7 {
+    margin-bottom: -18px;
+  }
+
+  .LogoSlider_container__KG1H5 .LogoSlider_innerContainer__Z\+wZ7 button img {
+    height: 21px;
+    width: 14px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .LogoSlider_container__KG1H5 .LogoSlider_innerContainer__Z\+wZ7 button img {
+    height: 20px;
+    width: 11px;
+  }
+}

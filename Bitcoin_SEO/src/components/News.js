@@ -1,0 +1,434 @@
+import React, { useState, useRef, useEffect } from "react";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
+import ".././assets/css/News.css";
+import Navbar from "./Navbar";
+import SubscribeForm from "./SubscribeForm";
+import Footer from "../Footer";
+import "../../src/assets/css/News.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const leftArrowIcon =
+  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
+const rightArrowIcon =
+  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
+
+const News = () => {
+  const navigate = useNavigate();
+  const [newsList, setNewsList] = useState([]);
+
+  useEffect(() => {
+    callNewsListApi();
+    // eslint-disable-next-line
+  }, []);
+
+  const callNewsListApi = () => {
+    const requestOptions = {
+      method: "GET",
+    };
+    fetch(`https://harsh7541.pythonanywhere.com/admin1/generalnews`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.status) {
+          setNewsList(data["generalNews"]);
+          // setTotalCount(data?.paginationDetails?.count);
+        }
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          toast.error("There was an error, Please try again later.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }, 1000);
+      });
+  };
+
+  let featuredArticle = null;
+  let sidebarItems = [];
+  let featuredLatestArticle = null;
+  let latestNewsItems = [];
+
+  const topNewsItems = newsList.filter((news) => news.isTopNews === "Yes");
+  if (topNewsItems?.length > 0) {
+    featuredArticle = topNewsItems[0];
+    sidebarItems = topNewsItems.slice(1);
+  }
+
+  if (newsList?.length > 0) {
+    featuredLatestArticle = newsList[0];
+    const remainingItems = newsList.slice(1);
+    latestNewsItems =
+      remainingItems.length > 5 ? remainingItems.slice(0, 4) : remainingItems;
+  }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { day: "2-digit", month: "short", year: "numeric" };
+    return date.toLocaleDateString("en-GB", options);
+  };
+
+  const allTopics = [
+    {
+      id: 1,
+      title:
+        "DECENTRALISING FINANCE: BITCOIN’S ROLE IN THE EVOLUTION OF GLOBAL MONEY",
+      day: "Day 1",
+      date: "WEDNESDAY, 1 JULY, 2026",
+      time: "11:30 - 11:55",
+      speaker: "Speaker A",
+      category: "Market Dynamics",
+    },
+    {
+      id: 2,
+      title: "FROM CODE TO CAPITAL: HOW BITCOIN INNOVATION IS RESHAPING FINANCIAL MARKETS",
+      day: "Day 1",
+      date: "WEDNESDAY, 1 JULY, 2026",
+      time: "13:30 - 13:55",
+      speaker: "Speaker B",
+      category: "Mining Security",
+    },
+    {
+      id: 3,
+      title: "BITCOIN BEYOND CURRENCY: DRIVING INNOVATION ACROSS GLOBAL FINANCIAL SYSTEMS",
+      day: "Day 1",
+      date: "WEDNESDAY, 1 JULY, 2026",
+      time: "14:00 - 14:25",
+      speaker: "Speaker C",
+      category: "Blockchain Technology",
+    },
+  ];
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const articlesPerPage = 6;
+  const topRef = useRef(null);
+  const shouldScrollRef = useRef(false);
+  const totalPages = Math.ceil(newsList?.length / articlesPerPage);
+
+  const startIndex = (currentPage - 1) * articlesPerPage;
+  const currentArticles = newsList.slice(
+    startIndex,
+    startIndex + articlesPerPage
+  );
+
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1200
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (topRef.current && shouldScrollRef.current) {
+      const element = topRef.current;
+      const elementPosition =
+        element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - 120;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+    // Reset the flag after handling
+    shouldScrollRef.current = false;
+  }, [currentPage]);
+
+  const handlePageClick = (pageNumber) => {
+    shouldScrollRef.current = true;
+    setCurrentPage(pageNumber);
+  };
+
+  const handlePrev = () => {
+    shouldScrollRef.current = true;
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const handleNext = () => {
+    shouldScrollRef.current = true;
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const handleClick = (member) => {
+    const newsTitle = member.newsTitle
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "") // remove special characters like ':'
+      .replace(/\s+/g, "-") // replace spaces with hyphens
+      .replace(/-+/g, "-");
+    navigate(`/newsdescription/${newsTitle}`, { state: member }); // ✅ Pass member object in route state
+  };
+
+  console.log("featuredArticle: ", featuredArticle);
+  return (
+    <>
+      <Navbar forceScrolled />
+      <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
+        <div className="NewsListing_container__44PGn">
+          <div className="NewsListing_darkContainer__Pa9P7">
+            <div className="NewsListing_topNewsContainerOuter__PGH7l">
+              <h1 className="NewsListing_top_news_heding__ffzau">Top News</h1>
+              <div className="NewsListing_topNewsContainer__kFBcy">
+                <div className="NewsListing_left__JLN1s">
+                  <div className="NewsCard_container__njErT">
+                    <div className="NewsCard_innerContainer__8EUva">
+                      <div className="NewsCard_upperContainer__FPKzO">
+                        <img
+                          src={featuredArticle?.newsImage}
+                          alt="news-image"
+                          onClick={() => handleClick(featuredArticle)}
+                        />
+                      </div>
+                      <div className="NewsCard_lowerContainer__Jsamo">
+                        <div className="NewsCard_nameDate__JcfXL NewsListing_left_sub__176br">
+                          <p onClick={() => handleClick(featuredArticle)}>
+                            {featuredArticle?.newsCategoryDetails?.newsCategory}
+                          </p>
+                          <p onClick={() => handleClick(featuredArticle)}>
+                            {formatDate(featuredArticle?.newsCreatedDate)}
+                          </p>
+                        </div>
+                        <div className="NewsCard_titleDescContainer__PExXU">
+                          <h1 onClick={() => handleClick(featuredArticle)}>
+                            {featuredArticle?.newsTitle}
+                          </h1>
+                          <p
+                            lang="en"
+                            dangerouslySetInnerHTML={{
+                              __html:
+                                featuredArticle?.newsShortDescription.replace(
+                                  /^"(.*)"$/,
+                                  "$1"
+                                ),
+                            }}
+                            onClick={() => handleClick(featuredArticle)}
+                          ></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="NewsListing_right__onLH8">
+                  <div className="NewsListing_rightTop__K0nYw">
+                    {sidebarItems?.map((news, index) => (
+                      <div className="NewsCard_container__njErT">
+                        <div className="NewsCard_innerContainer__8EUva">
+                          <div className="NewsCard_upperContainer__FPKzO">
+                            <img
+                              src={news?.newsImage}
+                              alt="news-image"
+                              style={{ height: "208px" }}
+                              onClick={() => handleClick(news)}
+                            />
+                          </div>
+                          <div className="NewsCard_lowerContainer__Jsamo">
+                            <div className="NewsCard_nameDate__JcfXL NewsListing_left_sub__176br">
+                              <p onClick={() => handleClick(news)}>
+                                {news?.newsCategoryDetails?.newsCategory}
+                              </p>
+                              <p onClick={() => handleClick(news)}>
+                                {formatDate(news?.newsCreatedDate)}
+                              </p>
+                            </div>
+                            <div className="NewsCard_titleDescContainer__PExXU">
+                              <h1
+                                style={{ fontSize: "18px", lineHeight: "24px" }}
+                                onClick={() => handleClick(news)}
+                              >
+                                {news?.newsTitle}
+                              </h1>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="NewsListing_latestNewsContainer__Dn5fI">
+              <div className="NewsSection_wholeContainer__t5qCK">
+                <div className="NewsSection_latestNewsContainer__T48Li">
+                  <div className="NewsSection_latestNews__9sDlt">
+                    <div className="NewsSection_newsList__tnQsK">
+                      <h2>Latest News</h2>
+                      <ul>
+                        {latestNewsItems?.map((item, index) => (
+                          <li>
+                            <div className="NewsSection_categoryAndDate__WBz4R">
+                              <p onClick={() => handleClick(item)}>
+                                {item?.newsCategoryDetails?.newsCategory}
+                              </p>
+                              <p onClick={() => handleClick(item)}>
+                                {formatDate(item?.newsCreatedDate)}
+                              </p>
+                            </div>
+                            <div
+                              className="NewsSection_newsTitle__1tiob"
+                              onClick={() => handleClick(item)}
+                            >
+                              {item?.newsTitle}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div
+                      className="NewsSection_featuredNews__ENl3B"
+                      style={{ height: "639PX", marginTop: "10px" }}
+                    >
+                      <h3 onClick={() => handleClick(featuredLatestArticle)}>
+                        {featuredLatestArticle?.newsTitle}
+                      </h3>
+                      <img
+                        src={featuredLatestArticle?.newsImage}
+                        alt={featuredLatestArticle?.newsTitle}
+                        style={{
+                          maxWidth: "100%",
+                          height: "auto",
+                          objectFit: "cover",
+                        }}
+                        onClick={() => handleClick(featuredLatestArticle)}
+                      />
+                      <div className="NewsSection_featuredcategoryAndDate__WZuqu">
+                        <p onClick={() => handleClick(featuredLatestArticle)}>
+                          {
+                            featuredLatestArticle?.newsCategoryDetails
+                              ?.newsCategory
+                          }
+                        </p>
+                        <p onClick={() => handleClick(featuredLatestArticle)}>
+                          {formatDate(featuredLatestArticle?.newsCreatedDate)}
+                        </p>
+                      </div>
+                      <p
+                        lang="en"
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            featuredLatestArticle?.newsShortDescription.replace(
+                              /^"(.*)"$/,
+                              "$1"
+                            ),
+                        }}
+                        onClick={() => handleClick(featuredLatestArticle)}
+                      ></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="NewsListing_lightContainer__7C1Ov" ref={topRef}>
+            <div
+              className="NewsListing_newsListingContainer__PwNmV  fade-transition"
+              key={currentPage}
+            >
+              {currentArticles.map((article, index) => (
+                <div
+                  className="NewsListingCard_container__s0wuY"
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className="NewsListingCard_left__qswsn">
+                    <img
+                      onClick={() => handleClick(article)}
+                      src={article.newsImage}
+                      alt={article.newsTitle}
+                    ></img>
+                  </div>
+                  <div className="NewsListingCard_right__RDYVn">
+                    <div className="NewsListingCard_categoryContainer__qknlO">
+                      <p onClick={() => handleClick(article)}>
+                        {article?.newsCategoryDetails?.newsCategory}
+                      </p>
+                      <p onClick={() => handleClick(article)}>
+                        {formatDate(article.newsCreatedDate)}
+                      </p>
+                    </div>
+                    <h2 onClick={() => handleClick(article)}>
+                      {article.newsTitle}
+                    </h2>
+                    {/* <p>{article.newsShortDescription}</p> */}
+                    <p
+                      lang="en"
+                      dangerouslySetInnerHTML={{
+                        __html: article.newsShortDescription.replace(
+                          /^"(.*)"$/,
+                          "$1"
+                        ),
+                      }}
+                      onClick={() => handleClick(article)}
+                    ></p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="pagination">
+              <button
+                className="pagination-button-arrow"
+                onClick={handlePrev}
+                disabled={currentPage === 1}
+              >
+                <img src={leftArrowIcon} alt="left arrow icon"></img>
+              </button>
+              <div className="pagination-inner-container">
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <button
+                    key={i}
+                    className={`pagination-button ${
+                      currentPage === i + 1 ? "active" : ""
+                    }`}
+                    onClick={() => handlePageClick(i + 1)}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+              <button
+                className="pagination-button-arrow"
+                onClick={handleNext}
+                disabled={currentPage === totalPages}
+              >
+                <img src={rightArrowIcon} alt="tight arrow icon"></img>
+              </button>
+            </div>
+          </div>
+          <div className="TopicsOnAgenda_container__86lkR">
+            <div className="TopicsOnAgenda_agendaContainer__TBsgc">
+              <div>
+                <h1>topics on the agenda</h1>
+                <div className="TopicsOnAgenda_cardContainer__r-nhg">
+                  {allTopics.map((topic, index) => (
+                    <div className="TopicsOnAgenda_card__pUjOu">
+                      <p>{topic.title}</p>
+                      <div>
+                        <p>
+                          {topic.day}: {topic.date}
+                        </p>
+                        <p>{topic.time}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <button onClick={() => navigate("/agenda")}>
+                  view more topics
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <SubscribeForm />
+      <Footer />
+    </>
+  );
+};
+export default News;

@@ -1,0 +1,256 @@
+.IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa {
+    background-color: #fff;
+    min-height: 200px;
+    padding: 100px 0 96px;
+}
+
+.IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div button {
+    background-color: #0000;
+    border: 1px solid var(--secondary-color);
+    border-radius: 2px;
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 14px;
+    min-height: 40px;
+    min-width: 228px;
+    padding: 10px 9px;
+    text-transform: uppercase;
+    transition: .3s;
+}
+
+.IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa- {
+    background-color: var(--secondary-color);
+    min-height: 400px;
+    padding: 92px 0 38px;
+}
+
+.IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa->div {
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa- h2 {
+    color: #181818;
+    color: #fff;
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0 0 35px;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa- p {
+    color: #181818;
+    color: #fff;
+    font-size: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    -webkit-hyphens: none;
+    hyphens: none;
+    letter-spacing: .25px;
+    line-height: 28px;
+    margin: 0 0 20px;
+    padding: 0;
+    text-align: center;
+    text-align: left;
+}
+
+.IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa->div:first-child p {
+    font-size: 18px;
+    line-height: 36px;
+    margin-bottom: 35px;
+}
+
+.IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa->div:first-child p:nth-child(3) {
+    align-items: center;
+    color: #181818;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa->div:first-child p:nth-child(3) svg {
+    margin-left: 15px;
+    width: 27px;
+}
+
+@media only screen and (max-width: 1460px) {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div button {
+        white-space: normal;
+    }
+}
+
+@media only screen and (max-width: 1419px) {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa {
+        padding: 60px 0;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa- {
+        padding: 60px 0 45px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa- h2 {
+        font-size: 30px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa->div:first-child p {
+        font-size: 16px;
+        line-height: 30px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa- p {
+        font-size: 16px;
+        line-height: 30px;
+    }
+}
+
+@media only screen and (max-width: 1231px) {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div {
+        max-width: 960px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div button {
+        font-size: 12px;
+        min-width: 180px;
+        padding: 0 5px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa->div {
+        max-width: 960px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa {
+        padding-bottom: 85px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div {
+        flex-wrap: wrap;
+        max-width: 720px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div button {
+        font-size: 13px;
+        margin-bottom: 15px;
+        min-width: 225px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa->div {
+        flex-wrap: wrap;
+        max-width: 720px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa- h2 {
+        font-size: 28px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div {
+        max-width: 650px;
+        width: 90%;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa->div {
+        max-width: 650px;
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa {
+        padding: 40px 0;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div {
+        grid-row-gap: 15px;
+        grid-column-gap: 15px;
+        display: grid;
+        grid-template-columns: repeat(2, 212px);
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div button {
+        border: 1px solid var(--secondary-color);
+        height: 35px;
+        height: auto;
+        margin: 0;
+        max-width: -webkit-max-content;
+        max-width: max-content;
+        min-height: 35px;
+        min-width: 212px;
+        padding: 5px;
+        width: auto;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa- {
+        padding: 36px 0 20px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa- h2 {
+        font-size: 22px;
+        line-height: 25px;
+        margin-bottom: 11px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa- p:last-child {
+        padding-bottom: 12px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa->div:first-child p {
+        line-height: 25px;
+        margin-bottom: 30px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa->div:first-child p:nth-child(3) {
+        font-size: 16px;
+    }
+
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa- p {
+        line-height: 25px;
+        margin-bottom: 30px;
+    }
+
+    .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa->div:first-child p:nth-child(3) svg {
+        width: 15px;
+    }
+}
+
+@media only screen and (max-width: 470px) {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div button {
+        font-size: 12px;
+        max-width: none;
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div {
+        align-content: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+}

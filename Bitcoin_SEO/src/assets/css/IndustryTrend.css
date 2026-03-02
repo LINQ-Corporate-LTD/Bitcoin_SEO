@@ -1,0 +1,148 @@
+.HomeScreen_industryTrends__KoD6- {
+    background-color: #000;
+    padding: 92px 0 100px;
+}
+
+.HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK {
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK h1 {
+    color: #181818;
+    color: #fff;
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0 auto 40px;
+    max-width: 1200px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK>div {
+    display: flex;
+    justify-content: center;
+}
+
+.HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK>div>div {
+    display: flex;
+    justify-content: center;
+}
+
+.HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK>div>div p {
+    align-items: center;
+    border: 2px solid #c5c5c5;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    font-weight: 700;
+    justify-content: center;
+    margin: 0 5px;
+    min-height: 40px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 232px;
+}
+
+.HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK>div>div p:hover {
+    color: #000000;
+    background-color: #fff;
+    border: none;
+}
+
+@media only screen and (max-width: 1419px) {
+    .HomeScreen_industryTrends__KoD6- {
+        padding: 60px 0;
+    }
+
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK h1 {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 1339px) {
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK>div {
+        flex-direction: column;
+    }
+
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK>div>div {
+        flex-wrap: wrap;
+    }
+
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK>div>div p {
+        font-size: 12px;
+        margin: 10px 5px;
+        width: 190px;
+    }
+}
+
+@media only screen and (max-width: 1231px) {
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK {
+        max-width: 960px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK {
+        max-width: 720px;
+    }
+
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK h1 {
+        font-size: 30px;
+    }
+
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK>div>div p {
+        font-size: 14px;
+        width: 230px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK {
+        max-width: 650px;
+    }
+
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK h1 {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .HomeScreen_industryTrends__KoD6- {
+        padding: 35px 0 32px;
+    }
+
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK h1 {
+        font-size: 22px;
+        line-height: 25px;
+        margin-bottom: 5px;
+    }
+
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK>div>div p {
+        font-size: 12.6px;
+        min-height: 37px;
+        width: 210px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK>div>div p {
+        border: 1px solid #c5c5c5;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK {
+        width: 90%;
+    }
+
+    .HomeScreen_industryTrends__KoD6- .HomeScreen_industryTrendsContainer__\+xwuK>div>div p {
+        width: 100%;
+    }
+}

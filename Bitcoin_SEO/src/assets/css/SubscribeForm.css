@@ -1,0 +1,260 @@
+.SubscribeforUpdates_updatesContainer__DD3wT {
+    align-items: center;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 460px;
+    padding: 100px 0;
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT input {
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT>div {
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT>div>div {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    max-height: 265px;
+    padding: 50px 0;
+    width: 100%;
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT>div>div h2 {
+    color: #1a1a1a;
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 24px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT>div>div p {
+    color: #464646;
+    font-size: 16px;
+    font-weight: 600;
+    -webkit-hyphens: none;
+    hyphens: none;
+    margin: 20px 0 22px;
+    padding: 0;
+    text-align: center;
+    width: 70%;
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT>div>div form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    width: 90%;
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW input {
+    background-color: #ececec;
+    border: none;
+    border-radius: 2px;
+    height: 50px;
+    margin: 0 22px 0 0;
+    padding: 0 20px;
+    width: -webkit-max-content;
+    width: max-content;
+    width: 415px;
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW>div {
+    height: 50px;
+    margin-right: 22px;
+    width: -webkit-max-content;
+    width: max-content;
+    width: 415px;
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW>div input {
+    width: 100%;
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW button {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 800;
+    height: 50px;
+    text-transform: uppercase;
+    transition: .3s;
+    width: 225px;
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW button:hover {
+    background-color: #fff;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+@media only screen and (max-width: 1619px) {
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW input {
+        width: 50%;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW>div {
+        width: 50%;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW button {
+        width: 20%;
+    }
+}
+
+@media only screen and (max-width: 1419px) {
+    .SubscribeforUpdates_updatesContainer__DD3wT {
+        padding: 60px 0;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div h2 {
+        font-size: 24px;
+    }
+}
+
+@media only screen and (max-width: 1231px) {
+    .SubscribeforUpdates_updatesContainer__DD3wT>div {
+        max-width: 960px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .SubscribeforUpdates_updatesContainer__DD3wT>div {
+        max-width: 720px;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    .SubscribeforUpdates_updatesContainer__DD3wT {
+        max-height: -webkit-max-content;
+        max-height: max-content;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div {
+        max-height: -webkit-max-content;
+        max-height: max-content;
+        padding: 40px 0 35px;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div form {
+        width: 89%;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW {
+        flex-direction: column;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW input {
+        margin: 0 1px;
+        width: 100%;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW>div {
+        height: auto;
+        margin-bottom: 7px;
+        margin-right: 0;
+        margin-top: 19px;
+        width: 100%;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW button {
+        margin: 10px 1px;
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width: 768px) {
+    .SubscribeforUpdates_updatesContainer__DD3wT>div {
+        max-width: 650px;
+        width: 90%;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div p {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .SubscribeforUpdates_updatesContainer__DD3wT {
+        padding: 40px 0;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div h2 {
+        font-size: 22px;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div p {
+        font-size: 16px;
+        margin-bottom: 40px;
+        margin-top: 15px;
+        padding: 0 10px;
+        text-align: center;
+        width: 96%;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW input {
+        padding: 10px;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW button {
+        font-size: 16.5px;
+        font-weight: 700;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div {
+        padding: 42px 0;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div h2 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .SubscribeforUpdates_updatesContainer__DD3wT>div>div form .SubscribeforUpdates_from__REPoW button {
+        margin: 15px 0 0;
+    }
+}
+
+.SubscribeforUpdates_updatesContainer__DD3wT
+  > div
+  > div
+  form
+  .SubscribeforUpdates_from__REPoW
+  input:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}

@@ -1,0 +1,78 @@
+.popup-content {
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #c8c8c8;
+    border-radius: 2px;
+    display: flex;
+    max-width: 400px;
+    min-height: 100px;
+    min-width: 300px;
+    padding: 10px 20px !important;
+    width: 20% !important;
+}
+
+.popup-content>div {
+    width: 100%;
+}
+
+.popup-content>div svg{
+color: #000;}
+
+.popup-content form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.popup-content form input {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.popup-content form input:first-child {
+    background-color: initial;
+    border: none;
+    border-bottom: 1px solid #555;
+    color: #181818;
+    font-size: 16px;
+    font-weight: 600;
+    height: 40px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+.popup-content form input:nth-child(2) {
+    background-color: #181818;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    height: 40px;
+    margin-bottom: 0;
+    outline: none;
+    transition: all .2s ease;
+}
+
+.popup-content form input:nth-child(2):hover {
+    background-color: #e4e4e4 !important;
+    color: #181818;
+}
+
+@media screen and (max-width: 941px) {
+    .popup-content {
+        max-width: 700px;
+        width: 80% !important;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .popup-content {
+        min-width: auto;
+        width: 90% !important;
+    }
+}
