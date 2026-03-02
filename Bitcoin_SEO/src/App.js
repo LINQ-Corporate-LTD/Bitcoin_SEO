@@ -1,6 +1,7 @@
 // src/App.js
+// Theme is now applied via SSR-injected <style> tag in <head>.
+// No client-side API calls here — all data flows through window.__INITIAL_DATA__.
 import React from "react";
-import { useEffect } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import ContactUs from "./components/ContactUs";
@@ -36,40 +37,14 @@ import SponsorDescription from "./components/SponsorDescription";
 import RemindMeLater from "./components/RemindMe";
 
 function App() {
-  useEffect(() => {
-    fetch("https://harsh7541.pythonanywhere.com/admin1/gettheme")
-      .then((res) => res.json())
-      .then((res) => {
-        if (!res.status || !res.themecolors) return;
-
-        const theme = res.themecolors;
-        console.log('theme: ', theme);
-        const root = document.documentElement;
-
-        theme.primaryColor &&
-          root.style.setProperty("--primary-color", theme.primaryColor);
-
-        theme.secondaryColor &&
-          root.style.setProperty("--secondary-color", theme.secondaryColor);
-
-        theme.darkColor &&
-          root.style.setProperty("--dark-color", theme.darkColor);
-
-        theme.lightColor &&
-          root.style.setProperty("--light-color", theme.lightColor);
-
-        theme.gradient &&
-          root.style.setProperty("--linearGradient-color", theme.gradientColor);
-      })
-      .catch((err) => console.error("Theme API error:", err));
-  }, []);
   // ✅ Get initial data from window if available (from SSR)
-  const initialData = typeof window !== 'undefined' && window.__INITIAL_DATA__ 
-    ? window.__INITIAL_DATA__ 
-    : null;
+  const initialData =
+    typeof window !== "undefined" && window.__INITIAL_DATA__
+      ? window.__INITIAL_DATA__
+      : null;
 
-  console.log("App.js - initialData:", initialData ? "Available" : "Not available");
-  console.log("App.js - Full data:", initialData);
+  // ✅ Theme is injected server-side as <style id="ssr-theme"> in <head>.
+  // No client-side theme fetch needed. The CSS variables are already applied.
 
   return (
     <>

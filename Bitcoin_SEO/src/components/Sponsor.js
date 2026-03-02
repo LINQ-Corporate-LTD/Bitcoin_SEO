@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import "../../src/assets/css/sponsor.css";
 import Navbar from "./Navbar";
@@ -11,6 +12,7 @@ import Slider from "react-slick";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TestimonialCarousel from "./TestimonialCarousel";
+import { useSSRData } from "../common/useSSRData";
 
 const leftArrowIcon =
   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
@@ -23,13 +25,15 @@ const phoneIcon =
 
 const Sponsors = () => {
   const sliderRef = useRef(null);
-
   const navigate = useNavigate();
-  const [sponsorList, setSponsorList] = useState([]);
-  const [mediaPageHelpersList, setMediaPageHelpersList] = useState([]);
+
+  // ✅ SSR data — no client-side GET requests
+  const sponsorList = useSSRData("sponsors") || [];
+  const mediaPageHelpersList = useSSRData("mediaPartners") || [];
+  const sponsorPageData = useSSRData("sponsorPageData") || [];
+  const paraDes = sponsorPageData[0]?.introParaDescription?.replace(/^"(.*)"$/, "$1") || "";
+
   const [isMobileScreen, setIsMobile] = useState(false);
-  const [sponsorPageData, setSponsorPageData] = useState([]);
-  const [paraDes, setParaDes] = useState("");
   const [fullName, setFullName] = useState("");
   const [fullNameErr, setFullNameErr] = useState(false);
   const [companyName, setCompanyName] = useState("");
@@ -129,141 +133,22 @@ const Sponsors = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    callSponsorListApi();
-    callMediaHelperListApi();
-    callSponsorPageDataApi();
-  }, []);
-
   const cleanHtml = (html) => {
     if (!html) return "";
-
-    // Remove outer quotes and unescape HTML
     let cleaned = html.replace(/^"(.*)"$/, "$1");
-
-    // Unescape quotes
     cleaned = cleaned.replace(/\\"/g, '"');
-
-    // Ensure all external links have proper attributes
     cleaned = cleaned.replace(
       /<a\s+href=["']([^"']+)["'][^>]*>/gi,
       (match, url) => {
-        // Check if URL is external (starts with http/https)
         if (url.startsWith("http://") || url.startsWith("https://")) {
           return `<a href="${url}" target="_blank" rel="noopener noreferrer">`;
         }
         return match;
       },
     );
-
     return cleaned;
   };
 
-  const callSponsorListApi = () => {
-    const requestOptions = {
-      method: "GET",
-    };
-    fetch(
-      `https://harsh7541.pythonanywhere.com/admin1/eventsponsors`,
-      requestOptions,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (
-          data &&
-          (data.detail === "The Token is expired" ||
-            data.message === "Invalid token")
-        ) {
-          navigate("/logout");
-        }
-        if (data && data.status) {
-          setSponsorList(data["eventSponsors"]);
-        } else {
-          toast.error(data?.message);
-        }
-      })
-      .catch((error) => {
-        setTimeout(() => {
-          toast.error("There was an error, Please try again later.", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }, 1000);
-      });
-  };
-
-  const callMediaHelperListApi = () => {
-    const requestOptions = {
-      method: "GET",
-    };
-    fetch(
-      `https://harsh7541.pythonanywhere.com/admin1/mediapagehelpers`,
-      requestOptions,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data && data.status) {
-          setMediaPageHelpersList(data["mediaPageHelpers"]);
-          // setTotalCount(data?.paginationDetails?.count);
-        }
-      })
-      .catch((error) => {
-        setTimeout(() => {
-          toast.error("There was an error, Please try again later.", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }, 1000);
-      });
-  };
-  const callSponsorPageDataApi = () => {
-    const requestOptions = {
-      method: "GET",
-    };
-    fetch(
-      `https://harsh7541.pythonanywhere.com/admin1/getsponsorpagedata`,
-      requestOptions,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data && data.status) {
-          setSponsorPageData(data["sponsorPageStaticData"]);
-          // setTotalCount(data?.paginationDetails?.count);
-        }
-      })
-      .catch((error) => {
-        setTimeout(() => {
-          toast.error("There was an error, Please try again later.", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }, 1000);
-      });
-  };
-
-  useEffect(() => {
-    if (sponsorPageData?.length > 0) {
-      setParaDes(
-        sponsorPageData[0]?.introParaDescription?.replace(/^"(.*)"$/, "$1"),
-      );
-    }
-    // eslint-disable-next-line
-  }, [sponsorPageData]);
   function chunkArray(array, size) {
     return Array.from({ length: Math.ceil(array.length / size) }, (_, i) =>
       array.slice(i * size, i * size + size),
@@ -446,6 +331,16 @@ const Sponsors = () => {
   return (
     <div id="root">
       <>
+        <Helmet>
+          <title>Become a Sponsor – Bitcoin Innovation &amp; Market Evolution 2026</title>
+          <meta name="description" content="Sponsor Bitcoin Innovation &amp; Market Evolution 2026. Exhibit your services, generate leads and boost your brand's visibility with industry leaders." />
+          <meta property="og:title" content="Become a Sponsor – Bitcoin Innovation &amp; Market Evolution 2026" />
+          <meta property="og:description" content="Sponsor Bitcoin Innovation &amp; Market Evolution 2026 to reach key decision-makers and boost your brand visibility." />
+          <meta property="og:type" content="website" />
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:title" content="Become a Sponsor – Bitcoin Innovation &amp; Market Evolution 2026" />
+          <link rel="canonical" href="https://bitcoinsummit.com/sponsors" />
+        </Helmet>
         <Navbar forceScrolled />
         <div style={{ opacity: 1 }}>
           <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
@@ -521,11 +416,10 @@ const Sponsors = () => {
                                 return (
                                   <div
                                     key={i}
-                                    className={`SponsorCards_card__8eNkT ${
-                                      item?.sponsorType !== "Dummy"
-                                        ? "clickable"
-                                        : ""
-                                    }`}
+                                    className={`SponsorCards_card__8eNkT ${item?.sponsorType !== "Dummy"
+                                      ? "clickable"
+                                      : ""
+                                      }`}
                                     onClick={
                                       item?.sponsorType !== "Dummy"
                                         ? handleClick

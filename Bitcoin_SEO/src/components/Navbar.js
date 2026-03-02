@@ -359,10 +359,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../assets/css/navbar.css";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useApiData } from "../../src/common/ApiContext";
 import GoogleTranslate from "./GoogleTranslate";
+import { useSSRData } from "../common/useSSRData";
 
 const closeBtn =
   "https://www.desalination-resource-recovery.com/images/icons/close-white.png";
@@ -372,10 +370,18 @@ const leftArrowIcon =
 
 const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
   const navigate = useNavigate();
-  const { navLogos: contextNavLogos } = useApiData();
-  
-  // Local state for logos - will be populated from API
-  const [navLogos, setNavLogos] = useState(contextNavLogos || null);
+
+  // ✅ Initialize navLogos from SSR window.__INITIAL_DATA__ — persists across route changes
+  const [navLogos, setNavLogos] = useState(() => {
+    if (typeof window !== "undefined" && window.__INITIAL_DATA__?.navLogos) {
+      return window.__INITIAL_DATA__.navLogos;
+    }
+    return null;
+  });
+
+  // ✅ navItems from SSR data
+  const ssrNavItems = useSSRData("navItems");
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -383,34 +389,23 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeMobileDropdown, setActiveMobileDropdown] = useState(null);
   const [activeNavItem, setActiveNavItem] = useState(null);
-  const [navItems, setNavItems] = useState([]);
+  // Use SSR navItems; fall back to empty array while waiting (won't trigger a fetch)
+  const navItems = ssrNavItems || [];
 
-  // ✅ Fetch logos directly if not available from context
+  // ✅ Client-side fallback: fetch navLogos if SSR data is null
   useEffect(() => {
-    if (!navLogos) {
-      fetchNavLogos();
-    }
+    if (navLogos) return;
+    fetch("https://harsh7541.pythonanywhere.com/admin1/getnavlogos")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data?.status && data.navLogos) {
+          const raw = data.navLogos;
+          setNavLogos(Array.isArray(raw) ? raw[0] : raw);
+        }
+      })
+      .catch(() => { });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // ✅ Update local state when context updates
-  useEffect(() => {
-    if (contextNavLogos && !navLogos) {
-      setNavLogos(contextNavLogos);
-    }
-  }, [contextNavLogos]);
-
-  const fetchNavLogos = async () => {
-    try {
-      const response = await fetch(`https://harsh7541.pythonanywhere.com/admin1/getnavlogos`);
-      const data = await response.json();
-      
-      if (data && data.status && data.navLogos) {
-        setNavLogos(data.navLogos);
-      }
-    } catch (error) {
-      console.error("Error fetching nav logos:", error);
-    }
-  };
 
   // Client-side only setup for window values
   useEffect(() => {
@@ -452,37 +447,6 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
     }
   }, [navItems]);
 
-  // Fetch navigation items
-  useEffect(() => {
-    navItemsListApi();
-  }, []);
-
-  const navItemsListApi = () => {
-    const requestOptions = {
-      method: "GET",
-    };
-    fetch(`https://harsh7541.pythonanywhere.com/admin1/getnavitems`, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data && data.status) {
-          setNavItems(data["navItems"]);
-        }
-      })
-      .catch(() => {
-        setTimeout(() => {
-          toast.error("There was an error, Please try again later.", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }, 1000);
-      });
-  };
-
   // Handle scroll
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -522,8 +486,8 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
           isMobileMenuOpen && less1024
             ? "#000000cc"
             : showWhiteNavbar
-            ? "#fff"
-            : "transparent",
+              ? "#fff"
+              : "transparent",
       }}
     >
       <div className="NewNavbar_container__dGANs">

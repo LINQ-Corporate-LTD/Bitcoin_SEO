@@ -647,6 +647,7 @@
 // export default Register;
 
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import "../../src/assets/css/register.css"; // ✅ CSS moved inside src/assets/css/
 import Navbar from "./Navbar";
 import SubscribeForm from "./SubscribeForm";
@@ -659,12 +660,16 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useApiData } from "../../src/common/ApiContext";
 import icon from "../../src/assets/images/group-icon.png";
+import { useSSRData } from "../common/useSSRData";
 
 const Register = () => {
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [delegatePackageList, setDelegatePackageList] = useState([]);
+  // ✅ Initialize from SSR data (direct URL load) or fetch client-side (button navigation)
+  const [delegatePackageList, setDelegatePackageList] = useState(
+    () => (typeof window !== "undefined" && window.__INITIAL_DATA__?.delegatePackages) || []
+  );
   const [cardCounts, setCardCounts] = useState({});
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200,
@@ -699,17 +704,23 @@ const Register = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Fetch delegate packages
+  // ✅ Client-side fallback: fetch delegate packages when arriving via button/link click
+  // (window.__INITIAL_DATA__ is not updated on React Router client-side navigation)
   useEffect(() => {
+    if (delegatePackageList.length > 0) return; // already populated from SSR
     fetch("https://harsh7541.pythonanywhere.com/admin1/deligatepackageslist")
-      .then((response) => response.json())
+      .then((r) => r.json())
       .then((data) => {
-        if (data && data.status) {
+        if (data?.status && data.delegatePackages) {
           setDelegatePackageList(data.delegatePackages);
         }
-      });
+      })
+      .catch(() => { });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
+  // openPopup / closePopup
   const openPopup = () => setIsPopupOpen(true);
   const closePopup = () => {
     setIsPopupOpen(false);
@@ -828,6 +839,13 @@ const Register = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Register Now – Bitcoin Innovation &amp; Market Evolution 2026</title>
+        <meta name="description" content="Register for Bitcoin Innovation &amp; Market Evolution 2026. Choose your delegate package and secure your place at the premier Bitcoin industry event." />
+        <meta property="og:title" content="Register Now – Bitcoin Innovation &amp; Market Evolution 2026" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://bitcoinsummit.com/register" />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
         <article>
