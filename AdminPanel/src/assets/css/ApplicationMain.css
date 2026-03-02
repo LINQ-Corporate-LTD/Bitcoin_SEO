@@ -1,0 +1,31 @@
+.hospital_graph {
+    height: 100%;
+}
+
+.row_place {
+    margin-top: 13rem ;
+}
+
+.btn_end {
+    text-align: center;
+    margin-top: 2rem ;
+}
+
+.bt_wi {
+    width: 10rem;
+}
+
+.main_logo {
+    margin-top: 2rem ;
+}
+
+.required_span {
+    color: red;
+}
+
+.phar-head{
+    background-color: black;
+    color: whitesmoke;
+    padding: 5px 0px 5px 0px;
+    text-align: center;
+}
