@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Slider from "react-slick";
 import Popup from "reactjs-popup";
+import { Helmet } from "react-helmet-async";
 
 const arrowUpIcon =
   "https://www.desalination-resource-recovery.com/images/icons/accordion-arrow-up.png";
@@ -291,9 +292,23 @@ const WhoShouldAttend = () => {
     pauseOnHover: true,
     arrows: false,
   };
+  const seoTitle = `Who Should Attend | Bitcoin Conference 2026`;
+  const seoDesc = "Discover who should attend Bitcoin Innovation & Market Evolution 2026 and the key benefits for exchanges, institutions, miners, fintechs, and regulators.";
 
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        {/* <meta property="og:image" content={bgImage} /> */}
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/who-should-attend" />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ opacity: 1 }}>
         <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>

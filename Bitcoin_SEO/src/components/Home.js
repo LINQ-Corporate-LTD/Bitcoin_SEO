@@ -97,17 +97,21 @@ const Home = () => {
     return () => window.removeEventListener("resize", updateSettings);
   }, [sponsorList]);
 
+  const seoTitle = `Bitcoin Conference 2026 | Bitcoin Innovation`;
+  const seoDesc = "Join Bitcoin Innovation & Market Evolution 2026, a global Bitcoin conference in Texas covering institutional adoption, regulation, and market innovation.";
+
+
   return (
     <>
       <Helmet>
-        <title>{eventName}</title>
-        <meta name="description" content={`Join ${eventName} — the premier event for Bitcoin innovation and market evolution. Register now!`} />
-        <meta property="og:title" content={eventName} />
-        <meta property="og:description" content={`Join ${eventName} — the premier event for Bitcoin innovation and market evolution.`} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={eventName} />
-        <link rel="canonical" href="https://bitcoinsummit.com/" />
+        <meta name="twitter:title" content={seoTitle} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/" />
       </Helmet>
       <Navbar />
       <article className="HomeScreen_wholeContainer__oE8Au">

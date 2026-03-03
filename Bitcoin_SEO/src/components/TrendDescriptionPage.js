@@ -11,6 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet-async";
 
 const leftArrowIcon =
   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
@@ -380,8 +381,22 @@ const TrendDescriptionPage = () => {
     return <Error404 />;
   }
 
+ const seoTitle = `Bitcoin Market Dynamics | Bitcoin Conference 2026`;
+  const seoDesc = "Explore Bitcoin market dynamics, institutional flows, volatility, and global macro trends shaping digital asset markets ahead of Bitcoin Innovation 2026."; 
   return (
     <>
+    <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        {/* <meta property="og:image" content={bgImage} /> */}
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href="http://localhost:3001/trenddescription/Market-Dynamics" />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
         <article className="IndustryTrends_container__TcST0">

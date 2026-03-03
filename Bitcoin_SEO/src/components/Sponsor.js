@@ -328,18 +328,21 @@ const Sponsors = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const seoTitle = `Sponsors & Exhibitors | Bitcoin Conference 2026`;
+  const seoDesc = "Exhibit or sponsor at Bitcoin Innovation & Market Evolution 2026 and connect with miners, exchanges, fintechs, regulators, and blockchain leaders.";
   return (
     <div id="root">
       <>
         <Helmet>
           <title>Become a Sponsor – Bitcoin Innovation &amp; Market Evolution 2026</title>
           <meta name="description" content="Sponsor Bitcoin Innovation &amp; Market Evolution 2026. Exhibit your services, generate leads and boost your brand's visibility with industry leaders." />
-          <meta property="og:title" content="Become a Sponsor – Bitcoin Innovation &amp; Market Evolution 2026" />
-          <meta property="og:description" content="Sponsor Bitcoin Innovation &amp; Market Evolution 2026 to reach key decision-makers and boost your brand visibility." />
+          <meta property="og:title" content= {seoTitle} />
+          <meta property="og:description" content={seoDesc} />
           <meta property="og:type" content="website" />
           <meta name="twitter:card" content="summary" />
-          <meta name="twitter:title" content="Become a Sponsor – Bitcoin Innovation &amp; Market Evolution 2026" />
-          <link rel="canonical" href="https://bitcoinsummit.com/sponsors" />
+          <meta name="twitter:title" content={seoTitle} />
+          <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/sponsors" />
         </Helmet>
         <Navbar forceScrolled />
         <div style={{ opacity: 1 }}>

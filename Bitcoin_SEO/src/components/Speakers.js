@@ -158,9 +158,11 @@ const Speakers = () => {
         });
     }
   };
-
+  const seoTitle = `Speakers | Bitcoin Innovation & Market Evolution 2026`;
+  const seoDesc = "Featured speakers for Bitcoin Innovation & Market Evolution 2026, including industry leaders, innovators, and experts in the Bitcoin ecosystem.";
   return (
     <>
+
       <Navbar forceScrolled />
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
         <article

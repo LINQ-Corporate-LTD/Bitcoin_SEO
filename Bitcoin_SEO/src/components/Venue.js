@@ -91,10 +91,8 @@ const Venue = () => {
     }
   };
 
-  const seoTitle = `Venue – Bitcoin Innovation & Market Evolution 2026`;
-  const seoDesc = venueDescription
-    ? venueDescription.replace(/<[^>]*>/g, "").substring(0, 160)
-    : "Discover the venue for Bitcoin Innovation & Market Evolution 2026.";
+  const seoTitle = `Venue | Bitcoin Innovation & Market Evolution 2026`;
+  const seoDesc = "Venue details for Bitcoin Innovation & Market Evolution 2026 at The Woodlands Resort, Curio Collection by Hilton, Texas, USA.";
 
   return (
     <>
@@ -108,7 +106,7 @@ const Venue = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDesc} />
-        <link rel="canonical" href="https://bitcoinsummit.com/venue" />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/venue" />
       </Helmet>
       <Navbar forceScrolled />
       <div style={{ opacity: 1 }}>
