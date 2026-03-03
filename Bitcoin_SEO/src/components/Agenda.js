@@ -272,32 +272,32 @@ const Agenda = () => {
     paddingTop: isXSmall
       ? "100px"
       : isSmall
-      ? "120px"
-      : isMedium
-      ? "140px"
-      : "150px",
+        ? "120px"
+        : isMedium
+          ? "140px"
+          : "150px",
     paddingBottom: isXSmall
       ? "50px"
       : isSmall
-      ? "60px"
-      : isMedium
-      ? "80px"
-      : "100px",
+        ? "60px"
+        : isMedium
+          ? "80px"
+          : "100px",
     backgroundColor: "#e5e5e5",
     paddingLeft: isXSmall
       ? "15px"
       : isSmall
-      ? "20px"
-      : isMedium
-      ? "30px"
-      : "40px",
+        ? "20px"
+        : isMedium
+          ? "30px"
+          : "40px",
     paddingRight: isXSmall
       ? "15px"
       : isSmall
-      ? "20px"
-      : isMedium
-      ? "30px"
-      : "40px",
+        ? "20px"
+        : isMedium
+          ? "30px"
+          : "40px",
   };
 
   const containerStyle = {
@@ -305,12 +305,12 @@ const Agenda = () => {
     maxWidth: isXSmall
       ? "100%"
       : isSmall
-      ? "100%"
-      : isMedium
-      ? "900px"
-      : isLarge
-      ? "1200px"
-      : "1400px",
+        ? "100%"
+        : isMedium
+          ? "900px"
+          : isLarge
+            ? "1200px"
+            : "1400px",
     width: "100%",
   };
 
@@ -319,12 +319,12 @@ const Agenda = () => {
     fontSize: isXSmall
       ? "20px"
       : isSmall
-      ? "24px"
-      : isMedium
-      ? "30px"
-      : isLarge
-      ? "36px"
-      : "40px",
+        ? "24px"
+        : isMedium
+          ? "30px"
+          : isLarge
+            ? "36px"
+            : "40px",
     fontWeight: "800",
     margin: "0",
     padding: "0",
@@ -341,10 +341,10 @@ const Agenda = () => {
     marginTop: isXSmall
       ? "25px"
       : isSmall
-      ? "30px"
-      : isMedium
-      ? "35px"
-      : "42px",
+        ? "30px"
+        : isMedium
+          ? "35px"
+          : "42px",
   };
 
   const formRowStyle = {
@@ -390,10 +390,10 @@ const Agenda = () => {
     height: isXSmall
       ? "120px"
       : isSmall
-      ? "140px"
-      : isMedium
-      ? "160px"
-      : "185px",
+        ? "140px"
+        : isMedium
+          ? "160px"
+          : "185px",
     outline: "none",
     padding: isXSmall ? "15px" : isSmall ? "18px" : "20px 23px",
     resize: "none",
@@ -1366,7 +1366,8 @@ const Agenda = () => {
                               </div>
                               <div className="Agenda_speakerContainer__av+wf">
                                 <div className="Agenda_keyContainer__ZlvJV">
-                                  <img src={clockIcon} alt="clock icon"></img>
+                                  {/* <img src={clockIcon} alt="clock icon"></img> */}
+                                  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" style={{ width: '45px', height: '45px' }}><g><path d="M22.71,3.66C11.4,3.66,2.24,12.83,2.24,24.13s9.16,20.47,20.47,20.47,20.47-9.16,20.47-20.47S34.01,3.66,22.71,3.66ZM22.68,41.78c-9.74,0-17.68-7.93-17.65-17.65.03-9.73,7.92-17.62,17.63-17.63,9.72-.01,17.66,7.94,17.65,17.66-.02,9.73-7.91,17.61-17.63,17.62Z" style={{ fill: 'rgb(46, 41, 45)' }}></path><path d="M22.71,3.66C11.4,3.66,2.24,12.83,2.24,24.13s9.16,20.47,20.47,20.47,20.47-9.16,20.47-20.47S34.01,3.66,22.71,3.66ZM22.68,41.78c-9.74,0-17.68-7.93-17.65-17.65.03-9.73,7.92-17.62,17.63-17.63,9.72-.01,17.66,7.94,17.65,17.66-.02,9.73-7.91,17.61-17.63,17.62Z" style={{ fill: 'rgb(46, 41, 45)' }}></path><path d="M24.15,18.45c0,1.98,0,3.97,0,5.95,0,.19-.09.44-.22.57-2,2.02-4.02,4.03-6.03,6.04-.42.42-.92.61-1.51.43-.55-.17-.89-.54-1.02-1.1-.13-.56.07-1.03.47-1.42,1.67-1.67,3.34-3.35,5.02-5.01.25-.24.35-.48.35-.84-.01-3.5,0-7,0-10.5,0-.97.58-1.62,1.44-1.64.87-.02,1.51.63,1.51,1.57,0,1.98,0,3.97,0,5.95Z" style={{ fill: 'rgb(46, 41, 45)' }}></path></g><path d="M15.39,3.22c-7.17,2.86-9.71,5.14-13.16,11.77C.27,12.6-.49,9.94.31,6.97,1.26,3.49,3.57,1.28,7.11.54c3.2-.67,5.94.34,8.28,2.68Z" style={{ fill: 'rgb(46, 41, 45)' }}></path><path d="M42.72,14.52c-2.64-5.77-6.92-9.62-12.95-11.59,2.3-2.4,5.05-3.4,8.26-2.72,3.49.74,5.77,2.93,6.68,6.38.78,2.94,0,5.57-1.98,7.93Z" style={{ fill: 'rgb(46, 41, 45)' }}></path></svg>
                                 </div>
                                 <div className="Agenda_speakerDetailsContainer__mOEC6">
                                   <div
@@ -1394,12 +1395,12 @@ const Agenda = () => {
                         else if (item.status === "Speaker") {
                           const selectedSpeaker =
                             item.selectedSpeakers &&
-                            item.selectedSpeakers !== "null"
+                              item.selectedSpeakers !== "null"
                               ? JSON.parse(item.selectedSpeakers)
                               : null;
                           const industryTrends =
                             item.industryTrends &&
-                            item.industryTrends !== "null"
+                              item.industryTrends !== "null"
                               ? JSON.parse(item.industryTrends)
                               : [];
                           const bulletPoints = item.bulletPoints
@@ -1427,8 +1428,8 @@ const Agenda = () => {
                           // Parse panel speaker images
                           const panelSpeakerImages =
                             isPanelSpeaker &&
-                            item.panelSpeakerImages &&
-                            item.panelSpeakerImages !== "null"
+                              item.panelSpeakerImages &&
+                              item.panelSpeakerImages !== "null"
                               ? JSON.parse(item.panelSpeakerImages)
                               : {};
 
@@ -1453,7 +1454,7 @@ const Agenda = () => {
                                                 key={speakerIndex}
                                                 src={
                                                   panelSpeakerImages[
-                                                    speaker.value
+                                                  speaker.value
                                                   ]
                                                 }
                                                 alt={speaker.label}
@@ -1492,7 +1493,7 @@ const Agenda = () => {
                                                       </strong>
                                                       {speakerIndex <
                                                         selectedSpeaker.length -
-                                                          1 && <br />}
+                                                        1 && <br />}
                                                     </span>
                                                   )
                                                 )}

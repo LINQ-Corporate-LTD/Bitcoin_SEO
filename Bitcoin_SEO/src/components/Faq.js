@@ -100,6 +100,7 @@ const Faq = () => {
                 >
                   {" "}
                   delegates@abcd.com
+                  {" "}
                 </a>
                 for support.
               </p>
