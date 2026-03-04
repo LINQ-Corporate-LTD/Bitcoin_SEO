@@ -8,6 +8,8 @@ import LogoCarousel from "./LogoCarousel";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Error404 from "./Error404";
+import { Helmet } from "react-helmet-async";
+
 const SpeakerProfile = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -96,8 +98,30 @@ const SpeakerProfile = () => {
   if (isNotFound) {
     return <Error404 />;
   }
+
+  const speaker = speakerData[0];
+  const seoTitle = speaker?.eventSpeakerMetaTitle
+  const seoDesc = speaker?.eventSpeakerMetaDescription
+  const canonicalUrl = slug
+    ? `https://www.bitcoin-innovation-market-evolution.online/speakerprofile/${slug}`
+    : "https://www.bitcoin-innovation-market-evolution.online/featured-speakers";
+
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <link rel="canonical" href={canonicalUrl} />
+        {/* Open Graph */}
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="profile" />
+        <meta property="og:url" content={canonicalUrl} />
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ opacity: 1 }}>
         <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>

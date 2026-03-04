@@ -8,6 +8,7 @@ import Footer from "../Footer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Error404 from "./Error404";
+import { Helmet } from "react-helmet-async";
 const newsImg =
   "https://www.desalination-resource-recovery.com/api/images/news/1749734842198.jpg";
 const linkedInLogo =
@@ -290,9 +291,29 @@ Read the full article: ${currentUrl}`);
   if (isNotFound) {
     return <Error404 />;
   }
+  const newsSeo = newsData[0];
+  const seoTitle = newsSeo?.newsMetaTitle
+  const seoDesc = newsSeo?.newsMetaDescription
+  const canonicalUrl = slug
+    ? `https://www.bitcoin-innovation-market-evolution.online/newsdescription/${slug}`
+    : "https://www.bitcoin-innovation-market-evolution.online/news";
 
   return (
     <div id="root">
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <link rel="canonical" href={canonicalUrl} />
+        {/* Open Graph */}
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="profile" />
+        <meta property="og:url" content={canonicalUrl} />
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+      </Helmet>
       <div style={{ opacity: 1 }}>
         <div style={{ marginTop: windowWidth > 1024 ? "150px" : "" }}>
           <Navbar forceScrolled />
@@ -422,7 +443,7 @@ Read the full article: ${currentUrl}`);
             <div className="NewsDetails_lowerPart__F5RRQ">
               <div className="NewsDetails_left__SL1Qe">
                 <div className="NewsDetails_content__0+gd8">
-                  <img src={newsData[0]?.newsImage} alt="News article"></img>
+                  <img src={newsData[0]?.newsImage} alt={newsData[0]?.newsImageAltText}></img>
                   <p
                     lang="en"
                     dangerouslySetInnerHTML={{
