@@ -272,6 +272,8 @@ def industryTrendListFun(request):
             'trendRedirectPath':trend.trendRedirectPath,
             'trendShortDescription':trend.trendShortDescription,
             'trendLongDescription':trend.trendLongDescription,
+            'trendMetaTitle':trend.trendMetaTitle,
+            'trendMetaDescription':trend.trendMetaDescription,
             'created_at': trend.created_at,
             'updated_at': trend.updated_at,
             'created_by': trend.created_by,
@@ -2477,6 +2479,12 @@ def add_industryTrend(request):
 
     if 'trendLongDescription' in request.POST:
         check_db.trendLongDescription = response['trendLongDescription']
+
+    if 'trendMetaTitle' in request.POST:
+        check_db.trendMetaTitle = response['trendMetaTitle']
+
+    if 'trendMetaDescription' in request.POST:
+        check_db.trendMetaDescription = response['trendMetaDescription']
  
     check_db.created_by = "Admin"
     check_db.updated_by = "Admin"
@@ -2501,6 +2509,12 @@ def edit_industryTrend(request):
 
     if 'trendLongDescription' in request.POST:
         check_db.trendLongDescription = response['trendLongDescription']
+
+    if 'trendMetaTitle' in request.POST:
+        check_db.trendMetaTitle = response['trendMetaTitle']
+
+    if 'trendMetaDescription' in request.POST:
+        check_db.trendMetaDescription = response['trendMetaDescription']
  
     check_db.updated_by = "Admin"
     check_db.save()
@@ -4950,6 +4964,8 @@ def getIndustryTrendDataById(request):
             'trendRedirectPath':trend.trendRedirectPath,
             'trendShortDescription':trend.trendShortDescription,
             'trendLongDescription':trend.trendLongDescription,
+            'trendMetaTitle':trend.trendMetaTitle,
+            'trendMetaDescription':trend.trendMetaDescription,
             'created_at': trend.created_at,
             'updated_at': trend.updated_at,
             'created_by': trend.created_by,

@@ -89,6 +89,8 @@ class eventIndustryTrends(models.Model):
     trendRedirectPath = models.CharField(default="",max_length=100,null=True, blank=True)
     trendShortDescription = models.TextField(null=True,blank=True)
     trendLongDescription = models.TextField(null=True,blank=True)
+    trendMetaTitle = models.CharField(null=True,blank=True)
+    trendMetaDescription = models.TextField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.CharField(null=False,max_length=50,default='No')

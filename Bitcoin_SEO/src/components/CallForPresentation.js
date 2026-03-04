@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Popup from "reactjs-popup";
 import "../assets/css/popUp.css";
-
+import { Helmet } from "react-helmet-async";
 const CallForPresentation = () => {
   const [speakerPageData, setSpeakerPageData] = useState([]);
   const [paraOne, setParaOne] = useState("");
@@ -505,13 +505,28 @@ const CallForPresentation = () => {
     }
   };
 
+  const seoTitle = `Call for Speakers | Bitcoin Conference 2026`;
+  const seoDesc = "Submit your speaker proposal for Bitcoin Innovation & Market Evolution 2026 and contribute insights on adoption, regulation, scalability, mining, and markets.";
+
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        {/* <meta property="og:image" content={bgImage} /> */}
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/speakers" />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
         {/* <div
           style={{
-            paddingTop: "150px",
+            paddingTop: "150px", 
             paddingBottom: "100px",
             backgroundColor: "rgb(241, 241, 241)",
           }}
