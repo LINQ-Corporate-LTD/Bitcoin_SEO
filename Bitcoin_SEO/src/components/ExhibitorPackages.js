@@ -27,7 +27,7 @@ import partner10 from "../../src/assets/images/partners/partner10.png";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TestimonialCarousel from "./TestimonialCarousel";
-
+import { Helmet } from "react-helmet-async";
 const leftArrowIcon =
   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
 const rightArrowIcon =
@@ -71,36 +71,36 @@ const ExhibitorPackages = () => {
   const [logoList, setLogoList] = useState([]);
 
   useEffect(() => {
-      callLogoListApi();
-      // eslint-disable-next-line
-    }, []);
+    callLogoListApi();
+    // eslint-disable-next-line
+  }, []);
 
-    const callLogoListApi = () => {
-        const requestOptions = {
-          method: "GET",
-        };
-        fetch(`https://harsh7541.pythonanywhere.com/admin1/homepagecompanieslogo`, requestOptions)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data && data.status) {
-              setLogoList(data["homePageCompaniesList"]);
-              // setTotalCount(data?.paginationDetails?.count);
-            }
-          })
-          .catch((error) => {
-            setTimeout(() => {
-              toast.error("There was an error, Please try again later.", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
-            }, 1000);
+  const callLogoListApi = () => {
+    const requestOptions = {
+      method: "GET",
+    };
+    fetch(`https://harsh7541.pythonanywhere.com/admin1/homepagecompanieslogo`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.status) {
+          setLogoList(data["homePageCompaniesList"]);
+          // setTotalCount(data?.paginationDetails?.count);
+        }
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          toast.error("There was an error, Please try again later.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
           });
-      };
+        }, 1000);
+      });
+  };
 
   const silverToggleBox = () => {
     setSilverActiveTab((prev) => !prev);
@@ -475,8 +475,22 @@ const ExhibitorPackages = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Sponsor Plans`;
+  const seoDesc = "Explore sponsorship, booths and branding add-ons to boost visibility with decision-makers at Bitcoin Innovation & Market Evolution 2026.";
+
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/sponsor-packages" />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ opacity: 1 }}>
         <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>

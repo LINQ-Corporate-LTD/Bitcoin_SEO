@@ -398,37 +398,37 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import Slider from "react-slick";
-
-  const allTopics = [
-    {
-      id: 1,
-      title:
-        "DECENTRALISING FINANCE: BITCOIN’S ROLE IN THE EVOLUTION OF GLOBAL MONEY",
-      day: "Day 1",
-      date: "WEDNESDAY, 1 JULY, 2026",
-      time: "11:30 - 11:55",
-      speaker: "Speaker A",
-      category: "Market Dynamics",
-    },
-    {
-      id: 2,
-      title: "FROM CODE TO CAPITAL: HOW BITCOIN INNOVATION IS RESHAPING FINANCIAL MARKETS",
-      day: "Day 1",
-      date: "WEDNESDAY, 1 JULY, 2026",
-      time: "13:30 - 13:55",
-      speaker: "Speaker B",
-      category: "Mining Security",
-    },
-    {
-      id: 3,
-      title: "BITCOIN BEYOND CURRENCY: DRIVING INNOVATION ACROSS GLOBAL FINANCIAL SYSTEMS",
-      day: "Day 1",
-      date: "WEDNESDAY, 1 JULY, 2026",
-      time: "14:00 - 14:25",
-      speaker: "Speaker C",
-      category: "Blockchain Technology",
-    },
-  ];
+import { Helmet } from "react-helmet-async";
+const allTopics = [
+  {
+    id: 1,
+    title:
+      "DECENTRALISING FINANCE: BITCOIN’S ROLE IN THE EVOLUTION OF GLOBAL MONEY",
+    day: "Day 1",
+    date: "WEDNESDAY, 1 JULY, 2026",
+    time: "11:30 - 11:55",
+    speaker: "Speaker A",
+    category: "Market Dynamics",
+  },
+  {
+    id: 2,
+    title: "FROM CODE TO CAPITAL: HOW BITCOIN INNOVATION IS RESHAPING FINANCIAL MARKETS",
+    day: "Day 1",
+    date: "WEDNESDAY, 1 JULY, 2026",
+    time: "13:30 - 13:55",
+    speaker: "Speaker B",
+    category: "Mining Security",
+  },
+  {
+    id: 3,
+    title: "BITCOIN BEYOND CURRENCY: DRIVING INNOVATION ACROSS GLOBAL FINANCIAL SYSTEMS",
+    day: "Day 1",
+    date: "WEDNESDAY, 1 JULY, 2026",
+    time: "14:00 - 14:25",
+    speaker: "Speaker C",
+    category: "Blockchain Technology",
+  },
+];
 
 const Attandees = () => {
   const sliderRef = useRef(null);
@@ -662,8 +662,22 @@ const Attandees = () => {
     }
   }, [isDataLoaded, chunkedLeaders]);
 
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Past Attendees`;
+  const seoDesc = "Discover industry leaders who attended and preview agenda topics shaping Bitcoin Innovation & Market Evolution 2026.";
+
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/attandees" />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ opacity: 1 }}>
         <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>

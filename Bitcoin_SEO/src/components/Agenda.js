@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
 import FeaturedSpeaker from "./FeaturedSpeaker";
 import { useNavigate } from "react-router-dom";
-
+import { Helmet } from "react-helmet-async";
 const Agenda = () => {
   const navigate = useNavigate();
   const [agendaList, setAgendaList] = useState(null);
@@ -596,8 +596,22 @@ const Agenda = () => {
     }
   }, []);
 
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Explore Agenda`;
+  const seoDesc = "Explore sessions, key topics and program highlights shaping Bitcoin markets in Bitcoin Innovation & Market Evolution 2026.";
+
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/agenda" />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
         {agendaVerification ? (

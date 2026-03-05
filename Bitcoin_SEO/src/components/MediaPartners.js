@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import SubscribeForm from "./SubscribeForm";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet-async";
 const mediaImage1 =
   "	https://www.frac-sand-conference.com/static/media/media.ba0e44e0a54f375e3e8f.png";
 const mediaImage2 =
@@ -62,8 +63,22 @@ const MediaPartners = () => {
       });
   };
 
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Media Partners`;
+  const seoDesc = "Apply for media partnership and press access, plus brand exposure and industry reach through Bitcoin Innovation & Market Evolution 2026.";
+
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/media-partners" />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ opacity: 1 }}>
         <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>

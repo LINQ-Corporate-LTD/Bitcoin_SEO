@@ -158,11 +158,11 @@ const Speakers = () => {
         });
     }
   };
-  // const seoTitle = `Speakers | Bitcoin Innovation & Market Evolution 2026`;
-  // const seoDesc = "Featured speakers for Bitcoin Innovation & Market Evolution 2026, including industry leaders, innovators, and experts in the Bitcoin ecosystem.";
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Speakers`;
+  const seoDesc = "Meet featured experts shaping adoption, mining, Layer-2, security, and regulation, presented by Bitcoin Innovation & Market Evolution 2026.";
   return (
     <>
-      {/* <Helmet>
+      <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />
         <meta property="og:title" content={seoTitle} />
@@ -171,8 +171,8 @@ const Speakers = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDesc} />
-        <link rel="canonical" href="http://localhost:3001/trenddescription/Market-Dynamics" />
-      </Helmet> */}
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/featured-speakers" />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
         <article

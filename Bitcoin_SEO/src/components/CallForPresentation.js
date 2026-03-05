@@ -505,8 +505,8 @@ const CallForPresentation = () => {
     }
   };
 
-  const seoTitle = `Call for Speakers | Bitcoin Conference 2026`;
-  const seoDesc = "Submit your speaker proposal for Bitcoin Innovation & Market Evolution 2026 and contribute insights on adoption, regulation, scalability, mining, and markets.";
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Submit Talk`;
+  const seoDesc = "Submit your speaker proposal for Bitcoin Innovation & Market Evolution 2026 and contribute insights on adoption, regulation, scalability, mining and markets.";
 
   return (
     <>

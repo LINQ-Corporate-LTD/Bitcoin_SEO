@@ -5,7 +5,7 @@ import Footer from "../Footer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../assets/css/contactUs.css";
-
+import { Helmet } from "react-helmet-async";
 const emailImage =
   "https://www.desalination-resource-recovery.com/images/icons/icon-email.png";
 const emailIcon =
@@ -697,8 +697,22 @@ const ContactUs = () => {
     }
   };
 
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Get in Touch`;
+  const seoDesc = "Reach the Bitcoin Innovation & Market Evolution 2026 team for registration help, sponsorship options, agenda questions, and venue support.";
+
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/contact-us" />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ opacity: 1 }}>
         <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>

@@ -292,8 +292,8 @@ const WhoShouldAttend = () => {
     pauseOnHover: true,
     arrows: false,
   };
-  const seoTitle = `Who Should Attend | Bitcoin Conference 2026`;
-  const seoDesc = "Discover who should attend Bitcoin Innovation & Market Evolution 2026 and the key benefits for exchanges, institutions, miners, fintechs, and regulators.";
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Who Attends`;
+  const seoDesc = "Discover who should attend Bitcoin Innovation & Market Evolution 2026 and the key benefits for exchanges, institutions, miners, fintechs and regulators.";
 
   return (
     <>

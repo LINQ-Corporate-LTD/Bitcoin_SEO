@@ -837,14 +837,21 @@ const Register = () => {
       [id]: Math.max((prev[id] || 1) - 1, 1),
     }));
 
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Book Delegate`;
+  const seoDesc = "Book your pass for Bitcoin Innovation & Market Evolution 2026. Choose delegate packages, access networking and materials.";
+
   return (
     <>
       <Helmet>
-        <title>Register Now – Bitcoin Innovation &amp; Market Evolution 2026</title>
-        <meta name="description" content="Register for Bitcoin Innovation &amp; Market Evolution 2026. Choose your delegate package and secure your place at the premier Bitcoin industry event." />
-        <meta property="og:title" content="Register Now – Bitcoin Innovation &amp; Market Evolution 2026" />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://bitcoinsummit.com/register" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/booking" />
       </Helmet>
       <Navbar forceScrolled />
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>

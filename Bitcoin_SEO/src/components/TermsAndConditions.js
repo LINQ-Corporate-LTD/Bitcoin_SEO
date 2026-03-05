@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "../Footer";
 import "../assets/css/TermsAndConditions.css";
+import { Helmet } from "react-helmet-async";
 const TermsAndConditions = () => {
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200
@@ -16,8 +17,22 @@ const TermsAndConditions = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Event Terms`;
+  const seoDesc = "Review the Terms & Conditions for Bitcoin Innovation & Market Evolution 2026 covering registration, liability, cancellations, data protection and compliance.";
+
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/terms-and-conditions" />
+      </Helmet>
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
         <Navbar forceScrolled />
         <div className="TermsAndConditions_container__xOKXK">

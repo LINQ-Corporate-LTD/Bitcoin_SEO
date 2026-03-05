@@ -97,8 +97,8 @@ const Home = () => {
     return () => window.removeEventListener("resize", updateSettings);
   }, [sponsorList]);
 
-  const seoTitle = `Bitcoin Conference 2026 | Bitcoin Innovation`;
-  const seoDesc = "Join Bitcoin Innovation & Market Evolution 2026, a global Bitcoin conference in Texas covering institutional adoption, regulation, and market innovation.";
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026`;
+  const seoDesc = "Join Bitcoin Innovation & Market Evolution 2026 to explore institutional adoption, mining, Layer-2 scalability, regulation and AI in Bitcoin markets.";
 
 
   return (

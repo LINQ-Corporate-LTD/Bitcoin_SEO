@@ -11,6 +11,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { MuiTelInput } from "mui-tel-input";
 import Button from "@mui/material/Button";
 import { FormControl, FormHelperText } from "@mui/material";
+import { Helmet } from "react-helmet-async";
 const logo =
   "https://www.desalination-resource-recovery.com/api/images/logo/1742534509561.png";
 const plusIcon =
@@ -447,8 +448,22 @@ const RemindMeLater = () => {
 
   const [showTextarea, setShowTextarea] = useState(false);
 
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Remind Me`;
+  const seoDesc = "Get a reminder for Bitcoin Innovation & Market Evolution 2026 and receive updates on passes, speakers and sponsorship opportunities.";
+
   return (
     <div id="root">
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/remind-me-later" />
+      </Helmet>
       <div className="PageForm_container__NA5Wr">
         <div className="PageForm_header__7W2Cz">
           <div
@@ -539,8 +554,8 @@ const RemindMeLater = () => {
               <span className="PageForm_divide__vwhn0">|</span>
               ABCD Company
             </p>
-            <p>©2026 Bitcoin Innovation & Market 
-Evolution 2026</p>
+            <p>©2026 Bitcoin Innovation & Market
+              Evolution 2026</p>
           </div>
         </div>
       </div>

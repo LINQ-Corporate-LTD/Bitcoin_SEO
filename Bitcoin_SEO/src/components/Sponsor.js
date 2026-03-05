@@ -329,15 +329,15 @@ const Sponsors = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const seoTitle = `Sponsors & Exhibitors | Bitcoin Conference 2026`;
-  const seoDesc = "Exhibit or sponsor at Bitcoin Innovation & Market Evolution 2026 and connect with miners, exchanges, fintechs, regulators, and blockchain leaders.";
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Sponsorship`;
+  const seoDesc = "Exhibit or sponsor at Bitcoin Innovation & Market Evolution 2026 and connect with miners, exchanges, fintechs, regulators and blockchain leaders.";
   return (
     <div id="root">
       <>
         <Helmet>
-          <title>Become a Sponsor – Bitcoin Innovation &amp; Market Evolution 2026</title>
-          <meta name="description" content="Sponsor Bitcoin Innovation &amp; Market Evolution 2026. Exhibit your services, generate leads and boost your brand's visibility with industry leaders." />
-          <meta property="og:title" content= {seoTitle} />
+          <title>{seoTitle}</title>
+          <meta name="description" content={seoDesc} />
+          <meta property="og:title" content={seoTitle} />
           <meta property="og:description" content={seoDesc} />
           <meta property="og:type" content="website" />
           <meta name="twitter:card" content="summary" />

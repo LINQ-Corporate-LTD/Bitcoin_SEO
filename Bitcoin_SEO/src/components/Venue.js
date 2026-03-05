@@ -91,8 +91,8 @@ const Venue = () => {
     }
   };
 
-  const seoTitle = `Venue | Bitcoin Innovation & Market Evolution 2026`;
-  const seoDesc = "Venue details for Bitcoin Innovation & Market Evolution 2026 at The Woodlands Resort, Curio Collection by Hilton, Texas, USA.";
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Venue`;
+  const seoDesc = "View the event venue information for Bitcoin Innovation & Market Evolution 2026 including location and directions.";
 
   return (
     <>

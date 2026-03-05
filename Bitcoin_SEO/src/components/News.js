@@ -7,6 +7,7 @@ import Footer from "../Footer";
 import "../../src/assets/css/News.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet-async";
 const leftArrowIcon =
   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
 const rightArrowIcon =
@@ -168,9 +169,21 @@ const News = () => {
     navigate(`/newsdescription/${newsTitle}`, { state: member }); // ✅ Pass member object in route state
   };
 
-  console.log("featuredArticle: ", featuredArticle);
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Latest News`;
+  const seoDesc = "Read Bitcoin market updates on regulation, ETFs, mining, Layer-2 and security, published by Bitcoin Innovation & Market Evolution 2026.";
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/news" />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
         <div className="NewsListing_container__44PGn">
@@ -383,9 +396,8 @@ const News = () => {
                 {Array.from({ length: totalPages }, (_, i) => (
                   <button
                     key={i}
-                    className={`pagination-button ${
-                      currentPage === i + 1 ? "active" : ""
-                    }`}
+                    className={`pagination-button ${currentPage === i + 1 ? "active" : ""
+                      }`}
                     onClick={() => handlePageClick(i + 1)}
                   >
                     {i + 1}
