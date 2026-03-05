@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../assets/css/speakers.css";
 import "../assets/css/form.css";
-// import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 const Speakers = () => {
   const navigate = useNavigate();
   const [windowWidth, setWindowWidth] = useState(
