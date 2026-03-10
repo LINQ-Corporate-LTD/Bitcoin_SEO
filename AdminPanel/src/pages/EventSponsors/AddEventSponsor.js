@@ -23,6 +23,7 @@ const sponsorTypes = [
   { label: "Silver", value: "Silver" },
   { label: "Gold", value: "Gold" },
   { label: "Platinum", value: "Platinum" },
+  { label: "Partner", value: "Partner" },
 ];
 const AddEventSponsor = (props) => {
   const navigate = useNavigate();
@@ -237,9 +238,8 @@ const AddEventSponsor = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      sponsorComapnyNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${sponsorComapnyNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Sponsor Company Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -352,9 +352,8 @@ const AddEventSponsor = (props) => {
                       </Label>
                       <Input
                         type="text"
-                        className={`form-control ${
-                          sponsorMetaTitleError ? "border-danger " : ""
-                        }`}
+                        className={`form-control ${sponsorMetaTitleError ? "border-danger " : ""
+                          }`}
                         placeholder="Enter Meta Title"
                         aria-label="name"
                         aria-describedby="basic-addon1"
@@ -386,9 +385,8 @@ const AddEventSponsor = (props) => {
                       </Label>
                       <textarea
                         type="text"
-                        className={`form-control ${
-                          sponsorMetaDescriptionError ? "border-danger " : ""
-                        }`}
+                        className={`form-control ${sponsorMetaDescriptionError ? "border-danger " : ""
+                          }`}
                         placeholder="Enter Meta Description"
                         aria-label="name"
                         aria-describedby="basic-addon1"
