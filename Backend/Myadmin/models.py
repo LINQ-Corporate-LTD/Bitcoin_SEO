@@ -1,6 +1,7 @@
 from django.db import models
 from tkinter import CASCADE
 from django.db.models.deletion import CASCADE
+from django.contrib.auth.hashers import make_password
 # Create your models here.
 class homePageNavLogoData(models.Model):
     whiteLogoLink = models.TextField(null=True,blank=True)
@@ -520,3 +521,52 @@ class pastAttandeeHomeData(models.Model):
     created_by = models.CharField(null=False,max_length=50,default='No')
     updated_by = models.CharField(null=False,max_length=50,default='No')
     isDelete = models.CharField(default="No",max_length=10)
+
+class SidebarModule(models.Model):
+    name = models.CharField(max_length=100)
+    icon = models.CharField(max_length=100, null=True, blank=True)
+    order = models.IntegerField(default=0)
+    isDelete = models.CharField(default="No", max_length=10)
+
+class SidebarSubModule(models.Model):
+    module = models.ForeignKey(SidebarModule, on_delete=models.CASCADE, related_name='submodules')
+    name = models.CharField(max_length=100)
+    link = models.CharField(max_length=100)
+    id_attr = models.CharField(max_length=100) # To match frontend id in LayoutMenuData
+    order = models.IntegerField(default=0)
+    isDelete = models.CharField(default="No", max_length=10)
+
+class AdminRole(models.Model):
+    name = models.CharField(max_length=100)
+    permissions = models.ManyToManyField(SidebarSubModule, blank=True)
+    detailed_permissions = models.JSONField(default=dict, blank=True)
+    isDelete = models.CharField(default="No", max_length=10)
+
+class AdminUserManager(models.Manager):
+    def create_user(self, username, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(username=username, email=email, **extra_fields)
+        if password:
+            user.password = make_password(password)
+        user.save(using=self._db)
+        return user
+
+    def normalize_email(self, email):
+        return email.lower()
+        
+class AdminUser(models.Model):
+    name = models.CharField(max_length=100, null=True, blank=True)
+    username = models.CharField(max_length=100, unique=True, null=True, blank=True)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=255)
+    role = models.ForeignKey(AdminRole, on_delete=models.SET_NULL, null=True, blank=True)
+    permissions = models.ManyToManyField(SidebarSubModule, blank=True)
+    detailed_permissions = models.JSONField(default=dict, blank=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    isDelete = models.CharField(default="No", max_length=10)
+
+    objects = AdminUserManager()

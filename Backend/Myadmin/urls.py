@@ -16,7 +16,7 @@ urlpatterns = [
     path('registerpagestaticdata',views.registerPageDataFun),
     path('deligatepackageslist',views.delegatePackagesListFun),
     path('deligatepackageinclusionslist',views.delegatePackageInclusionsListFun),
-    path('getagenda',views.agendaListFun),
+    # path('getagenda',views.agendaListFun),
     path('whoshouldattendpagedata',views.whoShouldAttendPageDataFun),
     path('eventcoreattandees',views.eventCoreAttendeesFun),
     path('eventparticipatedindustries',views.eventParticipatedIndustriesFun),
@@ -161,9 +161,9 @@ urlpatterns = [
     #------------------------------------------------------#
 
     #--------------- Api For Add Program Page Realted Data -----------------#
-    path('editagenda',views.edit_agenda),
-    path('addagenda',views.add_agenda),
-    path('deleteagenda',views.delete_agenda),
+    # path('editagenda',views.edit_agenda),
+    # path('addagenda',views.add_agenda),
+    # path('deleteagenda',views.delete_agenda),
 
     #------------------------------------------------------#
 
@@ -315,6 +315,25 @@ urlpatterns = [
     path('gettheme',views.getThemeFun),
     path('sendmail',views.send_booking_email),
     path('sendtozoho',views.send_to_zoho),
+
+    path('getagenda', views.agendaListFun),
+    path('addagenda', views.add_agenda),
+    path('editagenda', views.edit_agenda),
+    path('deleteagenda', views.delete_agenda),
+    path('reorder-agenda', views.reorder_agenda),
+
+    path('userlist', views.userListFun),
+    path('adduser', views.addUserFun),
+    path('updateuserpermissions', views.updateUserPermissionsFun),
+    path('deleteuser', views.deleteUserFun),
+    path('permissionlist', views.permissionListFun),
+    path('rolelist', views.roleListFun),
+    path('addrole', views.addRoleFun),
+    path('deleterole', views.deleteRoleFun),
+    path('rolepermissions', views.getRolePermissionsFun),
+    path('updaterolepermissions', views.updateRolePermissionsFun),
+    path('customlogin', views.customLoginFun),
+    path('getnavbardata', views.getNavbarDataFun),
 
 
 ]

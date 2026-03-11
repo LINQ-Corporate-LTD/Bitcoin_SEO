@@ -1,11 +1,22 @@
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
+from django.contrib.auth.models import User, Permission, Group
+
+
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 import json
 from datetime import datetime
 from django.core.mail import EmailMultiAlternatives
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view, parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from rest_framework import status
+from django.db import transaction
+from django.db.models import F
+from Myadmin.serializers import eventAgendaSerializer, eventIndustryTrendsSerializer
+
 # Create your views here.
 from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSubCategories,themeColorSettings,homePageVideoSectionInput,videoSectionUserOptions,speakerSection,homePageThirdSection,keyPointsSection,keyPointsSectionPoints,countSection,countSectionTopic,testimonialSection,pastAttandeesSection,sponsorSection, footerFirstSectionOptions, footerSocialMediaOptions,companiesLogoSection,registerPageSettings,whoShouldAttendPageData,speakerPageData,speakerPageSectionThreePoints,sponsorPageData,sponsorPageBulletData,venuePageData,venuePageGallery,newsCategory,generalNewsPoint,latestNews,topNews,subscribers,contactUsData,contactUsPageData,contactUsHelpData,pressMediaPageData,pressMediaPageBoxData,mediaPageHelpers,standOutCrowdRequestData,becomeSpeakerRequestData,quickProposalRequestData,endUserPassRegistrationRequestData,pastAttandeeHomeData
 from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders
@@ -391,46 +402,46 @@ def delegatePackageInclusionsListFun(request):
     return JsonResponse({'delegatePackageInclusions': delegatePackageInclusionsListData, 'status': True})
 
 #---------------------------- Api For Get Agenda List ----------------------------#
-@permission_classes((AllowAny,))
-@api_view(['GET'])
-def agendaListFun(request):
-    agenda_list = eventAgenda.objects.all().filter(isDelete='No').order_by('sortOrder')
-    agendaListData = []
-    for agenda in agenda_list:
-        x={
-            'id':agenda.id,
-            'status':agenda.status,
-            'heading':agenda.heading,
-            'day':agenda.day,
-            'startTime':agenda.startTime,
-            'endTime':agenda.endTime,
-            'sponsorBy':agenda.sponsorBy,
-            'sortOrder':agenda.sortOrder,
-            'speakerFormat':agenda.speakerFormat,
-            'bulletPoints':agenda.bulletPoints,
-            'industryTrends':agenda.industryTrends,
-            'speaker1Bullets':agenda.speaker1Bullets,
-            'speaker2Bullets':agenda.speaker2Bullets,
-            'panelSpeakerImages':agenda.panelSpeakerImages,
-            'panelSpeakerIds':agenda.panelSpeakerIds,
-            'panelModerators':agenda.panelModerators,
-            'selectedSpeakers':agenda.selectedSpeakers,
-            'singleSpeakerAgendaImg':agenda.singleSpeakerAgendaImg,
-            'singleSpeakerCompanyImg':agenda.singleSpeakerCompanyImg,
-            'singleSpeakerId':agenda.singleSpeakerId,
-            'Speaker1AgendaImg':agenda.Speaker1AgendaImg,
-            'Speaker1CompanyImg':agenda.Speaker1CompanyImg,
-            'Speaker1Id':agenda.Speaker1Id,
-            'Speaker2AgendaImg':agenda.Speaker2AgendaImg,
-            'Speaker2CompanyImg':agenda.Speaker2CompanyImg,
-            'Speaker2Id':agenda.Speaker2Id,
-            'created_at': agenda.created_at,
-            'updated_at': agenda.updated_at,
-            'created_by': agenda.created_by,
-            'updated_by': agenda.updated_by,
-        }
-        agendaListData.append(x)
-    return JsonResponse({'agendaList': agendaListData, 'status': True})
+# @permission_classes((AllowAny,))
+# @api_view(['GET'])
+# def agendaListFun(request):
+#     agenda_list = eventAgenda.objects.all().filter(isDelete='No').order_by('sortOrder')
+#     agendaListData = []
+#     for agenda in agenda_list:
+#         x={
+#             'id':agenda.id,
+#             'status':agenda.status,
+#             'heading':agenda.heading,
+#             'day':agenda.day,
+#             'startTime':agenda.startTime,
+#             'endTime':agenda.endTime,
+#             'sponsorBy':agenda.sponsorBy,
+#             'sortOrder':agenda.sortOrder,
+#             'speakerFormat':agenda.speakerFormat,
+#             'bulletPoints':agenda.bulletPoints,
+#             'industryTrends':agenda.industryTrends,
+#             'speaker1Bullets':agenda.speaker1Bullets,
+#             'speaker2Bullets':agenda.speaker2Bullets,
+#             'panelSpeakerImages':agenda.panelSpeakerImages,
+#             'panelSpeakerIds':agenda.panelSpeakerIds,
+#             'panelModerators':agenda.panelModerators,
+#             'selectedSpeakers':agenda.selectedSpeakers,
+#             'singleSpeakerAgendaImg':agenda.singleSpeakerAgendaImg,
+#             'singleSpeakerCompanyImg':agenda.singleSpeakerCompanyImg,
+#             'singleSpeakerId':agenda.singleSpeakerId,
+#             'Speaker1AgendaImg':agenda.Speaker1AgendaImg,
+#             'Speaker1CompanyImg':agenda.Speaker1CompanyImg,
+#             'Speaker1Id':agenda.Speaker1Id,
+#             'Speaker2AgendaImg':agenda.Speaker2AgendaImg,
+#             'Speaker2CompanyImg':agenda.Speaker2CompanyImg,
+#             'Speaker2Id':agenda.Speaker2Id,
+#             'created_at': agenda.created_at,
+#             'updated_at': agenda.updated_at,
+#             'created_by': agenda.created_by,
+#             'updated_by': agenda.updated_by,
+#         }
+#         agendaListData.append(x)
+#     return JsonResponse({'agendaList': agendaListData, 'status': True})
 
 #---------------------------- Api For Get Who Should Attend Page Static Data ----------------------------#
 @permission_classes((AllowAny,))
@@ -2861,158 +2872,158 @@ def delete_offerCoupon(request):
     return JsonResponse({'status': True, "message": "Record Updated Successfully"})
 
 #------------------- Api For Delete Agenda Item-------------------#
-@api_view(['POST'])
-def delete_agenda(request):
-    response = request.data
-    check_db = offerCoupon.objects.get(id=response['id'])
-    check_db.isDelete = response['isDelete']
-    check_db.save()
-    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+# @api_view(['POST'])
+# def delete_agenda(request):
+#     response = request.data
+#     check_db = offerCoupon.objects.get(id=response['id'])
+#     check_db.isDelete = response['isDelete']
+#     check_db.save()
+#     return JsonResponse({'status': True, "message": "Record Updated Successfully"})
 
 #------------------- Api For Edit Agenda-------------------#
-@api_view(['POST'])
-def edit_agenda(request):
-    response = request.data
-    check_db = eventAgenda.objects.get(id=response['id'])
+# @api_view(['POST'])
+# def edit_agenda(request):
+#     response = request.data
+#     check_db = eventAgenda.objects.get(id=response['id'])
 
-    if 'status' in request.POST:
-        check_db.status = response['status']
+#     if 'status' in request.POST:
+#         check_db.status = response['status']
 
-    if 'heading' in request.POST:
-        check_db.heading = response['heading']
+#     if 'heading' in request.POST:
+#         check_db.heading = response['heading']
 
-    if 'day' in request.POST:
-        check_db.day = response['day']
+#     if 'day' in request.POST:
+#         check_db.day = response['day']
 
-    if 'startTime' in request.POST:
-        check_db.startTime = response['startTime']
+#     if 'startTime' in request.POST:
+#         check_db.startTime = response['startTime']
 
-    if 'endTime' in request.POST:
-        check_db.endTime = response['endTime']
+#     if 'endTime' in request.POST:
+#         check_db.endTime = response['endTime']
 
-    if 'sponsorBy' in request.POST:
-        check_db.sponsorBy = response['sponsorBy']
+#     if 'sponsorBy' in request.POST:
+#         check_db.sponsorBy = response['sponsorBy']
 
-    if 'sortOrder' in request.POST:
-        check_db.sortOrder = response['sortOrder']
+#     if 'sortOrder' in request.POST:
+#         check_db.sortOrder = response['sortOrder']
 
-    if 'speakerFormat' in request.POST:
-        check_db.speakerFormat = response['speakerFormat']
+#     if 'speakerFormat' in request.POST:
+#         check_db.speakerFormat = response['speakerFormat']
 
-    if 'bulletPoints' in request.POST:
-        check_db.bulletPoints = response['bulletPoints']
+#     if 'bulletPoints' in request.POST:
+#         check_db.bulletPoints = response['bulletPoints']
 
-    if 'industryTrends' in request.POST:
-        check_db.industryTrends = response['industryTrends']
+#     if 'industryTrends' in request.POST:
+#         check_db.industryTrends = response['industryTrends']
     
-    if 'speaker1Bullets' in request.POST:
-        check_db.speaker1Bullets = response['speaker1Bullets']
-    if 'speaker2Bullets' in request.POST:
-        check_db.speaker2Bullets = response['speaker2Bullets']
-    if 'panelSpeakerImages' in request.POST:
-        check_db.panelSpeakerImages = response['panelSpeakerImages']
-    if 'panelSpeakerIds' in request.POST:
-        check_db.panelSpeakerIds = response['panelSpeakerIds']
-    if 'panelModerators' in request.POST:
-        check_db.panelModerators = response['panelModerators']
-    if 'selectedSpeakers' in request.POST:
-        check_db.selectedSpeakers = response['selectedSpeakers']
-    if 'singleSpeakerAgendaImg' in request.POST:
-        check_db.singleSpeakerAgendaImg = response['singleSpeakerAgendaImg']
-    if 'singleSpeakerCompanyImg' in request.POST:
-        check_db.singleSpeakerCompanyImg = response['singleSpeakerCompanyImg']
-    if 'singleSpeakerId' in request.POST:
-        check_db.singleSpeakerId = response['singleSpeakerId']
-    if 'Speaker1AgendaImg' in request.POST:
-        check_db.Speaker1AgendaImg = response['Speaker1AgendaImg']
-    if 'Speaker1CompanyImg' in request.POST:
-        check_db.Speaker1CompanyImg = response['Speaker1CompanyImg']
-    if 'Speaker1Id' in request.POST:
-        check_db.Speaker1Id = response['Speaker1Id']
-    if 'Speaker2AgendaImg' in request.POST:
-        check_db.Speaker2AgendaImg = response['Speaker2AgendaImg']
-    if 'Speaker2CompanyImg' in request.POST:
-        check_db.Speaker2CompanyImg = response['Speaker2CompanyImg']
-    if 'Speaker2Id' in request.POST:
-        check_db.Speaker2Id = response['Speaker2Id']
+#     if 'speaker1Bullets' in request.POST:
+#         check_db.speaker1Bullets = response['speaker1Bullets']
+#     if 'speaker2Bullets' in request.POST:
+#         check_db.speaker2Bullets = response['speaker2Bullets']
+#     if 'panelSpeakerImages' in request.POST:
+#         check_db.panelSpeakerImages = response['panelSpeakerImages']
+#     if 'panelSpeakerIds' in request.POST:
+#         check_db.panelSpeakerIds = response['panelSpeakerIds']
+#     if 'panelModerators' in request.POST:
+#         check_db.panelModerators = response['panelModerators']
+#     if 'selectedSpeakers' in request.POST:
+#         check_db.selectedSpeakers = response['selectedSpeakers']
+#     if 'singleSpeakerAgendaImg' in request.POST:
+#         check_db.singleSpeakerAgendaImg = response['singleSpeakerAgendaImg']
+#     if 'singleSpeakerCompanyImg' in request.POST:
+#         check_db.singleSpeakerCompanyImg = response['singleSpeakerCompanyImg']
+#     if 'singleSpeakerId' in request.POST:
+#         check_db.singleSpeakerId = response['singleSpeakerId']
+#     if 'Speaker1AgendaImg' in request.POST:
+#         check_db.Speaker1AgendaImg = response['Speaker1AgendaImg']
+#     if 'Speaker1CompanyImg' in request.POST:
+#         check_db.Speaker1CompanyImg = response['Speaker1CompanyImg']
+#     if 'Speaker1Id' in request.POST:
+#         check_db.Speaker1Id = response['Speaker1Id']
+#     if 'Speaker2AgendaImg' in request.POST:
+#         check_db.Speaker2AgendaImg = response['Speaker2AgendaImg']
+#     if 'Speaker2CompanyImg' in request.POST:
+#         check_db.Speaker2CompanyImg = response['Speaker2CompanyImg']
+#     if 'Speaker2Id' in request.POST:
+#         check_db.Speaker2Id = response['Speaker2Id']
 
-    check_db.updated_by = "Admin"
-    check_db.save()
+#     check_db.updated_by = "Admin"
+#     check_db.save()
 
-    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+#     return JsonResponse({'status': True, "message": "Record Updated Successfully"})
 
 #------------------- Api For Add Agenda-------------------#
-@api_view(['POST'])
-def add_agenda(request):
-    response = request.data
-    check_db = eventAgenda()
+# @api_view(['POST'])
+# def add_agenda(request):
+#     response = request.data
+#     check_db = eventAgenda()
 
-    if 'status' in request.POST:
-        check_db.status = response['status']
+#     if 'status' in request.POST:
+#         check_db.status = response['status']
 
-    if 'heading' in request.POST:
-        check_db.heading = response['heading']
+#     if 'heading' in request.POST:
+#         check_db.heading = response['heading']
 
-    if 'day' in request.POST:
-        check_db.day = response['day']
+#     if 'day' in request.POST:
+#         check_db.day = response['day']
 
-    if 'startTime' in request.POST:
-        check_db.startTime = response['startTime']
+#     if 'startTime' in request.POST:
+#         check_db.startTime = response['startTime']
 
-    if 'endTime' in request.POST:
-        check_db.endTime = response['endTime']
+#     if 'endTime' in request.POST:
+#         check_db.endTime = response['endTime']
 
-    if 'sponsorBy' in request.POST:
-        check_db.sponsorBy = response['sponsorBy']
+#     if 'sponsorBy' in request.POST:
+#         check_db.sponsorBy = response['sponsorBy']
 
-    if 'sortOrder' in request.POST:
-        check_db.sortOrder = response['sortOrder']
+#     if 'sortOrder' in request.POST:
+#         check_db.sortOrder = response['sortOrder']
 
-    if 'speakerFormat' in request.POST:
-        check_db.speakerFormat = response['speakerFormat']
+#     if 'speakerFormat' in request.POST:
+#         check_db.speakerFormat = response['speakerFormat']
 
-    if 'bulletPoints' in request.POST:
-        check_db.bulletPoints = response['bulletPoints']
+#     if 'bulletPoints' in request.POST:
+#         check_db.bulletPoints = response['bulletPoints']
 
-    if 'industryTrends' in request.POST:
-        check_db.industryTrends = response['industryTrends']
+#     if 'industryTrends' in request.POST:
+#         check_db.industryTrends = response['industryTrends']
     
-    if 'speaker1Bullets' in request.POST:
-        check_db.speaker1Bullets = response['speaker1Bullets']
-    if 'speaker2Bullets' in request.POST:
-        check_db.speaker2Bullets = response['speaker2Bullets']
-    if 'panelSpeakerImages' in request.POST:
-        check_db.panelSpeakerImages = response['panelSpeakerImages']
-    if 'panelSpeakerIds' in request.POST:
-        check_db.panelSpeakerIds = response['panelSpeakerIds']
-    if 'panelModerators' in request.POST:
-        check_db.panelModerators = response['panelModerators']
-    if 'selectedSpeakers' in request.POST:
-        check_db.selectedSpeakers = response['selectedSpeakers']
-    if 'singleSpeakerAgendaImg' in request.POST:
-        check_db.singleSpeakerAgendaImg = response['singleSpeakerAgendaImg']
-    if 'singleSpeakerCompanyImg' in request.POST:
-        check_db.singleSpeakerCompanyImg = response['singleSpeakerCompanyImg']
-    if 'singleSpeakerId' in request.POST:
-        check_db.singleSpeakerId = response['singleSpeakerId']
-    if 'Speaker1AgendaImg' in request.POST:
-        check_db.Speaker1AgendaImg = response['Speaker1AgendaImg']
-    if 'Speaker1CompanyImg' in request.POST:
-        check_db.Speaker1CompanyImg = response['Speaker1CompanyImg']
-    if 'Speaker1Id' in request.POST:
-        check_db.Speaker1Id = response['Speaker1Id']
-    if 'Speaker2AgendaImg' in request.POST:
-        check_db.Speaker2AgendaImg = response['Speaker2AgendaImg']
-    if 'Speaker2CompanyImg' in request.POST:
-        check_db.Speaker2CompanyImg = response['Speaker2CompanyImg']
-    if 'Speaker2Id' in request.POST:
-        check_db.Speaker2Id = response['Speaker2Id']
+#     if 'speaker1Bullets' in request.POST:
+#         check_db.speaker1Bullets = response['speaker1Bullets']
+#     if 'speaker2Bullets' in request.POST:
+#         check_db.speaker2Bullets = response['speaker2Bullets']
+#     if 'panelSpeakerImages' in request.POST:
+#         check_db.panelSpeakerImages = response['panelSpeakerImages']
+#     if 'panelSpeakerIds' in request.POST:
+#         check_db.panelSpeakerIds = response['panelSpeakerIds']
+#     if 'panelModerators' in request.POST:
+#         check_db.panelModerators = response['panelModerators']
+#     if 'selectedSpeakers' in request.POST:
+#         check_db.selectedSpeakers = response['selectedSpeakers']
+#     if 'singleSpeakerAgendaImg' in request.POST:
+#         check_db.singleSpeakerAgendaImg = response['singleSpeakerAgendaImg']
+#     if 'singleSpeakerCompanyImg' in request.POST:
+#         check_db.singleSpeakerCompanyImg = response['singleSpeakerCompanyImg']
+#     if 'singleSpeakerId' in request.POST:
+#         check_db.singleSpeakerId = response['singleSpeakerId']
+#     if 'Speaker1AgendaImg' in request.POST:
+#         check_db.Speaker1AgendaImg = response['Speaker1AgendaImg']
+#     if 'Speaker1CompanyImg' in request.POST:
+#         check_db.Speaker1CompanyImg = response['Speaker1CompanyImg']
+#     if 'Speaker1Id' in request.POST:
+#         check_db.Speaker1Id = response['Speaker1Id']
+#     if 'Speaker2AgendaImg' in request.POST:
+#         check_db.Speaker2AgendaImg = response['Speaker2AgendaImg']
+#     if 'Speaker2CompanyImg' in request.POST:
+#         check_db.Speaker2CompanyImg = response['Speaker2CompanyImg']
+#     if 'Speaker2Id' in request.POST:
+#         check_db.Speaker2Id = response['Speaker2Id']
 
-    check_db.created_by = "Admin"
-    check_db.updated_by = "Admin"
-    check_db.save()
+#     check_db.created_by = "Admin"
+#     check_db.updated_by = "Admin"
+#     check_db.save()
 
-    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+#     return JsonResponse({'status': True, "message": "Record Updated Successfully"})
 
 #------------------- Api For Add Who Should Attend Page Staic Data -------------------#
 @api_view(['POST'])
@@ -5456,3 +5467,297 @@ def send_to_zoho(request):
             "status": "error",
             "message": str(e)
         }, status=500)
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def agendaListFun(request):
+    items = eventAgenda.objects.filter(isDelete="No").order_by('sortOrder')
+    serializer = eventAgendaSerializer(items, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+@parser_classes([MultiPartParser, FormParser])
+def add_agenda(request):
+    serializer = eventAgendaSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return JsonResponse(serializer.data, status=201)
+    return JsonResponse(serializer.errors, status=400)
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+@parser_classes([MultiPartParser, FormParser])
+def edit_agenda(request):
+    item_id = request.data.get('id')
+    try:
+        item = eventAgenda.objects.get(id=item_id, isDelete="No")
+    except eventAgenda.DoesNotExist:
+        return JsonResponse({"error": "Item not found"}, status=404)
+    
+    serializer = eventAgendaSerializer(item, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return JsonResponse(serializer.data)
+    return JsonResponse(serializer.errors, status=400)
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def delete_agenda(request):
+    item_id = request.data.get('id')
+    try:
+        item = eventAgenda.objects.get(id=item_id)
+        item.isDelete = "Yes"
+        item.save()
+        
+        # Optional: Reorder remaining items to fill the gap
+        eventAgenda.objects.filter(isDelete="No", sortOrder__gt=item.sortOrder).update(sortOrder=F('sortOrder') - 1)
+        
+        return JsonResponse({"message": "Deleted successfully"})
+    except eventAgenda.DoesNotExist:
+        return JsonResponse({"error": "Item not found"}, status=404)
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def reorder_agenda(request):
+    items_data = request.data.get('items', [])
+    if not items_data:
+        return JsonResponse({"error": "items list required"}, status=400)
+    
+    with transaction.atomic():
+        for index, item_data in enumerate(items_data):
+            i_id = item_data.get('id')
+            eventAgenda.objects.filter(id=i_id).update(sortOrder=index)
+            
+    return JsonResponse({"message": "Reordered successfully"})
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def userListFun(request):
+    users = AdminUser.objects.filter(isDelete="No")
+    user_list = []
+    for user in users:
+        # Merge permissions from role and user
+        detailed = user.detailed_permissions.copy()
+        if user.role:
+            for k, v in user.role.detailed_permissions.items():
+                if k in detailed:
+                    detailed[k] = list(set(detailed[k] + v))
+                else:
+                    detailed[k] = v
+        
+        user_list.append({
+            'id': user.id,
+            'username': user.username,
+            'name': user.name,
+            'email': user.email,
+            'is_active': user.is_active,
+            'role': user.role.name if user.role else "No Role",
+            'permissions': [p.id_attr for p in user.permissions.all()], # Keep for compat
+            'detailed_permissions': detailed
+        })
+    return JsonResponse({'status': True, 'userList': user_list})
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+@parser_classes([MultiPartParser, FormParser])
+def addUserFun(request):
+    username = request.data.get('username')
+    email = request.data.get('email')
+    password = request.data.get('password')
+    role_id = request.data.get('role_id')
+    
+    if not username or not password or not email:
+        return JsonResponse({'status': False, 'message': 'Username, email and password are required'}, status=400)
+        
+    if AdminUser.objects.filter(username=username, isDelete="No").exists():
+        return JsonResponse({'status': False, 'message': 'Username already exists'}, status=400)
+    
+    user = AdminUser.objects.create_user(username=username, email=email, password=password)
+    if role_id:
+        try:
+            role = AdminRole.objects.get(id=role_id)
+            user.role = role
+            user.save()
+        except AdminRole.DoesNotExist:
+            pass
+    return JsonResponse({'status': True, 'message': 'User created successfully', 'user': {'id': user.id, 'username': user.username}})
+
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def updateUserPermissionsFun(request):
+    user_id = request.data.get('id')
+    detailed_permissions = request.data.get('detailed_permissions', {}) 
+    
+    try:
+        user = AdminUser.objects.get(id=user_id)
+        user.detailed_permissions = detailed_permissions
+        # Also sync the ManyToMany for backward compatibility if needed, using keys
+        permission_ids = list(detailed_permissions.keys())
+        permissions = SidebarSubModule.objects.filter(id_attr__in=permission_ids)
+        user.permissions.set(permissions)
+        user.save()
+        return JsonResponse({'status': True, 'message': 'Permissions updated successfully'})
+    except AdminUser.DoesNotExist:
+        return JsonResponse({'status': False, 'message': 'User not found'}, status=404)
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def deleteUserFun(request):
+    user_id = request.data.get('id')
+    try:
+        user = AdminUser.objects.get(id=user_id)
+        user.isDelete = "Yes"
+        user.save()
+        return JsonResponse({'status': True, 'message': 'User deleted successfully'})
+    except AdminUser.DoesNotExist:
+        return JsonResponse({'status': False, 'message': 'User not found'}, status=404)
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def permissionListFun(request):
+    modules = SidebarModule.objects.filter(isDelete="No").order_by('order')
+    grouped_perms = {}
+    for m in modules:
+        submodules = SidebarSubModule.objects.filter(module=m, isDelete="No").order_by('order')
+        if submodules.exists():
+            grouped_perms[m.name] = []
+            for sm in submodules:
+                grouped_perms[m.name].append({
+                    'id': sm.id,
+                    'name': sm.name,
+                    'codename': sm.id_attr # Using id_attr as codename for frontend compat
+                })
+    return JsonResponse({'status': True, 'permissionModules': grouped_perms})
+
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def roleListFun(request):
+    roles = AdminRole.objects.filter(isDelete="No")
+    role_list = []
+    for role in roles:
+        role_list.append({
+            'id': role.id,
+            'name': role.name,
+        })
+    return JsonResponse({'status': True, 'roleList': role_list})
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+@parser_classes([MultiPartParser, FormParser])
+def addRoleFun(request):
+    name = request.data.get('name')
+    if not name:
+        return JsonResponse({'status': False, 'message': 'Role name is required'}, status=400)
+    if AdminRole.objects.filter(name=name, isDelete="No").exists():
+        return JsonResponse({'status': False, 'message': 'Role already exists'}, status=400)
+    role = AdminRole.objects.create(name=name)
+    return JsonResponse({'status': True, 'message': 'Role created successfully', 'role': {'id': role.id, 'name': role.name}})
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def deleteRoleFun(request):
+    role_id = request.data.get('id')
+    try:
+        role = AdminRole.objects.get(id=role_id)
+        role.isDelete = "Yes"
+        role.save()
+
+        return JsonResponse({'status': True, 'message': 'Role deleted successfully'})
+    except AdminRole.DoesNotExist:
+        return JsonResponse({'status': False, 'message': 'Role not found'}, status=404)
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def getRolePermissionsFun(request):
+    role_id = request.query_params.get('id')
+    try:
+        role = AdminRole.objects.get(id=role_id)
+        return JsonResponse({
+            'status': True, 
+            'role_name': role.name, 
+            'detailed_permissions': role.detailed_permissions,
+            'permissions': [p.id_attr for p in role.permissions.all()] # For compat
+        })
+    except AdminRole.DoesNotExist:
+        return JsonResponse({'status': False, 'message': 'Role not found'}, status=404)
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def updateRolePermissionsFun(request):
+    role_id = request.data.get('id')
+    detailed_permissions = request.data.get('detailed_permissions', {})
+    try:
+        role = AdminRole.objects.get(id=role_id)
+        role.detailed_permissions = detailed_permissions
+        # Sync ManyToMany
+        permission_ids = list(detailed_permissions.keys())
+        permissions = SidebarSubModule.objects.filter(id_attr__in=permission_ids)
+        role.permissions.set(permissions)
+        role.save()
+        return JsonResponse({'status': True, 'message': 'Role permissions updated successfully'})
+    except AdminRole.DoesNotExist:
+        return JsonResponse({'status': False, 'message': 'Role not found'}, status=404)
+
+
+from django.contrib.auth.hashers import make_password, check_password
+from Myadmin.models import SidebarModule, SidebarSubModule, AdminUser, AdminRole
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def customLoginFun(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+    try:
+        user = AdminUser.objects.get(email=email, isDelete="No")
+        if check_password(password, user.password):
+            # Merge detailed permissions
+            detailed = user.detailed_permissions.copy()
+            if user.role:
+                for k, v in user.role.detailed_permissions.items():
+                    if k in detailed:
+                        detailed[k] = list(set(detailed[k] + v))
+                    else:
+                        detailed[k] = v
+            
+            return JsonResponse({
+                'status': True,
+                'user': {
+                    'id': user.id,
+                    'name': user.name,
+                    'username': user.username,
+                    'email': user.email,
+                    'role': user.role.name if user.role else "No Role"
+                },
+                'detailed_permissions': detailed,
+                'permissions': list(detailed.keys()) # Array of keys for legacy check
+            })
+        else:
+            return JsonResponse({'status': False, 'message': 'Invalid password'}, status=401)
+    except AdminUser.DoesNotExist:
+        return JsonResponse({'status': False, 'message': 'User not found'}, status=404)
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def getNavbarDataFun(request):
+    modules = SidebarModule.objects.filter(isDelete="No").order_by('order')
+    navbarData = []
+    for m in modules:
+        submodules = SidebarSubModule.objects.filter(module=m, isDelete="No").order_by('order')
+        sub_list = []
+        for sm in submodules:
+            sub_list.append({
+                'id': sm.id_attr,
+                'label': sm.name,
+                'link': sm.link,
+                'parentId': m.name.lower()
+            })
+        navbarData.append({
+            'id': m.name.lower(),
+            'label': m.name,
+            'icon': m.icon,
+            'subItems': sub_list
+        })
+    return JsonResponse({'status': True, 'navbarData': navbarData})
