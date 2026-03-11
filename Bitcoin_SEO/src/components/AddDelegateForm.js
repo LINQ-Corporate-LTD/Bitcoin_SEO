@@ -11,6 +11,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { MuiTelInput } from "mui-tel-input";
 import Button from "@mui/material/Button";
 import { FormControl, FormHelperText } from "@mui/material";
+import { useApiData } from "../../src/common/ApiContext";
 const logo =
   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
 const plusIcon =
@@ -27,6 +28,12 @@ const CompanyRegistrationForm = () => {
   console.log("selectedQty: ", selectedQty);
   console.log("selectedPackage: ", selectedPackage);
   const phoneInputRef = useRef(null);
+  const {
+    homeVideoSettings,
+    eventDetails,
+    eventGeneralSettings,
+    themeSettings,
+  } = useApiData();
   const createDelegate = (id) => ({
     id,
     firstName: "",
@@ -547,13 +554,82 @@ const CompanyRegistrationForm = () => {
         }
       }
 
+      // Function to submit to Zoho webhook
+      async function submitToZoho() {
+        const today = new Date();
+        const dateFormatted = today.toLocaleDateString("en-US", {
+          month: "short",
+          day: "2-digit",
+          year: "numeric",
+        });
+        const pacPrice = selectedPackage?.deligatePackagePrice
+        const numDelegates = delegates?.length
+        const preTaxAmount = pacPrice * numDelegates
+        const taxPercent = parseFloat(
+          eventGeneralSettings?.purchaseTaxPercent || 0,
+        );
+        const taxAmount = (preTaxAmount * taxPercent) / 100;
+        const totalAmount = preTaxAmount + taxAmount;
+
+        const zohoPayload = {
+          webhookTrigger: {
+            payload: {
+              StateRegion: formData.company.state || "",
+              Discount: "0",
+              Address: formData.company.address || "-",
+              DelegateCompanyName: formData.company.companyName || "",
+              PreTaxAmount: { preTaxAmount },
+              PostalCode: formData.company.postalCode || "0",
+              CompanyWebAddress: formData.company.webAddress || "",
+              City: formData.company.city || "",
+              DiscountCode: "",
+              TotalAmount: { totalAmount },
+              Date: dateFormatted,
+              TaxAmount: { taxAmount },
+              Packages: selectedPackage?.deligatePackageName || "",
+              Currency: "USD",
+              Eventname: "Bitcoin Innovation & Market Evolution",
+              Country: formData.company.country || "",
+              Delegates: formData.delegates.map((delegate) => ({
+                Email: delegate.email,
+                Position: delegate.position || "-",
+                FirstName: delegate.firstName,
+                PhoneNumber: delegate.mobile,
+                LastName: delegate.lastName,
+              })),
+              TotalAmountFormatted: { totalAmount },
+              InvoiceNumber: invoiceNumber,
+              FormName: "Booking Form",
+              FormURL: "https://www.bitcoin-innovation-market-evolution.online/adddelegate",
+              AddOnsTotalAmount: "0",
+              Eventcode: "BIME",
+            },
+          },
+        };
+
+        try {
+          const zohoResponse = await fetch(
+            "https://harsh7541.pythonanywhere.com/admin1/sendtozoho",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(zohoPayload),
+            },
+          );
+          const zohoResult = await zohoResponse.json();
+          console.log("✅ Zoho submission successful:", zohoResult);
+        } catch (error) {
+          console.error("❌ Error submitting to Zoho:", error);
+        }
+      }
+
       try {
-        // Run HubSpot submission and email sending in parallel
+        // Run HubSpot submission, email sending, and Zoho in parallel
         await Promise.all([
           submitCompanyDelegatesToHubSpot(formData),
           sendBookingEmail(),
+          submitToZoho(),
         ]);
-
         // Navigate to booking-form after both complete
         navigate("/booking-form", {
           state: {

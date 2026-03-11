@@ -6,11 +6,23 @@ import "../../assets/css/dropzone.css";
 import "../../assets/css/ckeditor.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { useApiData } from "../../../src/Components/Common/ApiContext.js";
 const ViewIndustryTrend = ({ row, viewIndustryTrendModal, onCloseModal }) => {
   const location = useLocation();
   const [trendTitle, setTrendTitle] = useState("");
   const [trendShortDescription, setTrendShortDescription] = useState("");
   const [trendLongDescription, setTrendLongDescription] = useState("");
+  const {
+    homeVideoSettings,
+    eventDetails,
+    eventGeneralSettings,
+    themeSettings,
+  } = useApiData();
+  const [trendMetaTitle, setTrendMetaTitle] = useState("");
+  const [trendMetaTitleError, setTrendMetaTitleError] = useState(false);
+  const [trendMetaDescription, setTrendMetaDescription] = useState("");
+  const [trendMetaDescriptionError, setTrendMetaDescriptionError] =
+    useState(false);
   let color = "#405189";
 
   useEffect(() => {
@@ -18,6 +30,10 @@ const ViewIndustryTrend = ({ row, viewIndustryTrendModal, onCloseModal }) => {
       setTrendTitle(row?.trendTitle);
       setTrendShortDescription(row?.trendShortDescription?.replace(/^"(.*)"$/, "$1"));
       setTrendLongDescription(row?.trendLongDescription?.replace(/^"(.*)"$/, "$1"));
+      if (eventDetails?.isSeoEnable === "Yes") {
+        setTrendMetaTitle(row?.trendMetaTitle || "");
+        setTrendMetaDescription(row?.trendMetaDescription || "");
+      }
     }
   }, [location]);
 
@@ -97,6 +113,75 @@ const ViewIndustryTrend = ({ row, viewIndustryTrendModal, onCloseModal }) => {
                   </div>
                 </div>
               </div>
+              {eventDetails?.isSeoEnable === "Yes" && (
+                <>
+                  <div className="col-md-12">
+                    <div>
+                      <Label
+                        htmlFor="customername-field"
+                        className="form-label"
+                      >
+                        Trend Meta Title <span className="required_span">*</span>{" "}
+                        (Max. Length 60 Characters)
+                      </Label>
+                      <Input
+                        type="text"
+                        className={`form-control ${trendMetaTitleError ? "border-danger " : ""
+                          }`}
+                        placeholder="Enter Meta Title"
+                        aria-label="name"
+                        aria-describedby="basic-addon1"
+                        value={trendMetaTitle}
+                        onChange={(e) => {
+                          setTrendMetaTitle(e.target.value);
+                          if (e.target.value?.length > 60) {
+                            setTrendMetaTitleError(true);
+                          } else {
+                            setTrendMetaTitleError(false);
+                          }
+                        }}
+                      />
+                      {/* Character Counter */}
+                      <p style={{ fontSize: "12px", marginTop: "3px" }}>
+                        Character count: {trendMetaTitle.length}/60
+                      </p>
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div>
+                      <Label
+                        htmlFor="customername-field"
+                        className="form-label"
+                      >
+                        Trend Meta Description{" "}
+                        <span className="required_span">*</span> (Max. Length
+                        160 Characters)
+                      </Label>
+                      <textarea
+                        type="text"
+                        className={`form-control ${trendMetaDescriptionError ? "border-danger " : ""
+                          }`}
+                        placeholder="Enter Meta Description"
+                        aria-label="name"
+                        aria-describedby="basic-addon1"
+                        value={trendMetaDescription}
+                        rows={4}
+                        onChange={(e) => {
+                          setTrendMetaDescription(e.target.value);
+                          if (e.target.value?.length > 160) {
+                            setTrendMetaDescriptionError(true);
+                          } else {
+                            setTrendMetaDescriptionError(false);
+                          }
+                        }}
+                      />
+                      <p style={{ fontSize: "12px", marginTop: "3px" }}>
+                        Character count: {trendMetaDescription.length}/160
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </ModalBody>
           <div className="modal-footer">
