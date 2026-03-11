@@ -218,7 +218,7 @@ const EventKeyPointList = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Event Key Topics" pageTitle="Event Key Topics" />
+          <BreadCrumb title="Event Key Topics" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">

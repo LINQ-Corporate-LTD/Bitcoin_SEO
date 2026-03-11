@@ -242,9 +242,8 @@ const EditSponsorPackage = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      SpoPackageNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${SpoPackageNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Package Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -268,9 +267,8 @@ const EditSponsorPackage = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      spoPackagePriceError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${spoPackagePriceError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Package Price"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -294,9 +292,8 @@ const EditSponsorPackage = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      spoPackageOldPriceError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${spoPackageOldPriceError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Package Old Price"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -319,9 +316,8 @@ const EditSponsorPackage = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      spoPackagePassQtyError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${spoPackagePassQtyError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Delegate Pass Qty"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -341,9 +337,8 @@ const EditSponsorPackage = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      spoPackageDiscountError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${spoPackageDiscountError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Package Old Price"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -367,9 +362,8 @@ const EditSponsorPackage = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      spoPackageSpaceError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${spoPackageSpaceError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Package Old Price"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -393,9 +387,8 @@ const EditSponsorPackage = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      sponsorPackageShowOrderError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${sponsorPackageShowOrderError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Show Order"
                     aria-label="name"
                     aria-describedby="basic-addon1"

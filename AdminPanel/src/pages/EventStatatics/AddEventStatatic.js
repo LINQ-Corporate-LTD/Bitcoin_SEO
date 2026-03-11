@@ -161,9 +161,8 @@ const AddEventStatatics = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      countTopicError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${countTopicError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Caption"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -186,9 +185,8 @@ const AddEventStatatics = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      countError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${countError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Figure"
                     aria-label="name"
                     aria-describedby="basic-addon1"

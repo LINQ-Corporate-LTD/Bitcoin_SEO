@@ -15,7 +15,6 @@ import {
   CardBody,
   CardHeader,
   Container,
-  Lin,
 } from "reactstrap";
 import "../../assets/css/ApplicationMain.css";
 import { toast } from "react-toastify";
@@ -61,6 +60,8 @@ const moderatorOptions = [
   { label: "Yes", value: "yes" },
   { label: "No", value: "no" },
 ];
+
+const BASE_URL = "https://harsh7541.pythonanywhere.com"; // USE LOCAL FOR DEBUGGING
 
 const AddAgenda = () => {
   const navigate = useNavigate();
@@ -230,25 +231,72 @@ const AddAgenda = () => {
   useEffect(() => {
     callIndustryListApi();
     callEventSpeakersApi();
+    callAgendaCountApi();
   }, []);
+
+  const callAgendaCountApi = () => {
+    fetch(`${BASE_URL}/admin1/getagenda`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.status !== false) {
+          const list = data.agendaList || data;
+          if (list.length > 0) {
+            // Identify the last added item based on the highest ID
+            const lastItem = list.reduce((prev, current) =>
+              prev.id > current.id ? prev : current
+            );
+
+            if (lastItem) {
+              // Pre-fill fields from the last added item
+              if (lastItem.endTime) setStartTime(lastItem.endTime);
+              if (lastItem.day) {
+                setSelectedDay({
+                  label: lastItem.day,
+                  value: lastItem.day,
+                });
+              }
+              // Set next sort order based on the last item's sort order
+              const nextSortOrder = (parseInt(lastItem.sortOrder) || 0) + 1;
+              setSortOrder(nextSortOrder);
+            }
+          } else {
+            setSortOrder(0); // If no items, start from 0
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching agenda count:", error);
+      });
+  };
 
   // Reset panel states when speaker selection changes
   useEffect(() => {
-    if (speakerFormat?.value === "panel" && selectedSpeakers) {
-      const newImages = {};
-      const newIds = {};
-      const newModerators = {};
+    if (speakerFormat?.value === "Panel Speaker" && selectedSpeakers && Array.isArray(selectedSpeakers)) {
+      const newImages = { ...panelSpeakerImages };
+      const newIds = { ...panelSpeakerIds };
+      const newModerators = { ...panelModeratorSelections };
 
+      let changed = false;
       selectedSpeakers.forEach((speaker) => {
-        newImages[speaker.value] = panelSpeakerImages[speaker.value] || "";
-        newIds[speaker.value] = panelSpeakerIds[speaker.value] || "";
-        newModerators[speaker.value] =
-          panelModeratorSelections[speaker.value] || null;
+        if (!(speaker.value in newImages)) {
+          newImages[speaker.value] = "";
+          changed = true;
+        }
+        if (!(speaker.value in newIds)) {
+          newIds[speaker.value] = "";
+          changed = true;
+        }
+        if (!(speaker.value in newModerators)) {
+          newModerators[speaker.value] = null;
+          changed = true;
+        }
       });
 
-      setPanelSpeakerImages(newImages);
-      setPanelSpeakerIds(newIds);
-      setPanelModeratorSelections(newModerators);
+      if (changed) {
+        setPanelSpeakerImages(newImages);
+        setPanelSpeakerIds(newIds);
+        setPanelModeratorSelections(newModerators);
+      }
     }
   }, [selectedSpeakers, speakerFormat]);
 
@@ -258,7 +306,7 @@ const AddAgenda = () => {
     const requestOptions = {
       method: "GET",
     };
-    fetch(`https://harsh7541.pythonanywhere.com/admin1/eventindustrytrends`, requestOptions)
+    fetch(`${BASE_URL}/admin1/eventindustrytrends`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         if (
@@ -309,7 +357,7 @@ const AddAgenda = () => {
     const requestOptions = {
       method: "GET",
     };
-    fetch(`https://harsh7541.pythonanywhere.com/admin1/eventspeakers`, requestOptions)
+    fetch(`${BASE_URL}/admin1/eventspeakers`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         if (
@@ -389,7 +437,7 @@ const AddAgenda = () => {
 
     try {
       const response = await fetch(
-        "https://harsh7541.pythonanywhere.com/admin1/upload",
+        `${BASE_URL}/admin1/upload`,
         requestOptions
       );
       const data = await response.json();
@@ -522,7 +570,7 @@ const AddAgenda = () => {
         method: "POST",
         body: formDataObj,
       };
-      fetch("https://harsh7541.pythonanywhere.com/admin1/addagenda", requestOptions)
+      fetch(`${BASE_URL}/admin1/addagenda`, requestOptions)
         .then((response) => response.json())
         .then((data) => {
           if (data.status) {
@@ -571,6 +619,7 @@ const AddAgenda = () => {
             setPanelSpeakerIds({});
             setPanelModeratorSelections({});
             setselectMulti(null);
+            navigate("/agendalist");
           } else {
             toast.error(data?.message);
           }
@@ -603,7 +652,7 @@ const AddAgenda = () => {
   return (
     <div className="page-content">
       <Container fluid>
-        <BreadCrumb title="Add Agenda" pageTitle="Agenda" />
+        <BreadCrumb title="Add Agenda" pageTitle="Agenda List" pageLink="/agendalist" />
         <Row>
           <Col lg={12}>
             <Card>
@@ -618,6 +667,10 @@ const AddAgenda = () => {
                         value={selectedStatusOption}
                         onChange={(selectedStatus) => {
                           setSelectedStatusOption(selectedStatus);
+                          if (selectedStatus?.value === "Day") {
+                            setStartTime("");
+                            setEndTime("");
+                          }
                         }}
                         options={status}
                         name="choices-publish-status-input"
@@ -653,79 +706,99 @@ const AddAgenda = () => {
 
                 {/* {(selectedStatusOption?.value === "Day" ||
                   selectedStatusOption?.value === "Speaker") && ( */}
-                  <div className="col-md-8 mt-2">
-                    <div>
-                      <Label htmlFor="amount-field" className="form-label">
-                        Select Day <span className="required_span">*</span>
-                      </Label>
-                      <div className="input-group">
-                        <Select
-                          value={selectedDay}
-                          onChange={(selectedDayOption) => {
-                            setSelectedDay(selectedDayOption);
-                          }}
-                          options={dayOption}
-                          name="choices-publish-status-input"
-                          classNamePrefix="select2-selection form-select"
-                          className="w-100"
-                        />
-                      </div>
+                <div className="col-md-8 mt-2">
+                  <div>
+                    <Label htmlFor="amount-field" className="form-label">
+                      Select Day <span className="required_span">*</span>
+                    </Label>
+                    <div className="input-group">
+                      <Select
+                        value={selectedDay}
+                        onChange={(selectedDayOption) => {
+                          setSelectedDay(selectedDayOption);
+                        }}
+                        options={dayOption}
+                        name="choices-publish-status-input"
+                        classNamePrefix="select2-selection form-select"
+                        className="w-100"
+                      />
                     </div>
                   </div>
+                </div>
                 {/* )} */}
                 {(
                   selectedStatusOption?.value === "Registration" ||
                   selectedStatusOption?.value === "Open/Close" ||
                   selectedStatusOption?.value === "Coffe/Launch" ||
+                  selectedStatusOption?.value === "Speaker" ||
+                  // selectedStatusOption?.value === "Day" ||
                   selectedStatusOption?.value === "Session") && (
-                  <>
-                    <div className="col-md-8 mt-2">
-                      <div>
-                        <Label htmlFor="amount-field" className="form-label">
-                          Start Time <span className="required_span">*</span>
-                        </Label>
-                        <div className="input-group">
-                          <Flatpickr
-                            className="form-control"
-                            options={{
-                              enableTime: true,
-                              noCalendar: true,
-                              dateFormat: "h:i K",
-                              time_24hr: false,
-                            }}
-                            value={startTime}
-                            onChange={(date, dateStr) => {
-                              setStartTime(dateStr);
-                            }}
-                          />
+                    <>
+                      <div className="col-md-8 mt-2">
+                        <div>
+                          <Label htmlFor="amount-field" className="form-label">
+                            Start Time <span className="required_span">*</span>
+                          </Label>
+                          <div className="input-group">
+                            <Flatpickr
+                              className="form-control"
+                              options={{
+                                enableTime: true,
+                                noCalendar: true,
+                                dateFormat: "h:i K",
+                                time_24hr: false,
+                              }}
+                              onReady={(selectedDates, dateStr, instance) => {
+                                if (instance.hourElement) {
+                                  instance.hourElement.addEventListener("keyup", (e) => {
+                                    if (e.target.value.length === 2) {
+                                      instance.minuteElement?.focus();
+                                    }
+                                  });
+                                }
+                              }}
+                              value={startTime}
+                              onChange={(date, dateStr) => {
+                                setStartTime(dateStr);
+                              }}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="col-md-8 mt-2">
-                      <div>
-                        <Label htmlFor="amount-field" className="form-label">
-                          End Time <span className="required_span">*</span>
-                        </Label>
-                        <div className="input-group">
-                          <Flatpickr
-                            className="form-control"
-                            options={{
-                              enableTime: true,
-                              noCalendar: true,
-                              dateFormat: "h:i K",
-                              time_24hr: false,
-                            }}
-                            value={endTime}
-                            onChange={(date, dateStr) => {
-                              setEndTime(dateStr);
-                            }}
-                          />
+                      <div className="col-md-8 mt-2">
+                        <div>
+                          <Label htmlFor="amount-field" className="form-label">
+                            End Time <span className="required_span">*</span>
+                          </Label>
+                          <div className="input-group">
+                            <Flatpickr
+                              className="form-control"
+                              options={{
+                                enableTime: true,
+                                noCalendar: true,
+                                dateFormat: "h:i K",
+                                time_24hr: false,
+                              }}
+                              onReady={(selectedDates, dateStr, instance) => {
+                                if (instance.hourElement) {
+                                  instance.hourElement.addEventListener("keyup", (e) => {
+                                    if (e.target.value.length === 2) {
+                                      instance.minuteElement?.focus();
+                                    }
+                                  });
+                                }
+                              }}
+                              value={endTime}
+                              onChange={(date, dateStr) => {
+                                setEndTime(dateStr);
+                              }}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </>
-                )}
+                    </>
+                  )}
 
                 {selectedStatusOption?.value === "Speaker" && (
                   <>
@@ -760,7 +833,7 @@ const AddAgenda = () => {
                             className="form-label"
                           >
                             Select Speaker(s){" "}
-                            <span className="required_span">*</span>
+                            {/* <span className="required_span">*</span> */}
                           </Label>
                           <div className="input-group">
                             <Select
@@ -774,7 +847,7 @@ const AddAgenda = () => {
                               placeholder="Select Speaker(s)"
                               styles={customStyles}
                               isOptionDisabled={() =>
-                                speakerFormat.value === "two" &&
+                                speakerFormat.value === "Two Speakers" &&
                                 selectedSpeakers &&
                                 selectedSpeakers.length >= 2
                               }
@@ -786,7 +859,8 @@ const AddAgenda = () => {
 
                     {/* Single Speaker Fields */}
                     {speakerFormat?.value === "Single Speaker" &&
-                      selectedSpeakers && (
+                      // selectedSpeakers && 
+                      (
                         <>
                           <div className="col-md-8 mt-2">
                             <div>
@@ -1101,15 +1175,15 @@ const AddAgenda = () => {
 
                                   {index ===
                                     speaker1BulletPoints.length - 1 && (
-                                    <button
-                                      type="button"
-                                      onClick={addSpeaker1BulletPoint}
-                                      className="btn btn-success d-flex align-items-center gap-1"
-                                    >
-                                      <Plus size={16} />
-                                      Add
-                                    </button>
-                                  )}
+                                      <button
+                                        type="button"
+                                        onClick={addSpeaker1BulletPoint}
+                                        className="btn btn-success d-flex align-items-center gap-1"
+                                      >
+                                        <Plus size={16} />
+                                        Add
+                                      </button>
+                                    )}
                                 </div>
                               </div>
                             ))}
@@ -1265,15 +1339,15 @@ const AddAgenda = () => {
 
                                       {index ===
                                         speaker2BulletPoints.length - 1 && (
-                                        <button
-                                          type="button"
-                                          onClick={addSpeaker2BulletPoint}
-                                          className="btn btn-success d-flex align-items-center gap-1"
-                                        >
-                                          <Plus size={16} />
-                                          Add
-                                        </button>
-                                      )}
+                                          <button
+                                            type="button"
+                                            onClick={addSpeaker2BulletPoint}
+                                            className="btn btn-success d-flex align-items-center gap-1"
+                                          >
+                                            <Plus size={16} />
+                                            Add
+                                          </button>
+                                        )}
                                     </div>
                                   </div>
                                 )
@@ -1377,7 +1451,7 @@ const AddAgenda = () => {
                                       <Select
                                         value={
                                           panelModeratorSelections[
-                                            speaker.value
+                                          speaker.value
                                           ] || null
                                         }
                                         onChange={(selectedOption) =>
@@ -1585,6 +1659,7 @@ const AddAgenda = () => {
                       aria-label="name"
                       aria-describedby="basic-addon1"
                       value={sortOrder}
+                      disabled
                       onChange={(e) => {
                         setSortOrder(e.target.value);
                       }}

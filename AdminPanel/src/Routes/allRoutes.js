@@ -294,7 +294,16 @@ import JoinedSponsors from "../pages/EventData/JoinedSponsors";
 import JoinedSponsorDelegates from "../pages/EventData/JoinedSponsorDelegates";
 import EventSponsorTransections from "../pages/EventData/EventSponsorTransections";
 
+import UserManagement from "../pages/Permissions/UserManagement";
+import EditUserPermissions from "../pages/Permissions/EditUserPermissions";
+import RoleManagement from "../pages/Permissions/RoleManagement";
+import EditRolePermissions from "../pages/Permissions/EditRolePermissions";
+
+
+
+
 const authProtectedRoutes = [
+
   { path: "/dashboard-analytics", component: <DashboardAnalytics /> },
   { path: "/dashboard-crm", component: <DashboardCrm /> },
   { path: "/dashboard", component: <DashboardEcommerce /> },
@@ -549,7 +558,7 @@ const authProtectedRoutes = [
   { path: "/eventdata", component: <EventData /> },
   { path: "/socialmediadata", component: <SocilMediaList /> },
   { path: "/addsocialmedialinks", component: <AddSocialMediaOption /> },
-  { path: "/agendalist", component: <AgendaList/> },
+  { path: "/agendalist", component: <AgendaList /> },
   { path: "/editagenda", component: <EditAgenda /> },
   { path: "/joineddelegates", component: <JoinedDelegates /> },
   { path: "/joinedcompanies", component: <JoinedCompanies /> },
@@ -557,6 +566,14 @@ const authProtectedRoutes = [
   { path: "/joinedsponsors", component: <JoinedSponsors /> },
   { path: "/joinedsponsordelegates", component: <JoinedSponsorDelegates /> },
   { path: "/sponsortransections", component: <EventSponsorTransections /> },
+  { path: "/apps-permissions", component: <UserManagement /> },
+  { path: "/apps-permissions/edit/:id", component: <EditUserPermissions /> },
+  { path: "/apps-roles", component: <RoleManagement /> },
+  { path: "/apps-roles/edit/:id", component: <EditRolePermissions /> },
+
+
+
+
 
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name

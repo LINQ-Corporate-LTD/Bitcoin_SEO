@@ -190,9 +190,8 @@ const AddFaq = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      questionError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${questionError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Question"
                     aria-label="name"
                     aria-describedby="basic-addon1"

@@ -59,6 +59,10 @@ const VenueContain = () => {
   const [offset, setOffset] = useState(0);
   let color = "#405189";
 
+  const detailedPermissions = JSON.parse(localStorage.getItem("detailed_permissions") || "{}");
+  const venuePermissions = detailedPermissions.venuePageData || [];
+  const canEdit = venuePermissions.includes("edit");
+
   useEffect(() => {
     callVenueContentListApi();
     callVenueGalleryListApi();
@@ -181,7 +185,7 @@ const VenueContain = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Event Speakers" pageTitle="Event Sponsors" />
+          <BreadCrumb title="Venue Content" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -193,17 +197,19 @@ const VenueContain = () => {
                       </h5>
                     </div>
                     {/* {permissions?.create && ( */}
-                    <div className="flex-shrink-0">
-                      <button
-                        type="button"
-                        className="btn btn-primary add-btn"
-                        id="create-btn"
-                        onClick={toggleEditVenueData}
-                      >
-                        <i className="ri-add-line align-bottom me-1"></i> Edit
-                        Venue Data
-                      </button>
-                    </div>
+                    {canEdit && (
+                      <div className="flex-shrink-0">
+                        <button
+                          type="button"
+                          className="btn btn-primary add-btn"
+                          id="create-btn"
+                          onClick={toggleEditVenueData}
+                        >
+                          <i className="ri-add-line align-bottom me-1"></i> Edit
+                          Venue Data
+                        </button>
+                      </div>
+                    )}
                     {/* )} */}
                   </div>
                 </CardHeader>

@@ -132,9 +132,8 @@ const AddMainCategory = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      mainCategoryNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${mainCategoryNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Main Category Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"

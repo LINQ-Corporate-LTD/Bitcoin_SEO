@@ -156,8 +156,9 @@ const AddSocialMediaOption = () => {
     <div className="page-content">
       <Container fluid>
         <BreadCrumb
-          title="Edit Event Social Media Links"
-          pageTitle="Event Data"
+          title="Event Social Media Links"
+          pageTitle="Event Social Media Links"
+          pageLink="/socialmediadata"
         />
         <Row>
           <Col lg={12}>

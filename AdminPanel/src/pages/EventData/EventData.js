@@ -167,7 +167,7 @@ const EventData = () => {
   return (
     <div className="page-content">
       <Container fluid>
-        <BreadCrumb title="Event General Detail" pageTitle="Event Data" />
+        <BreadCrumb title="Event General Detail" pageTitle="Dashboards" pageLink="/dashboard" />
         <Row>
           <Col lg={12}>
             <Card>

@@ -44,6 +44,10 @@ const SponsorPageContent = () => {
   const [offset, setOffset] = useState(0);
   let color = "#405189";
 
+  const detailedPermissions = JSON.parse(localStorage.getItem("detailed_permissions") || "{}");
+  const sponsorPermissions = detailedPermissions.sponsorPageData || [];
+  const canEdit = sponsorPermissions.includes("edit");
+
   useEffect(() => {
     callSponsorPageDataApi();
     // eslint-disable-next-line
@@ -115,7 +119,7 @@ const SponsorPageContent = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Speaker Page Data" pageTitle="Speaker Page Data" />
+          <BreadCrumb title="Sponsor Page Data" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -127,17 +131,19 @@ const SponsorPageContent = () => {
                       </h5>
                     </div>
                     {/* {permissions?.create && ( */}
-                    <div className="flex-shrink-0">
-                      <button
-                        type="button"
-                        className="btn btn-primary add-btn"
-                        id="create-btn"
-                        onClick={toggleEditSponsorPageData}
-                      >
-                        <i className="ri-add-line align-bottom me-1"></i> Edit
-                        Sponsor Page Data
-                      </button>
-                    </div>
+                    {canAdd && (
+                      <div className="flex-shrink-0">
+                        <button
+                          type="button"
+                          className="btn btn-primary add-btn"
+                          id="create-btn"
+                          onClick={toggleEditSponsorPageData}
+                        >
+                          <i className="ri-add-line align-bottom me-1"></i> Edit
+                          Sponsor Page Data
+                        </button>
+                      </div>
+                    )}
                     {/* )} */}
                   </div>
                 </CardHeader>
@@ -145,7 +151,7 @@ const SponsorPageContent = () => {
                   <div className="col-md-12">
                     <div>
                       <Label htmlFor="amount-field" className="form-label">
-                       Introduction Paragraph Description{" "}
+                        Introduction Paragraph Description{" "}
                       </Label>
                       <div className="input-group" style={{ width: "100%" }}>
                         <div style={{ width: "100%" }}>

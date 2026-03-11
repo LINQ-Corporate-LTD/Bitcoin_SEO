@@ -313,7 +313,7 @@ const SponsorAddOnsList = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Sponsor Add-Ons" pageTitle="Sponsor Add-Ons" />
+          <BreadCrumb title="Sponsor Add-Ons" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -349,10 +349,10 @@ const SponsorAddOnsList = () => {
                             className="form-control search bg-light border-light"
                             placeholder="Search for Sponsor Name..."
                             name="name"
-                            // value={query?.name}
-                            // onChange={(e) => {
-                            //   setQuery({ ...query, name: e.target.value });
-                            // }}
+                          // value={query?.name}
+                          // onChange={(e) => {
+                          //   setQuery({ ...query, name: e.target.value });
+                          // }}
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -362,11 +362,11 @@ const SponsorAddOnsList = () => {
                           type="button"
                           className="btn-success btn"
                           id="create-btn"
-                          // onClick={() => {
-                          //   handleSubmitFilter(10, 0, query);
-                          //   setLimit(10);
-                          //   setOffset(0);
-                          // }}
+                        // onClick={() => {
+                        //   handleSubmitFilter(10, 0, query);
+                        //   setLimit(10);
+                        //   setOffset(0);
+                        // }}
                         >
                           <i className="ri-equalizer-fill me-1 align-bottom"></i>
                           Filter
@@ -375,16 +375,16 @@ const SponsorAddOnsList = () => {
                           type="button"
                           className="btn-primary btn mx-2"
                           id="create-btn"
-                          // onClick={() => {
-                          //   setQuery({
-                          //     name: "",
-                          //     mobileNo: "",
-                          //     email: "",
-                          //   });
-                          //   callCustomerListApi(10, 0);
-                          //   setLimit(10);
-                          //   setOffset(0);
-                          // }}
+                        // onClick={() => {
+                        //   setQuery({
+                        //     name: "",
+                        //     mobileNo: "",
+                        //     email: "",
+                        //   });
+                        //   callCustomerListApi(10, 0);
+                        //   setLimit(10);
+                        //   setOffset(0);
+                        // }}
                         >
                           <i className="ri-chat-delete-line me-1 align-bottom"></i>
                           Clear

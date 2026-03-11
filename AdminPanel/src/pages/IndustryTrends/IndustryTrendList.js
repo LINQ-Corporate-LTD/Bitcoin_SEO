@@ -125,10 +125,10 @@ const IndustryTrendList = () => {
   };
 
   const isViewBtnClick = useCallback((row) => {
-  console.log('View clicked:', row);
-  setselectedViewRow(row);
-  setViewIndustryTrendModal(true);
-}, []);
+    console.log('View clicked:', row);
+    setselectedViewRow(row);
+    setViewIndustryTrendModal(true);
+  }, []);
 
   const trendCol = useMemo(
     () => [
@@ -317,7 +317,7 @@ const IndustryTrendList = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Industry Trends" pageTitle="Industry Trends" />
+          <BreadCrumb title="Industry Trends" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">

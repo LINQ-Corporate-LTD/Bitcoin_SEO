@@ -179,9 +179,8 @@ const AddIndustryTrend = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      trendTitleError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${trendTitleError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Topic"
                     aria-label="name"
                     aria-describedby="basic-addon1"

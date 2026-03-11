@@ -32,9 +32,9 @@ const EditEventLeader = ({
   const navigate = useNavigate();
   const location = useLocation();
   const [leaderName, setLeaderName] = useState("");
-    const [leaderNameError, setLeaderNameError] = useState(false);
-    const [leaderLogo, setLeaderLogo] = useState("");
-    const [leaderLogoError, setLeaderLogoError] = useState(false);
+  const [leaderNameError, setLeaderNameError] = useState(false);
+  const [leaderLogo, setLeaderLogo] = useState("");
+  const [leaderLogoError, setLeaderLogoError] = useState(false);
 
   const [visible, setVisible] = useState(false);
   const [loading, setloading] = useState(false);
@@ -216,9 +216,8 @@ const EditEventLeader = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      leaderNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${leaderNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Leader Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"

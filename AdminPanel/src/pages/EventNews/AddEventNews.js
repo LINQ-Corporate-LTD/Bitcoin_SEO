@@ -353,9 +353,8 @@ const AddEventNews = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      titleError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${titleError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter News Title"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -514,9 +513,8 @@ const AddEventNews = (props) => {
                       </Label>
                       <Input
                         type="text"
-                        className={`form-control ${
-                          newsMetaTitleError ? "border-danger " : ""
-                        }`}
+                        className={`form-control ${newsMetaTitleError ? "border-danger " : ""
+                          }`}
                         placeholder="Enter Meta Title"
                         aria-label="name"
                         aria-describedby="basic-addon1"
@@ -548,9 +546,8 @@ const AddEventNews = (props) => {
                       </Label>
                       <textarea
                         type="text"
-                        className={`form-control ${
-                          newsMetaDescriptionError ? "border-danger " : ""
-                        }`}
+                        className={`form-control ${newsMetaDescriptionError ? "border-danger " : ""
+                          }`}
                         placeholder="Enter Meta Description"
                         aria-label="name"
                         aria-describedby="basic-addon1"
@@ -582,9 +579,8 @@ const AddEventNews = (props) => {
                       </Label>
                       <textarea
                         type="text"
-                        className={`form-control ${
-                          newsImgAltTextError ? "border-danger " : ""
-                        }`}
+                        className={`form-control ${newsImgAltTextError ? "border-danger " : ""
+                          }`}
                         placeholder="Enter Alt Text"
                         aria-label="name"
                         aria-describedby="basic-addon1"

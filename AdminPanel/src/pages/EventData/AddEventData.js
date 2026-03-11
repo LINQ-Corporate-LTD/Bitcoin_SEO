@@ -293,7 +293,7 @@ const AddEventData = () => {
   return (
     <div className="page-content">
       <Container fluid>
-        <BreadCrumb title="Edit Event General Detail" pageTitle="Event Data" />
+        <BreadCrumb title="Event General Detail" pageTitle="Event General Detail" pageLink="/eventdata" />
         <Row>
           <Col lg={12}>
             <Card>

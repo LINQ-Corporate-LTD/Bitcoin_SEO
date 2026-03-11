@@ -157,9 +157,8 @@ const AddMediaPageHelper = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      mediaHelpingPersonErr ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${mediaHelpingPersonErr ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -183,9 +182,8 @@ const AddMediaPageHelper = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      mediaHelpingPersonMailErr ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${mediaHelpingPersonMailErr ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Email"
                     aria-label="email"
                     aria-describedby="basic-addon1"
@@ -209,9 +207,8 @@ const AddMediaPageHelper = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      mediaHelpingPersonPhoneErr ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${mediaHelpingPersonPhoneErr ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Designation"
                     aria-label="name"
                     aria-describedby="basic-addon1"

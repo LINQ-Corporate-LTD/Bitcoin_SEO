@@ -245,9 +245,8 @@ const EditNavSubCategory = ({
                       options={mainCategoryOptions(navMainCategoryList)}
                       name="choices-publish-status-input"
                       classNamePrefix="select2-selection form-select"
-                      className={`w-100 ${
-                        selectedMainCategoryError ? "border-danger" : ""
-                      }`}
+                      className={`w-100 ${selectedMainCategoryError ? "border-danger" : ""
+                        }`}
                     />
                   </div>
                 </div>
@@ -259,9 +258,8 @@ const EditNavSubCategory = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      subCategoryNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${subCategoryNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Sub Category Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -284,9 +282,8 @@ const EditNavSubCategory = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      subCategoryPathError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${subCategoryPathError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Sub Category Path"
                     aria-label="name"
                     aria-describedby="basic-addon1"

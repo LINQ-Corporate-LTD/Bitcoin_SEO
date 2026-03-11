@@ -129,25 +129,25 @@ const EventLeaders = () => {
         accessorKey: "leaderName",
         filterable: false,
         cell: (cell) => (
-        <>
-          <div className="d-flex align-items-center">
-            <div className="flex-shrink-0 me-3">
-              <div className="avatar-md bg-light rounded p-1 d-flex align-center justify-content-center">
-                <img
-                 src = {cell.row.original.leaderLogo}
-                  alt=""
-                  className="img-fluid d-block"
-                />
+          <>
+            <div className="d-flex align-items-center">
+              <div className="flex-shrink-0 me-3">
+                <div className="avatar-md bg-light rounded p-1 d-flex align-center justify-content-center">
+                  <img
+                    src={cell.row.original.leaderLogo}
+                    alt=""
+                    className="img-fluid d-block"
+                  />
+                </div>
+              </div>
+              <div className="flex-grow-1">
+                <h5 className="fs-14 mb-1">
+                  {cell.row.original.leaderName}
+                </h5>
               </div>
             </div>
-            <div className="flex-grow-1">
-              <h5 className="fs-14 mb-1">
-                {cell.row.original.leaderName}
-              </h5>
-            </div>
-          </div>
-        </>
-      ),
+          </>
+        ),
 
       },
       {
@@ -320,7 +320,7 @@ const EventLeaders = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Event Leaders" pageTitle="Event Leaders" />
+          <BreadCrumb title="Event Leaders" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -328,7 +328,7 @@ const EventLeaders = () => {
                   <div className="d-flex align-items-center">
                     <div className="flex-grow-1">
                       <h5 className="card-title mb-0 fs-15">
-                       Event Leaders
+                        Event Leaders
                       </h5>
                     </div>
                     {/* {permissions?.create && ( */}
@@ -351,7 +351,7 @@ const EventLeaders = () => {
                     {leaderList && leaderList?.length > 0 ? (
                       <TableContainer
                         columns={leaderCol}
-                        data={leaderList} 
+                        data={leaderList}
                         isGlobalFilter={false}
                         isAddUserList={false}
                         apiCallFunction={callLeaderListApi}

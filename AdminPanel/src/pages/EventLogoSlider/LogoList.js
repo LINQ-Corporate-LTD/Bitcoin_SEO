@@ -129,20 +129,20 @@ const LogoList = () => {
         accessorKey: "pastAttandeeName",
         filterable: false,
         cell: (cell) => (
-        <>
-          <div className="d-flex align-items-center">
-            <div className="flex-shrink-0 me-3">
-              <div className="avatar-md bg-light rounded p-1 d-flex align-center justify-content-center">
-                <img
-                 src = {cell.row.original.logoLink}
-                  alt=""
-                  className="img-fluid d-block"
-                />
+          <>
+            <div className="d-flex align-items-center">
+              <div className="flex-shrink-0 me-3">
+                <div className="avatar-md bg-light rounded p-1 d-flex align-center justify-content-center">
+                  <img
+                    src={cell.row.original.logoLink}
+                    alt=""
+                    className="img-fluid d-block"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </>
-      ),
+          </>
+        ),
 
       },
       {
@@ -315,7 +315,7 @@ const LogoList = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Event Slider Logos" pageTitle="Event Slider Logos" />
+          <BreadCrumb title="Event Slider Logos" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -323,7 +323,7 @@ const LogoList = () => {
                   <div className="d-flex align-items-center">
                     <div className="flex-grow-1">
                       <h5 className="card-title mb-0 fs-15">
-                       Event Slider Logos List
+                        Event Slider Logos List
                       </h5>
                     </div>
                     {/* {permissions?.create && ( */}
@@ -346,7 +346,7 @@ const LogoList = () => {
                     {logoList && logoList?.length > 0 ? (
                       <TableContainer
                         columns={logoCol}
-                        data={logoList} 
+                        data={logoList}
                         isGlobalFilter={false}
                         isAddUserList={false}
                         apiCallFunction={callLogoListApi}

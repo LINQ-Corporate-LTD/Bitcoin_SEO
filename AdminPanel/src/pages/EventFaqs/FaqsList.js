@@ -182,93 +182,93 @@ const FaqsList = () => {
   // );
 
   const faqCol = useMemo(
-  () => [
-    {
-      id: "titleId",
-      header: "Question",
-      accessorKey: "faqQuestion",
-      filterable: false,
-    },
-    {
-      id: "answerId",
-      header: "Answer",
-      accessorKey: "faqAnswer",
-      filterable: false,
-      cell: (cellProps) => {
-        const faqAnswer = cellProps.row.original.faqAnswer;
-        
-        // Clean the HTML content
-        const cleanHtml = (html) => {
-          if (!html) return "";
-          
-          // Remove outer quotes and unescape HTML
-          let cleaned = html.replace(/^"(.*)"$/, "$1");
-          
-          // Unescape quotes
-          cleaned = cleaned.replace(/\\"/g, '"');
-          
-          // Ensure all external links have proper attributes
-          cleaned = cleaned.replace(
-            /<a\s+href=["']([^"']+)["'][^>]*>/gi,
-            (match, url) => {
-              // Check if URL is external (starts with http/https)
-              if (url.startsWith('http://') || url.startsWith('https://')) {
-                return `<a href="${url}" target="_blank" rel="noopener noreferrer">`;
-              }
-              return match;
-            }
-          );
-          
-          return cleaned;
-        };
+    () => [
+      {
+        id: "titleId",
+        header: "Question",
+        accessorKey: "faqQuestion",
+        filterable: false,
+      },
+      {
+        id: "answerId",
+        header: "Answer",
+        accessorKey: "faqAnswer",
+        filterable: false,
+        cell: (cellProps) => {
+          const faqAnswer = cellProps.row.original.faqAnswer;
 
-        return (
-          <div
-            className="faq-answer-cell"
-            style={{
-              maxWidth: "800px",
-              wordWrap: "break-word",
-              whiteSpace: "normal",
-              lineHeight: "1.4",
-            }}
-            dangerouslySetInnerHTML={{
-              __html: cleanHtml(faqAnswer),
-            }}
-          />
-        );
+          // Clean the HTML content
+          const cleanHtml = (html) => {
+            if (!html) return "";
+
+            // Remove outer quotes and unescape HTML
+            let cleaned = html.replace(/^"(.*)"$/, "$1");
+
+            // Unescape quotes
+            cleaned = cleaned.replace(/\\"/g, '"');
+
+            // Ensure all external links have proper attributes
+            cleaned = cleaned.replace(
+              /<a\s+href=["']([^"']+)["'][^>]*>/gi,
+              (match, url) => {
+                // Check if URL is external (starts with http/https)
+                if (url.startsWith('http://') || url.startsWith('https://')) {
+                  return `<a href="${url}" target="_blank" rel="noopener noreferrer">`;
+                }
+                return match;
+              }
+            );
+
+            return cleaned;
+          };
+
+          return (
+            <div
+              className="faq-answer-cell"
+              style={{
+                maxWidth: "800px",
+                wordWrap: "break-word",
+                whiteSpace: "normal",
+                lineHeight: "1.4",
+              }}
+              dangerouslySetInnerHTML={{
+                __html: cleanHtml(faqAnswer),
+              }}
+            />
+          );
+        },
       },
-    },
-    {
-      header: "Action",
-      cell: (cellProps) => {
-        return (
-          <ul className="list-inline hstack gap-2 mb-0">
-            <li className="list-inline-item edit">
-              <Link
-                to="#"
-                className="text-primary d-inline-block edit-item-btn"
-                onClick={() => isEditBtnClick(cellProps.row.original)}
-              >
-                <i className="ri-pencil-fill fs-16"></i>
-              </Link>
-            </li>
-            <li className="list-inline-item">
-              <Link
-                to="#"
-                className="text-danger d-inline-block remove-item-btn"
-                onClick={() => onClickDelete(cellProps.row.original)}
-              >
-                <i className="ri-delete-bin-5-fill fs-16"></i>
-              </Link>
-            </li>
-          </ul>
-        );
+      {
+        header: "Action",
+        cell: (cellProps) => {
+          return (
+            <ul className="list-inline hstack gap-2 mb-0">
+              <li className="list-inline-item edit">
+                <Link
+                  to="#"
+                  className="text-primary d-inline-block edit-item-btn"
+                  onClick={() => isEditBtnClick(cellProps.row.original)}
+                >
+                  <i className="ri-pencil-fill fs-16"></i>
+                </Link>
+              </li>
+              <li className="list-inline-item">
+                <Link
+                  to="#"
+                  className="text-danger d-inline-block remove-item-btn"
+                  onClick={() => onClickDelete(cellProps.row.original)}
+                >
+                  <i className="ri-delete-bin-5-fill fs-16"></i>
+                </Link>
+              </li>
+            </ul>
+          );
+        },
       },
-    },
-  ],
-  // eslint-disable-next-line
-  []
-);
+    ],
+    // eslint-disable-next-line
+    []
+  );
 
   const onDeleteButtonClick = (value) => {
     if (value) {
@@ -405,7 +405,7 @@ const FaqsList = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Faqs" pageTitle="Faqs" />
+          <BreadCrumb title="Faqs" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">

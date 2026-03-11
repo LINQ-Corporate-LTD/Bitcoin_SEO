@@ -26,7 +26,7 @@ const EditNewsCategory = ({
   const navigate = useNavigate();
   const location = useLocation();
   const [category, setCategory] = useState("");
-    const [categoryError, setCategoryError] = useState(false);
+  const [categoryError, setCategoryError] = useState(false);
   const [visible, setVisible] = useState(false);
   const [loading, setloading] = useState(false);
   let color = "#405189";
@@ -132,28 +132,27 @@ const EditNewsCategory = ({
           <ModalBody>
             <input type="hidden" id="id-field" />
             <div className="row gy-4 mb-3">
-                          <div className="col-md-12">
-                            <div>
-                              <Label htmlFor="customername-field" className="form-label">
-                                News Category <span className="required_span">*</span>
-                              </Label>
-                              <Input
-                                type="text"
-                                className={`form-control ${
-                                  categoryError ? "border-danger " : ""
-                                }`}
-                                placeholder="Enter Caption"
-                                aria-label="name"
-                                aria-describedby="basic-addon1"
-                                value={category}
-                                onChange={(e) => {
-                                  setCategory(e.target.value);
-                                  setCategoryError(false);
-                                }}
-                              />
-                            </div>
-                          </div>
-                        </div>
+              <div className="col-md-12">
+                <div>
+                  <Label htmlFor="customername-field" className="form-label">
+                    News Category <span className="required_span">*</span>
+                  </Label>
+                  <Input
+                    type="text"
+                    className={`form-control ${categoryError ? "border-danger " : ""
+                      }`}
+                    placeholder="Enter Caption"
+                    aria-label="name"
+                    aria-describedby="basic-addon1"
+                    value={category}
+                    onChange={(e) => {
+                      setCategory(e.target.value);
+                      setCategoryError(false);
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
           </ModalBody>
           <div className="modal-footer">
             <div className="hstack gap-2 justify-content-end">

@@ -142,9 +142,8 @@ const AddAddOns = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      titleError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${titleError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Title"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -164,9 +163,8 @@ const AddAddOns = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      priceError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${priceError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Price"
                     aria-label="name"
                     aria-describedby="basic-addon1"

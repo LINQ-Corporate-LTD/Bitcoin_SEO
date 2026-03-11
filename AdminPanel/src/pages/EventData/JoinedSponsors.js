@@ -323,7 +323,7 @@ const JoinedSponsors = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Sponsor Companies" pageTitle="Sponsor Companies" />
+          <BreadCrumb title="Sponsor Companies" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">

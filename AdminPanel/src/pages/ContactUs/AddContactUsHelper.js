@@ -163,9 +163,8 @@ const AddContactUsHelper = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      helpSubjectErr ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${helpSubjectErr ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Title"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -188,9 +187,8 @@ const AddContactUsHelper = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      helpingPersonErr ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${helpingPersonErr ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -213,9 +211,8 @@ const AddContactUsHelper = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      helpingPersonDesignationErr ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${helpingPersonDesignationErr ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Designation"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -239,9 +236,8 @@ const AddContactUsHelper = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      helperMailErr ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${helperMailErr ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Email"
                     aria-label="name"
                     aria-describedby="basic-addon1"

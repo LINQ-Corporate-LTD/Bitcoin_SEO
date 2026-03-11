@@ -22,8 +22,10 @@ const Logout = (props) => {
   const isUserLogout = useSelector(logoutData);
 
   useEffect(() => {
+    localStorage.clear();
     dispatch(logoutUser());
   }, [dispatch]);
+
 
   if (isUserLogout) {
     return <Navigate to="/login" />;

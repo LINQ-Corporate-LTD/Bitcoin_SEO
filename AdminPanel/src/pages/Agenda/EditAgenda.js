@@ -62,6 +62,8 @@ const moderatorOptions = [
   { label: "No", value: "no" },
 ];
 
+const BASE_URL = "https://harsh7541.pythonanywhere.com"; // USE LOCAL FOR DEBUGGING
+
 const EditAgenda = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -132,139 +134,87 @@ const EditAgenda = () => {
 
   useEffect(() => {
     if (location?.state) {
+      const state = location.state;
       setSelectedStatusOption({
-        label: location?.state?.status,
-        value: location?.state?.status,
+        label: state.status,
+        value: state.status,
       });
       setSelectedDay({
-        label: location?.state?.day,
-        value: location?.state?.day,
+        label: state.day,
+        value: state.day,
       });
-      if (location?.state?.startTime !== null) {
-        setStartTime(location?.state?.startTime);
-      }
-      if (location?.state?.endTime !== null) {
-        setEndTime(location?.state?.endTime);
-      }
-      if (location?.state?.heading !== null) {
-        setHeading(location?.state?.heading);
-      }
-      if (location?.state?.sponsorBy !== null) {
-        setSponsorBy(location?.state?.sponsorBy);
-      }
-      setSortOrder(location?.state?.sortOrder);
-      if (
-        location?.state?.speakerFormat !== null &&
-        location?.state?.speakerFormat !== "undefined"
-      ) {
+      if (state.startTime) setStartTime(state.startTime);
+      if (state.endTime) setEndTime(state.endTime);
+      if (state.heading) setHeading(state.heading);
+      if (state.sponsorBy) setSponsorBy(state.sponsorBy);
+      setSortOrder(state.sortOrder);
+
+      if (state.speakerFormat) {
         setSpeakerFormat({
-          label: location?.state?.speakerFormat,
-          value: location?.state?.speakerFormat,
+          label: state.speakerFormat,
+          value: state.speakerFormat,
         });
       }
-      if (
-        location?.state?.industryTrends &&
-        location.state.industryTrends !== "null"
-      ) {
-        try {
-          const trends = JSON.parse(location.state.industryTrends);
-          if (Array.isArray(trends)) {
-            const selectedTrends = trends.map((trend) => ({
-              label: trend.label,
-              value: trend.value,
-            }));
-            setselectMulti(selectedTrends);
-          }
-        } catch (error) {
-          console.error("Error parsing industryTrends:", error);
-        }
-      }
-      if (location?.state?.bulletPoints) {
-        try {
-          const parsedPoints = JSON.parse(location.state.bulletPoints);
 
-          if (Array.isArray(parsedPoints) && parsedPoints.length > 0) {
-            console.log("parsedPoints: ", parsedPoints);
-            setBulletPoints(parsedPoints);
-
-            // ✅ Dynamically set nextId based on the last item
-            const maxId = Math.max(...parsedPoints.map((bp) => bp.id));
-            setNextId(maxId + 1);
-          }
-        } catch (error) {
-          console.error("Error parsing bulletPoints:", error);
-        }
-      }
-      if (
-        location?.state?.selectedSpeakers &&
-        location.state.selectedSpeakers !== "null"
-      ) {
-        const statespeakers = JSON.parse(location?.state?.selectedSpeakers);
-        if (location?.state?.speakerFormat === "Single Speaker") {
-          setSelectedSpeakers({
-            label: statespeakers?.label,
-            value: statespeakers?.value,
-            companyName: statespeakers?.companyName,
-          });
-          setSingleSpeakerAgendaImage(location?.state?.singleSpeakerAgendaImg);
-          setSingleSpeakerCompanyLogo(location?.state?.singleSpeakerCompanyImg);
-          setSingleSpeakerId(location?.state?.singleSpeakerId);
-        } else if (location?.state?.speakerFormat === "Two Speakers") {
-          const selectedSpkrs = statespeakers.map((spkr) => ({
-            label: spkr.label,
-            value: spkr.value,
-            companyName: spkr.companyName,
-          }));
-          setSelectedSpeakers(selectedSpkrs);
-          setSpeaker1AgendaImage(location?.state?.Speaker1AgendaImg);
-          setSpeaker1CompanyLogo(location?.state?.Speaker1CompanyImg);
-          setSpeaker1Id(location?.state?.Speaker1Id);
+      const safeParse = (data) => {
+        if (typeof data === "string") {
           try {
-            const parsedPoints = JSON.parse(location.state.speaker1Bullets);
-
-            if (Array.isArray(parsedPoints) && parsedPoints.length > 0) {
-              setSpeaker1BulletPoints(parsedPoints);
-
-              // ✅ Dynamically set nextId based on the last item
-              const maxId = Math.max(...parsedPoints.map((bp) => bp.id));
-              setSpeaker1NextId(maxId + 1);
-            }
-          } catch (error) {
-            console.error("Error parsing bulletPoints:", error);
+            return JSON.parse(data);
+          } catch (e) {
+            console.error("Parse error:", e);
+            return null;
           }
-          setSpeaker2AgendaImage(location?.state?.Speaker2AgendaImg);
-          setSpeaker2CompanyLogo(location?.state?.Speaker2CompanyImg);
-          setSpeaker2Id(location?.state?.Speaker2Id);
-          try {
-            const parsedPoints = JSON.parse(location.state.speaker2Bullets);
+        }
+        return data; // Already an object or null
+      };
 
-            if (Array.isArray(parsedPoints) && parsedPoints.length > 0) {
-              setSpeaker2BulletPoints(parsedPoints);
+      const trends = safeParse(state.industryTrends);
+      if (Array.isArray(trends)) {
+        setselectMulti(trends.map(t => ({ label: t.label || t.trendTitle, value: t.value || t.id })));
+      }
 
-              // ✅ Dynamically set nextId based on the last item
-              const maxId = Math.max(...parsedPoints.map((bp) => bp.id));
-              setSpeaker2NextId(maxId + 1);
-            }
-          } catch (error) {
-            console.error("Error parsing bulletPoints:", error);
+      const bulletPointsData = safeParse(state.bulletPoints);
+      if (Array.isArray(bulletPointsData) && bulletPointsData.length > 0) {
+        setBulletPoints(bulletPointsData);
+        const maxId = Math.max(...bulletPointsData.map((bp) => bp.id), 1);
+        setNextId(maxId + 1);
+      }
+
+      if (state.selectedSpeakers) {
+        const statespeakers = safeParse(state.selectedSpeakers);
+        if (state.speakerFormat === "Single Speaker") {
+          setSelectedSpeakers(statespeakers);
+          setSingleSpeakerAgendaImage(state.singleSpeakerAgendaImg);
+          setSingleSpeakerCompanyLogo(state.singleSpeakerCompanyImg);
+          setSingleSpeakerId(state.singleSpeakerId);
+        } else if (state.speakerFormat === "Two Speakers") {
+          setSelectedSpeakers(Array.isArray(statespeakers) ? statespeakers : []);
+          setSpeaker1AgendaImage(state.Speaker1AgendaImg);
+          setSpeaker1CompanyLogo(state.Speaker1CompanyImg);
+          setSpeaker1Id(state.Speaker1Id);
+
+          const s1Bullets = safeParse(state.speaker1Bullets);
+          if (Array.isArray(s1Bullets) && s1Bullets.length > 0) {
+            setSpeaker1BulletPoints(s1Bullets);
+            const maxId = Math.max(...s1Bullets.map((bp) => bp.id), 1);
+            setSpeaker1NextId(maxId + 1);
           }
-        } else if (location?.state?.speakerFormat === "Panel Speaker") {
-          const selectedSpkrs = statespeakers.map((spkr) => ({
-            label: spkr.label,
-            value: spkr.value,
-            companyName: spkr.companyName,
-          }));
-          setSelectedSpeakers(selectedSpkrs);
-          const parsedImages = JSON.parse(
-            location.state.panelSpeakerImages || "{}"
-          );
-          const parsedIds = JSON.parse(location.state.panelSpeakerIds || "{}");
-          const parsedModerators = JSON.parse(
-            location.state.panelModerators || "{}"
-          );
-          setPanelSpeakerImages(parsedImages);
-          setPanelSpeakerIds(parsedIds);
-          setPanelModeratorSelections(parsedModerators);
+
+          setSpeaker2AgendaImage(state.Speaker2AgendaImg);
+          setSpeaker2CompanyLogo(state.Speaker2CompanyImg);
+          setSpeaker2Id(state.Speaker2Id);
+
+          const s2Bullets = safeParse(state.speaker2Bullets);
+          if (Array.isArray(s2Bullets) && s2Bullets.length > 0) {
+            setSpeaker2BulletPoints(s2Bullets);
+            const maxId = Math.max(...s2Bullets.map((bp) => bp.id), 1);
+            setSpeaker2NextId(maxId + 1);
+          }
+        } else if (state.speakerFormat === "Panel Speaker") {
+          setSelectedSpeakers(Array.isArray(statespeakers) ? statespeakers : []);
+          setPanelSpeakerImages(safeParse(state.panelSpeakerImages) || {});
+          setPanelSpeakerIds(safeParse(state.panelSpeakerIds) || {});
+          setPanelModeratorSelections(safeParse(state.panelModerators) || {});
         }
       }
     }
@@ -376,21 +326,34 @@ const EditAgenda = () => {
 
   // Reset panel states when speaker selection changes
   useEffect(() => {
-    if (speakerFormat?.value === "panel" && selectedSpeakers) {
-      const newImages = {};
-      const newIds = {};
-      const newModerators = {};
+    // Only run if speakerFormat is Panel Speaker AND it's a user interaction (not initial load population)
+    // We check if location.state exists and if we've already populated the panel states from it.
+    if (speakerFormat?.value === "Panel Speaker" && selectedSpeakers && Array.isArray(selectedSpeakers)) {
+      const newImages = { ...panelSpeakerImages };
+      const newIds = { ...panelSpeakerIds };
+      const newModerators = { ...panelModeratorSelections };
 
+      let changed = false;
       selectedSpeakers.forEach((speaker) => {
-        newImages[speaker.value] = panelSpeakerImages[speaker.value] || "";
-        newIds[speaker.value] = panelSpeakerIds[speaker.value] || "";
-        newModerators[speaker.value] =
-          panelModeratorSelections[speaker.value] || null;
+        if (!(speaker.value in newImages)) {
+          newImages[speaker.value] = "";
+          changed = true;
+        }
+        if (!(speaker.value in newIds)) {
+          newIds[speaker.value] = "";
+          changed = true;
+        }
+        if (!(speaker.value in newModerators)) {
+          newModerators[speaker.value] = null;
+          changed = true;
+        }
       });
 
-      setPanelSpeakerImages(newImages);
-      setPanelSpeakerIds(newIds);
-      setPanelModeratorSelections(newModerators);
+      if (changed) {
+        setPanelSpeakerImages(newImages);
+        setPanelSpeakerIds(newIds);
+        setPanelModeratorSelections(newModerators);
+      }
     }
   }, [selectedSpeakers, speakerFormat]);
 
@@ -400,7 +363,7 @@ const EditAgenda = () => {
     const requestOptions = {
       method: "GET",
     };
-    fetch(`https://harsh7541.pythonanywhere.com/admin1/eventindustrytrends`, requestOptions)
+    fetch(`${BASE_URL}/admin1/eventindustrytrends`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         if (
@@ -451,7 +414,7 @@ const EditAgenda = () => {
     const requestOptions = {
       method: "GET",
     };
-    fetch(`https://harsh7541.pythonanywhere.com/admin1/eventspeakers`, requestOptions)
+    fetch(`${BASE_URL}/admin1/eventspeakers`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         if (
@@ -531,7 +494,7 @@ const EditAgenda = () => {
 
     try {
       const response = await fetch(
-        "https://harsh7541.pythonanywhere.com/admin1/upload",
+        `${BASE_URL}/admin1/upload`,
         requestOptions
       );
       const data = await response.json();
@@ -665,7 +628,7 @@ const EditAgenda = () => {
         method: "POST",
         body: formDataObj,
       };
-      fetch("https://harsh7541.pythonanywhere.com/admin1/editagenda", requestOptions)
+      fetch(`${BASE_URL}/admin1/editagenda`, requestOptions)
         .then((response) => response.json())
         .then((data) => {
           if (data.status) {
@@ -746,7 +709,7 @@ const EditAgenda = () => {
   return (
     <div className="page-content">
       <Container fluid>
-        <BreadCrumb title="Edit Agenda" pageTitle="Agenda" />
+        <BreadCrumb title="Edit Agenda" pageTitle="Agenda List" pageLink="/agendalist" />
         <Row>
           <Col lg={12}>
             <Card>
@@ -761,6 +724,10 @@ const EditAgenda = () => {
                         value={selectedStatusOption}
                         onChange={(selectedStatus) => {
                           setSelectedStatusOption(selectedStatus);
+                          if (selectedStatus?.value === "Day") {
+                            setStartTime("");
+                            setEndTime("");
+                          }
                         }}
                         options={status}
                         name="choices-publish-status-input"
@@ -819,55 +786,75 @@ const EditAgenda = () => {
                 {(selectedStatusOption?.value === "Registration" ||
                   selectedStatusOption?.value === "Open/Close" ||
                   selectedStatusOption?.value === "Coffe/Launch" ||
+                  selectedStatusOption?.value === "Speaker" ||
+                  // selectedStatusOption?.value === "Day" ||
                   selectedStatusOption?.value === "Session") && (
-                  <>
-                    <div className="col-md-8 mt-2">
-                      <div>
-                        <Label htmlFor="amount-field" className="form-label">
-                          Start Time <span className="required_span">*</span>
-                        </Label>
-                        <div className="input-group">
-                          <Flatpickr
-                            className="form-control"
-                            options={{
-                              enableTime: true,
-                              noCalendar: true,
-                              dateFormat: "h:i K",
-                              time_24hr: false,
-                            }}
-                            value={startTime}
-                            onChange={(date, dateStr) => {
-                              setStartTime(dateStr);
-                            }}
-                          />
+                    <>
+                      <div className="col-md-8 mt-2">
+                        <div>
+                          <Label htmlFor="amount-field" className="form-label">
+                            Start Time <span className="required_span">*</span>
+                          </Label>
+                          <div className="input-group">
+                            <Flatpickr
+                              className="form-control"
+                              options={{
+                                enableTime: true,
+                                noCalendar: true,
+                                dateFormat: "h:i K",
+                                time_24hr: false,
+                              }}
+                              onReady={(selectedDates, dateStr, instance) => {
+                                if (instance.hourElement) {
+                                  instance.hourElement.addEventListener("keyup", (e) => {
+                                    if (e.target.value.length === 2) {
+                                      instance.minuteElement?.focus();
+                                    }
+                                  });
+                                }
+                              }}
+                              value={startTime}
+                              onChange={(date, dateStr) => {
+                                setStartTime(dateStr);
+                              }}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="col-md-8 mt-2">
-                      <div>
-                        <Label htmlFor="amount-field" className="form-label">
-                          End Time <span className="required_span">*</span>
-                        </Label>
-                        <div className="input-group">
-                          <Flatpickr
-                            className="form-control"
-                            options={{
-                              enableTime: true,
-                              noCalendar: true,
-                              dateFormat: "h:i K",
-                              time_24hr: false,
-                            }}
-                            value={endTime}
-                            onChange={(date, dateStr) => {
-                              setEndTime(dateStr);
-                            }}
-                          />
+                      <div className="col-md-8 mt-2">
+                        <div>
+                          <Label htmlFor="amount-field" className="form-label">
+                            End Time <span className="required_span">*</span>
+                          </Label>
+                          <div className="input-group">
+                            <Flatpickr
+                              className="form-control"
+                              options={{
+                                enableTime: true,
+                                noCalendar: true,
+                                dateFormat: "h:i K",
+                                time_24hr: false,
+                              }}
+                              onReady={(selectedDates, dateStr, instance) => {
+                                if (instance.hourElement) {
+                                  instance.hourElement.addEventListener("keyup", (e) => {
+                                    if (e.target.value.length === 2) {
+                                      instance.minuteElement?.focus();
+                                    }
+                                  });
+                                }
+                              }}
+                              value={endTime}
+                              onChange={(date, dateStr) => {
+                                setEndTime(dateStr);
+                              }}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </>
-                )}
+                    </>
+                  )}
 
                 {selectedStatusOption?.value === "Speaker" && (
                   <>
@@ -916,7 +903,7 @@ const EditAgenda = () => {
                               placeholder="Select Speaker(s)"
                               styles={customStyles}
                               isOptionDisabled={() =>
-                                speakerFormat.value === "two" &&
+                                speakerFormat.value === "Two Speakers" &&
                                 selectedSpeakers &&
                                 selectedSpeakers.length >= 2
                               }
@@ -928,7 +915,8 @@ const EditAgenda = () => {
 
                     {/* Single Speaker Fields */}
                     {speakerFormat?.value === "Single Speaker" &&
-                      selectedSpeakers && (
+                      // selectedSpeakers && 
+                      (
                         <>
                           <div className="col-md-8 mt-2">
                             <div>
@@ -1243,15 +1231,15 @@ const EditAgenda = () => {
 
                                   {index ===
                                     speaker1BulletPoints.length - 1 && (
-                                    <button
-                                      type="button"
-                                      onClick={addSpeaker1BulletPoint}
-                                      className="btn btn-success d-flex align-items-center gap-1"
-                                    >
-                                      <Plus size={16} />
-                                      Add
-                                    </button>
-                                  )}
+                                      <button
+                                        type="button"
+                                        onClick={addSpeaker1BulletPoint}
+                                        className="btn btn-success d-flex align-items-center gap-1"
+                                      >
+                                        <Plus size={16} />
+                                        Add
+                                      </button>
+                                    )}
                                 </div>
                               </div>
                             ))}
@@ -1407,15 +1395,15 @@ const EditAgenda = () => {
 
                                       {index ===
                                         speaker2BulletPoints.length - 1 && (
-                                        <button
-                                          type="button"
-                                          onClick={addSpeaker2BulletPoint}
-                                          className="btn btn-success d-flex align-items-center gap-1"
-                                        >
-                                          <Plus size={16} />
-                                          Add
-                                        </button>
-                                      )}
+                                          <button
+                                            type="button"
+                                            onClick={addSpeaker2BulletPoint}
+                                            className="btn btn-success d-flex align-items-center gap-1"
+                                          >
+                                            <Plus size={16} />
+                                            Add
+                                          </button>
+                                        )}
                                     </div>
                                   </div>
                                 )
@@ -1519,7 +1507,7 @@ const EditAgenda = () => {
                                       <Select
                                         value={
                                           panelModeratorSelections[
-                                            speaker.value
+                                          speaker.value
                                           ] || null
                                         }
                                         onChange={(selectedOption) =>
@@ -1727,6 +1715,7 @@ const EditAgenda = () => {
                       aria-label="name"
                       aria-describedby="basic-addon1"
                       value={sortOrder}
+                      disabled
                       onChange={(e) => {
                         setSortOrder(e.target.value);
                       }}

@@ -138,9 +138,8 @@ const AddCoreAttandee = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      coreAttandeeNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${coreAttandeeNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Core Attandee Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"

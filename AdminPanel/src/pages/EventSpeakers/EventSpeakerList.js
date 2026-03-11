@@ -125,10 +125,10 @@ const EventSpeakerList = () => {
   };
 
   const isViewBtnClick = useCallback((row) => {
-  console.log('View clicked:', row);
-  setselectedViewRow(row);
-  setViewSpeakerModal(true);
-}, []);
+    console.log('View clicked:', row);
+    setselectedViewRow(row);
+    setViewSpeakerModal(true);
+  }, []);
 
   const speakerCol = useMemo(
     () => [
@@ -162,7 +162,7 @@ const EventSpeakerList = () => {
       //             </Link>
       //           </Tooltip>
       //         </li>
-    
+
       //           <li className="list-inline-item edit">
       //             <Tooltip title={"Edit"} placement="left" arrow>
       //               <Link
@@ -371,7 +371,7 @@ const EventSpeakerList = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Event Speakers" pageTitle="Event Speakers" />
+          <BreadCrumb title="Event Speakers" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -407,10 +407,10 @@ const EventSpeakerList = () => {
                             className="form-control search bg-light border-light"
                             placeholder="Search for Speaker Name..."
                             name="name"
-                            // value={query?.name}
-                            // onChange={(e) => {
-                            //   setQuery({ ...query, name: e.target.value });
-                            // }}
+                          // value={query?.name}
+                          // onChange={(e) => {
+                          //   setQuery({ ...query, name: e.target.value });
+                          // }}
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -422,10 +422,10 @@ const EventSpeakerList = () => {
                             className="form-control search bg-light border-light"
                             placeholder="Search for Speaker Mobile..."
                             name="name"
-                            // value={query?.mobileNo}
-                            // onChange={(e) => {
-                            //   setQuery({ ...query, mobileNo: e.target.value });
-                            // }}
+                          // value={query?.mobileNo}
+                          // onChange={(e) => {
+                          //   setQuery({ ...query, mobileNo: e.target.value });
+                          // }}
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -435,11 +435,11 @@ const EventSpeakerList = () => {
                           type="button"
                           className="btn-success btn"
                           id="create-btn"
-                          // onClick={() => {
-                          //   handleSubmitFilter(10, 0, query);
-                          //   setLimit(10);
-                          //   setOffset(0);
-                          // }}
+                        // onClick={() => {
+                        //   handleSubmitFilter(10, 0, query);
+                        //   setLimit(10);
+                        //   setOffset(0);
+                        // }}
                         >
                           <i className="ri-equalizer-fill me-1 align-bottom"></i>
                           Filter
@@ -448,16 +448,16 @@ const EventSpeakerList = () => {
                           type="button"
                           className="btn-primary btn mx-2"
                           id="create-btn"
-                          // onClick={() => {
-                          //   setQuery({
-                          //     name: "",
-                          //     mobileNo: "",
-                          //     email: "",
-                          //   });
-                          //   callCustomerListApi(10, 0);
-                          //   setLimit(10);
-                          //   setOffset(0);
-                          // }}
+                        // onClick={() => {
+                        //   setQuery({
+                        //     name: "",
+                        //     mobileNo: "",
+                        //     email: "",
+                        //   });
+                        //   callCustomerListApi(10, 0);
+                        //   setLimit(10);
+                        //   setOffset(0);
+                        // }}
                         >
                           <i className="ri-chat-delete-line me-1 align-bottom"></i>
                           Clear

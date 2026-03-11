@@ -106,75 +106,75 @@ const JoinedSponsorDelegates = () => {
   };
 
   const delegateCol = useMemo(
-  () => [
-    {
-      id: "relatedCompanyId",
-      header: "Company Name",
-      accessorKey: "relatedSponsorCompanyDetails.companyName",
-      filterable: false,
-    },
-    {
-      id: "firstNameId",
-      header: "First Name",
-      accessorKey: "firstName",
-      filterable: false,
-    },
-    {
-      id: "lastNameId",
-      header: "Last Name",
-      accessorKey: "lastName",
-      filterable: false,
-    },
-    {
-      id: "mobileId",
-      header: "Mobile",
-      accessorKey: "mobile",
-      filterable: false,
-    },
-    {
-      id: "emailId",
-      header: "Email",
-      accessorKey: "delegateEmail",
-      filterable: false,
-    },
-    {
-      id: "positionId",
-      header: "Position",
-      accessorKey: "position",
-      filterable: false,
-    },
+    () => [
+      {
+        id: "relatedCompanyId",
+        header: "Company Name",
+        accessorKey: "relatedSponsorCompanyDetails.companyName",
+        filterable: false,
+      },
+      {
+        id: "firstNameId",
+        header: "First Name",
+        accessorKey: "firstName",
+        filterable: false,
+      },
+      {
+        id: "lastNameId",
+        header: "Last Name",
+        accessorKey: "lastName",
+        filterable: false,
+      },
+      {
+        id: "mobileId",
+        header: "Mobile",
+        accessorKey: "mobile",
+        filterable: false,
+      },
+      {
+        id: "emailId",
+        header: "Email",
+        accessorKey: "delegateEmail",
+        filterable: false,
+      },
+      {
+        id: "positionId",
+        header: "Position",
+        accessorKey: "position",
+        filterable: false,
+      },
 
-    // {
-    //   header: "Action",
-    //   cell: (cellProps) => {
-    //     return (
-    //       <ul className="list-inline hstack gap-2 mb-0">
-    //         <li className="list-inline-item edit">
-    //           <Link
-    //             to="#"
-    //             className="text-primary d-inline-block edit-item-btn"
-    //             onClick={() => isEditBtnClick(cellProps.row.original)}
-    //           >
-    //             <i className="ri-pencil-fill fs-16"></i>
-    //           </Link>
-    //         </li>
-    //         <li className="list-inline-item">
-    //           <Link
-    //             to="#"
-    //             className="text-danger d-inline-block remove-item-btn"
-    //             onClick={() => onClickDelete(cellProps.row.original)}
-    //           >
-    //             <i className="ri-delete-bin-5-fill fs-16"></i>
-    //           </Link>
-    //         </li>
-    //       </ul>
-    //     );
-    //   },
-    // },
-  ],
-  // eslint-disable-next-line
-  []
-);
+      // {
+      //   header: "Action",
+      //   cell: (cellProps) => {
+      //     return (
+      //       <ul className="list-inline hstack gap-2 mb-0">
+      //         <li className="list-inline-item edit">
+      //           <Link
+      //             to="#"
+      //             className="text-primary d-inline-block edit-item-btn"
+      //             onClick={() => isEditBtnClick(cellProps.row.original)}
+      //           >
+      //             <i className="ri-pencil-fill fs-16"></i>
+      //           </Link>
+      //         </li>
+      //         <li className="list-inline-item">
+      //           <Link
+      //             to="#"
+      //             className="text-danger d-inline-block remove-item-btn"
+      //             onClick={() => onClickDelete(cellProps.row.original)}
+      //           >
+      //             <i className="ri-delete-bin-5-fill fs-16"></i>
+      //           </Link>
+      //         </li>
+      //       </ul>
+      //     );
+      //   },
+      // },
+    ],
+    // eslint-disable-next-line
+    []
+  );
 
   const onDeleteButtonClick = (value) => {
     if (value) {
@@ -311,7 +311,7 @@ const JoinedSponsorDelegates = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Sponsored Delegates" pageTitle="Sponsored Delegates" />
+          <BreadCrumb title="Sponsored Delegates" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">

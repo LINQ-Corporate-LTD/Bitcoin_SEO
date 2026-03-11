@@ -55,6 +55,11 @@ const QuickProposalResponse = () => {
   //   initialState.hiddenColumns = ["Action"];
   // }
 
+  const detailedPermissions = JSON.parse(localStorage.getItem("detailed_permissions") || "{}");
+  const quickPropPermissions = detailedPermissions.quickProposalResponse || [];
+  const canView = quickPropPermissions.includes("view");
+  const canDelete = quickPropPermissions.includes("delete");
+
   useEffect(() => {
     callResponseListApi();
     // eslint-disable-next-line
@@ -131,35 +136,38 @@ const QuickProposalResponse = () => {
         filterable: false,
       },
       {
-        header: "Action",
         cell: (cellProps) => {
           return (
             <ul className="list-inline hstack gap-2 mb-0">
-              <li className="list-inline-item">
-                <Link
-                  to="#"
-                  onClick={() => isViewBtnClick(cellProps.row.original)}
-                  className="text-primary d-inline-block"
-                >
-                  <i className="ri-eye-fill fs-16"></i>
-                </Link>
-              </li>
-              <li className="list-inline-item">
-                <Link
-                  to="#"
-                  className="text-danger d-inline-block remove-item-btn"
-                  onClick={() => onClickDelete(cellProps.row.original)}
-                >
-                  <i className="ri-delete-bin-5-fill fs-16"></i>
-                </Link>
-              </li>
+              {canView && (
+                <li className="list-inline-item">
+                  <Link
+                    to="#"
+                    onClick={() => isViewBtnClick(cellProps.row.original)}
+                    className="text-primary d-inline-block"
+                  >
+                    <i className="ri-eye-fill fs-16"></i>
+                  </Link>
+                </li>
+              )}
+              {canDelete && (
+                <li className="list-inline-item">
+                  <Link
+                    to="#"
+                    className="text-danger d-inline-block remove-item-btn"
+                    onClick={() => onClickDelete(cellProps.row.original)}
+                  >
+                    <i className="ri-delete-bin-5-fill fs-16"></i>
+                  </Link>
+                </li>
+              )}
             </ul>
           );
         },
       },
     ],
     // eslint-disable-next-line
-    []
+    [canView, canDelete]
   );
 
   const onDeleteButtonClick = (value) => {
@@ -302,7 +310,8 @@ const QuickProposalResponse = () => {
         <Container fluid>
           <BreadCrumb
             title="Quick Proposal Response"
-            pageTitle="Quick Proposal Response"
+            pageTitle="Dashboards"
+            pageLink="/dashboard"
           />
           <Row>
             <Col lg={12}>
@@ -326,10 +335,10 @@ const QuickProposalResponse = () => {
                             className="form-control search bg-light border-light"
                             placeholder="Search for Person.."
                             name="name"
-                            // value={query?.name}
-                            // onChange={(e) => {
-                            //   setQuery({ ...query, name: e.target.value });
-                            // }}
+                          // value={query?.name}
+                          // onChange={(e) => {
+                          //   setQuery({ ...query, name: e.target.value });
+                          // }}
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -339,11 +348,11 @@ const QuickProposalResponse = () => {
                           type="button"
                           className="btn-success btn"
                           id="create-btn"
-                          // onClick={() => {
-                          //   handleSubmitFilter(10, 0, query);
-                          //   setLimit(10);
-                          //   setOffset(0);
-                          // }}
+                        // onClick={() => {
+                        //   handleSubmitFilter(10, 0, query);
+                        //   setLimit(10);
+                        //   setOffset(0);
+                        // }}
                         >
                           <i className="ri-equalizer-fill me-1 align-bottom"></i>
                           Filter
@@ -352,16 +361,16 @@ const QuickProposalResponse = () => {
                           type="button"
                           className="btn-primary btn mx-2"
                           id="create-btn"
-                          // onClick={() => {
-                          //   setQuery({
-                          //     name: "",
-                          //     mobileNo: "",
-                          //     email: "",
-                          //   });
-                          //   callCustomerListApi(10, 0);
-                          //   setLimit(10);
-                          //   setOffset(0);
-                          // }}
+                        // onClick={() => {
+                        //   setQuery({
+                        //     name: "",
+                        //     mobileNo: "",
+                        //     email: "",
+                        //   });
+                        //   callCustomerListApi(10, 0);
+                        //   setLimit(10);
+                        //   setOffset(0);
+                        // }}
                         >
                           <i className="ri-chat-delete-line me-1 align-bottom"></i>
                           Clear

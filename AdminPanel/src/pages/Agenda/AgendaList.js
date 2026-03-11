@@ -25,6 +25,8 @@ const override = css`
   height: 100%;
 `;
 
+const BASE_URL = "https://harsh7541.pythonanywhere.com"; // USE LOCAL FOR DEBUGGING
+
 const AgendaList = () => {
   const navigate = useNavigate();
 
@@ -62,8 +64,8 @@ const AgendaList = () => {
   }, []);
 
   const handleEdit = useCallback((row) => {
-  navigate("/editagenda", { state: row });
-}, [navigate]);
+    navigate("/editagenda", { state: row });
+  }, [navigate]);
 
   const callAgendaListApi = () => {
     setloading(true);
@@ -71,7 +73,7 @@ const AgendaList = () => {
     const requestOptions = {
       method: "GET",
     };
-    fetch(`https://harsh7541.pythonanywhere.com/admin1/getagenda`, requestOptions)
+    fetch(`${BASE_URL}/admin1/getagenda`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         if (
@@ -81,9 +83,9 @@ const AgendaList = () => {
         ) {
           localStorage.clear();
           navigate("/logout");
-        }
-        if (data && data.status) {
-          setAgendaList(data["agendaList"]);
+        } else if (data && data.status !== false) {
+          // DRF response might be direct array or status wrapped
+          setAgendaList(data.agendaList || data);
           // setTotalCount(data?.paginationDetails?.count);
         }
         setloading(false);
@@ -109,79 +111,85 @@ const AgendaList = () => {
   };
 
   const agendaCol = useMemo(
-  () => [
-    {
-      id: "sortOrderId",
-      header: "Sort Order",
-      accessorKey: "sortOrder",
-      filterable: false,
-    },
-    {
-      id: "dayId",
-      header: "Day",
-      accessorKey: "day",
-      filterable: false,
-    },
-    {
-      id: "statusId",
-      header: "Status",
-      accessorKey: "status",
-      filterable: false,
-    },
-    {
-      id: "headingId",
-      header: "Heading",
-      accessorKey: "heading",
-      filterable: false,
-    },
-    {
-      id: "startTime",
-      header: "Start Time",
-      accessorKey: "startTime",
-      filterable: false,
-    },
-    {
-      id: "endTime",
-      header: "End Time",
-      accessorKey: "endTime",
-      filterable: false,
-    },
-    {
-      header: "Action",
-      cell: (cellProps) => {
-        return (
-          <ul className="list-inline hstack gap-2 mb-0">
-            <li className="list-inline-item edit">
-              <Link
-                to="#"
-                className="text-primary d-inline-block edit-item-btn"
-                onClick={(e) => {
-                  e.preventDefault(); // Add this to prevent default link behavior
-                  handleEdit(cellProps.row.original);
-                }}
-              >
-                <i className="ri-pencil-fill fs-16"></i>
-              </Link>
-            </li>
-            <li className="list-inline-item">
-              <Link
-                to="#"
-                className="text-danger d-inline-block remove-item-btn"
-                onClick={(e) => {
-                  e.preventDefault(); // Add this too
-                  onClickDelete(cellProps.row.original);
-                }}
-              >
-                <i className="ri-delete-bin-5-fill fs-16"></i>
-              </Link>
-            </li>
-          </ul>
-        );
+    () => [
+      {
+        id: "sortOrderId",
+        header: "Sort Order",
+        accessorKey: "sortOrder",
+        filterable: false,
       },
-    },
-  ],
-  [handleEdit, onClickDelete] // ⚠️ CHANGE THIS - Remove eslint-disable and add dependencies!
-);
+      {
+        id: "dayId",
+        header: "Day",
+        accessorKey: "day",
+        filterable: false,
+      },
+      {
+        id: "statusId",
+        header: "Status",
+        accessorKey: "status",
+        filterable: false,
+      },
+      {
+        id: "headingId",
+        header: "Heading",
+        accessorKey: "heading",
+        filterable: false,
+      },
+      {
+        id: "startTime",
+        header: "Start Time",
+        accessorKey: "startTime",
+        filterable: false,
+        cell: (cellProps) => {
+          return cellProps.row.original.status === "Day" ? "" : cellProps.getValue();
+        },
+      },
+      {
+        id: "endTime",
+        header: "End Time",
+        accessorKey: "endTime",
+        filterable: false,
+        cell: (cellProps) => {
+          return cellProps.row.original.status === "Day" ? "" : cellProps.getValue();
+        },
+      },
+      {
+        header: "Action",
+        cell: (cellProps) => {
+          return (
+            <ul className="list-inline hstack gap-2 mb-0">
+              <li className="list-inline-item edit">
+                <Link
+                  to="#"
+                  className="text-primary d-inline-block edit-item-btn"
+                  onClick={(e) => {
+                    e.preventDefault(); // Add this to prevent default link behavior
+                    handleEdit(cellProps.row.original);
+                  }}
+                >
+                  <i className="ri-pencil-fill fs-16"></i>
+                </Link>
+              </li>
+              <li className="list-inline-item">
+                <Link
+                  to="#"
+                  className="text-danger d-inline-block remove-item-btn"
+                  onClick={(e) => {
+                    e.preventDefault(); // Add this too
+                    onClickDelete(cellProps.row.original);
+                  }}
+                >
+                  <i className="ri-delete-bin-5-fill fs-16"></i>
+                </Link>
+              </li>
+            </ul>
+          );
+        },
+      },
+    ],
+    [handleEdit, onClickDelete] // ⚠️ CHANGE THIS - Remove eslint-disable and add dependencies!
+  );
 
   const onDeleteButtonClick = (value) => {
     if (value) {
@@ -192,7 +200,7 @@ const AgendaList = () => {
         method: "POST",
         body: finalData,
       };
-      fetch("https://harsh7541.pythonanywhere.com/admin1/deleteagenda", requestOptions)
+      fetch(`${BASE_URL}/admin1/deleteagenda`, requestOptions)
         .then((response) => response.json())
         .then((data) => {
           if (
@@ -201,11 +209,11 @@ const AgendaList = () => {
               data.message === "Invalid token")
           ) {
             localStorage.clear();
-            history.push("/logout");
+            navigate("/logout");
           }
-          if (data.status) {
+          if (data.status === true || (data.status !== false && data.message === "Deleted successfully")) {
             setDeleteModal(false);
-            toast.success("Record Deleted Successfully.", {
+            toast.success(data.message || "Record Deleted Successfully.", {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -216,7 +224,7 @@ const AgendaList = () => {
             });
             callAgendaListApi();
           } else {
-            toast.error(data.message, {
+            toast.error(data.message || data.error || "Failed to delete record", {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -246,6 +254,53 @@ const AgendaList = () => {
     }
   };
 
+  const handleDragEnd = (result) => {
+    if (!result.destination) return;
+
+    const items = Array.from(agendaList);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    // Update sortOrder visually for all items (Zero-indexed)
+    const updatedItems = items.map((item, index) => ({
+      ...item,
+      sortOrder: index,
+    }));
+
+    setAgendaList(updatedItems);
+
+    // Call API to persist reorder
+    const requestData = {
+      items: updatedItems.map((item) => ({
+        id: item.id,
+        sortOrder: item.sortOrder // Include updated sortOrder in API call
+      })),
+    };
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestData),
+    };
+
+    fetch(`${BASE_URL}/admin1/reorder-agenda`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === false) {
+          toast.error(data.message || "Failed to reorder items");
+          // Optionally revert state if API fails
+          callAgendaListApi();
+        } else {
+          toast.success("Items reordered successfully");
+        }
+      })
+      .catch((error) => {
+        console.error("Error reordering items:", error);
+        toast.error("An error occurred while reordering");
+        callAgendaListApi(); // Revert to server state on error
+      });
+  };
+
   if (loading)
     return (
       <div className="loaderClass" style={{ textAlign: "center" }}>
@@ -257,7 +312,7 @@ const AgendaList = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Agenda List" pageTitle="Agenda List" />
+          <BreadCrumb title="Agenda List" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -298,6 +353,8 @@ const AgendaList = () => {
                         theadClass="table-light"
                         isLeadsFilter={false}
                         SearchPlaceholder="Search for"
+                        isRowDnD={true}
+                        onDragEnd={handleDragEnd}
                       />
                     ) : (
                       "No Records Found!!"

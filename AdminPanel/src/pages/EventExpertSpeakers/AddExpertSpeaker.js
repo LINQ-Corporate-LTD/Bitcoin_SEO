@@ -143,9 +143,8 @@ const AddExpertSpeaker = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      expertSpeakerNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${expertSpeakerNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Speaker Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -164,9 +163,8 @@ const AddExpertSpeaker = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      expertSpeakerCompanyNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${expertSpeakerCompanyNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Speaker Company Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"

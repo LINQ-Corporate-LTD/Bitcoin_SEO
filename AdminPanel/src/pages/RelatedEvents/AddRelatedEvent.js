@@ -258,9 +258,8 @@ const AddRelatedEvent = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      eventNameErr ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${eventNameErr ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Related Event Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -283,9 +282,8 @@ const AddRelatedEvent = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      eventDateErr ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${eventDateErr ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Related Event Date"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -305,9 +303,8 @@ const AddRelatedEvent = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      eventLocationErr ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${eventLocationErr ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Related Event Location"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -327,9 +324,8 @@ const AddRelatedEvent = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      eventWebsiteErr ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${eventWebsiteErr ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Related Event Website"
                     aria-label="name"
                     aria-describedby="basic-addon1"

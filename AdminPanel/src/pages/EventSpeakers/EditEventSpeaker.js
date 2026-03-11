@@ -342,9 +342,8 @@ const EditEventSpeaker = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      speakerNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${speakerNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Speaker Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -376,9 +375,8 @@ const EditEventSpeaker = ({
                   <div className="input-group">
                     <Input
                       type="text"
-                      className={`form-control ${
-                        speakerCompanyError ? "border-danger" : ""
-                      }`}
+                      className={`form-control ${speakerCompanyError ? "border-danger" : ""
+                        }`}
                       placeholder="Speaker Company"
                       aria-label="Username"
                       aria-describedby="basic-addon1"
@@ -594,9 +592,8 @@ const EditEventSpeaker = ({
                       </Label>
                       <Input
                         type="text"
-                        className={`form-control ${
-                          speakerMetaTitleError ? "border-danger " : ""
-                        }`}
+                        className={`form-control ${speakerMetaTitleError ? "border-danger " : ""
+                          }`}
                         placeholder="Enter Meta Title"
                         aria-label="name"
                         aria-describedby="basic-addon1"
@@ -628,9 +625,8 @@ const EditEventSpeaker = ({
                       </Label>
                       <textarea
                         type="text"
-                        className={`form-control ${
-                          speakerMetaDescriptionError ? "border-danger " : ""
-                        }`}
+                        className={`form-control ${speakerMetaDescriptionError ? "border-danger " : ""
+                          }`}
                         placeholder="Enter Meta Description"
                         aria-label="name"
                         aria-describedby="basic-addon1"

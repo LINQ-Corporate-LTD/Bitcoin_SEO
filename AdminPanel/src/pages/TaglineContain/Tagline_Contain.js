@@ -71,6 +71,10 @@ const Tagline_Contain = () => {
   //   initialState.hiddenColumns = ["Action"];
   // }
 
+  const detailedPermissions = JSON.parse(localStorage.getItem("detailed_permissions") || "{}");
+  const taglinePermissions = detailedPermissions.eventTagline || [];
+  const canEdit = taglinePermissions.includes("edit");
+
   useEffect(() => {
     callTaglineListApi();
     // eslint-disable-next-line
@@ -350,7 +354,7 @@ const Tagline_Contain = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Event Speakers" pageTitle="Event Sponsors" />
+          <BreadCrumb title="Tagline Content" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -362,17 +366,19 @@ const Tagline_Contain = () => {
                       </h5>
                     </div>
                     {/* {permissions?.create && ( */}
-                    <div className="flex-shrink-0">
-                      <button
-                        type="button"
-                        className="btn btn-primary add-btn"
-                        id="create-btn"
-                        onClick={toggleEditTagline}
-                      >
-                        <i className="ri-add-line align-bottom me-1"></i> Edit
-                        Tagline Data
-                      </button>
-                    </div>
+                    {canEdit && (
+                      <div className="flex-shrink-0">
+                        <button
+                          type="button"
+                          className="btn btn-primary add-btn"
+                          id="create-btn"
+                          onClick={toggleEditTagline}
+                        >
+                          <i className="ri-add-line align-bottom me-1"></i> Edit
+                          Tagline Data
+                        </button>
+                      </div>
+                    )}
                     {/* )} */}
                   </div>
                 </CardHeader>

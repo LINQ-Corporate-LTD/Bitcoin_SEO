@@ -224,9 +224,8 @@ const EditDelegatePackage = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      delPackageNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${delPackageNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Package Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -250,9 +249,8 @@ const EditDelegatePackage = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      delPackagePriceError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${delPackagePriceError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Package Price"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -296,9 +294,8 @@ const EditDelegatePackage = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      delPackageOrderError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${delPackageOrderError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Show Order"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -317,9 +314,8 @@ const EditDelegatePackage = ({
                     <span className="required_span">*</span>
                   </Label>
                   <Flatpickr
-                    className={`form-control ${
-                      delPackageExpiryError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${delPackageExpiryError ? "border-danger " : ""
+                      }`}
                     id="datepicker-publish-input"
                     placeholder="Select Expiry Date"
                     value={delPackageExpiry}

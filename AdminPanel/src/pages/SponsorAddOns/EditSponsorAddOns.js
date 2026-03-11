@@ -250,9 +250,8 @@ const EditSponsorAddOns = ({
                       options={AddOnTypeOptions(sponsorAddOnTypesList)}
                       name="choices-publish-status-input"
                       classNamePrefix="select2-selection form-select"
-                      className={`w-100 ${
-                        selectedAddOnTypeError ? "border-danger" : ""
-                      }`}
+                      className={`w-100 ${selectedAddOnTypeError ? "border-danger" : ""
+                        }`}
                     />
                   </div>
                 </div>
@@ -264,9 +263,8 @@ const EditSponsorAddOns = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      addOnNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${addOnNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter News Title"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -289,9 +287,8 @@ const EditSponsorAddOns = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      addOnPriceError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${addOnPriceError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Add On Price"
                     aria-label="name"
                     aria-describedby="basic-addon1"

@@ -46,6 +46,10 @@ const SpeakerPageContent = () => {
   const [offset, setOffset] = useState(0);
   let color = "#405189";
 
+  const detailedPermissions = JSON.parse(localStorage.getItem("detailed_permissions") || "{}");
+  const speakerPermissions = detailedPermissions.speakerPageData || [];
+  const canEdit = speakerPermissions.includes("edit");
+
   useEffect(() => {
     callSpeakerPageDataApi();
     // eslint-disable-next-line
@@ -120,7 +124,7 @@ const SpeakerPageContent = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Speaker Page Data" pageTitle="Speaker Page Data" />
+          <BreadCrumb title="Speaker Page Data" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -132,17 +136,19 @@ const SpeakerPageContent = () => {
                       </h5>
                     </div>
                     {/* {permissions?.create && ( */}
-                    <div className="flex-shrink-0">
-                      <button
-                        type="button"
-                        className="btn btn-primary add-btn"
-                        id="create-btn"
-                        onClick={toggleEditSpeakerPageData}
-                      >
-                        <i className="ri-add-line align-bottom me-1"></i> Edit
-                        Speaker Page Data
-                      </button>
-                    </div>
+                    {canEdit && (
+                      <div className="flex-shrink-0">
+                        <button
+                          type="button"
+                          className="btn btn-primary add-btn"
+                          id="create-btn"
+                          onClick={toggleEditSpeakerPageData}
+                        >
+                          <i className="ri-add-line align-bottom me-1"></i> Edit
+                          Speaker Page Data
+                        </button>
+                      </div>
+                    )}
                     {/* )} */}
                   </div>
                 </CardHeader>

@@ -129,9 +129,8 @@ const AddSponsorAddOnType = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      addOnTypeError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${addOnTypeError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Type"
                     aria-label="name"
                     aria-describedby="basic-addon1"

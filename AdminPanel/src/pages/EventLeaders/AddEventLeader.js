@@ -189,9 +189,8 @@ const AddEventLeader = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      leaderNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${leaderNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Leader Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -209,7 +208,7 @@ const AddEventLeader = (props) => {
               </div>
               <div className="col-md-12">
                 <Label>
-                 Leader Logo <span className="required_span">*</span>
+                  Leader Logo <span className="required_span">*</span>
                 </Label>
                 <Input
                   id="profile-img-file-input"

@@ -142,9 +142,8 @@ const AddOfferCoupon = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      couponCodeError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${couponCodeError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Coupon Code"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -164,9 +163,8 @@ const AddOfferCoupon = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      discountError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${discountError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Discount Amount"
                     aria-label="name"
                     aria-describedby="basic-addon1"

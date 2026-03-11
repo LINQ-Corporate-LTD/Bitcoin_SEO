@@ -142,9 +142,8 @@ const AddIndustry = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      industryNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${industryNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Industry Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"

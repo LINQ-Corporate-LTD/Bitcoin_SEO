@@ -46,39 +46,39 @@ const EditVenueContain = (props) => {
   const [visible, setVisible] = useState(false);
   const [loading, setloading] = useState(false);
   const editorConfiguration = {
-  toolbar: [
-    "heading",
-    "|",
-    "bold",
-    "italic",
-    "link",
-    "|",
-    "bulletedList",
-    "numberedList",
-    "|",
-    "blockQuote",
-    "insertTable",
-    "|",
-    "undo",
-    "redo",
-  ],
-  link: {
-    defaultProtocol: "https://",
-    decorators: {
-      openInNewTab: {
-        mode: "manual",
-        label: "Open in a new tab",
-        attributes: {
-          target: "_blank",
-          rel: "noopener noreferrer",
+    toolbar: [
+      "heading",
+      "|",
+      "bold",
+      "italic",
+      "link",
+      "|",
+      "bulletedList",
+      "numberedList",
+      "|",
+      "blockQuote",
+      "insertTable",
+      "|",
+      "undo",
+      "redo",
+    ],
+    link: {
+      defaultProtocol: "https://",
+      decorators: {
+        openInNewTab: {
+          mode: "manual",
+          label: "Open in a new tab",
+          attributes: {
+            target: "_blank",
+            rel: "noopener noreferrer",
+          },
         },
       },
     },
-  },
-  // Disable media embed and auto media embed to prevent Google Maps links 
-  // from being converted to oembed format
-  removePlugins: ['MediaEmbed', 'AutoMediaEmbed'],
-};
+    // Disable media embed and auto media embed to prevent Google Maps links 
+    // from being converted to oembed format
+    removePlugins: ['MediaEmbed', 'AutoMediaEmbed'],
+  };
   let color = "#405189";
   useEffect(() => {
     callVenueContentListApi();
@@ -257,7 +257,7 @@ const EditVenueContain = (props) => {
     //   setVisible(false);
     //   setVenuePlaceErr(true);
     // } else 
-      if (venueDescription === "") {
+    if (venueDescription === "") {
       toast.error("Venue Description is Required", {
         position: "top-right",
         autoClose: 5000,
@@ -315,9 +315,9 @@ const EditVenueContain = (props) => {
         draggable: true,
         progress: undefined,
       });
-      setVisible(false); 
+      setVisible(false);
       setVenueMapLinkErr(true);
-    } 
+    }
     // else if (venueWebAddress === "") {
     //   toast.error("Venue Web Address is Required", {
     //     position: "top-right",
@@ -335,11 +335,11 @@ const EditVenueContain = (props) => {
       setVisible(true);
       const finalData = new FormData();
       // finalData.append("venueFirstSectionFirstTitle", venuePlace);
-      finalData.append("venueFirstSectionDescription",JSON.stringify(venueDescription));
-      finalData.append("venueLocation",JSON.stringify(venueLocation));
-      finalData.append("venueContact",JSON.stringify(venueContact));
-      finalData.append("venueAddressLink",JSON.stringify(venueWebsiteLink));
-      finalData.append("venueMapLink",JSON.stringify(venueMapLink));
+      finalData.append("venueFirstSectionDescription", JSON.stringify(venueDescription));
+      finalData.append("venueLocation", JSON.stringify(venueLocation));
+      finalData.append("venueContact", JSON.stringify(venueContact));
+      finalData.append("venueAddressLink", JSON.stringify(venueWebsiteLink));
+      finalData.append("venueMapLink", JSON.stringify(venueMapLink));
       // finalData.append("venueWebsiteAddress", venueWebAddress);
 
       finalData.append("gallerySectionOneBigImage", venueGalleryImg1);

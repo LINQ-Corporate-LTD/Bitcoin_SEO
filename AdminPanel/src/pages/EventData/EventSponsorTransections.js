@@ -329,7 +329,7 @@ const EventSponsorTransections = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Sponsor Transection" pageTitle="Sponsor Transection" />
+          <BreadCrumb title="Sponsor Transection" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">

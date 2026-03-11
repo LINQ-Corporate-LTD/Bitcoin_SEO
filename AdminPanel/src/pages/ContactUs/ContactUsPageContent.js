@@ -46,6 +46,10 @@ const ContactUsPageContent = () => {
   const [offset, setOffset] = useState(0);
   let color = "#405189";
 
+  const detailedPermissions = JSON.parse(localStorage.getItem("detailed_permissions") || "{}");
+  const contactPermissions = detailedPermissions.contactUsPageData || [];
+  const canEdit = contactPermissions.includes("edit");
+
   useEffect(() => {
     callContactUsPageDataApi();
     // eslint-disable-next-line
@@ -117,7 +121,7 @@ const ContactUsPageContent = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Speaker Page Data" pageTitle="Speaker Page Data" />
+          <BreadCrumb title="Contact Us Page Data" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -129,17 +133,19 @@ const ContactUsPageContent = () => {
                       </h5>
                     </div>
                     {/* {permissions?.create && ( */}
-                    <div className="flex-shrink-0">
-                      <button
-                        type="button"
-                        className="btn btn-primary add-btn"
-                        id="create-btn"
-                        onClick={toggleEditContactUsPageData}
-                      >
-                        <i className="ri-add-line align-bottom me-1"></i> Edit
-                        Contact Us Page Data
-                      </button>
-                    </div>
+                    {canEdit && (
+                      <div className="flex-shrink-0">
+                        <button
+                          type="button"
+                          className="btn btn-primary add-btn"
+                          id="create-btn"
+                          onClick={toggleEditContactUsPageData}
+                        >
+                          <i className="ri-add-line align-bottom me-1"></i> Edit
+                          Contact Us Page Data
+                        </button>
+                      </div>
+                    )}
                     {/* )} */}
                   </div>
                 </CardHeader>
@@ -147,7 +153,7 @@ const ContactUsPageContent = () => {
                   <div className="col-md-12">
                     <div>
                       <Label htmlFor="amount-field" className="form-label">
-                       Email Us Description{" "}
+                        Email Us Description{" "}
                       </Label>
                       <div className="input-group" style={{ width: "100%" }}>
                         <div style={{ width: "100%" }}>

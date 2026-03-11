@@ -60,6 +60,12 @@ const MediaPageHelpers = () => {
   //   initialState.hiddenColumns = ["Action"];
   // }
 
+  const detailedPermissions = JSON.parse(localStorage.getItem("detailed_permissions") || "{}");
+  const mediaPermissions = detailedPermissions.mediaPageData || [];
+  const canAdd = mediaPermissions.includes("add");
+  const canEdit = mediaPermissions.includes("edit");
+  const canDelete = mediaPermissions.includes("delete");
+
   useEffect(() => {
     callMediaHelperListApi();
     // eslint-disable-next-line
@@ -143,31 +149,35 @@ const MediaPageHelpers = () => {
         cell: (cellProps) => {
           return (
             <ul className="list-inline hstack gap-2 mb-0">
-              <li className="list-inline-item edit">
-                <Link
-                  to="#"
-                  className="text-primary d-inline-block edit-item-btn"
-                  onClick={() => isEditBtnClick(cellProps.row.original)}
-                >
-                  <i className="ri-pencil-fill fs-16"></i>
-                </Link>
-              </li>
-              <li className="list-inline-item">
-                <Link
-                  to="#"
-                  className="text-danger d-inline-block remove-item-btn"
-                  onClick={() => onClickDelete(cellProps.row.original)}
-                >
-                  <i className="ri-delete-bin-5-fill fs-16"></i>
-                </Link>
-              </li>
+              {canEdit && (
+                <li className="list-inline-item edit">
+                  <Link
+                    to="#"
+                    className="text-primary d-inline-block edit-item-btn"
+                    onClick={() => isEditBtnClick(cellProps.row.original)}
+                  >
+                    <i className="ri-pencil-fill fs-16"></i>
+                  </Link>
+                </li>
+              )}
+              {canDelete && (
+                <li className="list-inline-item">
+                  <Link
+                    to="#"
+                    className="text-danger d-inline-block remove-item-btn"
+                    onClick={() => onClickDelete(cellProps.row.original)}
+                  >
+                    <i className="ri-delete-bin-5-fill fs-16"></i>
+                  </Link>
+                </li>
+              )}
             </ul>
           );
         },
       },
     ],
     // eslint-disable-next-line
-    []
+    [canEdit, canDelete]
   );
 
   const onDeleteButtonClick = (value) => {
@@ -310,7 +320,8 @@ const MediaPageHelpers = () => {
         <Container fluid>
           <BreadCrumb
             title="Media Page Company Persons"
-            pageTitle="Media Page Company Persons"
+            pageTitle="Dashboards"
+            pageLink="/dashboard"
           />
           <Row>
             <Col lg={12}>
@@ -323,24 +334,26 @@ const MediaPageHelpers = () => {
                       </h5>
                     </div>
                     {/* {permissions?.create && ( */}
-                    <div className="flex-shrink-0">
-                      <button
-                        type="button"
-                        className="btn btn-primary add-btn"
-                        id="create-btn"
-                        onClick={toggleUser}
-                      >
-                        <i className="ri-add-line align-bottom me-1"></i> Add
-                        Company Person
-                      </button>
-                    </div>
+                    {canAdd && (
+                      <div className="flex-shrink-0">
+                        <button
+                          type="button"
+                          className="btn btn-primary add-btn"
+                          id="create-btn"
+                          onClick={toggleUser}
+                        >
+                          <i className="ri-add-line align-bottom me-1"></i> Add
+                          Company Person
+                        </button>
+                      </div>
+                    )}
                     {/* )} */}
                   </div>
                 </CardHeader>
                 <CardBody>
                   <div className="mt-3">
                     {mediaPageHelpersList &&
-                    mediaPageHelpersList?.length > 0 ? (
+                      mediaPageHelpersList?.length > 0 ? (
                       <TableContainer
                         columns={mediaHelperCol}
                         data={mediaPageHelpersList}

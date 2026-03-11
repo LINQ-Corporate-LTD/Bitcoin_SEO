@@ -155,9 +155,8 @@ const EditIndustry = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      industryNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${industryNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Core Attandee Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"

@@ -139,9 +139,8 @@ const EditHomePastAttandee = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      attandeeNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${attandeeNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Attandee Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"

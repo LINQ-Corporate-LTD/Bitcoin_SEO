@@ -220,9 +220,8 @@ const EditEventKeyPoint = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      topicError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${topicError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Topic"
                     aria-label="name"
                     aria-describedby="basic-addon1"

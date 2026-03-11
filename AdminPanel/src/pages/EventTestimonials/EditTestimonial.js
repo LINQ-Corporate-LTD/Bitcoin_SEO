@@ -198,9 +198,8 @@ const EditTestimonial = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      personNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${personNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Topic"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -223,9 +222,8 @@ const EditTestimonial = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      companyError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${companyError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Topic"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -250,9 +248,8 @@ const EditTestimonial = ({
                   <div className="input-group" style={{ width: "100%" }}>
                     <div style={{ width: "100%" }}>
                       <textarea
-                        className={`form-control ${
-                          reviewError ? "border-danger " : ""
-                        }`}
+                        className={`form-control ${reviewError ? "border-danger " : ""
+                          }`}
                         placeholder="Enter Review Message"
                         rows="2"
                         autoComplete="off"

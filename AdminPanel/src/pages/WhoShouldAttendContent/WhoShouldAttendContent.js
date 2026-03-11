@@ -49,6 +49,10 @@ const WhoShouldAttendContent = () => {
   const [offset, setOffset] = useState(0);
   let color = "#405189";
 
+  const detailedPermissions = JSON.parse(localStorage.getItem("detailed_permissions") || "{}");
+  const whoAttendPermissions = detailedPermissions.WhoShouldAttendPageData || [];
+  const canEdit = whoAttendPermissions.includes("edit");
+
   useEffect(() => {
     callWhoShouldAttendDataApi();
     // eslint-disable-next-line
@@ -132,7 +136,7 @@ const WhoShouldAttendContent = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Who Should Attend Data" pageTitle="Who Should Attend Data" />
+          <BreadCrumb title="Who Should Attend Data" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -144,17 +148,19 @@ const WhoShouldAttendContent = () => {
                       </h5>
                     </div>
                     {/* {permissions?.create && ( */}
-                    <div className="flex-shrink-0">
-                      <button
-                        type="button"
-                        className="btn btn-primary add-btn"
-                        id="create-btn"
-                        onClick={toggleEditWhoShouldAttendDataData}
-                      >
-                        <i className="ri-add-line align-bottom me-1"></i> Edit
-                        Who Should Attend Page Data
-                      </button>
-                    </div>
+                    {canEdit && (
+                      <div className="flex-shrink-0">
+                        <button
+                          type="button"
+                          className="btn btn-primary add-btn"
+                          id="create-btn"
+                          onClick={toggleEditWhoShouldAttendDataData}
+                        >
+                          <i className="ri-add-line align-bottom me-1"></i> Edit
+                          Who Should Attend Page Data
+                        </button>
+                      </div>
+                    )}
                     {/* )} */}
                   </div>
                 </CardHeader>

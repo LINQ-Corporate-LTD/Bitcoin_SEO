@@ -317,7 +317,7 @@ const ContactUsHelpers = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Event Contact Persons" pageTitle="Event Contact Persons" />
+          <BreadCrumb title="Event Contact Persons" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -348,7 +348,7 @@ const ContactUsHelpers = () => {
                     {helpersList && helpersList?.length > 0 ? (
                       <TableContainer
                         columns={helperCol}
-                        data={helpersList} 
+                        data={helpersList}
                         isGlobalFilter={false}
                         isAddUserList={false}
                         apiCallFunction={callHelperListApi}

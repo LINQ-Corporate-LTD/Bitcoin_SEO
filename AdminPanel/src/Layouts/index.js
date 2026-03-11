@@ -132,6 +132,26 @@ const Layout = (props) => {
         }
     }, [sidebarVisibilitytype, layoutType]);
 
+    useEffect(() => {
+        const checkAutoLogout = () => {
+            const loginTime = localStorage.getItem("loginTime");
+            if (loginTime) {
+                const currentTime = new Date().getTime();
+                const twoHoursInMs = 2 * 60 * 60 * 1000;
+                if (currentTime - parseInt(loginTime) > twoHoursInMs) {
+                    localStorage.clear();
+                    window.location.href = "/login";
+                }
+            }
+        };
+
+        // Check on mount and then every minute
+        checkAutoLogout();
+        const interval = setInterval(checkAutoLogout, 60000);
+        return () => clearInterval(interval);
+    }, []);
+
+
     return (
         <React.Fragment>
             <div id="layout-wrapper">

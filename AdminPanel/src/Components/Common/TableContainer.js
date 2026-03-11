@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { CardBody, Col, Row, Table } from "reactstrap";
 import { Link } from "react-router-dom";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 import {
   useReactTable,
@@ -44,6 +45,8 @@ const TableContainer = ({
   thClass,
   divClass,
   SearchPlaceholder,
+  isRowDnD = false,
+  onDragEnd,
 }) => {
   const [columnFilters, setColumnFilters] = useState([]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -104,6 +107,59 @@ const TableContainer = ({
     }));
   }, [customPageSize]);
 
+  const renderTableBody = () => {
+    const rows = getRowModel().rows;
+
+    if (!isRowDnD) {
+      return (
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      );
+    }
+
+    return (
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="table-body">
+          {(provided) => (
+            <tbody {...provided.droppableProps} ref={provided.innerRef}>
+              {rows.map((row, index) => (
+                <Draggable key={row.original.id} draggableId={row.original.id.toString()} index={index}>
+                  {(provided, snapshot) => (
+                    <tr
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={{
+                        ...provided.draggableProps.style,
+                        backgroundColor: snapshot.isDragging ? "#f8f9fa" : "transparent",
+                      }}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <td key={cell.id}>
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </td>
+                      ))}
+                    </tr>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </tbody>
+          )}
+        </Droppable>
+      </DragDropContext>
+    );
+  };
+
   return (
     <Fragment>
       {isGlobalFilter && (
@@ -131,18 +187,7 @@ const TableContainer = ({
               </tr>
             ))}
           </thead>
-
-          <tbody>
-            {getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
+          {renderTableBody()}
         </Table>
       </div>
 
@@ -167,9 +212,8 @@ const TableContainer = ({
               <li key={p} className="page-item">
                 <Link
                   to="#"
-                  className={`page-link ${
-                    getState().pagination.pageIndex === p && "active"
-                  }`}
+                  className={`page-link ${getState().pagination.pageIndex === p && "active"
+                    }`}
                   onClick={() => setPageIndex(p)}
                 >
                   {p + 1}

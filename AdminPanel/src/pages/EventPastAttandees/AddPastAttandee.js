@@ -189,9 +189,8 @@ const AddPastAttandee = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      pastAttandeeNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${pastAttandeeNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Past Attandee Name"
                     aria-label="name"
                     aria-describedby="basic-addon1"

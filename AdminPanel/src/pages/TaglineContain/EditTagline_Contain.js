@@ -70,15 +70,15 @@ const EditTagline_Contain = (props) => {
       });
   };
   useEffect(() => {
-      if (taglineData.length > 0) {
-        setTagline(taglineData[0]?.thirdSectionFirstTitle);
-        setTaglineDescription(
-          taglineData[0]?.thirdSectionDescription?.replace(/^"(.*)"$/, "$1")
-        );
-        setTaglineBackImg(taglineData[0]?.thirdSectionBackgroundImage);
-      }
-      // eslint-disable-next-line
-    }, [taglineData]);
+    if (taglineData.length > 0) {
+      setTagline(taglineData[0]?.thirdSectionFirstTitle);
+      setTaglineDescription(
+        taglineData[0]?.thirdSectionDescription?.replace(/^"(.*)"$/, "$1")
+      );
+      setTaglineBackImg(taglineData[0]?.thirdSectionBackgroundImage);
+    }
+    // eslint-disable-next-line
+  }, [taglineData]);
 
   const getUploadParams = async (file) => {
     const finalData = new FormData();

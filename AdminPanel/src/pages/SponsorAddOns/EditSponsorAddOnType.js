@@ -40,18 +40,18 @@ const EditSponsorAddOnType = ({
   const submitBtnClk = (e) => {
     e.preventDefault();
     if (addOnType === "") {
-          toast.error("Add On Type is Required", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          setAddOnTypeError(true);
-          setVisible(false);
-        }else {
+      toast.error("Add On Type is Required", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setAddOnTypeError(true);
+      setVisible(false);
+    } else {
       setVisible(true);
       const finalData = new FormData();
       finalData.append("id", row?.id);
@@ -135,28 +135,27 @@ const EditSponsorAddOnType = ({
           <ModalBody>
             <input type="hidden" id="id-field" />
             <div className="row gy-4 mb-3">
-                          <div className="col-md-12">
-                            <div>
-                              <Label htmlFor="customername-field" className="form-label">
-                                Add on Type <span className="required_span">*</span>
-                              </Label>
-                              <Input
-                                type="text"
-                                className={`form-control ${
-                                  addOnTypeError ? "border-danger " : ""
-                                }`}
-                                placeholder="Enter Type"
-                                aria-label="name"
-                                aria-describedby="basic-addon1"
-                                value={addOnType}
-                                onChange={(e) => {
-                                  setAddOnType(e.target.value);
-                                  setAddOnTypeError(false);
-                                }}
-                              />
-                            </div>
-                          </div>
-                        </div>
+              <div className="col-md-12">
+                <div>
+                  <Label htmlFor="customername-field" className="form-label">
+                    Add on Type <span className="required_span">*</span>
+                  </Label>
+                  <Input
+                    type="text"
+                    className={`form-control ${addOnTypeError ? "border-danger " : ""
+                      }`}
+                    placeholder="Enter Type"
+                    aria-label="name"
+                    aria-describedby="basic-addon1"
+                    value={addOnType}
+                    onChange={(e) => {
+                      setAddOnType(e.target.value);
+                      setAddOnTypeError(false);
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
           </ModalBody>
           <div className="modal-footer">
             <div className="hstack gap-2 justify-content-end">

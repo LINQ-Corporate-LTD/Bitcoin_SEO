@@ -108,7 +108,7 @@ const SocilMediaList = () => {
   return (
     <div className="page-content">
       <Container fluid>
-        <BreadCrumb title="Event Social Media Links" pageTitle="Event Data" />
+        <BreadCrumb title="Event Social Media Links" pageTitle="Dashboards" pageLink="/dashboard" />
         <Row>
           <Col lg={12}>
             <Card>

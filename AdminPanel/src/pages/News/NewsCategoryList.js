@@ -60,6 +60,12 @@ const NewsCategoryList = () => {
   //   initialState.hiddenColumns = ["Action"];
   // }
 
+  const detailedPermissions = JSON.parse(localStorage.getItem("detailed_permissions") || "{}");
+  const newsCatPermissions = detailedPermissions.newsCategories || [];
+  const canAdd = newsCatPermissions.includes("add");
+  const canEdit = newsCatPermissions.includes("edit");
+  const canDelete = newsCatPermissions.includes("delete");
+
   useEffect(() => {
     callNewsCategoryListApi();
     // eslint-disable-next-line
@@ -134,32 +140,37 @@ const NewsCategoryList = () => {
         cell: (cellProps) => {
           return (
             <ul className="list-inline hstack gap-2 mb-0">
-              <li className="list-inline-item edit">
-                <Link
-                  to="#"
-                  className="text-primary d-inline-block edit-item-btn"
-                  onClick={() => isEditBtnClick(cellProps.row.original)}
-                >
-                  <i className="ri-pencil-fill fs-16"></i>
-                </Link>
-              </li>
-              <li className="list-inline-item">
-                <Link
-                  to="#"
-                  className="text-danger d-inline-block remove-item-btn"
-                  onClick={() => onClickDelete(cellProps.row.original)}
-                >
-                  <i className="ri-delete-bin-5-fill fs-16"></i>
-                </Link>
-              </li>
+              {canEdit && (
+                <li className="list-inline-item edit">
+                  <Link
+                    to="#"
+                    className="text-primary d-inline-block edit-item-btn"
+                    onClick={() => isEditBtnClick(cellProps.row.original)}
+                  >
+                    <i className="ri-pencil-fill fs-16"></i>
+                  </Link>
+                </li>
+              )}
+              {canDelete && (
+                <li className="list-inline-item">
+                  <Link
+                    to="#"
+                    className="text-danger d-inline-block remove-item-btn"
+                    onClick={() => onClickDelete(cellProps.row.original)}
+                  >
+                    <i className="ri-delete-bin-5-fill fs-16"></i>
+                  </Link>
+                </li>
+              )}
             </ul>
           );
         },
       },
     ],
     // eslint-disable-next-line
-    []
+    [canEdit, canDelete]
   );
+
 
   const onDeleteButtonClick = (value) => {
     if (value) {
@@ -299,7 +310,7 @@ const NewsCategoryList = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Event News Categories" pageTitle="Event News Categories" />
+          <BreadCrumb title="Event News Categories" pageTitle="Dashboards" pageLink="/dashboard" />
           <Row>
             <Col lg={12}>
               <Card className="file-manager-content w-100 p-3 pt-0">
@@ -310,19 +321,19 @@ const NewsCategoryList = () => {
                         News Category List
                       </h5>
                     </div>
-                    {/* {permissions?.create && ( */}
-                    <div className="flex-shrink-0">
-                      <button
-                        type="button"
-                        className="btn btn-primary add-btn"
-                        id="create-btn"
-                        onClick={toggleUser}
-                      >
-                        <i className="ri-add-line align-bottom me-1"></i> Add
-                        News Category
-                      </button>
-                    </div>
-                    {/* )} */}
+                    {canAdd && (
+                      <div className="flex-shrink-0">
+                        <button
+                          type="button"
+                          className="btn btn-primary add-btn"
+                          id="create-btn"
+                          onClick={toggleUser}
+                        >
+                          <i className="ri-add-line align-bottom me-1"></i> Add
+                          News Category
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </CardHeader>
                 <CardBody className="bg-soft-light border border-dashed border-start-0 border-end-0">
@@ -335,10 +346,10 @@ const NewsCategoryList = () => {
                             className="form-control search bg-light border-light"
                             placeholder="Search for Person.."
                             name="name"
-                            // value={query?.name}
-                            // onChange={(e) => {
-                            //   setQuery({ ...query, name: e.target.value });
-                            // }}
+                          // value={query?.name}
+                          // onChange={(e) => {
+                          //   setQuery({ ...query, name: e.target.value });
+                          // }}
                           />
                           <i className="ri-search-line search-icon"></i>
                         </div>
@@ -348,11 +359,11 @@ const NewsCategoryList = () => {
                           type="button"
                           className="btn-success btn"
                           id="create-btn"
-                          // onClick={() => {
-                          //   handleSubmitFilter(10, 0, query);
-                          //   setLimit(10);
-                          //   setOffset(0);
-                          // }}
+                        // onClick={() => {
+                        //   handleSubmitFilter(10, 0, query);
+                        //   setLimit(10);
+                        //   setOffset(0);
+                        // }}
                         >
                           <i className="ri-equalizer-fill me-1 align-bottom"></i>
                           Filter
@@ -361,16 +372,16 @@ const NewsCategoryList = () => {
                           type="button"
                           className="btn-primary btn mx-2"
                           id="create-btn"
-                          // onClick={() => {
-                          //   setQuery({
-                          //     name: "",
-                          //     mobileNo: "",
-                          //     email: "",
-                          //   });
-                          //   callCustomerListApi(10, 0);
-                          //   setLimit(10);
-                          //   setOffset(0);
-                          // }}
+                        // onClick={() => {
+                        //   setQuery({
+                        //     name: "",
+                        //     mobileNo: "",
+                        //     email: "",
+                        //   });
+                        //   callCustomerListApi(10, 0);
+                        //   setLimit(10);
+                        //   setOffset(0);
+                        // }}
                         >
                           <i className="ri-chat-delete-line me-1 align-bottom"></i>
                           Clear

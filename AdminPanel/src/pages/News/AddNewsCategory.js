@@ -129,9 +129,8 @@ const AddNewsCategory = (props) => {
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      categoryError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${categoryError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Caption"
                     aria-label="name"
                     aria-describedby="basic-addon1"

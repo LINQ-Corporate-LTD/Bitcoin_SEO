@@ -3,6 +3,8 @@ import { Card, CardBody, Col, Container, Input, Label, Row, Button, Form, Alert 
 import { Link, useNavigate } from "react-router-dom";
 import ParticlesAuth from "../AuthenticationInner/ParticlesAuth";
 import logoLight from "../../assets/images/logo-light.png";
+import axios from "axios";
+import { api } from "../../config";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,21 +13,45 @@ const Login = () => {
   const [message, setMessage] = useState("");
   const [passwordShow, setPasswordShow] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Dummy login check
-    if (email === "admin@test.com" && password === "bhargav") {
-      setMessage("✅ Login Successful!");
+    try {
+      const response = await axios.post(
+        "https://harsh7541.pythonanywhere.com" + "/admin1/customlogin", { email, password });
+
+      // Note: api_helper.js interceptor unwraps response.data, so response here IS the data
+      if (response.status) {
+        localStorage.setItem("authUser", JSON.stringify(response.user));
+        localStorage.setItem("permissions", JSON.stringify(response.permissions));
+        localStorage.setItem("detailed_permissions", JSON.stringify(response.detailed_permissions));
+        localStorage.setItem("loginTime", new Date().getTime().toString());
+        localStorage.setItem("token", "custom-auth-token"); // Set dummy token for AuthProtected check
+
+
+        // Fetch and store navbar data
+        try {
+          const navResponse = await axios.get("https://harsh7541.pythonanywhere.com" + "/admin1/getnavbardata");
+          if (navResponse.status) {
+            localStorage.setItem("navbarData", JSON.stringify(navResponse.navbarData));
+          }
+        } catch (navError) {
+          console.error("Error fetching navbar data:", navError);
+        }
+
+        setMessage("✅ Login Successful!");
         navigate("/dashboard");
-       localStorage.setItem("authUser", JSON.stringify({ email}))
-       localStorage.setItem("token", "dummy-token");
-    } else {
+      } else {
+        setMessage("❌ " + (response.message || "Invalid credentials"));
+      }
+    } catch (error) {
       setMessage("❌ Invalid email or password");
     }
+
   };
 
   return (
+
     <React.Fragment>
       <ParticlesAuth>
         <div className="auth-page-content mt-lg-5">
@@ -64,7 +90,7 @@ const Login = () => {
                           <Input
                             name="email"
                             placeholder="Enter email"
-                            type="email"
+                            type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                           />

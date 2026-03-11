@@ -155,9 +155,8 @@ const EditOfferCoupon = ({
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      couponCodeError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${couponCodeError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Coupon Code"
                     aria-label="name"
                     aria-describedby="basic-addon1"
@@ -172,14 +171,13 @@ const EditOfferCoupon = ({
               <div className="col-md-12">
                 <div>
                   <Label htmlFor="customername-field" className="form-label">
-                     Discount Amount{" "}
+                    Discount Amount{" "}
                     <span className="required_span">*</span>
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${
-                      expertSpeakerCompanyNameError ? "border-danger " : ""
-                    }`}
+                    className={`form-control ${expertSpeakerCompanyNameError ? "border-danger " : ""
+                      }`}
                     placeholder="Enter Discount Amount"
                     aria-label="name"
                     aria-describedby="basic-addon1"
