@@ -130,8 +130,7 @@ const SponsorPageContent = () => {
                         Sponsor Page Data
                       </h5>
                     </div>
-                    {/* {permissions?.create && ( */}
-                    {canAdd && (
+                    {canEdit && (
                       <div className="flex-shrink-0">
                         <button
                           type="button"
@@ -144,7 +143,6 @@ const SponsorPageContent = () => {
                         </button>
                       </div>
                     )}
-                    {/* )} */}
                   </div>
                 </CardHeader>
                 <CardBody>

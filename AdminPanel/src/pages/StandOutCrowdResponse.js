@@ -142,6 +142,8 @@ const StandOutCrowdResponse = () => {
         filterable: false,
       },
       {
+        id: "action",
+        header: "Action",
         cell: (cellProps) => {
           return (
             <ul className="list-inline hstack gap-2 mb-0">

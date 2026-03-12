@@ -149,6 +149,7 @@ const UserPassRegistration = () => {
         filterable: false,
       },
       {
+        id: "action",
         header: "Action",
         cell: (cellProps) => {
           return (
