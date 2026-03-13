@@ -89,7 +89,7 @@ const MainCategories = () => {
           navigate("/logout");
         }
         if (data && data.status) {
-          setMainCategoriesList(data["navMainatories"]);
+          setMainCategoriesList(data["navMainategories"]);
           // setTotalCount(data?.paginationDetails?.count);
         }
         setloading(false);

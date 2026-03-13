@@ -144,6 +144,12 @@ const EventSpeakerList = () => {
         accessorKey: "eventSpeakerCompany",
         filterable: false,
       },
+      {
+        id: "eventSpeakerLinkedinFollowers",
+        header: "Linkedin Followers",
+        accessorKey: "eventSpeakerLinkedinFollowers",
+        filterable: false,
+      },
 
       // {
       //   id: "action",

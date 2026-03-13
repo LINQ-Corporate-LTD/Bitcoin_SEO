@@ -22,6 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/react";
 import "../../assets/css/dropzone.css";
+import Select from "react-select";
 const override = css`
   display: block;
   margin: 0 auto;
@@ -54,7 +55,15 @@ const AddEventData = () => {
   const [gradientColor, setGradientColor] = useState("");
   const [videoReplaceImage, setVideoReplaceImage] = useState("");
   const [isSeoEnable, setIsSeoEnable] = useState("No");
+  const [selectedAgendaVersion, setSelectedAgendaVersion] = useState({
+    label: "Version-1",
+    value: "Version-1",
+  });
 
+  const agendaVersionOption = [
+    { label: "Version-1", value: "Version-1" },
+    { label: "Version-2", value: "Version-2" },
+  ];
   const [loading, setloading] = useState(false);
   let color = "#405189";
 
@@ -242,6 +251,7 @@ const AddEventData = () => {
     formDataObj.append("gradientColor", gradientColor);
     formDataObj.append("videoReplaceImage", videoReplaceImage);
     formDataObj.append("isSeoEnable", isSeoEnable);
+    formDataObj.append("agendaVersion", selectedAgendaVersion?.value);
 
 
     const requestOptions = {
@@ -317,7 +327,7 @@ const AddEventData = () => {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4 mt-2">
+                  <div className="col-md-2 mt-2">
                     <div>
                       <Label htmlFor="sort-order" className="form-label">
                         Event Year{" "}
@@ -333,6 +343,25 @@ const AddEventData = () => {
                           setEventYear(e.target.value);
                         }}
                       />
+                    </div>
+                  </div>
+                  <div className="col-md-2 mt-2">
+                    <div>
+                      <Label htmlFor="sort-order" className="form-label">
+                        Agenda Version{" "}
+                      </Label>
+                      <div className="input-group">
+                        <Select
+                          value={selectedAgendaVersion}
+                          onChange={(selectedAgendaVersionOption) => {
+                            setSelectedAgendaVersion(selectedAgendaVersionOption);
+                          }}
+                          options={agendaVersionOption}
+                          name="choices-publish-status-input"
+                          classNamePrefix="select2-selection form-select"
+                          className="w-100"
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="col-md-2 mt-2">

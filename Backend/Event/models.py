@@ -10,6 +10,7 @@ class eventDetails(models.Model):
     eventLocation = models.CharField(default="",max_length=100,null=True, blank=True)
     eventShortCode = models.CharField(default="",max_length=100,null=True, blank=True)
     isSeoEnable = models.CharField(default="",max_length=100,null=True, blank=True)
+    agendaVersion = models.CharField(default="",max_length=100,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.CharField(null=False,max_length=50,default='No')
@@ -32,6 +33,7 @@ class eventSpeakers(models.Model):
     eventSpeakerProfilePageDescription = models.TextField(null=True,blank=True)
     eventSpeakerMetaTitle = models.CharField(null=True,blank=True)
     eventSpeakerMetaDescription = models.TextField(null=True,blank=True)
+    eventSpeakerLinkedinFollowers = models.IntegerField(default=0, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.CharField(null=False,max_length=50,default='No')
@@ -131,44 +133,95 @@ class deligatePackageInclusionPoints(models.Model):
     updated_by = models.CharField(null=False,max_length=50,default='No')
     isDelete = models.CharField(default="No",max_length=10)
 
+# class eventAgenda(models.Model):
+#     status = models.CharField(default="",max_length=150,null=True, blank=True)
+#     heading = models.CharField(default="",max_length=200,null=True, blank=True)
+#     day = models.CharField(default="",max_length=200,null=True, blank=True)
+#     startTime = models.CharField(default="",max_length=150,null=True, blank=True)
+#     endTime = models.CharField(default="",max_length=150,null=True, blank=True)
+#     sponsorBy = models.CharField(default="",max_length=150,null=True, blank=True)
+#     sortOrder = models.IntegerField(default=0, null=True, blank=True)
+#     speakerFormat = models.CharField(default="",max_length=150,null=True, blank=True)
+#     bulletPoints = models.TextField(null=True,blank=True)
+#     industryTrends = models.TextField(null=True,blank=True)
+
+#     speaker1Bullets = models.TextField(null=True,blank=True)
+#     speaker2Bullets = models.TextField(null=True,blank=True)
+
+#     panelSpeakerImages = models.TextField(null=True,blank=True)
+#     panelSpeakerIds = models.TextField(null=True,blank=True)
+#     panelModerators = models.TextField(null=True,blank=True)
+#     selectedSpeakers = models.TextField(null=True,blank=True)
+
+#     singleSpeakerAgendaImg = models.CharField(default="",max_length=150,null=True, blank=True)
+#     singleSpeakerCompanyImg = models.CharField(default="",max_length=150,null=True, blank=True)
+#     singleSpeakerId = models.CharField(default="",max_length=150,null=True, blank=True)
+
+#     Speaker1AgendaImg = models.CharField(default="",max_length=150,null=True, blank=True)
+#     Speaker1CompanyImg = models.CharField(default="",max_length=150,null=True, blank=True)
+#     Speaker1Id = models.CharField(default="",max_length=150,null=True, blank=True)
+
+#     Speaker2AgendaImg = models.CharField(default="",max_length=150,null=True, blank=True)
+#     Speaker2CompanyImg = models.CharField(default="",max_length=150,null=True, blank=True)
+#     Speaker2Id = models.CharField(default="",max_length=150,null=True, blank=True)
+
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#     created_by = models.CharField(null=False,max_length=50,default='No')
+#     updated_by = models.CharField(null=False,max_length=50,default='No')
+#     isDelete = models.CharField(default="No",max_length=10)
+
 class eventAgenda(models.Model):
-    status = models.CharField(default="",max_length=150,null=True, blank=True)
-    heading = models.CharField(default="",max_length=200,null=True, blank=True)
-    day = models.CharField(default="",max_length=200,null=True, blank=True)
-    startTime = models.CharField(default="",max_length=150,null=True, blank=True)
-    endTime = models.CharField(default="",max_length=150,null=True, blank=True)
-    sponsorBy = models.CharField(default="",max_length=150,null=True, blank=True)
+    status = models.CharField(default="", max_length=150, null=True, blank=True)
+    heading = models.CharField(default="", max_length=200, null=True, blank=True)
+    day = models.CharField(default="", max_length=200, null=True, blank=True)
+    startTime = models.CharField(default="", max_length=150, null=True, blank=True)
+    endTime = models.CharField(default="", max_length=150, null=True, blank=True)
+    sponsorBy = models.CharField(default="", max_length=150, null=True, blank=True)
     sortOrder = models.IntegerField(default=0, null=True, blank=True)
-    speakerFormat = models.CharField(default="",max_length=150,null=True, blank=True)
-    bulletPoints = models.TextField(null=True,blank=True)
-    industryTrends = models.TextField(null=True,blank=True)
+    speakerFormat = models.CharField(default="", max_length=150, null=True, blank=True)
+    bulletPoints = models.TextField(null=True, blank=True)
+    industryTrends = models.TextField(null=True, blank=True)
 
-    speaker1Bullets = models.TextField(null=True,blank=True)
-    speaker2Bullets = models.TextField(null=True,blank=True)
+    speaker1Bullets = models.TextField(null=True, blank=True)
+    speaker2Bullets = models.TextField(null=True, blank=True)
 
-    panelSpeakerImages = models.TextField(null=True,blank=True)
-    panelSpeakerIds = models.TextField(null=True,blank=True)
-    panelModerators = models.TextField(null=True,blank=True)
-    selectedSpeakers = models.TextField(null=True,blank=True)
+    panelSpeakerImages = models.TextField(null=True, blank=True)
+    panelSpeakerIds = models.TextField(null=True, blank=True)
+    panelModerators = models.TextField(null=True, blank=True)
+    selectedSpeakers = models.TextField(null=True, blank=True)
 
-    singleSpeakerAgendaImg = models.CharField(default="",max_length=150,null=True, blank=True)
-    singleSpeakerCompanyImg = models.CharField(default="",max_length=150,null=True, blank=True)
-    singleSpeakerId = models.CharField(default="",max_length=150,null=True, blank=True)
+    # ── Single Speaker ──
+    singleSpeakerAgendaImg = models.CharField(default="", max_length=500, null=True, blank=True)
+    singleSpeakerCompanyImg = models.CharField(default="", max_length=500, null=True, blank=True)
+    singleSpeakerId = models.CharField(default="", max_length=150, null=True, blank=True)
+    singleSpeakerName = models.CharField(default="", max_length=200, null=True, blank=True)       # NEW
+    singleSpeakerCompanyName = models.CharField(default="", max_length=200, null=True, blank=True) # NEW
 
-    Speaker1AgendaImg = models.CharField(default="",max_length=150,null=True, blank=True)
-    Speaker1CompanyImg = models.CharField(default="",max_length=150,null=True, blank=True)
-    Speaker1Id = models.CharField(default="",max_length=150,null=True, blank=True)
+    # ── Two Speakers ──
+    Speaker1AgendaImg = models.CharField(default="", max_length=500, null=True, blank=True)
+    Speaker1CompanyImg = models.CharField(default="", max_length=500, null=True, blank=True)
+    Speaker1Id = models.CharField(default="", max_length=150, null=True, blank=True)
+    speaker1Name = models.CharField(default="", max_length=200, null=True, blank=True)            # NEW
+    speaker1CompanyName = models.CharField(default="", max_length=200, null=True, blank=True)     # NEW
+    selectedSpeaker1 = models.TextField(null=True, blank=True)                                    # NEW (JSON)
 
-    Speaker2AgendaImg = models.CharField(default="",max_length=150,null=True, blank=True)
-    Speaker2CompanyImg = models.CharField(default="",max_length=150,null=True, blank=True)
-    Speaker2Id = models.CharField(default="",max_length=150,null=True, blank=True)
+    Speaker2AgendaImg = models.CharField(default="", max_length=500, null=True, blank=True)
+    Speaker2CompanyImg = models.CharField(default="", max_length=500, null=True, blank=True)
+    Speaker2Id = models.CharField(default="", max_length=150, null=True, blank=True)
+    speaker2Name = models.CharField(default="", max_length=200, null=True, blank=True)            # NEW
+    speaker2CompanyName = models.CharField(default="", max_length=200, null=True, blank=True)     # NEW
+    selectedSpeaker2 = models.TextField(null=True, blank=True)                                    # NEW (JSON)
+
+    # ── Panel Speaker ──
+    panelSpeakers = models.TextField(null=True, blank=True)                                       # NEW (JSON array)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    created_by = models.CharField(null=False,max_length=50,default='No')
-    updated_by = models.CharField(null=False,max_length=50,default='No')
-    isDelete = models.CharField(default="No",max_length=10)
-
+    created_by = models.CharField(null=False, max_length=50, default='No')
+    updated_by = models.CharField(null=False, max_length=50, default='No')
+    isDelete = models.CharField(default="No", max_length=10)
+    
 class eventCoreAttandees(models.Model):
     corAttandeeName = models.CharField(default="",max_length=150,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -426,6 +479,29 @@ class groupPassRegistrationRequestData(models.Model):
 class eventLeaders(models.Model):
     leaderName = models.CharField(default="",max_length=100,null=True, blank=True)
     leaderLogo = models.CharField(default="",max_length=100,null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.CharField(null=False,max_length=50,default='No')
+    updated_by = models.CharField(null=False,max_length=50,default='No')
+    isDelete = models.CharField(default="No",max_length=10)
+
+class eventSlideShares(models.Model):
+    author = models.CharField(default="",max_length=100,null=True, blank=True)
+    authorCompany = models.CharField(default="",max_length=100,null=True, blank=True)
+    heading = models.CharField(default="", max_length=200, null=True, blank=True)
+    pptImage = models.TextField(null=True,blank=True)
+    pptLink = models.TextField(null=True,blank=True)
+    projectYear = models.CharField(default="",max_length=100,null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.CharField(null=False,max_length=50,default='No')
+    updated_by = models.CharField(null=False,max_length=50,default='No')
+    isDelete = models.CharField(default="No",max_length=10)
+
+class eventSlideSharesAttandees(models.Model):
+    companyName = models.CharField(default="",max_length=100,null=True, blank=True)
+    delegateName = models.CharField(default="",max_length=100,null=True, blank=True)
+    projectYear = models.CharField(default="",max_length=100,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.CharField(null=False,max_length=50,default='No')

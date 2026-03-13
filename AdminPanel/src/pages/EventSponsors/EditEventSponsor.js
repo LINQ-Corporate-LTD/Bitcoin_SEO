@@ -23,7 +23,8 @@ const sponsorTypes = [
   { label: "Silver", value: "Silver" },
   { label: "Gold", value: "Gold" },
   { label: "Platinum", value: "Platinum" },
-  { label: "Partner", value: "Partner" },
+  { label: "Lead", value: "Lead" },
+  { label: "Associated", value: "Associated" },
 ];
 const EditEventSponsor = ({
   row,

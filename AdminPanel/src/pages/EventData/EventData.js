@@ -56,7 +56,10 @@ const EventData = () => {
   const [gradientColor, setGradientColor] = useState("");
   const [videoReplaceImage, setVideoReplaceImage] = useState("");
   const [isSeoEnable, setIsSeoEnable] = useState("");
-
+  const [selectedAgendaVersion, setSelectedAgendaVersion] = useState({
+    label: "Version-1",
+    value: "Version-1",
+  });
   const [loading, setloading] = useState(false);
   let color = "#405189";
 
@@ -115,6 +118,9 @@ const EventData = () => {
         );
         setIsSeoEnable(
           eventData?.homeVideoSctionEventDetails[0]?.isSeoEnable
+        );
+        setSelectedAgendaVersion(
+          eventData?.homeVideoSctionEventDetails[0]?.agendaVersion,
         );
       }
       if (eventData?.navLogos?.length > 0) {
@@ -197,7 +203,7 @@ const EventData = () => {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4 mt-2">
+                  <div className="col-md-2 mt-2">
                     <div>
                       <Label htmlFor="sort-order" className="form-label">
                         Event Year{" "}
@@ -209,6 +215,22 @@ const EventData = () => {
                         aria-label="name"
                         aria-describedby="basic-addon1"
                         value={eventYear}
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-2 mt-2">
+                    <div>
+                      <Label htmlFor="sort-order" className="form-label">
+                        Agenda Version{" "}
+                      </Label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Event Name"
+                        aria-label="name"
+                        aria-describedby="basic-addon1"
+                        value={selectedAgendaVersion}
                         disabled
                       />
                     </div>

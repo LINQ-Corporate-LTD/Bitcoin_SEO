@@ -335,5 +335,14 @@ urlpatterns = [
     path('customlogin', views.customLoginFun),
     path('getnavbardata', views.getNavbarDataFun),
 
+    path('getslideShare', views.slideShareListFun),
+    path('addslideShare', views.add_slideShare),
+    path('editslideShare', views.edit_slideShare),
+    path('deleteslideShare', views.delete_slideShare),
+
+    path('getslideShareAttandee', views.slideShareAttandeeListFun),
+    path('addslideShareAttandee', views.add_slideShare_attandee),
+    path('editslideShareAttandee', views.edit_slideShare_attandee),
+    path('deleteslideShareAttandee', views.delete_slideShare_attandee),
 
 ]
