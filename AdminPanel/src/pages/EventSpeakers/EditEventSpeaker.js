@@ -54,6 +54,9 @@ const EditEventSpeaker = ({
   const [speakerMetaDescription, setSpeakerMetaDescription] = useState("");
   const [speakerMetaDescriptionError, setSpeakerMetaDescriptionError] =
     useState(false);
+  const [speakerLinkedinFollowers, setSpeakerLinkedinFollowers] = useState("");
+  const [speakerLinkedinFollowersError, setSpeakerLinkedinFollowersError] =
+    useState(false);
   let color = "#405189";
 
   useEffect(() => {
@@ -67,6 +70,7 @@ const EditEventSpeaker = ({
       setGreyBgUrl(row?.eventSpeakerProfilePageImage);
       setWhiteBgUrl(row?.eventSpeakerFeaturedPageImage);
       setOriginalPhotoUrl(row?.eventSpeakerHomePageImage);
+      setSpeakerLinkedinFollowers(row?.eventSpeakerLinkedinFollowers);
       if (eventDetails?.isSeoEnable === "Yes") {
         setSpeakerMetaTitle(row?.eventSpeakerMetaTitle || "");
         setSpeakerMetaDescription(row?.eventSpeakerMetaDescription || "");
@@ -163,6 +167,18 @@ const EditEventSpeaker = ({
       });
       setVisible(false);
       setSpeakerNameError(true);
+    } else if (speakerLinkedinFollowers === "") {
+      toast.error("Speaker Linkedin Followers is Required", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setSpeakerLinkedinFollowersError(true);
+      setVisible(false);
     } else if (longDescriptionLength === 0 || speakerBio.trim() === "") {
       toast.error("Speaker Bio. is Required", {
         position: "top-right",
@@ -253,6 +269,7 @@ const EditEventSpeaker = ({
       finalData.append("eventSpeakerHomePageImage", originalPhotoUrl);
       finalData.append("eventSpeakerProfilePageImage", greyBgUrl);
       finalData.append("eventSpeakerFeaturedPageImage", whiteBgUrl);
+      finalData.append("eventSpeakerLinkedinFollowers", speakerLinkedinFollowers);
       if (eventDetails?.isSeoEnable === "Yes") {
         finalData.append("eventSpeakerMetaTitle", speakerMetaTitle);
         finalData.append("eventSpeakerMetaDescription", speakerMetaDescription);
@@ -501,6 +518,27 @@ const EditEventSpeaker = ({
                       </p>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div>
+                  <Label htmlFor="customername-field" className="form-label">
+                    Speaker Linkedin Followers <span className="required_span">*</span>
+                  </Label>
+                  <Input
+                    type="text"
+                    className={`form-control ${speakerLinkedinFollowersError ? "border-danger " : ""
+                      }`}
+                    placeholder="Enter Speaker Linkedin Followers"
+                    aria-label="name"
+                    aria-describedby="basic-addon1"
+                    value={speakerLinkedinFollowers}
+                    onChange={(e) => {
+                      setSpeakerLinkedinFollowers(e.target.value);
+                      setSpeakerLinkedinFollowersError(false);
+                    }}
+                  />
                 </div>
               </div>
 

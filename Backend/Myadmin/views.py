@@ -19,7 +19,7 @@ from Myadmin.serializers import eventAgendaSerializer, eventIndustryTrendsSerial
 
 # Create your views here.
 from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSubCategories,themeColorSettings,homePageVideoSectionInput,videoSectionUserOptions,speakerSection,homePageThirdSection,keyPointsSection,keyPointsSectionPoints,countSection,countSectionTopic,testimonialSection,pastAttandeesSection,sponsorSection, footerFirstSectionOptions, footerSocialMediaOptions,companiesLogoSection,registerPageSettings,whoShouldAttendPageData,speakerPageData,speakerPageSectionThreePoints,sponsorPageData,sponsorPageBulletData,venuePageData,venuePageGallery,newsCategory,generalNewsPoint,latestNews,topNews,subscribers,contactUsData,contactUsPageData,contactUsHelpData,pressMediaPageData,pressMediaPageBoxData,mediaPageHelpers,standOutCrowdRequestData,becomeSpeakerRequestData,quickProposalRequestData,endUserPassRegistrationRequestData,pastAttandeeHomeData
-from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders
+from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees
 import requests
 #---------------------------- Api For Upload Media ----------------------------#
 @api_view(['POST'])
@@ -99,6 +99,7 @@ def homePageDataFun(request):
             'eventLocation':eventDetail.eventLocation,
             'eventShortCode':eventDetail.eventShortCode,
             'isSeoEnable':eventDetail.isSeoEnable,
+            'agendaVersion':eventDetail.agendaVersion,
             'created_at': eventDetail.created_at,
             'updated_at': eventDetail.updated_at,
             'created_by': eventDetail.created_by,
@@ -195,7 +196,7 @@ def navSubCategoriesFun(request):
 @permission_classes((AllowAny,))
 @api_view(['GET'])
 def speakersListFun(request):
-    speaker_list = eventSpeakers.objects.all().filter(isDelete='No').order_by('-id')
+    speaker_list = eventSpeakers.objects.all().filter(isDelete='No').order_by('-eventSpeakerLinkedinFollowers')
     speakerData = []
     for speaker in speaker_list:
         x={
@@ -215,6 +216,7 @@ def speakersListFun(request):
             'eventSpeakerProfilePageDescription':speaker.eventSpeakerProfilePageDescription,
             'eventSpeakerMetaTitle':speaker.eventSpeakerMetaTitle,
             'eventSpeakerMetaDescription':speaker.eventSpeakerMetaDescription,
+            'eventSpeakerLinkedinFollowers':speaker.eventSpeakerLinkedinFollowers,
             'created_at': speaker.created_at,
             'updated_at': speaker.updated_at,
             'created_by': speaker.created_by,
@@ -244,31 +246,72 @@ def testimonialListFun(request):
     return JsonResponse({'eventTestimonials': testimonialData, 'status': True})
 
 #---------------------------- Api For Sponsor List ----------------------------#
+# @permission_classes((AllowAny,))
+# @api_view(['GET'])
+# def sponsorListFun(request):
+#     sponsor_list = eventSponsors.objects.all().filter(isDelete='No').order_by('-id')
+#     sponsorData = []
+#     for sponsor in sponsor_list:
+#         x={
+#             'id':sponsor.id,
+#             'sponsorComapnyName':sponsor.sponsorComapnyName,
+#             'sponsorComapnyLogo':sponsor.sponsorComapnyLogo,
+#             'sponsorType':sponsor.sponsorType,
+#             'sponsorComapnyBioDescription':sponsor.sponsorComapnyBioDescription,
+#             'sponsorWebsite':sponsor.sponsorWebsite,
+#             'sponsorComapnyBioLogo':sponsor.sponsorComapnyBioLogo,
+#             'sponsorEmail':sponsor.sponsorEmail,
+#             'sponsorMobile':sponsor.sponsorMobile,
+#             'relateComapnyPersonName':sponsor.relateComapnyPersonName,
+#             'eventSponsorMetaTitle':sponsor.eventSponsorMetaTitle,  
+#             'eventSponsorMetaDescription':sponsor.eventSponsorMetaDescription,
+#             'created_at': sponsor.created_at,
+#             'updated_at': sponsor.updated_at,
+#             'created_by': sponsor.created_by,
+#             'updated_by': sponsor.updated_by,
+#         }
+#         sponsorData.append(x)
+#     return JsonResponse({'eventSponsors': sponsorData, 'status': True})
+
 @permission_classes((AllowAny,))
 @api_view(['GET'])
 def sponsorListFun(request):
-    sponsor_list = eventSponsors.objects.all().filter(isDelete='No').order_by('-id')
+    SPONSOR_TYPE_ORDER = {
+        'Lead': 1,
+        'Platinum': 2,
+        'Gold': 3,
+        'Silver': 4,
+        'Associated': 5,
+        'Dummy': 6,
+    }
+
+    sponsor_list = eventSponsors.objects.all().filter(isDelete='No')
+    
+    # Sort in Python using the priority map
+    sponsor_list = sorted(sponsor_list, key=lambda s: SPONSOR_TYPE_ORDER.get(s.sponsorType, 99))
+
     sponsorData = []
     for sponsor in sponsor_list:
-        x={
-            'id':sponsor.id,
-            'sponsorComapnyName':sponsor.sponsorComapnyName,
-            'sponsorComapnyLogo':sponsor.sponsorComapnyLogo,
-            'sponsorType':sponsor.sponsorType,
-            'sponsorComapnyBioDescription':sponsor.sponsorComapnyBioDescription,
-            'sponsorWebsite':sponsor.sponsorWebsite,
-            'sponsorComapnyBioLogo':sponsor.sponsorComapnyBioLogo,
-            'sponsorEmail':sponsor.sponsorEmail,
-            'sponsorMobile':sponsor.sponsorMobile,
-            'relateComapnyPersonName':sponsor.relateComapnyPersonName,
-            'eventSponsorMetaTitle':sponsor.eventSponsorMetaTitle,  
-            'eventSponsorMetaDescription':sponsor.eventSponsorMetaDescription,
+        x = {
+            'id': sponsor.id,
+            'sponsorComapnyName': sponsor.sponsorComapnyName,
+            'sponsorComapnyLogo': sponsor.sponsorComapnyLogo,
+            'sponsorType': sponsor.sponsorType,
+            'sponsorComapnyBioDescription': sponsor.sponsorComapnyBioDescription,
+            'sponsorWebsite': sponsor.sponsorWebsite,
+            'sponsorComapnyBioLogo': sponsor.sponsorComapnyBioLogo,
+            'sponsorEmail': sponsor.sponsorEmail,
+            'sponsorMobile': sponsor.sponsorMobile,
+            'relateComapnyPersonName': sponsor.relateComapnyPersonName,
+            'eventSponsorMetaTitle': sponsor.eventSponsorMetaTitle,
+            'eventSponsorMetaDescription': sponsor.eventSponsorMetaDescription,
             'created_at': sponsor.created_at,
             'updated_at': sponsor.updated_at,
             'created_by': sponsor.created_by,
             'updated_by': sponsor.updated_by,
         }
         sponsorData.append(x)
+    
     return JsonResponse({'eventSponsors': sponsorData, 'status': True})
 
 #---------------------------- Api For Industry Trend List ----------------------------#
@@ -2294,6 +2337,8 @@ def add_speaker(request):
         check_db.eventSpeakerMetaTitle = response['eventSpeakerMetaTitle']
     if 'eventSpeakerMetaDescription' in request.POST:
         check_db.eventSpeakerMetaDescription = response['eventSpeakerMetaDescription']
+    if 'eventSpeakerLinkedinFollowers' in request.POST:
+        check_db.eventSpeakerLinkedinFollowers = response['eventSpeakerLinkedinFollowers']
     check_db.created_by = "Admin"
     check_db.updated_by = "Admin"
     check_db.save()
@@ -2335,6 +2380,8 @@ def edit_speaker(request):
         check_db.eventSpeakerMetaTitle = response['eventSpeakerMetaTitle']
     if 'eventSpeakerMetaDescription' in request.POST:
         check_db.eventSpeakerMetaDescription = response['eventSpeakerMetaDescription']
+    if 'eventSpeakerLinkedinFollowers' in request.POST:
+        check_db.eventSpeakerLinkedinFollowers = response['eventSpeakerLinkedinFollowers']
     check_db.updated_by = "Admin"
     check_db.save()
 
@@ -4748,6 +4795,7 @@ def getSpeakerDataById(request):
             'eventSpeakerProfilePageDescription':speaker.eventSpeakerProfilePageDescription,
             'eventSpeakerMetaTitle':speaker.eventSpeakerMetaTitle,
             'eventSpeakerMetaDescription':speaker.eventSpeakerMetaDescription,
+            'eventSpeakerLinkedinFollowers':speaker.eventSpeakerLinkedinFollowers,
             'created_at': speaker.created_at,
             'updated_at': speaker.updated_at,
             'created_by': speaker.created_by,
@@ -4879,6 +4927,9 @@ def add_event_general_data(request):
 
     if 'isSeoEnable' in request.POST:
         check_db.isSeoEnable = response['isSeoEnable']
+
+    if 'agendaVersion' in request.POST:
+        check_db.agendaVersion = response['agendaVersion']
     
     # Update homePageNavLogoData fields
     if 'whiteLogoLink' in request.POST:
@@ -5761,3 +5812,164 @@ def getNavbarDataFun(request):
             'subItems': sub_list
         })
     return JsonResponse({'status': True, 'navbarData': navbarData})
+
+#------------------- Api For Add Slide Share-------------------#
+@api_view(['POST'])
+def add_slideShare(request):
+    response = request.data
+    check_db = eventSlideShares()
+
+    if 'author' in request.POST:
+        check_db.author = response['author']
+
+    if 'authorCompany' in request.POST:
+        check_db.authorCompany = response['authorCompany']
+
+    if 'heading' in request.POST:
+        check_db.heading = response['heading']
+
+    if 'pptImage' in request.POST:
+        check_db.pptImage = response['pptImage']
+
+    if 'pptLink' in request.POST:
+        check_db.pptLink = response['pptLink']
+
+    if 'projectYear' in request.POST:
+        check_db.projectYear = response['projectYear']
+ 
+    check_db.created_by = "Admin"
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Edit Slide Share-------------------#
+@api_view(['POST'])
+def edit_slideShare(request):
+    response = request.data
+    check_db = eventSlideShares.objects.get(id=response['id'])
+
+    if 'author' in request.POST:
+        check_db.author = response['author']
+
+    if 'authorCompany' in request.POST:
+        check_db.authorCompany = response['authorCompany']
+
+    if 'heading' in request.POST:
+        check_db.heading = response['heading']
+
+    if 'pptImage' in request.POST:
+        check_db.pptImage = response['pptImage']
+
+    if 'pptLink' in request.POST:
+        check_db.pptLink = response['pptLink']
+
+    if 'projectYear' in request.POST:
+        check_db.projectYear = response['projectYear']
+ 
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Delete Slide Share -------------------#
+@api_view(['POST'])
+def delete_slideShare(request):
+    response = request.data
+    check_db = eventSlideShares.objects.get(id=response['id'])
+    check_db.isDelete = response['isDelete']
+    check_db.save()
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#---------------------------- Api For Get Slide Share List ----------------------------#
+@permission_classes((AllowAny,))
+@api_view(['GET'])
+def slideShareListFun(request):
+    slideShares_Data = eventSlideShares.objects.all().filter(isDelete='No')
+    slideSharesOptions = []
+    for slideShare in slideShares_Data:
+        x={
+            'id':slideShare.id,
+            'author':slideShare.author,
+            'authorCompany':slideShare.authorCompany,
+            'heading':slideShare.heading,
+            'pptImage':slideShare.pptImage,
+            'pptLink':slideShare.pptLink,
+            'projectYear':slideShare.projectYear,
+            'created_at': slideShare.created_at,
+            'updated_at': slideShare.updated_at,
+            'created_by': slideShare.created_by,
+            'updated_by': slideShare.updated_by,
+        }
+        slideSharesOptions.append(x) 
+    return JsonResponse({'slideShares': slideSharesOptions, 'status': True})
+
+#------------------- Api For Add Slide Share Attandee-------------------#
+@api_view(['POST'])
+def add_slideShare_attandee(request):
+    response = request.data
+    check_db = eventSlideSharesAttandees()
+
+    if 'companyName' in request.POST:
+        check_db.companyName = response['companyName']
+
+    if 'delegateName' in request.POST:
+        check_db.delegateName = response['delegateName']
+
+    if 'projectYear' in request.POST:
+        check_db.projectYear = response['projectYear']
+
+    check_db.created_by = "Admin"
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Edit Slide Share Attandee-------------------#
+@api_view(['POST'])
+def edit_slideShare_attandee(request):
+    response = request.data
+    check_db = eventSlideSharesAttandees.objects.get(id=response['id'])
+
+    if 'companyName' in request.POST:
+        check_db.companyName = response['companyName']
+
+    if 'delegateName' in request.POST:
+        check_db.delegateName = response['delegateName']
+
+    if 'projectYear' in request.POST:
+        check_db.projectYear = response['projectYear']
+ 
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Delete Slide Share Attandee-------------------#
+@api_view(['POST'])
+def delete_slideShare_attandee(request):
+    response = request.data
+    check_db = eventSlideSharesAttandees.objects.get(id=response['id'])
+    check_db.isDelete = response['isDelete']
+    check_db.save()
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#---------------------------- Api For Get Slide Share Attandee List ----------------------------#
+@permission_classes((AllowAny,))
+@api_view(['GET'])
+def slideShareAttandeeListFun(request):
+    slideSharesAttandee_Data = eventSlideSharesAttandees.objects.all().filter(isDelete='No')
+    slideSharesAttandees = []
+    for attandee in slideSharesAttandee_Data:
+        x={
+            'id':attandee.id,
+            'companyName':attandee.companyName,
+            'delegateName':attandee.delegateName,
+            'projectYear':attandee.projectYear,
+            'created_at': attandee.created_at,
+            'updated_at': attandee.updated_at,
+            'created_by': attandee.created_by,
+            'updated_by': attandee.updated_by,
+        }
+        slideSharesAttandees.append(x) 
+    return JsonResponse({'slideSharesAttandees': slideSharesAttandees, 'status': True})

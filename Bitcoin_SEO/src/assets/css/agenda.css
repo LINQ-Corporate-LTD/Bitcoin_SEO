@@ -1680,6 +1680,38 @@ body {
   width: 75%;
 }
 
+.Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1 {
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1>img {
+    margin: 0;
+    max-height: 80px;
+    max-width: 170px;
+    object-fit: contain;
+    padding: 0;
+    width: auto;
+}
+
+.Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1>div p {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 18px;
+    margin: 0 0 10px;
+    padding: 0;
+    text-transform: capitalize;
+}
+
+.Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1>div p:nth-child(2) {
+    font-weight: 800;
+    margin: 0;
+    padding: 0;
+}
+
 .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_lower__Oy-1W {
   margin: 50px 0 0;
   padding: 0 0 14px;
@@ -2055,6 +2087,21 @@ body {
     padding: 20px 19px;
   }
 
+  .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1>img {
+    max-height: 40px;
+    max-width: 120px;
+  }
+
+  .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1>div p {
+    font-size: 16px;
+    margin-left: 0;
+  }
+
+  .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1>div p:nth-child(2) {
+    line-height: 16px;
+    margin-top: 10px;
+  }
+
   .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_lower__Oy-1W {
     margin-top: 35px;
   }
@@ -2101,6 +2148,16 @@ body {
   }
 
   .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV1__VkoVw>div p:nth-child(2) {
+    line-height: 13px;
+    margin-top: 0;
+  }
+
+  .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1>div p {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1>div p:nth-child(2) {
     line-height: 13px;
     margin-top: 0;
   }

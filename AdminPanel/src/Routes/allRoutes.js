@@ -298,6 +298,8 @@ import UserManagement from "../pages/Permissions/UserManagement";
 import EditUserPermissions from "../pages/Permissions/EditUserPermissions";
 import RoleManagement from "../pages/Permissions/RoleManagement";
 import EditRolePermissions from "../pages/Permissions/EditRolePermissions";
+import SlideShareList from "../pages/EventSlideShares/SlideShareList";
+import SlideShareAttandees from "../pages/SlideShareAttandees/SlideShareAttandees";
 
 
 
@@ -570,10 +572,8 @@ const authProtectedRoutes = [
   { path: "/apps-permissions/edit/:id", component: <EditUserPermissions /> },
   { path: "/apps-roles", component: <RoleManagement /> },
   { path: "/apps-roles/edit/:id", component: <EditRolePermissions /> },
-
-
-
-
+  { path: "/eventslideshares", component: <SlideShareList /> },
+  { path: "/eventslideshareattandees", component: <SlideShareAttandees /> },
 
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name

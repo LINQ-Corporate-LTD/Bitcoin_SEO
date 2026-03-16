@@ -24,6 +24,7 @@ const ViewEventSpeaker = ({ row, viewSpeakerModal, onCloseModal }) => {
   const [originalPhotoUrl, setOriginalPhotoUrl] = useState("");
   const [speakerMetaTitle, setSpeakerMetaTitle] = useState("");
   const [speakerMetaDescription, setSpeakerMetaDescription] = useState("");
+  const [speakerLinkedinFollowers, setSpeakerLinkedinFollowers] = useState("");
   let color = "#405189";
 
   useEffect(() => {
@@ -37,6 +38,7 @@ const ViewEventSpeaker = ({ row, viewSpeakerModal, onCloseModal }) => {
       setGreyBgUrl(row?.eventSpeakerProfilePageImage);
       setWhiteBgUrl(row?.eventSpeakerFeaturedPageImage);
       setOriginalPhotoUrl(row?.eventSpeakerHomePageImage);
+      setSpeakerLinkedinFollowers(row?.eventSpeakerLinkedinFollowers);
       if (eventDetails?.isSeoEnable === "Yes") {
         setSpeakerMetaTitle(row?.eventSpeakerMetaTitle || "");
         setSpeakerMetaDescription(row?.eventSpeakerMetaDescription || "");
@@ -130,6 +132,21 @@ const ViewEventSpeaker = ({ row, viewSpeakerModal, onCloseModal }) => {
                       />
                     </div>
                   </div>
+                </div>
+              </div><div className="col-md-6">
+                <div>
+                  <Label htmlFor="customername-field" className="form-label">
+                    Speaker Linkedin Followers
+                  </Label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Speaker Linkedin Followers"
+                    aria-label="name"
+                    aria-describedby="basic-addon1"
+                    value={speakerLinkedinFollowers}
+                    disabled
+                  />
                 </div>
               </div>
 
