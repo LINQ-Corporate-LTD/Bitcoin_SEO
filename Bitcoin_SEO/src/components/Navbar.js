@@ -382,6 +382,8 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
   // ✅ navItems from SSR data
   const ssrNavItems = useSSRData("navItems");
 
+  const ssrSponsorList = useSSRData("sponsors");
+  const sponsorList = ssrSponsorList || [];
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -419,6 +421,7 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
   }, []);
 
   const less1024 = windowWidth < 1025;
+  const greater1024 = windowWidth > 1024;
   const isHomePage =
     typeof window !== "undefined" ? window.location.pathname === "/" : false;
 
@@ -433,19 +436,21 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
     if (typeof window === "undefined") return;
 
     const currentPath = window.location.pathname;
-    const activeIndex = navItems.findIndex((item) => {
+    const items = ssrNavItems || [];
+    const activeIndex = items.findIndex((item) => {
       if (item.href === currentPath) return true;
       if (currentPath === "/" && item.href === "/") return true;
       if (item.href !== "/" && currentPath.startsWith(item.href)) return true;
       return false;
     });
 
-    if (activeIndex !== -1 && !navItems[activeIndex]?.dropdown) {
-      setActiveNavItem(activeIndex);
-    } else {
-      setActiveNavItem(null);
-    }
-  }, [navItems]);
+    const newActive =
+      activeIndex !== -1 && !items[activeIndex]?.dropdown
+        ? activeIndex
+        : null;
+
+    setActiveNavItem((prev) => (prev === newActive ? prev : newActive));
+  }, [ssrNavItems]);
 
   // Handle scroll
   useEffect(() => {
@@ -473,6 +478,9 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
       }
     };
   }, [isMobileMenuOpen]);
+
+  const sponsorLogoWhite = "https://www.direct-lithium-extraction-show.com/api/images/sponsor/1760958766497-923906797.png"
+  const sponsorLogoBlack = "https://www.direct-lithium-extraction-show.com/api/images/sponsor/1760958766497-534741386.png"
 
   return (
     <header
@@ -507,12 +515,41 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
             )}
           </a>
         </div>
+        {sponsorList.map((group) => (
+          group?.sponsorType === "Lead" && (
+            less1024 && (
+              <div className={showWhiteNavbar
+                ? "NewNavbar_sponsorBarFixed__k-Ba4"
+                : "NewNavbar_sponsorBar__+QUFr"}>
+                <span>Lead Sponsor</span>
+                <div className="NewNavbar_imageContainer__wGvkD">
+                  <img src={showWhiteNavbar ? sponsorLogoBlack : sponsorLogoWhite} loading="lazy" alt="Sponsor logo"></img>
+                </div>
+              </div>
+            )
+          )
+        ))}
 
         <div
           className="NewNavbar_hide__g8Glm NewNavbar_navLinksContainer__s15t3 navLinksContainer "
           style={{ display: isMobileMenuOpen && less1024 ? "block" : "" }}
         >
-          <div className="NewNavbar_linksContainer__tbm-r">
+          {sponsorList.map((group) => (
+            group?.sponsorType === "Lead" && (
+              greater1024 && (
+                <div className={showWhiteNavbar
+                  ? "NewNavbar_sponsorBarFixed__k-Ba4"
+                  : "NewNavbar_sponsorBar__+QUFr"}>
+                  <span>Lead Sponsor</span>
+                  <div className="NewNavbar_imageContainer__wGvkD">
+                    <img src={showWhiteNavbar ? sponsorLogoBlack : sponsorLogoWhite} loading="lazy" alt="Sponsor logo"></img>
+                  </div>
+                </div>
+              )
+            )
+          ))}
+
+          <div className="NewNavbar_linksContainer__tbm-r" style={{ marginTop: '10px' }}>
             <ul>
               {navItems.map((item, index) => {
                 const hasDropdown = item.dropdown?.length;

@@ -15,7 +15,8 @@ const rightArrowIcon =
 const LogoCarousel = () => {
   const sliderRef = useRef(null);
   // ✅ SSR data — no useEffect fetch
-  const logoList = useSSRData("logoCarousel") || [];
+  const ssrLogoCarousel = useSSRData("logoCarousel");
+  const logoList = ssrLogoCarousel || [];
 
   const settings = {
     dots: false,

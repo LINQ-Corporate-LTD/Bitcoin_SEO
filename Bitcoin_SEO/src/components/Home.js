@@ -49,7 +49,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   // ✅ SSR data — no client-side API calls
-  const sponsorList = useSSRData("sponsors") || [];
+  const ssrSponsorList = useSSRData("sponsors");
+  const sponsorList = ssrSponsorList || [];
   const { eventGeneralSettings } = useApiData();
   const eventName = eventGeneralSettings?.eventName || "Bitcoin Innovation & Market Evolution 2026";
 
@@ -71,7 +72,8 @@ const Home = () => {
       }
 
       const autoplayOn = width <= 1230;
-      const sponsorImg = sponsorList.map((sponsor) => sponsor);
+      const sponsors = ssrSponsorList || [];
+      const sponsorImg = sponsors.map((sponsor) => sponsor);
       const totalSlides = Math.ceil(sponsorImg.length / itemsPerSlide);
       const totalNeeded = totalSlides * itemsPerSlide;
       const padded = padToFill(sponsorImg, totalNeeded);
@@ -95,7 +97,7 @@ const Home = () => {
     updateSettings();
     window.addEventListener("resize", updateSettings);
     return () => window.removeEventListener("resize", updateSettings);
-  }, [sponsorList]);
+  }, [ssrSponsorList]);
 
   const seoTitle = `Bitcoin Innovation & Market Evolution 2026`;
   const seoDesc = "Join Bitcoin Innovation & Market Evolution 2026 to explore institutional adoption, mining, Layer-2 scalability, regulation and AI in Bitcoin markets.";

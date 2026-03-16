@@ -28,9 +28,12 @@ const Sponsors = () => {
   const navigate = useNavigate();
 
   // ✅ SSR data — no client-side GET requests
-  const sponsorList = useSSRData("sponsors") || [];
-  const mediaPageHelpersList = useSSRData("mediaPartners") || [];
-  const sponsorPageData = useSSRData("sponsorPageData") || [];
+  const ssrSponsorList = useSSRData("sponsors");
+  const sponsorList = ssrSponsorList || [];
+  const ssrMediaPartners = useSSRData("mediaPartners");
+  const mediaPageHelpersList = ssrMediaPartners || [];
+  const ssrSponsorPageData = useSSRData("sponsorPageData");
+  const sponsorPageData = ssrSponsorPageData || [];
   const paraDes = sponsorPageData[0]?.introParaDescription?.replace(/^"(.*)"$/, "$1") || "";
 
   const [isMobileScreen, setIsMobile] = useState(false);
@@ -187,7 +190,9 @@ const Sponsors = () => {
       }
 
       const autoplayOn = width <= 1230;
+
       const sponsorImg = sponsorList.map((sponsor) => sponsor);
+
       const totalSlides = Math.ceil(sponsorImg.length / itemsPerSlide);
       const totalNeeded = totalSlides * itemsPerSlide;
       const padded = padToFill(sponsorImg, totalNeeded);
@@ -224,7 +229,7 @@ const Sponsors = () => {
     updateSettings();
     window.addEventListener("resize", updateSettings);
     return () => window.removeEventListener("resize", updateSettings);
-  }, [sponsorList]);
+  }, [ssrSponsorList]);
 
   const sliderSettings = {
     dots: false,
@@ -329,6 +334,8 @@ const Sponsors = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const sponsorLogoBlack = "https://www.direct-lithium-extraction-show.com/api/images/sponsor/1757675931045-678212680.png"
+
   const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Sponsorship`;
   const seoDesc = "Exhibit or sponsor at Bitcoin Innovation & Market Evolution 2026 and connect with miners, exchanges, fintechs, regulators and blockchain leaders.";
   return (
@@ -380,6 +387,34 @@ const Sponsors = () => {
                   </div>
                 </div>
               </div>
+              {
+                sponsorList.map((group) => (
+                  group?.sponsorType === "Lead" && (
+                    <div className="SponsorBanner_container__19tBD">
+                      <div className="SponsorBanner_PartnerSponsorContainer__zdVCD">
+                        <h2>Lead Sponsor</h2>
+                        <div className="SponsorBanner_imageContainer__xHm3Z">
+                          <a href="/">
+                            <img src={sponsorLogoBlack} loading="lazy" alt="Halliburton"></img>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                ))
+              }
+              {/* {item?.sponsorType === "Partner" && (
+                <div className="SponsorBanner_container__19tBD">
+                  <div className="SponsorBanner_PartnerSponsorContainer__zdVCD">
+                    <h2>Lead Sponsor</h2>
+                    <div className="SponsorBanner_imageContainer__xHm3Z">
+                      <a href="/">
+                        <img src={sponsorLogoBlack} loading="lazy" alt="Halliburton"></img>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )} */}
               <div className="SponsorCards_container__o3uWn">
                 <div className="SponsorCards_AttendeesContainer__PLZ7L">
                   <h2>OUR SPONSORS</h2>

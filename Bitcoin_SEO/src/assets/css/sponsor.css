@@ -617,6 +617,44 @@
     color: var(--secondary-color);
 }
 
+.SponsorBanner_container__19tBD {
+    background-color: #fff;
+}
+
+.SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1920px;
+    padding: 70px 20px 55px;
+    width: 90%;
+}
+
+.SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD h2 {
+    color: #181818;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 30px;
+    margin: 0 0 50px;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD .SponsorBanner_imageContainer__xHm3Z {
+    align-items: center;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD .SponsorBanner_imageContainer__xHm3Z img {
+    max-width: 550px;
+    width: 100%;
+}
+
 .SponsorCards_container__o3uWn {
     background-color: #f1f1f1;
     min-height: 234px;
@@ -1043,6 +1081,14 @@
         font-size: 26px;
     }
 
+    .SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD {
+        padding: 60px 0 50px;
+    }
+
+    .SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD h2 {
+        font-size: 30px;
+    }
+
     .SponsorCards_container__o3uWn .SponsorCards_AttendeesContainer__PLZ7L {
         padding: 60px 0 50px;
     }
@@ -1143,6 +1189,10 @@
 
     .SponsorsScreen_exhibitCardContainer__6IHeV>div .SponsorsScreen_exhibitCard__nXsu2 {
         width: 100%;
+    }
+
+    .SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD h2 {
+        font-size: 28px;
     }
 
     .SponsorCards_container__o3uWn .SponsorCards_AttendeesContainer__PLZ7L h2 {
@@ -1275,6 +1325,10 @@
         margin: 40px 0;
     }
 
+    .SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD .SponsorBanner_imageContainer__xHm3Z img {
+        max-width: 450px;
+    }
+
     .SponsorCards_container__o3uWn .SponsorCards_AttendeesContainer__PLZ7L>div .SponsorCards_cardContainerOuter__yj9ca {
         max-width: 670px;
         width: 94%;
@@ -1319,6 +1373,25 @@
     .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textContainer__D8Ukb .DetailsContainer_innerContent__6NQGR p {
         font-size: 16px;
         line-height: 25px;
+    }
+
+    .SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD {
+        padding-bottom: 30px;
+        padding-top: 36px;
+    }
+
+    .SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD h2 {
+        font-size: 22px;
+        line-height: 25px;
+        margin-bottom: 30px;
+    }
+
+    .SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD .SponsorBanner_imageContainer__xHm3Z {
+        gap: 15px;
+    }
+
+    .SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD .SponsorBanner_imageContainer__xHm3Z img {
+        max-width: 300px;
     }
 
     .SponsorCards_container__o3uWn .SponsorCards_AttendeesContainer__PLZ7L {
@@ -1424,6 +1497,10 @@
 @media only screen and (max-width: 480px) {
     .DetailsContainer_wholeContainer__385Iv .DetailsContainer_container__JrWjX .DetailsContainer_textContainer__D8Ukb .DetailsContainer_innerContent__6NQGR {
         margin: 15px 0 20px;
+    }
+
+    .SponsorBanner_container__19tBD .SponsorBanner_PartnerSponsorContainer__zdVCD .SponsorBanner_imageContainer__xHm3Z img {
+        max-width: 250px;
     }
 
     .SponsorCards_container__o3uWn .SponsorCards_AttendeesContainer__PLZ7L>div .SponsorCards_cardContainerOuter__yj9ca>div .SponsorCards_cardContainerInner__BPPEL .SponsorCards_card__8eNkT {

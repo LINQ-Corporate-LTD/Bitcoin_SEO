@@ -18,7 +18,8 @@ const arrowRed =
 const HomeSpeakerSlider = () => {
   const navigate = useNavigate();
   // ✅ SSR data — no useEffect fetch
-  const speakerList = useSSRData("speakers") || [];
+  const ssrSpeakerList = useSSRData("speakers");
+  const speakerList = ssrSpeakerList || [];
   const [activeOverlayIndex, setActiveOverlayIndex] = useState(null);
 
   const slider1 = useRef(null);

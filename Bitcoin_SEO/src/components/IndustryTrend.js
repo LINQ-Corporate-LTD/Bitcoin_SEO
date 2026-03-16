@@ -8,7 +8,8 @@ import { useSSRData } from "../common/useSSRData";
 const IndustryTrend = () => {
   const navigate = useNavigate();
   // ✅ SSR data — no useEffect fetch
-  const indutryTrendList = useSSRData("trends") || [];
+  const ssrTrends = useSSRData("trends");
+  const indutryTrendList = ssrTrends || [];
 
   const handleClick = (trend) => {
     const trendTitle = trend?.trendTitle.replace(/\s+/g, "-");

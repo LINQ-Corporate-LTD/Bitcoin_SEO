@@ -8,7 +8,8 @@ import { useSSRData } from "../common/useSSRData";
 const LatestNews = () => {
   const navigate = useNavigate();
   // ✅ SSR data — no useEffect fetch
-  const newsList = useSSRData("news") || [];
+  const ssrNews = useSSRData("news");
+  const newsList = ssrNews || [];
 
   const handleClick = (member) => {
     const newsTitle = member.newsTitle

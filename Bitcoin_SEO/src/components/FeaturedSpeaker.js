@@ -17,7 +17,8 @@ const FeaturedSpeaker = ({ title }) => {
   const navigate = useNavigate();
   const sliderRef = useRef(null);
   // ✅ SSR data — no useEffect fetch
-  const speakerList = useSSRData("speakers") || [];
+  const ssrSpeakerList = useSSRData("speakers");
+  const speakerList = ssrSpeakerList || [];
 
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200

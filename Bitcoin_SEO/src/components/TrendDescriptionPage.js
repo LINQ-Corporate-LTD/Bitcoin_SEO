@@ -680,9 +680,12 @@ const TrendDescriptionPage = () => {
   const navigate = useNavigate();
 
   // ✅ SSR data — no client-side fetches
-  const trendList = useSSRData("trends") || [];
-  const ssrTrendDetail = useSSRData("trendDetail") || [];
-  const ssrSponsors = useSSRData("sponsors") || [];
+  const ssrTrends = useSSRData("trends");
+  const trendList = ssrTrends || [];
+  const ssrTrendDetail = useSSRData("trendDetail");
+  const trendDetailData = ssrTrendDetail || [];
+  const ssrSponsors = useSSRData("sponsors");
+  const initialSponsors = ssrSponsors || [];
 
   // Resolve which trend is active from slug
   const matchedTrend = trendList.find(
@@ -692,12 +695,12 @@ const TrendDescriptionPage = () => {
   const [currentTrendId, setCurrentTrendId] = useState(
     location.state?.id || matchedTrend?.id || null
   );
-  const [trendData, setTrendData] = useState(ssrTrendDetail);
+  const [trendData, setTrendData] = useState(trendDetailData);
   const [activeTab, setActiveTab] = useState(
-    ssrTrendDetail?.[0]?.slug || ""
+    trendDetailData?.[0]?.slug || ""
   );
   const [isExpanded, setIsExpanded] = useState(false);
-  const [sponsorList, setSponsorList] = useState(ssrSponsors);
+  const [sponsorList, setSponsorList] = useState(initialSponsors);
   const [settings, setSettings] = useState({});
   const [chunkedSponsors, setChunkedSponsors] = useState([]);
   const [windowWidth, setWindowWidth] = useState(
@@ -720,7 +723,7 @@ const TrendDescriptionPage = () => {
     setValidSlug(true);
     setCurrentTrendId(resolved.id);
     fetchTrendDetailClient(resolved.id); // ✅ always fetch — SSR data only valid for initial load
-  }, [slug, trendList]);
+  }, [slug, ssrTrends]);
 
   const fetchTrendDetailClient = (id) => {
     const formData = new FormData();
@@ -819,7 +822,7 @@ const TrendDescriptionPage = () => {
     updateSettings();
     window.addEventListener("resize", updateSettings);
     return () => window.removeEventListener("resize", updateSettings);
-  }, [sponsorList]);
+  }, [ssrSponsors]);
 
   const handleTrendListClick = (trend) => {
     const trendSlug = trend.trendTitle.replace(/\s+/g, "-");

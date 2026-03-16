@@ -23,8 +23,10 @@ const webIcon =
 
 const Venue = () => {
   // ✅ SSR data — no client-side API calls
-  const venueData = useSSRData("venue") || [];
-  const venueGalleryData = useSSRData("venueGallery") || [];
+  const ssrVenue = useSSRData("venue");
+  const venueData = ssrVenue || [];
+  const ssrVenueGallery = useSSRData("venueGallery");
+  const venueGalleryData = ssrVenueGallery || [];
 
   const contactSectionRef = useRef(null);
   const [lightboxIndex, setLightboxIndex] = useState(-1);

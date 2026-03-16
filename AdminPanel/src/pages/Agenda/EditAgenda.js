@@ -801,8 +801,8 @@ const EditAgenda = () => {
                               options={{
                                 enableTime: true,
                                 noCalendar: true,
-                                dateFormat: "h:i K",
-                                time_24hr: false,
+                                dateFormat: "H:i",
+                                time_24hr: true,
                               }}
                               onReady={(selectedDates, dateStr, instance) => {
                                 if (instance.hourElement) {
@@ -833,8 +833,8 @@ const EditAgenda = () => {
                               options={{
                                 enableTime: true,
                                 noCalendar: true,
-                                dateFormat: "h:i K",
-                                time_24hr: false,
+                                dateFormat: "H:i",
+                                time_24hr: true,
                               }}
                               onReady={(selectedDates, dateStr, instance) => {
                                 if (instance.hourElement) {

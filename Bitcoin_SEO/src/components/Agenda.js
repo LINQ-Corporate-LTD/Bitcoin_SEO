@@ -30,7 +30,11 @@ const Agenda = () => {
         ) {
           navigate("/logout");
         }
-        if (data && data.status) {
+
+        // API returns an array directly — not { status, agendaList }
+        if (Array.isArray(data)) {
+          setAgendaList(data); // ✅ set the array directly
+        } else if (data && data.status) {
           setAgendaList(data["agendaList"]);
         } else {
           toast.error(data?.message);
@@ -38,15 +42,7 @@ const Agenda = () => {
       })
       .catch((error) => {
         setTimeout(() => {
-          toast.error("There was an error, Please try again later.", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error("There was an error, Please try again later.");
         }, 1000);
       });
   };
