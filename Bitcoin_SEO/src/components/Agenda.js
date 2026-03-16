@@ -10,6 +10,9 @@ import FeaturedSpeaker from "./FeaturedSpeaker";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useApiData } from "../common/ApiContext";
+import speakerDummy from '../../src/assets/images/Speaker_photos/Speaker_dummy.jpg'
+import companyDummy from '../../src/assets/images/Speaker_photos/companyLogo_dummy.png'
+
 const Agenda = () => {
   const navigate = useNavigate();
   const [agendaList, setAgendaList] = useState(null);
@@ -31,16 +34,23 @@ const Agenda = () => {
         ) {
           localStorage.clear();
           navigate("/logout");
-        }
-        if (data && data.status) {
-          setAgendaList(data["agendaList"]);
-        } else {
-          toast.error(data?.message);
+        } else if (data && data.status !== false) {
+          // DRF response might be direct array or status wrapped
+          setAgendaList(data.agendaList || data);
+          // setTotalCount(data?.paginationDetails?.count);
         }
       })
       .catch((error) => {
         setTimeout(() => {
-          toast.error("There was an error, Please try again later.");
+          toast.error("There was an error, Please try again later.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         }, 1000);
       });
   };
@@ -1792,7 +1802,7 @@ const Agenda = () => {
                                         <div className='Agenda_speakerDetailsContainer__mOEC6'>
                                           <div className='Agenda_upper__9vYZH'>
                                             <div className="Agenda_upperInnerV2__SAsL1">
-                                              <img src={item.Speaker1CompanyImg}
+                                              <img src={!item.Speaker1CompanyImg ? companyDummy : item.Speaker1CompanyImg}
                                                 alt={item.speaker1CompanyName}
                                                 width="100"></img>
                                               <div>
@@ -1829,23 +1839,23 @@ const Agenda = () => {
                                         </div>
                                         <div className="Agenda_speakerDetailsContainer__mOEC6">
                                           <div className="Agenda_upper__9vYZH">
-                                            {item.Speaker1AgendaImg && (
-                                              <img
-                                                src={item.Speaker1AgendaImg}
-                                                alt={item.speaker1Name}
-                                                width="100"
-                                                height="50"
-                                                style={{ cursor: "pointer" }}
-                                              />
-                                            )}
+                                            {/* {item.Speaker1AgendaImg && ( */}
+                                            <img
+                                              src={!item.Speaker1AgendaImg ? speakerDummy : item.Speaker1AgendaImg}
+                                              alt={item.speaker1Name}
+                                              width="100"
+                                              height="50"
+                                              style={{ cursor: "pointer" }}
+                                            />
+                                            {/* )} */}
                                             <div className="Agenda_upperInnerV1__VkoVw">
-                                              {item.Speaker1CompanyImg && (
-                                                <img
-                                                  src={item.Speaker1CompanyImg}
-                                                  alt={item.speaker1CompanyName}
-                                                  width="100"
-                                                />
-                                              )}
+                                              {/* {item.Speaker1CompanyImg && ( */}
+                                              <img
+                                                src={!item.Speaker1CompanyImg ? companyDummy : item.Speaker1CompanyImg}
+                                                alt={item.speaker1CompanyName}
+                                                width="100"
+                                              />
+                                              {/* )} */}
                                               <div>
                                                 <p>{item.speaker1Name}</p>
                                                 <p>{item.speaker1CompanyName}</p>
@@ -1885,7 +1895,7 @@ const Agenda = () => {
                                           <div className='Agenda_speakerDetailsContainer__mOEC6'>
                                             <div className='Agenda_upper__9vYZH'>
                                               <div className="Agenda_upperInnerV2__SAsL1">
-                                                <img src={item.Speaker2CompanyImg}
+                                                <img src={!item.Speaker2CompanyImg ? companyDummy : item.Speaker2CompanyImg}
                                                   alt={item.speaker2CompanyName}
                                                   width="100"></img>
                                                 <div>
@@ -1917,23 +1927,23 @@ const Agenda = () => {
                                         </div>
                                         <div className="Agenda_speakerDetailsContainer__mOEC6">
                                           <div className="Agenda_upper__9vYZH">
-                                            {item.Speaker2AgendaImg && (
-                                              <img
-                                                src={item.Speaker2AgendaImg}
-                                                alt={item.speaker2Name}
-                                                width="100"
-                                                height="50"
-                                                style={{ cursor: "pointer" }}
-                                              />
-                                            )}
+                                            {/* {item.Speaker2AgendaImg && ( */}
+                                            <img
+                                              src={!item.Speaker2AgendaImg ? speakerDummy : item.Speaker2AgendaImg}
+                                              alt={item.speaker2Name}
+                                              width="100"
+                                              height="50"
+                                              style={{ cursor: "pointer" }}
+                                            />
+                                            {/* )} */}
                                             <div className="Agenda_upperInnerV1__VkoVw">
-                                              {item.Speaker2CompanyImg && (
-                                                <img
-                                                  src={item.Speaker2CompanyImg}
-                                                  alt={item.speaker2CompanyName}
-                                                  width="100"
-                                                />
-                                              )}
+                                              {/* {item.Speaker2CompanyImg && ( */}
+                                              <img
+                                                src={!item.Speaker2CompanyImg ? companyDummy : item.Speaker2CompanyImg}
+                                                alt={item.speaker2CompanyName}
+                                                width="100"
+                                              />
+                                              {/* )} */}
                                               <div>
                                                 <p>{item.speaker2Name}</p>
                                                 <p>{item.speaker2CompanyName}</p>
@@ -1975,7 +1985,7 @@ const Agenda = () => {
                                           <div className='Agenda_speakerDetailsContainer__mOEC6'>
                                             <div className='Agenda_upper__9vYZH'>
                                               <div className="Agenda_upperInnerV2__SAsL1">
-                                                <img src={item.singleSpeakerCompanyImg}
+                                                <img src={!item.singleSpeakerCompanyImg ? companyDummy : item.singleSpeakerCompanyImg}
                                                   alt={item.singleSpeakerCompanyName}
                                                   width="100"></img>
                                                 <div>
@@ -2012,23 +2022,23 @@ const Agenda = () => {
                                           </div>
                                           <div className="Agenda_speakerDetailsContainer__mOEC6">
                                             <div className="Agenda_upper__9vYZH">
-                                              {item.singleSpeakerAgendaImg && (
-                                                <img
-                                                  src={item.singleSpeakerAgendaImg}
-                                                  alt={item.singleSpeakerName}
-                                                  width="100"
-                                                  height="50"
-                                                  style={{ cursor: "pointer" }}
-                                                />
-                                              )}
+                                              {/* {item.singleSpeakerAgendaImg && ( */}
+                                              <img
+                                                src={!item.singleSpeakerAgendaImg ? speakerDummy : item.singleSpeakerAgendaImg}
+                                                alt={item.singleSpeakerName}
+                                                width="100"
+                                                height="50"
+                                                style={{ cursor: "pointer" }}
+                                              />
+                                              {/* )} */}
                                               <div className="Agenda_upperInnerV1__VkoVw">
-                                                {item.singleSpeakerCompanyImg && (
-                                                  <img
-                                                    src={item.singleSpeakerCompanyImg}
-                                                    alt={item.singleSpeakerCompanyName}
-                                                    width="100"
-                                                  />
-                                                )}
+                                                {/* {item.singleSpeakerCompanyImg && ( */}
+                                                <img
+                                                  src={!item.singleSpeakerCompanyImg ? companyDummy : item.singleSpeakerCompanyImg}
+                                                  alt={item.singleSpeakerCompanyName}
+                                                  width="100"
+                                                />
+                                                {/* )} */}
                                                 <div>
                                                   <p>{item.singleSpeakerName}</p>
                                                   <p>{item.singleSpeakerCompanyName}</p>

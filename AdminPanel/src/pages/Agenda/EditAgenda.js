@@ -2231,16 +2231,7 @@ const EditAgenda = () => {
                           <div className="input-group">
                             <Flatpickr
                               className="form-control"
-<<<<<<< HEAD
-                              options={{
-                                enableTime: true,
-                                noCalendar: true,
-                                dateFormat: "H:i",
-                                time_24hr: true,
-                              }}
-=======
                               options={{ enableTime: true, noCalendar: true, dateFormat: "H:i", time_24hr: true, }}
->>>>>>> 648bc9bc9428f0252ec8b37b3528e1b2d878651c
                               onReady={(selectedDates, dateStr, instance) => {
                                 if (instance.hourElement) {
                                   instance.hourElement.addEventListener("keyup", (e) => {
@@ -2263,16 +2254,7 @@ const EditAgenda = () => {
                           <div className="input-group">
                             <Flatpickr
                               className="form-control"
-<<<<<<< HEAD
-                              options={{
-                                enableTime: true,
-                                noCalendar: true,
-                                dateFormat: "H:i",
-                                time_24hr: true,
-                              }}
-=======
                               options={{ enableTime: true, noCalendar: true, dateFormat: "H:i", time_24hr: true, }}
->>>>>>> 648bc9bc9428f0252ec8b37b3528e1b2d878651c
                               onReady={(selectedDates, dateStr, instance) => {
                                 if (instance.hourElement) {
                                   instance.hourElement.addEventListener("keyup", (e) => {
