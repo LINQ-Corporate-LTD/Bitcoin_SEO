@@ -80,7 +80,7 @@
     width: 26%;
 }
 
-.Slideshare_container__TrIvi .Slideshare_authenticate__A8Vrd form input:nth-child(2):hover {
+.Slideshare_container__TrIvi .Slideshare_authenticate__A8Vrd form .verify_btn:hover {
     background-color: initial;
     background-color: var(--primary-color);
     border: 1px solid;

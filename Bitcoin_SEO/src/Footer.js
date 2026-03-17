@@ -388,8 +388,8 @@ const Footer = () => {
               >
                 Email
               </a>
-              <a target="_blank" href="/contact-us">
-                Customer Support
+              <a target="_blank" href="/pay-online">
+                Pay Online
               </a>
               <a target="_blank" href="/terms-and-conditions">
                 Terms and Conditions

@@ -1,0 +1,241 @@
+.PayOnline_container__lSTKr {
+  background-color: #f2f2f2;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP {
+  align-items: center;
+  background-color: #0000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 93px 0 100px;
+  width: 100%;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div {
+  margin: 0 auto;
+  max-width: 1920px;
+  width: 100%;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div h2 {
+  color: #181818;
+  font-size: 36px;
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div>p {
+  color: #181818;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 38px 0 46px;
+  text-align: center;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_inputs__r1BVt {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_inputs__r1BVt input {
+  border: 1px solid #0000004f;
+  border-radius: 2px;
+  color: #777;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 10px;
+  max-width: 402px;
+  padding: 8.5px 20px;
+  width: 100%;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_inputs__r1BVt input:first-child {
+  margin-left: 0;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_inputs__r1BVt input:last-child {
+  margin-right: 0;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_submit__GYabM {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0 30px;
+  width: 100%;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_submit__GYabM p {
+  color: #181818;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+  text-align: start;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_submit__GYabM button {
+  background-color: initial;
+  background-color: var(--secondary-color);
+  border: 1px solid #0000;
+  border-radius: 2px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 800;
+  margin-left: 20px;
+  padding: 10px;
+  text-transform: uppercase;
+  transition: all .3s ease;
+  width: 210px;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_submit__GYabM button:hover {
+  background-color: #e4e4e4 !important;
+  border: 1px solid #0000;
+  color: initial;
+  color: var(--secondary-color);
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_logos__u4LhC {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_logos__u4LhC img {
+  height: 39px;
+  width: 100%;
+}
+
+.PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_submit__GYabM p a {
+  color: #131d48;
+  text-decoration: underline !important;
+}
+
+@media only screen and (max-width: 1419px) {
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP {
+    padding: 50px 0 60px;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div h2 {
+    font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 1231px) {
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP {
+    max-width: 960px;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c {
+    max-width: 960px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP {
+    max-width: 720px;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div h2 {
+    font-size: 28px;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c {
+    max-width: 720px;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_submit__GYabM {
+    margin: 30px 0 20px;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_submit__GYabM button {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 940px) {
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div {
+    max-width: 100%;
+    width: auto;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP {
+    max-width: 650px;
+    width: 90%;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c {
+    max-width: 650px;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_submit__GYabM button {
+    padding: 5px;
+  }
+}
+
+@media only screen and (max-width: 639px) {
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP {
+    padding: 35px 0 40px;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div h2 {
+    font-size: 22px;
+    line-height: 25px;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div>p {
+    margin: 10px 0 13px;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_inputs__r1BVt {
+    flex-wrap: wrap;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_inputs__r1BVt input {
+    margin: 0 0 18px;
+    max-width: 100%;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_inputs__r1BVt input:last-child {
+    margin-bottom: 0;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_submit__GYabM {
+    flex-wrap: wrap;
+    margin: 14px 0 21px;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_submit__GYabM p {
+    text-align: center;
+  }
+
+  .PayOnline_container__lSTKr .PayOnline_paymentContainer__wFbAP>div .PayOnline_form__O6V2c .PayOnline_submit__GYabM button {
+    font-size: 16.5px !important;
+    margin-left: 0;
+    margin-top: 16px;
+    padding: 10px;
+    width: 100%;
+  }
+}

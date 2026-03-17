@@ -793,6 +793,7 @@ const SlideShare = () => {
                                                 </div>
                                             </div>
                                             <input
+                                                className="verify_btn"
                                                 type="submit"
                                                 value={isLoggingIn ? "Verifying…" : "Verify"}
                                                 disabled={isLoggingIn}
