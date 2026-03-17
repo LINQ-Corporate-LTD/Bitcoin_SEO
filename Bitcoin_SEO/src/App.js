@@ -35,6 +35,7 @@ import TermsAndConditions from "./components/TermsAndConditions";
 import Error404 from "./components/Error404";
 import SponsorDescription from "./components/SponsorDescription";
 import RemindMeLater from "./components/RemindMe";
+import SlideShare from "./components/slideShare";
 
 function App() {
   // ✅ Get initial data from window if available (from SSR)
@@ -100,6 +101,7 @@ function App() {
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="thank-you" element={<ThankYouPage />} />
+            <Route path="securelogin" element={<SlideShare />} />
             <Route path="404" element={<Error404 />} />
             <Route path="*" element={<Error404 />} />
           </Route>

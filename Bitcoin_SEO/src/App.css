@@ -87,6 +87,11 @@
   color: #080808;
 }
 
+.ReactModal__Overlay {
+  background-color: #000000b3 !important;
+  z-index: 21;
+}
+
 @media screen and (max-width: 768px) {
   .speaker-h1-name {
     font-size: 28px !important;
