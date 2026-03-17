@@ -345,4 +345,11 @@ urlpatterns = [
     path('editslideShareAttandee', views.edit_slideShare_attandee),
     path('deleteslideShareAttandee', views.delete_slideShare_attandee),
 
+    path('getslideShareAccess', views.slideShareAccessListFun),
+    path('addslideShareAccess', views.add_slideShare_access),
+    path('editslideShareAccess', views.edit_slideShare_access),
+    path('deleteslideShareAccess', views.delete_slideShare_access),
+    path('securelogin', views.secure_login_slideShare),
+
+
 ]

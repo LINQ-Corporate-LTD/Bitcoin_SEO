@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User, Permission, Group
 
 
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes, throttle_classes
 from rest_framework.permissions import AllowAny
 import json
 from datetime import datetime
@@ -16,11 +16,14 @@ from rest_framework import status
 from django.db import transaction
 from django.db.models import F
 from Myadmin.serializers import eventAgendaSerializer, eventIndustryTrendsSerializer
-
+from rest_framework.throttling import AnonRateThrottle
 # Create your views here.
 from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSubCategories,themeColorSettings,homePageVideoSectionInput,videoSectionUserOptions,speakerSection,homePageThirdSection,keyPointsSection,keyPointsSectionPoints,countSection,countSectionTopic,testimonialSection,pastAttandeesSection,sponsorSection, footerFirstSectionOptions, footerSocialMediaOptions,companiesLogoSection,registerPageSettings,whoShouldAttendPageData,speakerPageData,speakerPageSectionThreePoints,sponsorPageData,sponsorPageBulletData,venuePageData,venuePageGallery,newsCategory,generalNewsPoint,latestNews,topNews,subscribers,contactUsData,contactUsPageData,contactUsHelpData,pressMediaPageData,pressMediaPageBoxData,mediaPageHelpers,standOutCrowdRequestData,becomeSpeakerRequestData,quickProposalRequestData,endUserPassRegistrationRequestData,pastAttandeeHomeData
-from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees
+from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees,slideSharesAccessPersons
 import requests
+import jwt
+import datetime
+from django.conf import settings
 #---------------------------- Api For Upload Media ----------------------------#
 @api_view(['POST'])
 def upload_media(request):
@@ -5973,3 +5976,108 @@ def slideShareAttandeeListFun(request):
         }
         slideSharesAttandees.append(x) 
     return JsonResponse({'slideSharesAttandees': slideSharesAttandees, 'status': True})
+
+#------------------- Api For Add Slide Share Access-------------------#
+@api_view(['POST'])
+def add_slideShare_access(request):
+    response = request.data
+    check_db = slideSharesAccessPersons()
+
+    if 'email' in request.POST:
+        check_db.email = response['email']
+
+    if 'eventPassword' in request.POST:
+        check_db.eventPassword = response['eventPassword']
+
+    if 'projectYear' in request.POST:
+        check_db.projectYear = response['projectYear']
+
+    check_db.created_by = "Admin"
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Delete Slide Share Access-------------------#
+@api_view(['POST'])
+def delete_slideShare_access(request):
+    response = request.data
+    check_db = slideSharesAccessPersons.objects.get(id=response['id'])
+    check_db.isDelete = response['isDelete']
+    check_db.save()
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#---------------------------- Api For Get Slide Share Access List ----------------------------#
+@permission_classes((AllowAny,))
+@api_view(['GET'])
+def slideShareAccessListFun(request):
+    slideSharesAccess_Data = slideSharesAccessPersons.objects.all().filter(isDelete='No')
+    slideSharesAccess = []
+    for a in slideSharesAccess_Data:
+        x={
+            'id':a.id,
+            'email':a.email,
+            'eventPassword':a.eventPassword,
+            'projectYear':a.projectYear,
+            'created_at': a.created_at,
+            'updated_at': a.updated_at,
+            'created_by': a.created_by,
+            'updated_by': a.updated_by,
+        }
+        slideSharesAccess.append(x) 
+    return JsonResponse({'slideSharesAccess': slideSharesAccess, 'status': True})
+
+#------------------- Api For Edit Slide Share Access-------------------#
+@api_view(['POST'])
+def edit_slideShare_access(request):
+    response = request.data
+    check_db = slideSharesAccessPersons.objects.get(id=response['id'])
+
+    if 'email' in request.POST:
+        check_db.email = response['email']
+
+    if 'eventPassword' in request.POST:
+        check_db.eventPassword = response['eventPassword']
+
+    if 'projectYear' in request.POST:
+        check_db.projectYear = response['projectYear']
+ 
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+class LoginRateThrottle(AnonRateThrottle):
+    rate = '5/min'
+
+#------------------- Api For Secure Login of Slide Share-------------------#
+@api_view(['POST'])
+@authentication_classes([]) 
+@permission_classes((AllowAny,))
+@throttle_classes([LoginRateThrottle])
+def secure_login_slideShare(request):
+    response = request.data
+    email = response['email']
+    eventPassword = response['eventPassword']
+    projectYear = response['projectYear']
+
+    try:
+        attendee = slideSharesAccessPersons.objects.get(email=email, eventPassword=eventPassword, projectYear=projectYear)
+    except slideSharesAccessPersons.DoesNotExist:
+        return JsonResponse({'status': False, "message": "Invalid Credentials"})
+
+    now = datetime.datetime.utcnow()
+    expires_at = now + datetime.timedelta(hours=2)
+
+    payload = {
+            "attendee_id": attendee.id,
+            "email":       attendee.email,
+            "year":        attendee.projectYear,
+            "iat":         now,
+            "exp":         expires_at,
+        }
+
+    token = jwt.encode(payload, settings.JWT_SECRET_KEY, algorithm=settings.JWT_ALGORITHM)
+
+    return JsonResponse({'status': True, "message": "Login successful.","token": token, "email": attendee.email,"expires_at": expires_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
+"token_type": "Bearer","success": True,})

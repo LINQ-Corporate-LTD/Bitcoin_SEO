@@ -36,6 +36,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
 
+# JWT SETTINGS
+# ─────────────────────────────────────────────
+JWT_SECRET_KEY = "c2aff4bb1821311e3259c94ec069c50862da0130e69ab175d52b805d9cf923a43e38229b85fb526c0eb039848fcbde418fe62c7ae6afe23b3510505554b4e5b2"  # Use env var in prod
+JWT_ALGORITHM = "HS256"
+JWT_EXPIRATION_HOURS = 2  # Token expires in 2 hours
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,12 +87,32 @@ TEMPLATES = [
     },
 ]
 
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "authorization",
+]
+
 WSGI_APPLICATION = 'Backend.wsgi.application'
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#                 'rest_framework_simplejwt.authentication.JWTAuthentication',  #SimpleJWT for authentication
-#     ),
-# }
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ],
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
+        "rest_framework.parsers.MultiPartParser",  # ← Add this
+        "rest_framework.parsers.FormParser",        # ← Add this
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "10/min",
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases

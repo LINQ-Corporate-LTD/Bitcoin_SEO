@@ -507,3 +507,13 @@ class eventSlideSharesAttandees(models.Model):
     created_by = models.CharField(null=False,max_length=50,default='No')
     updated_by = models.CharField(null=False,max_length=50,default='No')
     isDelete = models.CharField(default="No",max_length=10)
+
+class slideSharesAccessPersons(models.Model):
+    email = models.CharField(default="",max_length=100,null=True, blank=True)
+    eventPassword = models.CharField(default="",max_length=100,null=True, blank=True)
+    projectYear = models.CharField(default="",max_length=100,null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.CharField(null=False,max_length=50,default='No')
+    updated_by = models.CharField(null=False,max_length=50,default='No')
+    isDelete = models.CharField(default="No",max_length=10)
