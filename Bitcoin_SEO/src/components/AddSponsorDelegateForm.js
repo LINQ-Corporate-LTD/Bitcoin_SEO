@@ -200,7 +200,7 @@ const AddSponsorDelegateForm = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitAttempted(true);
 
@@ -212,9 +212,23 @@ const AddSponsorDelegateForm = () => {
       };
       console.log("formData: ", formData);
 
-      const invoiceNumber = `WDRM25TBC-${Math.floor(
-        1000 + Math.random() * 9000
-      )}`;
+      // const invoiceNumber = `WDRM25TBC-${Math.floor(
+      //   1000 + Math.random() * 9000
+      // )}`;
+
+      // ADD THIS ✅
+      let invoiceNumber;
+      try {
+        const invoiceRes = await fetch(
+          "https://harsh7541.pythonanywhere.com/admin1/generate-invoice-no/"
+        );
+        const invoiceData = await invoiceRes.json();
+        invoiceNumber = invoiceData.invoiceNo;
+      } catch (error) {
+        console.error("❌ Failed to generate invoice number:", error);
+        alert("Could not generate invoice number. Please try again.");
+        return; // Stop submission if invoice generation fails
+      }
 
       // Static values
       const disposition = "Confirmed";
@@ -272,20 +286,92 @@ const AddSponsorDelegateForm = () => {
         console.log(`🎟️ Company: ${formData.company.companyName}`);
         console.log(`🧾 Invoice Number: ${invoiceNumber}`);
       }
+      // Function to send email
+      async function sendBookingEmail() {
+        // Build HTML content for email
+        let htmlContent = `
+        <div style='width: 60%; background-color: transparent; color: black;'>
+          <table style='width: 100%; border-collapse: collapse;'>
+            <tr><td colspan='2' style='font-weight: bold; padding: 8px; background-color: #f0f0f0;'>Company Details</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>Company Name:</td><td style='width: 50%; padding: 8px;'>${companyData.companyName}</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>Web Address:</td><td style='width: 50%; padding: 8px;'>${companyData.webAddress}</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>Address:</td><td style='width: 50%; padding: 8px;'>${companyData.address}</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>City:</td><td style='width: 50%; padding: 8px;'>${companyData.city}</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>Country:</td><td style='width: 50%; padding: 8px;'>${companyData.country}</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>Postal Code:</td><td style='width: 50%; padding: 8px;'>${companyData.postalCode}</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>State:</td><td style='width: 50%; padding: 8px;'>${companyData.state}</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>Invoice no:</td><td style='width: 50%; padding: 8px;'>${invoiceNumber}</td></tr>
+      `;
 
-      // Run the submission
-      submitCompanyDelegatesToHubSpot(formData);
+        // Add each delegate
+        delegates.forEach((delegate, index) => {
+          htmlContent += `
+            <tr><td colspan='2' style='font-weight: bold; padding: 8px; background-color: #f0f0f0;'>Delegate ${index + 1} Details:</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>Email:</td><td style='width: 50%; padding: 8px;'>${delegate.email}</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>First Name:</td><td style='width: 50%; padding: 8px;'>${delegate.firstName}</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>Last Name:</td><td style='width: 50%; padding: 8px;'>${delegate.lastName}</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>Phone Number:</td><td style='width: 50%; padding: 8px;'>${delegate.mobile}</td></tr>
+            <tr><td style='width: 50%; padding: 8px;'>Position:</td><td style='width: 50%; padding: 8px;'>${delegate.position}</td></tr>
+        `;
+        });
 
-      // Navigate to booking-form and pass the data via state
-      navigate("/sponsor-booking", {
-        state: {
-          selectedPackage: selectedPackage,
-          companyData: companyData,
-          delegates: delegates,
-          termsAgreement: termsAgreement,
-          uniqueInvoiceNo: invoiceNumber,
-        },
-      });
+        htmlContent += `
+          </table>
+        </div>
+      `;
+
+        // Prepare email payload
+        const emailPayload = {
+          toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
+          cc: "",
+          subject: "BIME - Sponsor Booking Form Step 1",
+          html: htmlContent,
+        };
+
+        try {
+          const emailResponse = await fetch(
+            "https://harsh7541.pythonanywhere.com/admin1/sendmail",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(emailPayload),
+            },
+          );
+
+          const emailResult = await emailResponse.json();
+
+          if (emailResult.status === "success") {
+            console.log("✅ Email sent successfully");
+          } else {
+            console.error("❌ Email sending failed:", emailResult.message);
+          }
+        } catch (error) {
+          console.error("❌ Error sending email:", error);
+        }
+      }
+
+      try {
+        // Run HubSpot submission, email sending, and Zoho in parallel
+        await Promise.all([
+          submitCompanyDelegatesToHubSpot(formData),
+          sendBookingEmail(),
+          // submitToZoho(),
+        ]);
+        // Navigate to booking-form after both complete
+        navigate("/sponsor-booking", {
+          state: {
+            selectedPackage: selectedPackage,
+            companyData: companyData,
+            delegates: delegates,
+            termsAgreement: termsAgreement,
+            uniqueInvoiceNo: invoiceNumber,
+          },
+        });
+      } catch (error) {
+        console.error("❌ Error in submission process:", error);
+        // Optionally show error message to user
+        alert("There was an error submitting your booking. Please try again.");
+      }
     }
   };
 
@@ -1115,7 +1201,7 @@ const AddSponsorDelegateForm = () => {
                     type="submit"
                     className="SponsorFormV2_submitBtn__96h2O"
                     value="Submit"
-                    // onClick={() => navigate("/booking-form")}
+                  // onClick={() => navigate("/booking-form")}
                   ></input>
                 </div>
               </form>
@@ -1134,8 +1220,8 @@ const AddSponsorDelegateForm = () => {
               <span className="PageForm_divide__vwhn0">|</span>
               ABCD Company
             </p>
-            <p>©2026 Bitcoin Innovation & Market 
-Evolution 2026</p>
+            <p>©2026 Bitcoin Innovation & Market
+              Evolution 2026</p>
           </div>
         </div>
       </div>

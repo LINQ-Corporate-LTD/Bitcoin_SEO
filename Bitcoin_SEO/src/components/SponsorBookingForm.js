@@ -46,7 +46,7 @@ const SponsorBookingForm = () => {
   console.log("discountPercent: ", discountPercent);
   const [activeDelPackageData, setActiveDelPackageData] = useState([]);
   console.log("activeDelPackageData: ", activeDelPackageData);
-
+  const invopiceNo = location?.state?.uniqueInvoiceNo;
   const paymentFormRef = useRef(null);
 
   const [windowWidth, setWindowWidth] = useState(
@@ -91,17 +91,382 @@ const SponsorBookingForm = () => {
       return;
     }
 
-    // Check if payment form is ready
-    if (paymentFormRef.current) {
-      // Trigger payment submission
-      await paymentFormRef.current.submitPayment();
-    } else {
-      toast.error("Payment form is not ready. Please try again.");
+    // Function to send Step 2 email
+    async function sendStep2Email() {
+      // Build Step 2 HTML content (pricing details)
+      let step2Html = `
+      <h3>Sponsor Booking Form Step 2</h3>
+      <div style='width: 60%; background-color: transparent; color: black;'>
+        <table style='width: 100%; border-collapse: collapse;'>
+          <tr><td style='width: 50%; padding: 8px;'>Delegate pass ${delegates.length}:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName} ${prices.initialPrice}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Discount:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName} ${prices.discountAmount}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Taxes and Service Charges:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName} ${prices.taxAmount}</td></tr>
+          <tr><td colspan='2' style='font-weight: bold; padding: 8px;'>Add Ons:</td></tr>
+    `;
+
+      // Add selected add-ons
+      if (selectedAddOns && selectedAddOns.length > 0) {
+        selectedAddOns.forEach((addOn) => {
+          step2Html += `<tr><td style='width: 50%; padding: 8px;'>${addOn.addOnPointName}:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName} ${addOn.additionalPrice}</td></tr>`;
+        });
+      }
+
+      step2Html += `
+          <tr><td style='width: 50%; padding: 8px; font-weight: 700;'>Total Amount:</td><td style='width: 35%; padding: 8px; font-weight: 700;'>${eventGeneralSettings?.currencyName} ${prices.finalTotal}</td></tr>
+        </table>
+      </div>
+      <hr style='border:none; height: 2px; background-color: #7c7c7c; margin: 20px 0;'>
+      <h3 style='margin-top: 7px;'>Booking Form Step 1</h3>
+      <div style='width: 60%; background-color: transparent; color: black;'>
+        <table style='width: 100%; border-collapse: collapse;'>
+          <tr><td colspan='2' style='font-weight: bold; padding: 8px; background-color: #f0f0f0;'>Company Details</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Company Name:</td><td style='width: 50%; padding: 8px;'>${companyDetails?.companyName || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Web Address:</td><td style='width: 50%; padding: 8px;'>${companyDetails?.webAddress || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Address:</td><td style='width: 50%; padding: 8px;'>${companyDetails?.address || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>City:</td><td style='width: 50%; padding: 8px;'>${companyDetails?.city || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Country:</td><td style='width: 50%; padding: 8px;'>${companyDetails?.country || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Postal Code:</td><td style='width: 50%; padding: 8px;'>${companyDetails?.postalCode || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>State:</td><td style='width: 50%; padding: 8px;'>${companyDetails?.state || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Invoice no:</td><td style='width: 50%; padding: 8px;'>${invopiceNo || ""}</td></tr>
+    `;
+
+      // Add all delegates
+      delegates.forEach((delegate, index) => {
+        step2Html += `
+          <tr><td colspan='2' style='font-weight: bold; padding: 8px; background-color: #f0f0f0;'>Delegate ${index + 1} Details:</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Email:</td><td style='width: 50%; padding: 8px;'>${delegate.email || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>First Name:</td><td style='width: 50%; padding: 8px;'>${delegate.firstName || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Last Name:</td><td style='width: 50%; padding: 8px;'>${delegate.lastName || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Phone Number:</td><td style='width: 50%; padding: 8px;'>${delegate.mobile || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Position:</td><td style='width: 50%; padding: 8px;'>${delegate.position || ""}</td></tr>
+      `;
+      });
+
+      step2Html += `
+        </table>
+      </div>
+    `;
+
+      // Prepare email payload
+      const emailPayload = {
+        toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
+        cc: "",
+        subject: "BIME - Sponsor Booking Form Step 2",
+        html: step2Html,
+      };
+
+      try {
+        const emailResponse = await fetch(
+          "https://harsh7541.pythonanywhere.com/admin1/sendmail",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(emailPayload),
+          },
+        );
+
+        const emailResult = await emailResponse.json();
+
+        if (emailResult.status === "success") {
+          console.log("✅ Step 2 Email sent successfully");
+        } else {
+          console.error("❌ Step 2 Email sending failed:", emailResult.message);
+        }
+      } catch (error) {
+        console.error("❌ Error sending Step 2 email:", error);
+        // Don't block payment even if email fails
+      }
+    }
+
+    try {
+      // Send Step 2 email (don't await - let it run in background)
+      sendStep2Email().catch((err) => console.error("Email error:", err));
+
+      // Check if payment form is ready
+      if (paymentFormRef.current) {
+        // Trigger payment submission
+        await paymentFormRef.current.submitPayment();
+      } else {
+        toast.error("Payment form is not ready. Please try again.");
+      }
+    } catch (error) {
+      console.error("❌ Error in payment process:", error);
+      toast.error("An error occurred during payment. Please try again.");
     }
   };
 
   const handlePaymentSuccess = async (stripeResponse) => {
     console.log("stripeResponse: ", stripeResponse);
+
+    // Function to send Step 3 email (after successful payment)
+    async function sendStep3Email() {
+      // Build Step 3 HTML content with better styling
+      let step3Html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        h3 {
+            color: #555;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .label {
+            width: 50%;
+            color: #666;
+            font-weight: 500;
+        }
+        .value {
+            width: 50%;
+            color: #333;
+        }
+        .section-header {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            color: #333;
+            padding: 12px 8px !important;
+        }
+        .total-row {
+            font-weight: 700;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+        .divider {
+            border: none;
+            height: 2px;
+            background-color: #7c7c7c;
+            margin: 30px 0;
+        }
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .invoice-label {
+            font-weight: 600;
+            color: #666;
+        }
+        .invoice-value {
+            font-weight: 700;
+            color: #333;
+        }
+        .success-badge {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-badge">✓ Payment Successful</div>
+        
+        <!-- Booking Form Step 3 -->
+        <h2>Sponsor Booking Form Step 3</h2>
+        <div class="invoice-header">
+            <span class="invoice-label">Invoice No:</span>
+            <span class="invoice-value">${invopiceNo || ""}</span>
+        </div>
+        <div class="invoice-header">
+            <span class="invoice-label">Transaction ID:</span>
+            <span class="invoice-value">${stripeResponse.paymentIntentId || ""}</span>
+        </div>
+
+        <!-- Booking Form Step 2 -->
+        <h2>Booking Form Step 2</h2>
+        <table>
+            <tr>
+                <td class="label">Delegate pass ${delegates.length}:</td>
+                <td class="value">${eventGeneralSettings?.currencyName} ${prices.initialPrice}</td>
+            </tr>
+            <tr>
+                <td class="label">Discount:</td>
+                <td class="value">${eventGeneralSettings?.currencyName} ${prices.discountAmount}</td>
+            </tr>
+            <tr>
+                <td class="label">Taxes and Service Charges:</td>
+                <td class="value">${eventGeneralSettings?.currencyName} ${prices.taxAmount}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="section-header">Add Ons:</td>
+            </tr>
+    `;
+
+      // Add selected add-ons
+      if (selectedAddOns && selectedAddOns.length > 0) {
+        selectedAddOns.forEach((addOn) => {
+          step3Html += `
+            <tr>
+                <td class="label">${addOn.addOnPointName}:</td>
+                <td class="value">${eventGeneralSettings?.currencyName} ${addOn.additionalPrice}</td>
+            </tr>
+        `;
+        });
+      } else {
+        step3Html += `
+            <tr>
+                <td colspan="2" style="padding: 8px; color: #999; font-style: italic;">No add-ons selected</td>
+            </tr>
+        `;
+      }
+
+      step3Html += `
+            <tr class="total-row">
+                <td class="label">Total Amount Paid:</td>
+                <td class="value">${eventGeneralSettings?.currencyName} ${prices.finalTotal}</td>
+            </tr>
+        </table>
+
+        <hr class="divider">
+
+        <!-- Booking Form Step 1 -->
+        <h2>Booking Form Step 1</h2>
+        
+        <h3>Company Details</h3>
+        <table>
+            <tr>
+                <td class="label">Company Name:</td>
+                <td class="value">${companyDetails?.companyName || ""}</td>
+            </tr>
+            <tr>
+                <td class="label">Web Address:</td>
+                <td class="value">${companyDetails?.webAddress || ""}</td>
+            </tr>
+            <tr>
+                <td class="label">Address:</td>
+                <td class="value">${companyDetails?.address || ""}</td>
+            </tr>
+            <tr>
+                <td class="label">City:</td>
+                <td class="value">${companyDetails?.city || ""}</td>
+            </tr>
+            <tr>
+                <td class="label">Country:</td>
+                <td class="value">${companyDetails?.country || ""}</td>
+            </tr>
+            <tr>
+                <td class="label">Postal Code:</td>
+                <td class="value">${companyDetails?.postalCode || ""}</td>
+            </tr>
+            <tr>
+                <td class="label">State:</td>
+                <td class="value">${companyDetails?.state || ""}</td>
+            </tr>
+            <tr>
+                <td class="label">Invoice no:</td>
+                <td class="value">${invopiceNo || ""}</td>
+            </tr>
+        </table>
+    `;
+
+      // Add all delegates
+      delegates.forEach((delegate, index) => {
+        step3Html += `
+        <h3>Delegate ${index + 1} Details</h3>
+        <table>
+            <tr>
+                <td class="label">Email:</td>
+                <td class="value">${delegate.email || ""}</td>
+            </tr>
+            <tr>
+                <td class="label">First Name:</td>
+                <td class="value">${delegate.firstName || ""}</td>
+            </tr>
+            <tr>
+                <td class="label">Last Name:</td>
+                <td class="value">${delegate.lastName || ""}</td>
+            </tr>
+            <tr>
+                <td class="label">Phone Number:</td>
+                <td class="value">${delegate.mobile || ""}</td>
+            </tr>
+            <tr>
+                <td class="label">Position:</td>
+                <td class="value">${delegate.position || ""}</td>
+            </tr>
+        </table>
+      `;
+      });
+
+      step3Html += `
+        <div style="margin-top: 30px; padding: 20px; background-color: #f0f0f0; border-radius: 4px;">
+            <p style="margin: 0; color: #666; font-size: 14px;">
+                Thank you for your booking! If you have any questions, please contact us.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+    `;
+
+      // Prepare email payload
+      const emailPayload = {
+        toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com",
+        cc: "",
+        subject: "BIME - Sponsor Booking Confirmation - Payment Successful",
+        html: step3Html,
+      };
+
+      try {
+        const emailResponse = await fetch(
+          "https://harsh7541.pythonanywhere.com/admin1/sendmail",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(emailPayload),
+          },
+        );
+
+        const emailResult = await emailResponse.json();
+
+        if (emailResult.status === "success") {
+          console.log("✅ Step 3 Confirmation Email sent successfully");
+          return { success: true };
+        } else {
+          console.error("❌ Step 3 Email sending failed:", emailResult.message);
+          return { success: false, error: emailResult.message };
+        }
+      } catch (error) {
+        console.error("❌ Error sending Step 3 email:", error);
+        return { success: false, error: error.message };
+      }
+    }
     try {
       const finalData = new FormData();
       finalData.append("sponsorPackageTypeId", selectedPackage?.id);
@@ -134,9 +499,23 @@ const SponsorBookingForm = () => {
 
       fetch("https://harsh7541.pythonanywhere.com/admin1/addnewsponsor", requestOptions)
         .then((response) => response.json())
-        .then((data) => {
+        .then(async (data) => {
           if (data.status) {
             console.log("Payment successful:", stripeResponse);
+
+            // Send confirmation email after successful payment
+            console.log("📧 Sending confirmation email...");
+            const emailResult = await sendStep3Email();
+
+            if (emailResult.success) {
+              console.log("✅ Confirmation email sent successfully");
+            } else {
+              console.error(
+                "⚠️ Email sending failed, but payment was successful:",
+                emailResult.error,
+              );
+            }
+
             toast.success("Payment completed successfully!", {
               position: "top-right",
               autoClose: 5000,
@@ -223,18 +602,18 @@ const SponsorBookingForm = () => {
           const marketingLiteratureAddOns = allAddOns.filter(
             (addon) =>
               addon.addOnTypeDetails.addOnTypeName ===
-                "Pre-event Marketing Add-ons" ||
+              "Pre-event Marketing Add-ons" ||
               addon.addOnTypeDetails.addOnTypeName ===
-                "Literature Distribution Add-ons"
+              "Literature Distribution Add-ons"
           );
 
           // Filter and group for array 2 (Session and On Site)
           const sessionOnSiteAddOns = allAddOns.filter(
             (addon) =>
               addon.addOnTypeDetails.addOnTypeName ===
-                "Session Branding Add-ons" ||
+              "Session Branding Add-ons" ||
               addon.addOnTypeDetails.addOnTypeName ===
-                "On Site Branding Add-ons"
+              "On Site Branding Add-ons"
           );
 
           setMarketingAndLiterature(groupByType(marketingLiteratureAddOns));
@@ -732,11 +1111,9 @@ const SponsorBookingForm = () => {
                           ""
                         }
                         companyName={companyDetails?.companyName || ""}
-                        orderDescription={`Payment for Sponsor- ${
-                          companyDetails?.companyName
-                        } - Type: ${
-                          selectedPackage?.sponsorPackageType
-                        } - Event: ${eventDetails?.eventName || ""}`}
+                        orderDescription={`Payment for Sponsor- ${companyDetails?.companyName
+                          } - Type: ${selectedPackage?.sponsorPackageType
+                          } - Event: ${eventDetails?.eventName || ""}`}
                         onPaymentSuccess={handlePaymentSuccess}
                         onPaymentError={handlePaymentError}
                       />
@@ -891,8 +1268,8 @@ const SponsorBookingForm = () => {
               <span className="PageForm_divide__vwhn0">|</span>
               ABCD Company
             </p>
-            <p>©2026 Bitcoin Innovation & Market 
-Evolution 2026</p>
+            <p>©2026 Bitcoin Innovation & Market
+              Evolution 2026</p>
           </div>
         </div>
       </div>

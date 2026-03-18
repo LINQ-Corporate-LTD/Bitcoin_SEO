@@ -301,6 +301,7 @@ import EditRolePermissions from "../pages/Permissions/EditRolePermissions";
 import SlideShareList from "../pages/EventSlideShares/SlideShareList";
 import SlideShareAttandees from "../pages/SlideShareAttandees/SlideShareAttandees";
 import SlideShareAccessors from "../pages/SlideShareAccessors/SlideShareAccessors";
+import PayOnlineResponse from "../pages/PayOnlineResponse";
 
 
 
@@ -576,6 +577,7 @@ const authProtectedRoutes = [
   { path: "/eventslideshares", component: <SlideShareList /> },
   { path: "/eventslideshareattandees", component: <SlideShareAttandees /> },
   { path: "/eventslideshareaccessors", component: <SlideShareAccessors /> },
+  { path: "/payonlineresponse", component: <PayOnlineResponse /> },
 
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name

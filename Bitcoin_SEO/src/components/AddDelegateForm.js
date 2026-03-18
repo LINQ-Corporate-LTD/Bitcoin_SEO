@@ -430,9 +430,23 @@ const CompanyRegistrationForm = () => {
       };
       console.log("formData: ", formData);
 
-      const invoiceNumber = `BIME26ABC-${Math.floor(
-        1000 + Math.random() * 9000,
-      )}`;
+      // const invoiceNumber = `BIME26ABC-${Math.floor(
+      //   1000 + Math.random() * 9000,
+      // )}`;
+
+      // ADD THIS ✅
+      let invoiceNumber;
+      try {
+        const invoiceRes = await fetch(
+          "https://harsh7541.pythonanywhere.com/admin1/generate-invoice-no/"
+        );
+        const invoiceData = await invoiceRes.json();
+        invoiceNumber = invoiceData.invoiceNo;
+      } catch (error) {
+        console.error("❌ Failed to generate invoice number:", error);
+        alert("Could not generate invoice number. Please try again.");
+        return; // Stop submission if invoice generation fails
+      }
       // Static values
       const disposition = "Confirmed";
       const emailStatus = "Confirmed Old";

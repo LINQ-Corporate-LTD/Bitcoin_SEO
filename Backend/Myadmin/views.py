@@ -6,6 +6,7 @@ from django.contrib.auth.models import User, Permission, Group
 from rest_framework.decorators import api_view, permission_classes, authentication_classes, throttle_classes
 from rest_framework.permissions import AllowAny
 import json
+import random
 from datetime import datetime
 from django.core.mail import EmailMultiAlternatives
 from django.views.decorators.csrf import csrf_exempt
@@ -19,7 +20,7 @@ from Myadmin.serializers import eventAgendaSerializer, eventIndustryTrendsSerial
 from rest_framework.throttling import AnonRateThrottle
 # Create your views here.
 from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSubCategories,themeColorSettings,homePageVideoSectionInput,videoSectionUserOptions,speakerSection,homePageThirdSection,keyPointsSection,keyPointsSectionPoints,countSection,countSectionTopic,testimonialSection,pastAttandeesSection,sponsorSection, footerFirstSectionOptions, footerSocialMediaOptions,companiesLogoSection,registerPageSettings,whoShouldAttendPageData,speakerPageData,speakerPageSectionThreePoints,sponsorPageData,sponsorPageBulletData,venuePageData,venuePageGallery,newsCategory,generalNewsPoint,latestNews,topNews,subscribers,contactUsData,contactUsPageData,contactUsHelpData,pressMediaPageData,pressMediaPageBoxData,mediaPageHelpers,standOutCrowdRequestData,becomeSpeakerRequestData,quickProposalRequestData,endUserPassRegistrationRequestData,pastAttandeeHomeData
-from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees,slideSharesAccessPersons
+from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees,slideSharesAccessPersons,payOnlineTransectionData
 import requests
 import jwt
 import datetime
@@ -6081,3 +6082,62 @@ def secure_login_slideShare(request):
 
     return JsonResponse({'status': True, "message": "Login successful.","token": token, "email": attendee.email,"expires_at": expires_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
 "token_type": "Bearer","success": True,})
+
+def generate_invoice_number(request):
+    while True:
+        number = random.randint(1000, 9999)
+        invoice_no = f"BIME26ABC-{number}"
+        
+        delegate_exists = delegateTransectionData.objects.filter(invoiceNo=invoice_no).exists()
+        sponsor_exists = sponsorCompanyTransectionData.objects.filter(invoiceNo=invoice_no).exists()
+        
+        if not delegate_exists and not sponsor_exists:
+            return JsonResponse({"invoiceNo": invoice_no})
+
+#---------------------------- Api For Get Pay Online Transection List ----------------------------#
+@permission_classes((AllowAny,))
+@api_view(['GET'])
+def payOnlineTransectionListFun(request):
+    payOnlineTransection_Data = payOnlineTransectionData.objects.all().filter(isDelete='No')
+    payOnlineTransections = []
+    for tr in payOnlineTransection_Data:
+        x={
+            'id':tr.id,
+            'invoiceNo':tr.invoiceNo,
+            'totalPayAmount':tr.totalPayAmount,
+            'email':tr.email,
+            'transectionId':tr.transectionId,
+            'created_at': tr.created_at,
+            'updated_at': tr.updated_at,
+            'created_by': tr.created_by,
+            'updated_by': tr.updated_by,
+        }
+        payOnlineTransections.append(x) 
+    return JsonResponse({'payOnlineTransections': payOnlineTransections, 'status': True})
+
+#------------------- Api For Add Pay Online Request-------------------#
+@api_view(['POST'])
+def add_payOnline_request(request):
+    response = request.data
+    check_db = payOnlineTransectionData()
+
+    if 'invoiceNo' in request.POST:
+        check_db.invoiceNo = response['invoiceNo']
+
+    if 'totalPayAmount' in request.POST:
+        check_db.totalPayAmount = response['totalPayAmount']
+
+    if 'email' in request.POST:
+        check_db.email = response['email']
+
+    if 'transectionId' in request.POST:
+        check_db.transectionId = response['transectionId']
+
+    if 'transectionType' in request.POST:
+        check_db.transectionType = response['transectionType']
+
+    check_db.created_by = "Admin"
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})

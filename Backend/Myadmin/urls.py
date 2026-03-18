@@ -351,5 +351,9 @@ urlpatterns = [
     path('deleteslideShareAccess', views.delete_slideShare_access),
     path('securelogin', views.secure_login_slideShare),
 
+    path('generate-invoice-no', views.generate_invoice_number),
+    path('payonlinetransections', views.payOnlineTransectionListFun),
+    path('addpayonlinerequest', views.add_payOnline_request),
+
 
 ]

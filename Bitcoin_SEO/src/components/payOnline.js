@@ -710,8 +710,74 @@ const PayOnline = () => {
 
   const [showStripeForm, setShowStripeForm] = useState(false);
 
+  // const handleInitialPayClick = (e) => {
+  //   e.preventDefault();
+  //   if (!payFormData.amount || parseFloat(payFormData.amount) <= 0) {
+  //     toast.error("Please enter a valid amount.");
+  //     return;
+  //   }
+  //   if (!payFormData.invoiceNumber || !payFormData.invoiceNumber.trim()) {
+  //     toast.error("Please enter an Invoice Number.");
+  //     return;
+  //   }
+  //   if (!payFormData.email || !emailRegex.test(payFormData.email)) {
+  //     toast.error("Please enter a valid email.");
+  //     return;
+  //   }
+  //   // Function to send email
+  //   async function sendPayOnlineEmail() {
+  //     // Build Step 2 HTML content (pricing details)
+  //     let payOnineHtml = `
+  //     <h3>Pay Online Request</h3>
+  //     <div style='width: 60%; background-color: transparent; color: black;'>
+  //       <table style='width: 100%; border-collapse: collapse;'>
+  //         <tr><td style='width: 50%; padding: 8px;'>Invoice No:</td><td style='width: 35%; padding: 8px;'>${payFormData?.invoiceNumber}</td></tr>
+  //         <tr><td style='width: 50%; padding: 8px;'>Amount:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName} ${payFormData?.amount}</td></tr>
+  //         <tr><td style='width: 50%; padding: 8px;'>Email:</td><td style='width: 35%; padding: 8px;'>${payFormData?.email}</td></tr>
+  //         <tr><td colspan='2' style='font-weight: bold; padding: 8px;'>Add Ons:</td></tr>
+  //   `;`
+  //       </table>
+  //     </div>
+  //   `;
+
+  //     // Prepare email payload
+  //     const emailPayload = {
+  //       toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
+  //       cc: "",
+  //       subject: "BIME - Pay Online Request",
+  //       html: payOnineHtml,
+  //     };
+
+  //     try {
+  //       const emailResponse = await fetch(
+  //         "https://harsh7541.pythonanywhere.com/admin1/sendmail",
+  //         {
+  //           method: "POST",
+  //           headers: { "Content-Type": "application/json" },
+  //           body: JSON.stringify(emailPayload),
+  //         },
+  //       );
+
+  //       const emailResult = await emailResponse.json();
+
+  //       if (emailResult.status === "success") {
+  //         console.log("✅ Step 2 Email sent successfully");
+  //       } else {
+  //         console.error("❌ Step 2 Email sending failed:", emailResult.message);
+  //       }
+  //     } catch (error) {
+  //       console.error("❌ Error sending Step 2 email:", error);
+  //       // Don't block payment even if email fails
+  //     }
+  //   }
+
+  //   setShowStripeForm(true);
+
+  // };
+
   const handleInitialPayClick = (e) => {
     e.preventDefault();
+
     if (!payFormData.amount || parseFloat(payFormData.amount) <= 0) {
       toast.error("Please enter a valid amount.");
       return;
@@ -724,15 +790,80 @@ const PayOnline = () => {
       toast.error("Please enter a valid email.");
       return;
     }
-    setShowStripeForm(true);
-  };
 
-  const {
-    homeVideoSettings,
-    eventDetails,
-    eventGeneralSettings,
-    themeSettings,
-  } = useApiData();
+    async function sendPayOnlineEmail() {
+      const payOnlineHtml = `
+      <h3>Pay Online Request</h3>
+      <div style='width: 60%; background-color: transparent; color: black;'>
+        <table style='width: 100%; border-collapse: collapse;'>
+          <tr><td style='width: 50%; padding: 8px;'>Invoice No:</td><td style='width: 35%; padding: 8px;'>${payFormData?.invoiceNumber}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Amount:</td><td style='width: 35%; padding: 8px;'>${payFormData?.amount}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Email:</td><td style='width: 35%; padding: 8px;'>${payFormData?.email}</td></tr>
+        </table>
+      </div>
+    `;
+
+      const emailPayload = {
+        toemail:
+          "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
+        cc: "",
+        subject: "BIME - Pay Online Request",
+        html: payOnlineHtml,
+      };
+
+      try {
+        const emailResponse = await fetch(
+          "https://harsh7541.pythonanywhere.com/admin1/sendmail",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(emailPayload),
+          }
+        );
+
+        const emailResult = await emailResponse.json();
+
+        if (emailResult.status === "success") {
+          console.log("✅ Email sent successfully");
+        } else {
+          console.error("❌ Email sending failed:", emailResult.message);
+        }
+      } catch (error) {
+        console.error("❌ Error sending email:", error);
+      }
+    }
+
+    const finalData = new FormData();
+    finalData.append("invoiceNo", payFormData?.invoiceNumber);
+    finalData.append("totalPayAmount", payFormData?.amount);
+    finalData.append("email", payFormData?.email);
+
+    fetch("https://harsh7541.pythonanywhere.com/admin1/addpayonlinerequest", {
+      method: "POST",
+      body: finalData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status) {
+          sendPayOnlineEmail(); // ✅ Only send email on success
+          setShowStripeForm(true); // ✅ Only show Stripe form on success
+        } else {
+          toast.error(data?.message);
+        }
+      })
+      .catch((error) => {
+        console.error("error: ", error);
+        toast.error("There was an error, Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  };
 
   const [formData, setFormData] = useState({
     name: "",

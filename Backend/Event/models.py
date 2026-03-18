@@ -517,3 +517,15 @@ class slideSharesAccessPersons(models.Model):
     created_by = models.CharField(null=False,max_length=50,default='No')
     updated_by = models.CharField(null=False,max_length=50,default='No')
     isDelete = models.CharField(default="No",max_length=10)
+
+class payOnlineTransectionData(models.Model):
+    invoiceNo = models.CharField(default="",max_length=150,null=True, blank=True)
+    totalPayAmount = models.CharField(default="",max_length=150,null=True, blank=True)
+    email = models.CharField(default="",max_length=100,null=True, blank=True)
+    transectionId = models.CharField(default="",max_length=150,null=True, blank=True)
+    transectionType = models.CharField(default="",max_length=150,null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.CharField(null=False,max_length=50,default='No')
+    updated_by = models.CharField(null=False,max_length=50,default='No')
+    isDelete = models.CharField(default="No",max_length=10)
