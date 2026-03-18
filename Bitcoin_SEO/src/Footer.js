@@ -388,7 +388,7 @@ const Footer = () => {
               >
                 Email
               </a>
-              <a target="_blank" href="/pay-online">
+              <a href="/pay-online">
                 Pay Online
               </a>
               <a target="_blank" href="/terms-and-conditions">

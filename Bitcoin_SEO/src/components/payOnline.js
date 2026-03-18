@@ -646,7 +646,7 @@
 // };
 // export default Register;
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import "../../src/assets/css/payOnline.css";
 import Navbar from "./Navbar";
@@ -662,6 +662,9 @@ import { useApiData } from "../common/ApiContext";
 import icon from "../../src/assets/images/group-icon.png";
 import { useSSRData } from "../common/useSSRData";
 import cardLabel from "../../src/assets/images/card-labels.png";
+import SimpleStripeForm from "./PaymentForm";
+
+const lockIcon = "https://img.icons8.com/ios-filled/50/ffffff/lock.png";
 
 const PayOnline = () => {
   const navigate = useNavigate();
@@ -675,6 +678,54 @@ const PayOnline = () => {
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200,
   );
+
+  const paymentFormRef = useRef(null);
+
+  const [payFormData, setPayFormData] = useState({
+    amount: "",
+    invoiceNumber: "",
+    email: "",
+  });
+
+  const handlePayFormChange = (e) => {
+    const { name, value } = e.target;
+    setPayFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePaymentClick = () => {
+    if (paymentFormRef.current) {
+      paymentFormRef.current.submitPayment();
+    }
+  };
+
+  const handlePaymentSuccess = (data) => {
+    toast.success("Payment Successful!");
+    console.log("Payment Success:", data);
+  };
+
+  const handlePaymentError = (errorMsg) => {
+    toast.error(errorMsg || "Payment Failed");
+    console.error("Payment Error:", errorMsg);
+  };
+
+  const [showStripeForm, setShowStripeForm] = useState(false);
+
+  const handleInitialPayClick = (e) => {
+    e.preventDefault();
+    if (!payFormData.amount || parseFloat(payFormData.amount) <= 0) {
+      toast.error("Please enter a valid amount.");
+      return;
+    }
+    if (!payFormData.invoiceNumber || !payFormData.invoiceNumber.trim()) {
+      toast.error("Please enter an Invoice Number.");
+      return;
+    }
+    if (!payFormData.email || !emailRegex.test(payFormData.email)) {
+      toast.error("Please enter a valid email.");
+      return;
+    }
+    setShowStripeForm(true);
+  };
 
   const {
     homeVideoSettings,
@@ -901,31 +952,82 @@ const PayOnline = () => {
             </div>
           </section>
           <div className="PayOnline_paymentContainer__wFbAP">
-            <div>
-              <h2 id="payOnlineHeading">pay online</h2>
-              <p>We accept all major credit and debit cards.</p>
-              <div className="SPE_2026_payonline_form PayOnline_form__O6V2c form_SPE">
-                <form id="SPE-(Pay Online 2026)" data-hs-cf-bound="true">
-                  <div className="PayOnline_inputs__r1BVt">
-                    <input type="number" name="amount" placeholder="Amount"></input>
-                    <input type="text" name="company-name" placeholder="Invoice Number"></input>
-                    <input type="email" name="email" placeholder="Email"></input>
-                  </div>
-                  <div className="PayOnline_submit__GYabM">
-                    <p>
-                      Should you have any queries, please do not hesitate to contact our delegate support team at{' '}
-                      <a href="mailto:delegates@iq-hub.com?subject=Bitcoin Innovation & Market Evolution 2026">delegates@iq-hub.com</a>
-                    </p>
-                    <button>Pay Now</button>
-                  </div>
-                  <div className="PayOnline_logos__u4LhC">
-                    <div className="image-card-labels">
-                      <img src={cardLabel} alt="card label"></img>
+            {!showStripeForm ? (
+              <div>
+                <h2 id="payOnlineHeading">pay online</h2>
+                <p>We accept all major credit and debit cards.</p>
+                <div className="SPE_2026_payonline_form PayOnline_form__O6V2c form_SPE">
+                  <form id="SPE-(Pay Online 2026)" data-hs-cf-bound="true">
+                    <div className="PayOnline_inputs__r1BVt">
+                      <input
+                        type="number"
+                        name="amount"
+                        placeholder="Amount"
+                        value={payFormData.amount}
+                        onChange={handlePayFormChange}
+                      />
+                      <input
+                        type="text"
+                        name="invoiceNumber"
+                        placeholder="Invoice Number"
+                        value={payFormData.invoiceNumber}
+                        onChange={handlePayFormChange}
+                      />
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        value={payFormData.email}
+                        onChange={handlePayFormChange}
+                      />
                     </div>
-                  </div>
-                </form>
+                    <div className="PayOnline_submit__GYabM">
+                      <p>
+                        Should you have any queries, please do not hesitate to contact our delegate support team at{' '}
+                        <a href="mailto:delegates@iq-hub.com?subject=Bitcoin Innovation & Market Evolution 2026">delegates@iq-hub.com</a>
+                      </p>
+                      <button type="button" onClick={handleInitialPayClick}>Pay Now</button>
+                    </div>
+                    <div className="PayOnline_logos__u4LhC">
+                      <div className="image-card-labels">
+                        <img src={cardLabel} alt="card label"></img>
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div>
+                <h1 style={{ marginBottom: '30px' }}>ADD PAYMENT DETAILS</h1>
+                <div className="stripe-input-container">
+                  <SimpleStripeForm
+                    ref={paymentFormRef}
+                    amount={parseFloat(payFormData.amount) || 0}
+                    userEmail={payFormData.email}
+                    companyName={payFormData.invoiceNumber}
+                    orderDescription={`Payment for Invoice: ${payFormData.invoiceNumber}`}
+                    onPaymentSuccess={handlePaymentSuccess}
+                    onPaymentError={handlePaymentError}
+                  />
+                </div>
+                <div className="stripeBtnContainer">
+                  <button
+                    className="paymentButtonStripe"
+                    onClick={handlePaymentClick}
+                    disabled={paymentFormRef.current?.isProcessing}
+                  >
+                    <img src={lockIcon} alt=""></img>
+                    {paymentFormRef.current?.isProcessing
+                      ? "Processing..."
+                      : "Pay Securely Now"}
+                  </button>
+                  <p>
+                    This is a secure AES-256 bit SSL Encrypted payment.
+                    You're safe.
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         </article>
       </div>
