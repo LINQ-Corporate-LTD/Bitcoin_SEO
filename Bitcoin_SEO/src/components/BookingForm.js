@@ -153,7 +153,8 @@ const BookingForm = () => {
 
       // Prepare email payload
       const emailPayload = {
-        toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
+        // toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
+        toemail: "sam.razura@iq-hub.com,benny.scott@iq-hub.com,",
         cc: "",
         subject: "BIME - Booking Form Step 2",
         html: step2Html,
@@ -550,7 +551,8 @@ const BookingForm = () => {
 
       // Prepare email payload
       const emailPayload = {
-        toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com",
+        // toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com",
+        toemail: "sam.razura@iq-hub.com,benny.scott@iq-hub.com,",
         cc: "",
         subject: "BIME - Booking Confirmation - Payment Successful",
         html: step3Html,
