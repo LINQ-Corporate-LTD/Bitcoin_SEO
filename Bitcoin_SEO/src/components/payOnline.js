@@ -965,6 +965,7 @@ const PayOnline = () => {
                         placeholder="Amount"
                         value={payFormData.amount}
                         onChange={handlePayFormChange}
+                        style={{ MozAppearance: "textfield" }}
                       />
                       <input
                         type="text"
