@@ -132,7 +132,7 @@ const NewsDescription = () => {
 
   const scrollToQuickProposal = () => {
     if (subscribeSectionRef.current) {
-      const navbarHeight = 120;
+      const navbarHeight = 0;
       const elementPosition = subscribeSectionRef.current.offsetTop;
       const offsetPosition = elementPosition - navbarHeight;
       window.scrollTo({

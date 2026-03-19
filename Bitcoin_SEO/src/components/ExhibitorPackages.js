@@ -125,7 +125,7 @@ const ExhibitorPackages = () => {
 
   const scrollToExhibitPackage = () => {
     if (exhibitorPackageSectionRef.current) {
-      const navbarHeight = 120;
+      const navbarHeight = 0;
       const elementPosition = exhibitorPackageSectionRef.current.offsetTop;
       const offsetPosition = elementPosition - navbarHeight;
       window.scrollTo({

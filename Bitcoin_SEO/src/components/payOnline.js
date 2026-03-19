@@ -151,6 +151,23 @@ const PayOnline = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const target = document.getElementById("payOnlineHeading");
+      if (target) {
+        const top = target.getBoundingClientRect().top + window.pageYOffset;
+        const offset = 120; // height of your navbar
+
+        window.scrollTo({
+          top: top - offset,
+          behavior: "smooth",
+        });
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
 
   return (
     <>
@@ -200,10 +217,10 @@ const PayOnline = () => {
               </div>
             </div>
           </section>
-          <div className="PayOnline_paymentContainer__wFbAP">
+          <div className="PayOnline_paymentContainer__wFbAP" id="payOnlineHeading">
             {!showStripeForm ? (
               <div>
-                <h2 id="payOnlineHeading">pay online</h2>
+                <h2>pay online</h2>
                 <p>We accept all major credit and debit cards.</p>
                 <div className="SPE_2026_payonline_form PayOnline_form__O6V2c form_SPE">
                   <form id="SPE-(Pay Online 2026)" data-hs-cf-bound="true">

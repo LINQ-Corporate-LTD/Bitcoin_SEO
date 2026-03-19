@@ -87,7 +87,7 @@ const Venue = () => {
 
   const scrollToContact = () => {
     if (contactSectionRef.current) {
-      const navbarHeight = 120;
+      const navbarHeight = 0;
       const elementPosition = contactSectionRef.current.offsetTop;
       window.scrollTo({ top: elementPosition - navbarHeight, behavior: "smooth" });
     }

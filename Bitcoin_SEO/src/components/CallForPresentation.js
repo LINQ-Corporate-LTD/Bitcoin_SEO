@@ -343,7 +343,7 @@ const CallForPresentation = () => {
 
   const scrollToQuickProposal = () => {
     if (quickProposalSectionRef.current) {
-      const navbarHeight = 120;
+      const navbarHeight = 0;
       const elementPosition = quickProposalSectionRef.current.offsetTop;
       const offsetPosition = elementPosition - navbarHeight;
       window.scrollTo({
