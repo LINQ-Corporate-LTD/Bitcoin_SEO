@@ -7,15 +7,15 @@ import { useProfile } from "../Components/Hooks/UserHooks";
 
 import { logoutUser } from "../slices/auth/login/thunk";
 
-const AuthProtected = (props) =>{
+const AuthProtected = (props) => {
   const dispatch = useDispatch();
- const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const userProfile = JSON.parse(localStorage.getItem("authUser"));
-  
+
   useEffect(() => {
-    if ( token) {
+    if (token) {
       setAuthorization(token);
-    } else if (!userProfile  && !token) {
+    } else if (!userProfile && !token) {
       dispatch(logoutUser());
     }
   }, [token, userProfile, dispatch]);
@@ -26,7 +26,7 @@ const AuthProtected = (props) =>{
 
   if (!userProfile && !token) {
     return (
-      <Navigate to={{ pathname: "/login", state: { from: props.location } }} />
+      <Navigate to={{ pathname: "/admin/login", state: { from: props.location } }} />
     );
   }
 

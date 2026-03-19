@@ -38,7 +38,7 @@ const Register = () => {
         validationSchema: Yup.object({
             email: Yup.string().required("Please Enter Your Email"),
             first_name: Yup.string().required("Please Enter Your Username"),
-              password: Yup.string().required("Please enter your password"),
+            password: Yup.string().required("Please enter your password"),
             confirm_password: Yup.string()
                 .oneOf([Yup.ref("password")], "Passwords do not match")
                 .required("Please confirm your password"),
@@ -67,7 +67,7 @@ const Register = () => {
 
     useEffect(() => {
         if (success) {
-            setTimeout(() => history("/login"), 3000);
+            setTimeout(() => history("/admin/login"), 3000);
         }
 
         setTimeout(() => {

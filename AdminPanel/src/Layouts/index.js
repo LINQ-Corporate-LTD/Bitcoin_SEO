@@ -140,7 +140,7 @@ const Layout = (props) => {
                 const twoHoursInMs = 2 * 60 * 60 * 1000;
                 if (currentTime - parseInt(loginTime) > twoHoursInMs) {
                     localStorage.clear();
-                    window.location.href = "/login";
+                    window.location.href = "/admin/login";
                 }
             }
         };
