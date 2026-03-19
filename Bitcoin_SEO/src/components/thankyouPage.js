@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation, Navigate } from "react-router-dom";
 
 import Navbar from "./Navbar";
 import Footer from "../Footer";
@@ -9,6 +10,8 @@ const leftArrowIcon =
     "https://www.frac-sand-conference.com/images/icons/icon-arrow-left.png";
 
 const ThankYouPage = () => {
+    const location = useLocation();
+    console.log("ThankYouPage - entry state:", location.state);
     const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
 
     useEffect(() => {
@@ -19,6 +22,11 @@ const ThankYouPage = () => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    // ✅ Redirect to 404 if not authorized (direct URL access)
+    if (!location.state || !location.state.authorized) {
+        return <Navigate to="/404" replace />;
+    }
     return (
         <>
             <Navbar forceScrolled />

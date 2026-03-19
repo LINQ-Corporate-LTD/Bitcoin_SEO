@@ -41,7 +41,7 @@ const PayOnline = () => {
   const handlePaymentSuccess = (data) => {
     toast.success("Payment Successful!");
     console.log("Payment Success:", data);
-    navigate("/thank-you");
+    navigate("/thank-you", { state: { authorized: true } });
   };
 
   const handlePaymentError = (errorMsg) => {

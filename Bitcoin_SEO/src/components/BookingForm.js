@@ -644,7 +644,7 @@ const BookingForm = () => {
               progress: undefined,
             });
 
-            navigate("/thank-you");
+            navigate("/thank-you", { state: { authorized: true } });
           } else {
             toast.error(data?.message);
           }
