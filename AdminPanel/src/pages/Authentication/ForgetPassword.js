@@ -141,7 +141,7 @@ const ForgetPasswordPage = props => {
               </Card>
 
               <div className="mt-4 text-center">
-                <p className="mb-0">Wait, I remember my password... <Link to="/admin/login" className="fw-semibold text-primary text-decoration-underline"> Click here </Link> </p>
+                <p className="mb-0">Wait, I remember my password... <Link to="/login" className="fw-semibold text-primary text-decoration-underline"> Click here </Link> </p>
               </div>
 
             </Col>

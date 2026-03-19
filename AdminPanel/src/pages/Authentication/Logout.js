@@ -28,7 +28,7 @@ const Logout = (props) => {
 
 
   if (isUserLogout) {
-    return <Navigate to="/admin/login" />;
+    return <Navigate to="/login" />;
   }
 
   return <></>;

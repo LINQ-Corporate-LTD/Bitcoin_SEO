@@ -67,7 +67,7 @@ const Register = () => {
 
     useEffect(() => {
         if (success) {
-            setTimeout(() => history("/admin/login"), 3000);
+            setTimeout(() => history("/login"), 3000);
         }
 
         setTimeout(() => {
