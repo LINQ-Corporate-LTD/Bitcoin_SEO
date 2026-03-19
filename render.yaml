@@ -1,9 +1,12 @@
 services:
   - type: web
     name: admin-panel-bitcoin-seo
-    env: static
-    buildCommand: cd AdminPanel && npm install && npm run build
+    runtime: static
+    buildCommand: cd AdminPanel && npm install --legacy-peer-deps && npm run build
     staticPublishPath: AdminPanel/build
+    envVars:
+      - key: NODE_OPTIONS
+        value: --max_old_space_size=4096
     routes:
       - type: rewrite
         source: /*
