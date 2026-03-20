@@ -2,7 +2,7 @@ services:
   - type: web
     name: admin-panel-bitcoin-seo
     runtime: static
-    buildCommand: cd AdminPanel && npm install --legacy-peer-deps && PUBLIC_URL=/admin npm run build
+    buildCommand: cd AdminPanel && npm install --legacy-peer-deps && npm run build
     staticPublishPath: AdminPanel/build
     envVars:
       - key: NODE_OPTIONS
