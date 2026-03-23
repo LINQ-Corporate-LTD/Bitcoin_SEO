@@ -9,6 +9,9 @@ const fs = require("fs");
 const compression = require("compression");
 const { fetchSSRData } = require("./ssrDataFetcher");
 
+// ✅ Import sitemap route
+const { mountSitemapRoute } = require("./sitemapRoute");
+
 const App = require("../src/App").default;
 
 const app = express();
@@ -32,6 +35,12 @@ app.use(
     index: false,
   })
 );
+
+/* -------------------- SITEMAP + ROBOTS -------------------- */
+// ✅ Must be mounted BEFORE the catch-all SSR route below
+// Registers: GET /sitemap.xml, GET /sitemap-index.xml, GET /robots.txt
+mountSitemapRoute(app);
+
 
 /* -------------------- THEME CSS HELPER -------------------- */
 function buildThemeStyle(theme) {
