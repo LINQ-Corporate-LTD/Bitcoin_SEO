@@ -355,8 +355,11 @@ async function fetchSSRData(pathname) {
 
     // ---- REGISTER ----
     if (pathname === "/booking") {
-        const delegatePackages = await fetchDelegatePackages();
-        return { ...base, delegatePackages };
+        const [delegatePackages, home] = await Promise.all([
+            fetchDelegatePackages(),
+            fetchHomeData(),        // ← add this
+        ]);
+        return { ...base, delegatePackages, home };
     }
 
     // ---- CONTACT US ----
