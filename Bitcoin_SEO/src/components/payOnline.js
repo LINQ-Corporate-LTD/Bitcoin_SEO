@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import cardLabel from "../../src/assets/images/card-labels.png";
 import SimpleStripeForm from "./PaymentForm";
-
+import { Helmet } from "react-helmet-async";
 const lockIcon = "https://img.icons8.com/ios-filled/50/ffffff/lock.png";
 
 const PayOnline = () => {
@@ -168,9 +168,22 @@ const PayOnline = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Secure Online Payment`;
+  const seoDescription = `Pay securely for your Bitcoin Innovation & Market Evolution 2026 delegate pass. Fast, reliable, and encrypted transactions for your conference registration.`;
+
 
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/pay-online" />
+      </Helmet>
       <Navbar forceScrolled />
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
         <article className="PayOnline_container__lSTKr">
