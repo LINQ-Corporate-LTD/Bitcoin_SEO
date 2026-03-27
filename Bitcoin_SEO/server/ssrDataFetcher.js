@@ -319,13 +319,13 @@ async function fetchSSRData(pathname) {
     // ---- TREND DESCRIPTION (dynamic) ----
     if (pathname.startsWith("/trenddescription/")) {
         const slug = pathname.replace("/trenddescription/", "");
-        const [trends, sponsors] = await Promise.all([fetchTrends(), fetchSponsors()]);
+        const [trends, sponsors, speakers] = await Promise.all([fetchTrends(), fetchSponsors(), fetchSpeakers(),]);
         const matched = trends.find((t) => toTrendSlug(t.trendTitle) === slug);
         let trendDetail = null;
         if (matched) {
             trendDetail = await fetchTrendById(matched.id);
         }
-        return { ...base, trends, sponsors, trendDetail };
+        return { ...base, trends, sponsors, trendDetail, speakers };
     }
 
     // ---- FAQ ----
@@ -355,8 +355,11 @@ async function fetchSSRData(pathname) {
 
     // ---- REGISTER ----
     if (pathname === "/booking") {
-        const delegatePackages = await fetchDelegatePackages();
-        return { ...base, delegatePackages };
+        const [delegatePackages, home] = await Promise.all([
+            fetchDelegatePackages(),
+            fetchHomeData(),        // ← add this
+        ]);
+        return { ...base, delegatePackages, home };
     }
 
     // ---- CONTACT US ----

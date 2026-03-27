@@ -34,7 +34,7 @@
 //     };
 
 //     setDefaultTheme();
-    
+
 //     // Only fetch if we don't have initial data
 //     if (!initialData) {
 //       fetchData();
@@ -87,7 +87,7 @@
 //   // Update theme when data changes
 //   useEffect(() => {
 //     if (typeof window === 'undefined') return; // Skip on server
-    
+
 //     if (data?.themeSetting?.[0]) {
 //       const theme = data.themeSetting[0];
 //       document.documentElement.style.setProperty(
@@ -141,8 +141,13 @@ export const useApiData = () => {
 
 export const ApiDataProvider = ({ children, initialData = null }) => {
   const navigate = typeof window !== 'undefined' ? useNavigate() : null;
-  const [data, setData] = useState(initialData);
-  const [isLoading, setIsLoading] = useState(!initialData);
+  const [data, setData] = useState(() => {
+    // Always read home data from initialData.home
+    return initialData?.home ?? null;
+  });
+  const [isLoading, setIsLoading] = useState(() => {
+    return !initialData?.home;
+  });
 
   // Set default theme values immediately
   useEffect(() => {
@@ -160,9 +165,9 @@ export const ApiDataProvider = ({ children, initialData = null }) => {
     };
 
     setDefaultTheme();
-    
+
     // Only fetch if we don't have initial data
-    if (!initialData) {
+    if (!initialData?.home) {
       fetchData();
     }
   }, [initialData]);
@@ -213,7 +218,7 @@ export const ApiDataProvider = ({ children, initialData = null }) => {
   // Update theme when data changes
   useEffect(() => {
     if (typeof window === 'undefined') return; // Skip on server
-    
+
     if (data?.themeSetting?.[0]) {
       const theme = data.themeSetting[0];
       document.documentElement.style.setProperty(
