@@ -177,7 +177,7 @@ const PastAttandessSection = () => {
     >
       <div className="HomeScreen_registerContainer__X9V4n">
         <div className="HomeScreen_expertSpeakers__Zs1Eo">
-          <h1>Expert Speakers</h1>
+          <h2>Expert Speakers</h2>
           <div>
             {expertSpeakerList.map((speaker, index) => (
               <div key={index}>
