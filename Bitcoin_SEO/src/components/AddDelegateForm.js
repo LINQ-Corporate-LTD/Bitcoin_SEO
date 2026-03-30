@@ -438,7 +438,7 @@ const CompanyRegistrationForm = () => {
       let invoiceNumber;
       try {
         const invoiceRes = await fetch(
-          "https://harsh7541.pythonanywhere.com/admin1/generate-invoice-no/"
+          "https://harsh7541.pythonanywhere.com/admin1/generate-invoice-no"
         );
         const invoiceData = await invoiceRes.json();
         invoiceNumber = invoiceData.invoiceNo;
