@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useLocation, useParams, useNavigate, Link } from "react-router-dom";
 import Newsimg from "../../src/assets/images/News/1749734953604.jpg";
 import "../../src/assets/css/NewsDescription.css";
 import Navbar from "./Navbar";
@@ -464,18 +464,37 @@ Read the full article: ${currentUrl}`);
                         {windowWidth > 1024 && <h2>Latest News</h2>}
                         <ul>
                           {latestNewsItems?.map((item, index) => (
-                            <li>
-                              <div className="NewsSection_categoryAndDate__WBz4R">
-                                <p onClick={() => handleClick(item)}>
-                                  {formatDate(item?.newsCreatedDate)}
-                                </p>
-                              </div>
-                              <div
-                                className="NewsSection_newsTitle__1tiob"
-                                onClick={() => handleClick(item)}
+                            // add a tag due to Semrush warning
+                            // <li>
+                            //   <div className="NewsSection_categoryAndDate__WBz4R">
+                            //     <p onClick={() => handleClick(item)}>
+                            //       {formatDate(item?.newsCreatedDate)}
+                            //     </p>
+                            //   </div>
+                            //   <div
+                            //     className="NewsSection_newsTitle__1tiob"
+                            //     onClick={() => handleClick(item)}
+                            //   >
+                            //     {item?.newsTitle}
+                            //   </div>
+                            // </li>
+                            <li key={index}>
+                              <Link
+                                to={item.newsTitle
+                                  .toLowerCase()
+                                  .replace(/[^a-z0-9\s-]/g, "") // remove special characters like ':'
+                                  .replace(/\s+/g, "-") // replace spaces with hyphens
+                                  .replace(/-+/g, "-")}
+                                state={item}
+                                style={{ textDecoration: "none", color: "inherit" }} // keeps original look
                               >
-                                {item?.newsTitle}
-                              </div>
+                                <div className="NewsSection_categoryAndDate__WBz4R">
+                                  <p>{formatDate(item?.newsCreatedDate)}</p>
+                                </div>
+                                <div className="NewsSection_newsTitle__1tiob">
+                                  {item?.newsTitle}
+                                </div>
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -499,7 +518,7 @@ Read the full article: ${currentUrl}`);
           <Footer />
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

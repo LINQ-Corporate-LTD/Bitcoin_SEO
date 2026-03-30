@@ -884,21 +884,30 @@ const TrendDescriptionPage = () => {
           >
             <div>
               {trendList.map((tab) => (
-                <button
-                  key={tab.id}
-                  style={{
-                    backgroundColor:
-                      currentTrendId === tab.id ? "var(--secondary-color)" : "",
-                    color: currentTrendId === tab.id ? "#fff" : "",
-                    boxShadow:
-                      currentTrendId === tab.id
-                        ? "rgba(0, 0, 0, 0.2) 0px 9px 10px -5px"
-                        : "",
-                  }}
-                  onClick={() => handleTrendListClick(tab)}
-                >
-                  {tab.trendTitle}
-                </button>
+                // <button
+                //   key={tab.id}
+                //   style={{
+                //     backgroundColor:
+                //       currentTrendId === tab.id ? "var(--secondary-color)" : "",
+                //     color: currentTrendId === tab.id ? "#fff" : "",
+                //     boxShadow:
+                //       currentTrendId === tab.id
+                //         ? "rgba(0, 0, 0, 0.2) 0px 9px 10px -5px"
+                //         : "",
+                //   }}
+                //   onClick={() => handleTrendListClick(tab)}
+                // >
+                //   {tab.trendTitle}
+                // </button>
+                <a href={`/trenddescription/${tab.trendTitle.replace(/\s+/g, "-")}`} key={tab.id} style={{
+                  backgroundColor:
+                    currentTrendId === tab.id ? "var(--secondary-color)" : "",
+                  color: currentTrendId === tab.id ? "#fff" : "",
+                  boxShadow:
+                    currentTrendId === tab.id
+                      ? "rgba(0, 0, 0, 0.2) 0px 9px 10px -5px"
+                      : "",
+                }}>{tab.trendTitle}</a>
               ))}
             </div>
           </div>
