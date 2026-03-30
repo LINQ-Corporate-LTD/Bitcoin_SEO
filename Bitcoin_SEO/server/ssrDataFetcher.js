@@ -362,6 +362,12 @@ async function fetchSSRData(pathname) {
         return { ...base, delegatePackages, home };
     }
 
+    // ---- BOOKING FORM ----
+    if (pathname === "/booking-form") {
+        const home = await fetchHomeData();
+        return { ...base, home };
+    }
+
     // ---- CONTACT US ----
     if (pathname === "/contact-us") {
         const [contactHelpers, contactPageData] = await Promise.all([

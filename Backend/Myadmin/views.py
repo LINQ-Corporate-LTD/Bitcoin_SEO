@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.permissions import AllowAny
 import json
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.core.mail import EmailMultiAlternatives
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, parser_classes
@@ -23,7 +23,6 @@ from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSub
 from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees,slideSharesAccessPersons,payOnlineTransectionData
 import requests
 import jwt
-import datetime
 from django.conf import settings
 #---------------------------- Api For Upload Media ----------------------------#
 @api_view(['POST'])
@@ -6067,15 +6066,15 @@ def secure_login_slideShare(request):
     except slideSharesAccessPersons.DoesNotExist:
         return JsonResponse({'status': False, "message": "Invalid Credentials"})
 
-    now = datetime.datetime.utcnow()
-    expires_at = now + datetime.timedelta(hours=2)
+    now = datetime.utcnow()
+    expires_at = now + timedelta(hours=2)
 
     payload = {
             "attendee_id": attendee.id,
             "email":       attendee.email,
             "year":        attendee.projectYear,
-            "iat":         now,
-            "exp":         expires_at,
+            "iat":         int(now.timestamp()),
+            "exp":         int(expires_at.timestamp()),
         }
 
     token = jwt.encode(payload, settings.JWT_SECRET_KEY, algorithm=settings.JWT_ALGORITHM)
