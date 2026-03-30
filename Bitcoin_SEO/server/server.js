@@ -193,6 +193,15 @@ const PORT = process.env.PORT || 3001;
 /* -------------------- MIDDLEWARE -------------------- */
 app.use(compression());
 
+// ✅ ADD THIS — HSTS header for all responses including redirects
+app.use((req, res, next) => {
+  res.setHeader(
+    "Strict-Transport-Security",
+    "max-age=31536000; includeSubDomains; preload"
+  );
+  next();
+});
+
 app.use(
   express.static(path.resolve(__dirname, "../build"), {
     maxAge: "1y",
