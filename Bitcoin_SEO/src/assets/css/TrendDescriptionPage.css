@@ -13,7 +13,7 @@
     width: 100%;
 }
 
-.IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div button {
+.IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div a {
     background-color: #0000;
     border: 1px solid var(--secondary-color);
     border-radius: 2px;
@@ -25,6 +25,8 @@
     min-height: 40px;
     min-width: 228px;
     padding: 10px 9px;
+    text-align: center;
+    text-decoration: none;
     text-transform: uppercase;
     transition: .3s;
 }
@@ -93,7 +95,7 @@
 }
 
 @media only screen and (max-width: 1460px) {
-    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div button {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div a {
         white-space: normal;
     }
 }
@@ -127,10 +129,10 @@
         max-width: 960px;
     }
 
-    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div button {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div a {
         font-size: 12px;
         min-width: 180px;
-        padding: 0 5px;
+        padding: 10px 5px;
     }
 
     .IndustryTrends_container__TcST0 .IndustryTrends_contentContainer__LSMa->div {
@@ -148,7 +150,7 @@
         max-width: 720px;
     }
 
-    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div button {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div a {
         font-size: 13px;
         margin-bottom: 15px;
         min-width: 225px;
@@ -189,7 +191,7 @@
         grid-template-rows: repeat(2, 1fr);
     }
 
-    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div button {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div a {
         border: 1px solid var(--secondary-color);
         height: 35px;
         height: auto;
@@ -237,7 +239,7 @@
 }
 
 @media only screen and (max-width: 470px) {
-    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div button {
+    .IndustryTrends_container__TcST0 .IndustryTrends_tabsContainer__akAHa>div a {
         font-size: 12px;
         max-width: none;
         width: 90%;
@@ -256,13 +258,13 @@
 }
 
 .trend-scroll-anchor {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 .scroll-external {
-  scroll-margin-top: 0px;
+    scroll-margin-top: 0px;
 }
 
 .scroll-internal {
-  scroll-margin-top: 100px;
+    scroll-margin-top: 100px;
 }

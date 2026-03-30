@@ -25,18 +25,20 @@ const IndustryTrend = () => {
             <div>
               {indutryTrendList?.map((trend, index) =>
                 index < 2 ? (
-                  <p key={index} onClick={() => handleClick(trend)}>
-                    {trend?.trendTitle}
-                  </p>
+                  // <p key={index} onClick={() => handleClick(trend)}>
+                  //   {trend?.trendTitle}
+                  // </p>
+                  <a href={`/trenddescription/${trend?.trendTitle.replace(/\s+/g, "-")}`}>{trend?.trendTitle}</a>
                 ) : null
               )}
             </div>
             <div>
               {indutryTrendList?.map((trend, index) =>
                 index >= 2 ? (
-                  <p key={index} onClick={() => handleClick(trend)}>
-                    {trend?.trendTitle}
-                  </p>
+                  // <p key={index} onClick={() => handleClick(trend)}>
+                  //   {trend?.trendTitle}
+                  // </p>
+                  <a href={`/trenddescription/${trend?.trendTitle.replace(/\s+/g, "-")}`}>{trend?.trendTitle}</a>
                 ) : null
               )}
             </div>
