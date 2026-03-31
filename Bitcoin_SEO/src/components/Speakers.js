@@ -211,7 +211,7 @@ const Speakers = () => {
       <div className="Form_container__jwPCR">
         <div>
           <div>
-            <h1>BECOME A SPEAKER & JOIN THE CONVERSATION</h1>
+            <h2>BECOME A SPEAKER & JOIN THE CONVERSATION</h2>
             <form
               className="WDRM_2025_quick_proposal Form_form__nhNBc form_WDRM"
               method="POST"
