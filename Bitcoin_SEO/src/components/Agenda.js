@@ -1296,7 +1296,7 @@ const Agenda = () => {
 
             {/* =========== Benny's Day Seperate integrated Agenda code =========== */}
             <div className="AgendaScreen_agendaContainer__F7gzR">
-              <h1>Program 2026</h1>
+              <h2>Program 2026</h2>
               {agendaList &&
                 (() => {
                   // Group items by day
@@ -2115,9 +2115,9 @@ const Agenda = () => {
             >
               <div>
                 <div>
-                  <h1 style={{ color: "#181818" }}>
+                  <h2 style={{ color: "#181818" }}>
                     BECOME A SPEAKER & JOIN THE CONVERSATION
-                  </h1>
+                  </h2>
                   <form
                     className="WDRM_2025_quick_proposal Form_form__nhNBc form_WDRM"
                     method="POST"

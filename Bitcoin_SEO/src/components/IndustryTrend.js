@@ -19,7 +19,7 @@ const IndustryTrend = () => {
   return (
     <article className="HomeScreen_industryTrends__KoD6-">
       <div className="HomeScreen_industryTrendsContainer__+xwuK">
-        <h1>Industry Trends</h1>
+        <h2>Industry Trends</h2>
         <div>
           <>
             <div>

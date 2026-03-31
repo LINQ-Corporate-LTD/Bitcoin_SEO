@@ -864,10 +864,10 @@ const ContactUs = () => {
               </div>
             </div>
             <section className="ContactUs_emailContainer__tR-DD">
-              <h1>
+              <h2>
                 <img src={emailImage} alt="email img"></img>
                 <span>Email Us</span>
-              </h1>
+              </h2>
               <p
                 dangerouslySetInnerHTML={{
                   __html: cleanHtml(emailDes).replace(/<\/?p>/g, ""),
