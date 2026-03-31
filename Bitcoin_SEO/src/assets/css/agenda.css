@@ -1442,6 +1442,14 @@ body {
   margin: 0 0 35px;
 }
 
+.Agenda_contain__zWX4U .Agenda_container__L3EFb .Agenda_errorMsg__IIG4Q {
+  color: red;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
+  text-align: left;
+}
+
 .Agenda_contain__zWX4U .Agenda_container__L3EFb form {
   display: flex;
   justify-content: space-between;

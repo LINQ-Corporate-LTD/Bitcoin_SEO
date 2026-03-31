@@ -1018,7 +1018,7 @@ const CallForPresentation = () => {
         >
           <div>
             <div>
-              <h1>quick proposal</h1>
+              <h2>quick proposal</h2>
               <form
                 className="WDRM_2025_sponsor_form Form_form__nhNBc form_WDRM"
                 method="POST"

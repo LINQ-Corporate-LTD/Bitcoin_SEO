@@ -236,6 +236,7 @@ const Agenda = () => {
   const [emailVerification, setEmailVerification] = useState("");
   const [emailVerificationError, setEmailVerificationError] = useState("");
   const [agendaVerification, setAgendaVerification] = useState(false);
+  const [isVerify, setIsVerify] = useState(false);
 
   const [personName, setPersonName] = useState("");
   console.log("personName: ", personName);
@@ -554,6 +555,7 @@ const Agenda = () => {
       return;
     }
 
+    setIsVerify(true);
     try {
       const response = await fetch("https://harsh7541.pythonanywhere.com/admin1/verifyemaildomain", {
         method: "POST",
@@ -566,6 +568,7 @@ const Agenda = () => {
       const data = await response.json();
 
       if (!data.status) {
+        setIsVerify(false);
         setBlockedDomainError(true);
         toast.error(data.message, {
           position: "top-right",
@@ -585,6 +588,7 @@ const Agenda = () => {
       setAgendaVerification(true);
 
     } catch (error) {
+      setIsVerify(false);
       toast.error("Something went wrong. Please try again.", {
         position: "top-right",
         autoClose: 5000,
@@ -2332,7 +2336,7 @@ const Agenda = () => {
                     </p>
                   )}
                 </div>
-                <input type="submit" value={"verify"}></input>
+                <input type="submit" value={isVerify ? "verifying" : "verify"}></input>
               </form>
             </div>
           </div>
