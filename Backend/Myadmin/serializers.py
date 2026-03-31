@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Event.models import eventAgenda, eventIndustryTrends
+from Event.models import eventAgenda, eventIndustryTrends,blockedEmailDomains
 
 class eventAgendaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,3 +49,14 @@ class eventIndustryTrendsSerializer(serializers.ModelSerializer):
     class Meta:
         model = eventIndustryTrends
         fields = '__all__'
+
+class EmailVerificationSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def validate_email(self, value):
+        domain = value.split("@")[-1].lower()
+        if blockedEmailDomains.objects.filter(domainName__iexact=domain).exists():
+            raise serializers.ValidationError(
+                f"Emails from '{domain}' are not allowed."
+            )
+        return value

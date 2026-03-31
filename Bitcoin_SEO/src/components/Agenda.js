@@ -16,6 +16,7 @@ import companyDummy from '../../src/assets/images/Speaker_photos/companyLogo_dum
 const Agenda = () => {
   const navigate = useNavigate();
   const [agendaList, setAgendaList] = useState(null);
+  const [blockedDomainError, setBlockedDomainError] = useState(false);
   console.log("agendaList: ", agendaList);
   useEffect(() => {
     callAgendaListApi();
@@ -536,8 +537,9 @@ const Agenda = () => {
     }
   };
 
-  const emailSubmitBtnClk = (e) => {
+  const emailSubmitBtnClk = async (e) => {
     e.preventDefault();
+
     if (emailVerification === "") {
       toast.error("Email Address is Required", {
         position: "top-right",
@@ -548,10 +550,45 @@ const Agenda = () => {
         draggable: true,
         progress: undefined,
       });
-      setPersonEmailError(true);
-    } else {
+      setEmailVerificationError(true);
+      return;
+    }
+
+    try {
+      const response = await fetch("https://harsh7541.pythonanywhere.com/admin1/verifyemaildomain", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: emailVerification }),
+      });
+
+      const data = await response.json();
+
+      if (!data.status) {
+        setBlockedDomainError(true);
+        toast.error(data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setEmailVerificationError(true);
+        return;
+      }
+      setBlockedDomainError(false);
+      // ✅ Domain is valid — proceed
       Cookies.set("agendaEmailVerify", emailVerification, { expires: 200 });
       setAgendaVerification(true);
+
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+      });
     }
   };
 
@@ -2286,8 +2323,14 @@ const Agenda = () => {
                     onChange={(e) => {
                       setEmailVerification(e.target.value);
                       setEmailVerificationError(false);
+                      setBlockedDomainError(false);
                     }}
                   ></input>
+                  {blockedDomainError && (
+                    <p className="Agenda_errorMsg__IIG4Q">
+                      Please use a company or institution email address.
+                    </p>
+                  )}
                 </div>
                 <input type="submit" value={"verify"}></input>
               </form>

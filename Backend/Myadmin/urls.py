@@ -355,5 +355,7 @@ urlpatterns = [
     path('payonlinetransections', views.payOnlineTransectionListFun),
     path('addpayonlinerequest', views.add_payOnline_request),
 
+    path('verifyemaildomain', views.verify_email_domain),
+
 
 ]
