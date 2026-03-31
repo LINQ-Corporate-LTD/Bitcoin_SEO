@@ -2303,7 +2303,7 @@ const Agenda = () => {
           <div className="Agenda_contain__zWX4U">
             <FeaturedSpeaker title={"highlights from our last show"} />
             <div className="Agenda_container__L3EFb">
-              <h1>view the program</h1>
+              <h2>view the program</h2>
               <p>
                 To view the event program, please verify your email address
                 below.
