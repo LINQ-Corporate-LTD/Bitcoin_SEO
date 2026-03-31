@@ -368,6 +368,12 @@ async function fetchSSRData(pathname) {
         return { ...base, home };
     }
 
+    // ----SPONSOR BOOKING FORM ----
+    if (pathname === "/sponsor-booking") {
+        const home = await fetchHomeData();
+        return { ...base, home };
+    }
+
     // ---- CONTACT US ----
     if (pathname === "/contact-us") {
         const [contactHelpers, contactPageData] = await Promise.all([
