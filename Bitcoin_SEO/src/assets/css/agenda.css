@@ -1427,7 +1427,7 @@ body {
   width: 100%;
 }
 
-.Agenda_contain__zWX4U .Agenda_container__L3EFb h1 {
+.Agenda_contain__zWX4U .Agenda_container__L3EFb h2 {
   color: #181818;
   font-size: 36px;
   font-weight: 800;
@@ -1681,35 +1681,35 @@ body {
 }
 
 .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1 {
-    align-items: center;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1>img {
-    margin: 0;
-    max-height: 80px;
-    max-width: 170px;
-    object-fit: contain;
-    padding: 0;
-    width: auto;
+  margin: 0;
+  max-height: 80px;
+  max-width: 170px;
+  object-fit: contain;
+  padding: 0;
+  width: auto;
 }
 
 .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1>div p {
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 18px;
-    margin: 0 0 10px;
-    padding: 0;
-    text-transform: capitalize;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 18px;
+  margin: 0 0 10px;
+  padding: 0;
+  text-transform: capitalize;
 }
 
 .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_upper__9vYZH .Agenda_upperInnerV2__SAsL1>div p:nth-child(2) {
-    font-weight: 800;
-    margin: 0;
-    padding: 0;
+  font-weight: 800;
+  margin: 0;
+  padding: 0;
 }
 
 .Agenda_container__6yJM7 .Agenda_speakerContainer__av\+wf .Agenda_speakerDetailsContainer__mOEC6 .Agenda_lower__Oy-1W {
@@ -1849,7 +1849,7 @@ body {
     padding: 60px 0;
   }
 
-  .Agenda_contain__zWX4U .Agenda_container__L3EFb h1 {
+  .Agenda_contain__zWX4U .Agenda_container__L3EFb h2 {
     font-size: 30px;
   }
 
@@ -1897,7 +1897,7 @@ body {
     max-width: 720px;
   }
 
-  .Agenda_contain__zWX4U .Agenda_container__L3EFb h1 {
+  .Agenda_contain__zWX4U .Agenda_container__L3EFb h2 {
     font-size: 28px;
   }
 
@@ -2035,7 +2035,7 @@ body {
     padding: 33px 0 40px;
   }
 
-  .Agenda_contain__zWX4U .Agenda_container__L3EFb h1 {
+  .Agenda_contain__zWX4U .Agenda_container__L3EFb h2 {
     font-size: 22px;
     line-height: 25px;
     margin-bottom: 15px;
