@@ -6158,3 +6158,59 @@ def verify_email_domain(request):
         })
 
     return JsonResponse({'status': True, 'message': 'Email is valid'})
+
+#------------------- Api For Add Block Domain-------------------#
+@api_view(['POST'])
+def add_blockDomain(request):
+    response = request.data
+    check_db = blockedEmailDomains()
+
+    if 'domainName' in request.POST:
+        check_db.domainName = response['domainName']
+
+    check_db.created_by = "Admin"
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Edit Block Domain-------------------#
+@api_view(['POST'])
+def edit_blockDomain(request):
+    response = request.data
+    check_db = blockedEmailDomains.objects.get(id=response['id'])
+
+    if 'domainName' in request.POST:
+        check_db.domainName = response['domainName']
+
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Delete Block Domain-------------------#
+@api_view(['POST'])
+def delete_blockDomain(request):
+    response = request.data
+    check_db = blockedEmailDomains.objects.get(id=response['id'])
+    check_db.isDelete = response['isDelete']
+    check_db.save()
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#---------------------------- Api For Get Block Domain List ----------------------------#
+@permission_classes((AllowAny,))
+@api_view(['GET'])
+def blockDomainListFun(request):
+    blockDomain_Data = blockedEmailDomains.objects.all().filter(isDelete='No')
+    blockDomains = []
+    for blockDomain in blockDomain_Data:
+        x={
+            'id':blockDomain.id,
+            'domainName':blockDomain.domainName,
+            'created_at': blockDomain.created_at,
+            'updated_at': blockDomain.updated_at,
+            'created_by': blockDomain.created_by,
+            'updated_by': blockDomain.updated_by,
+        }
+        blockDomains.append(x) 
+    return JsonResponse({'blockDomains': blockDomains, 'status': True})
