@@ -101,6 +101,8 @@ const CompanyRegistrationForm = () => {
   const [submitAttempted, setSubmitAttempted] = useState(false);
 
   const [termsAgreement, setTermsAgreement] = useState(false);
+  const [submitBtnCheck, setSubmitBtnCheck] = useState(false);
+
   // const validateField = (fieldName, value) => {
   //   const isRequired = !value || value.trim() === "";
   //   setErrors((prev) => ({
@@ -451,6 +453,7 @@ const CompanyRegistrationForm = () => {
       const disposition = "Confirmed";
       const emailStatus = "Confirmed Old";
 
+      setSubmitBtnCheck(true)
       // Function to submit to HubSpot (no delay)
       async function submitCompanyDelegatesToHubSpot(formData) {
         const submissions = formData.delegates.map(async (delegate) => {
@@ -656,6 +659,7 @@ const CompanyRegistrationForm = () => {
           },
         });
       } catch (error) {
+        setSubmitBtnCheck(false)
         console.error("❌ Error in submission process:", error);
         // Optionally show error message to user
         alert("There was an error submitting your booking. Please try again.");
@@ -1490,7 +1494,7 @@ const CompanyRegistrationForm = () => {
                   <input
                     type="submit"
                     className="BookingFormV2_submitBtn__nFF03"
-                    value="Submit"
+                    value={submitBtnCheck ? "Please Wait" : "Submit"}
                   // onClick={() => navigate("/booking-form")}
                   ></input>
                 </div>

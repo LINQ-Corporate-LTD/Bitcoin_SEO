@@ -63,6 +63,8 @@ const AddSponsorDelegateForm = () => {
   const [submitAttempted, setSubmitAttempted] = useState(false);
 
   const [validationErrors, setValidationErrors] = useState({});
+  const [submitBtnCheck, setSubmitBtnCheck] = useState(false);
+
 
   const portalId = "4000965";
   const formGuid = "1e2e18e4-1877-4d07-9a22-6c2dbca5c2f8";
@@ -234,6 +236,7 @@ const AddSponsorDelegateForm = () => {
       const disposition = "Confirmed";
       const emailStatus = "Confirmed Old";
 
+      setSubmitBtnCheck(true)
       // Function to submit to HubSpot (no delay)
       async function submitCompanyDelegatesToHubSpot(formData) {
         const submissions = formData.delegates.map(async (delegate) => {
@@ -369,6 +372,7 @@ const AddSponsorDelegateForm = () => {
           },
         });
       } catch (error) {
+        setSubmitBtnCheck(false)
         console.error("❌ Error in submission process:", error);
         // Optionally show error message to user
         alert("There was an error submitting your booking. Please try again.");
@@ -1201,7 +1205,7 @@ const AddSponsorDelegateForm = () => {
                   <input
                     type="submit"
                     className="SponsorFormV2_submitBtn__96h2O"
-                    value="Submit"
+                    value={submitBtnCheck ? "Please Wait" : "Submit"}
                   // onClick={() => navigate("/booking-form")}
                   ></input>
                 </div>

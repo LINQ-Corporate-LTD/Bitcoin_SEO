@@ -17,7 +17,7 @@ const stripePromise = loadStripe(
 
 const CheckoutForm = forwardRef(
   (
-    { amount, userEmail,companyName,orderDescription, onPaymentSuccess, onPaymentError },
+    { amount, userEmail, companyName, orderDescription, onPaymentSuccess, onPaymentError },
     ref
   ) => {
     const stripe = useStripe();
@@ -167,11 +167,11 @@ const CheckoutForm = forwardRef(
             {error}
           </div>
         )}
-        {message && (
+        {/* {message && (
           <div style={{ color: "green", marginTop: "10px", fontSize: "14px" }}>
             {message}
           </div>
-        )}
+        )} */}
         {isLoading && (
           <div style={{ color: "#666", marginTop: "10px", fontSize: "14px" }}>
             Processing payment...
