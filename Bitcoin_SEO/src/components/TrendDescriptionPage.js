@@ -976,7 +976,7 @@ const TrendDescriptionPage = () => {
                     <Slider ref={sliderRef} {...settings}>
                       {chunkedSponsors.map((group) => (
                         <div key={group.id} className="SponsorCards_cardContainerInner__BPPEL">
-                          {group.items.map((item, i) => {
+                          {/* {group.items.map((item, i) => {
                             const handleClick = () => {
                               if (item?.sponsorType !== "Dummy") {
                                 const sponsorName = item?.sponsorComapnyName
@@ -1002,6 +1002,53 @@ const TrendDescriptionPage = () => {
                                   </div>
                                 )}
                               </div>
+                            );
+                          })} */}
+                          {group.items.map((item, i) => {
+                            // const handleClick = () => {
+                            //   if (item?.sponsorType !== "Dummy") {
+                            //     const sponsorName = item?.sponsorComapnyName
+                            //       .toLowerCase()
+                            //       .replace(/[^a-z0-9\s-]/g, "") // remove special characters
+                            //       .replace(/\s+/g, "-") // replace spaces with hyphens
+                            //       .replace(/-+/g, "-"); // collapse multiple hyphens
+
+                            //     navigate(`/sponsor/${sponsorName}`, {
+                            //       state: item, // pass full sponsor data to description page
+                            //     });
+                            //   }
+                            // };
+
+                            return (
+                              <a
+                                key={i}
+                                href={item?.sponsorType !== "Dummy" ? `/sponsor/${item?.sponsorComapnyName
+                                  .toLowerCase()
+                                  .replace(/[^a-z0-9\s-]/g, "")
+                                  .replace(/\s+/g, "-")
+                                  .replace(/-+/g, "-")}` : "#"}
+                                className={`SponsorCards_card__8eNkT ${item?.sponsorType !== "Dummy"
+                                  ? "clickable"
+                                  : ""
+                                  }`}
+                                style={{
+                                  cursor:
+                                    item?.sponsorType !== "Dummy"
+                                      ? "pointer"
+                                      : "default",
+                                }}
+                              >
+                                <img
+                                  src={item?.sponsorComapnyLogo}
+                                  alt={`Sponsor ${i + 1}`}
+                                />
+                                {item?.sponsorType !== "Dummy" && (
+                                  <a className="SponsorCards_overlay__7MT16">
+                                    <h4>{item?.sponsorComapnyName}</h4>
+                                    <h4>{item?.sponsorType} Sponsor</h4>
+                                  </a>
+                                )}
+                              </a>
                             );
                           })}
                         </div>

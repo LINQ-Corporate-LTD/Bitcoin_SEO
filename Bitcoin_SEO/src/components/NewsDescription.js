@@ -480,11 +480,11 @@ Read the full article: ${currentUrl}`);
                             // </li>
                             <li key={index}>
                               <Link
-                                to={item.newsTitle
+                                to={`/news/${item.newsTitle
                                   .toLowerCase()
                                   .replace(/[^a-z0-9\s-]/g, "") // remove special characters like ':'
                                   .replace(/\s+/g, "-") // replace spaces with hyphens
-                                  .replace(/-+/g, "-")}
+                                  .replace(/-+/g, "-")}`}
                                 state={item}
                                 style={{ textDecoration: "none", color: "inherit" }} // keeps original look
                               >
