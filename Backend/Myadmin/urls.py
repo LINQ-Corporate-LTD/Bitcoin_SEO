@@ -357,5 +357,10 @@ urlpatterns = [
 
     path('verifyemaildomain', views.verify_email_domain),
 
+    path('getblockdomain', views.blockDomainListFun),
+    path('addblockdomain', views.add_blockDomain),
+    path('editblockdomain', views.edit_blockDomain),
+    path('deleteblockdomain', views.delete_blockDomain),
+
 
 ]
