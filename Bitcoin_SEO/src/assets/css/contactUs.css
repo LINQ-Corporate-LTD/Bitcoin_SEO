@@ -11,7 +11,7 @@
     width: 100%;
 }
 
-.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 {
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h2 {
     color: #181818;
     display: flex;
     font-size: 36px;
@@ -23,7 +23,7 @@
     text-transform: uppercase;
 }
 
-.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 img {
+.ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h2 img {
     height: auto;
     margin-right: 20px;
     width: 58px;
@@ -120,7 +120,7 @@
         padding: 60px 0;
     }
 
-    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 {
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h2 {
         font-size: 30px;
     }
 }
@@ -158,7 +158,7 @@
         max-width: 720px;
     }
 
-    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 {
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h2 {
         font-size: 28px;
     }
 
@@ -177,7 +177,7 @@
         width: 90%;
     }
 
-    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 img {
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h2 img {
         width: 45px;
     }
 }
@@ -187,12 +187,12 @@
         padding: 40px 0 20px;
     }
 
-    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 {
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h2 {
         font-size: 22px;
         line-height: 25px;
     }
 
-    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h1 img {
+    .ContactUs_bg__MKqvU .ContactUs_emailContainer__tR-DD h2 img {
         width: 33px;
     }
 
