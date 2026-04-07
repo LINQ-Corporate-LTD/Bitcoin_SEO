@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import ".././assets/css/News.css";
 import Navbar from "./Navbar";
 import SubscribeForm from "./SubscribeForm";
@@ -169,6 +169,16 @@ const News = () => {
     navigate(`/newsdescription/${newsTitle}`, { state: member }); // ✅ Pass member object in route state
   };
 
+  const getNewsUrl = (item) => {
+    if (!item) return "#";
+    const slug = item.newsTitle
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+    return `/newsdescription/${slug}`;
+  };
+
   const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Latest News`;
   const seoDesc = "Read Bitcoin market updates on regulation, ETFs, mining, Layer-2 and security, published by Bitcoin Innovation & Market Evolution 2026.";
   return (
@@ -212,7 +222,9 @@ const News = () => {
                         </div>
                         <div className="NewsCard_titleDescContainer__PExXU">
                           <h1 onClick={() => handleClick(featuredArticle)}>
-                            {featuredArticle?.newsTitle}
+                            <Link to={getNewsUrl(featuredArticle)} state={featuredArticle} style={{ textDecoration: "none", color: "inherit" }}>
+                              {featuredArticle?.newsTitle}
+                            </Link>
                           </h1>
                           <p
                             lang="en"
@@ -257,7 +269,9 @@ const News = () => {
                                 style={{ fontSize: "18px", lineHeight: "24px" }}
                                 onClick={() => handleClick(news)}
                               >
-                                {news?.newsTitle}
+                                <Link to={getNewsUrl(news)} state={news} style={{ textDecoration: "none", color: "inherit" }}>
+                                  {news?.newsTitle}
+                                </Link>
                               </h1>
                             </div>
                           </div>
@@ -276,21 +290,20 @@ const News = () => {
                       <h2>Latest News</h2>
                       <ul>
                         {latestNewsItems?.map((item, index) => (
-                          <li>
-                            <div className="NewsSection_categoryAndDate__WBz4R">
-                              <p onClick={() => handleClick(item)}>
-                                {item?.newsCategoryDetails?.newsCategory}
-                              </p>
-                              <p onClick={() => handleClick(item)}>
-                                {formatDate(item?.newsCreatedDate)}
-                              </p>
-                            </div>
-                            <div
-                              className="NewsSection_newsTitle__1tiob"
-                              onClick={() => handleClick(item)}
+                          <li key={index}>
+                            <Link
+                              to={getNewsUrl(item)}
+                              state={item}
+                              style={{ textDecoration: "none", color: "inherit" }}
                             >
-                              {item?.newsTitle}
-                            </div>
+                              <div className="NewsSection_categoryAndDate__WBz4R">
+                                <p>{item?.newsCategoryDetails?.newsCategory}</p>
+                                <p>{formatDate(item?.newsCreatedDate)}</p>
+                              </div>
+                              <div className="NewsSection_newsTitle__1tiob">
+                                {item?.newsTitle}
+                              </div>
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -299,41 +312,34 @@ const News = () => {
                       className="NewsSection_featuredNews__ENl3B"
                       style={{ height: "639PX", marginTop: "10px" }}
                     >
-                      <h3 onClick={() => handleClick(featuredLatestArticle)}>
-                        {featuredLatestArticle?.newsTitle}
-                      </h3>
-                      <img
-                        src={featuredLatestArticle?.newsImage}
-                        alt={featuredLatestArticle?.newsTitle}
-                        style={{
-                          maxWidth: "100%",
-                          height: "auto",
-                          objectFit: "cover",
-                        }}
-                        onClick={() => handleClick(featuredLatestArticle)}
-                      />
-                      <div className="NewsSection_featuredcategoryAndDate__WZuqu">
-                        <p onClick={() => handleClick(featuredLatestArticle)}>
-                          {
-                            featuredLatestArticle?.newsCategoryDetails
-                              ?.newsCategory
-                          }
-                        </p>
-                        <p onClick={() => handleClick(featuredLatestArticle)}>
-                          {formatDate(featuredLatestArticle?.newsCreatedDate)}
-                        </p>
-                      </div>
-                      <p
-                        lang="en"
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            featuredLatestArticle?.newsShortDescription.replace(
-                              /^"(.*)"$/,
-                              "$1"
-                            ),
-                        }}
-                        onClick={() => handleClick(featuredLatestArticle)}
-                      ></p>
+                      {featuredLatestArticle && (
+                        <Link
+                          to={getNewsUrl(featuredLatestArticle)}
+                          state={featuredLatestArticle}
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          <h3>{featuredLatestArticle?.newsTitle}</h3>
+                          <img
+                            src={featuredLatestArticle?.newsImage}
+                            alt={featuredLatestArticle?.newsTitle}
+                            style={{
+                              maxWidth: "100%",
+                              height: "auto",
+                              objectFit: "cover",
+                            }}
+                          />
+                          <div className="NewsSection_featuredcategoryAndDate__WZuqu">
+                            <p>{featuredLatestArticle?.newsCategoryDetails?.newsCategory}</p>
+                            <p>{formatDate(featuredLatestArticle?.newsCreatedDate)}</p>
+                          </div>
+                          <p
+                            lang="en"
+                            dangerouslySetInnerHTML={{
+                              __html: featuredLatestArticle?.newsShortDescription.replace(/^"(.*)"$/, "$1"),
+                            }}
+                          ></p>
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -346,30 +352,25 @@ const News = () => {
               key={currentPage}
             >
               {currentArticles.map((article, index) => (
-                <div
+                <Link
+                  key={index}
+                  to={getNewsUrl(article)}
+                  state={article}
                   className="NewsListingCard_container__s0wuY"
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", textDecoration: "none", color: "inherit", display: "flex" }}
                 >
                   <div className="NewsListingCard_left__qswsn">
                     <img
-                      onClick={() => handleClick(article)}
                       src={article.newsImage}
                       alt={article.newsTitle}
                     ></img>
                   </div>
                   <div className="NewsListingCard_right__RDYVn">
                     <div className="NewsListingCard_categoryContainer__qknlO">
-                      <p onClick={() => handleClick(article)}>
-                        {article?.newsCategoryDetails?.newsCategory}
-                      </p>
-                      <p onClick={() => handleClick(article)}>
-                        {formatDate(article.newsCreatedDate)}
-                      </p>
+                      <p>{article?.newsCategoryDetails?.newsCategory}</p>
+                      <p>{formatDate(article.newsCreatedDate)}</p>
                     </div>
-                    <h2 onClick={() => handleClick(article)}>
-                      {article.newsTitle}
-                    </h2>
-                    {/* <p>{article.newsShortDescription}</p> */}
+                    <h2>{article.newsTitle}</h2>
                     <p
                       lang="en"
                       dangerouslySetInnerHTML={{
@@ -378,10 +379,9 @@ const News = () => {
                           "$1"
                         ),
                       }}
-                      onClick={() => handleClick(article)}
                     ></p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
             <div className="pagination">

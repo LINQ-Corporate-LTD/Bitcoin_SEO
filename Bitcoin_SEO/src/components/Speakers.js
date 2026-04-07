@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import SubscribeForm from "./SubscribeForm";
 import Footer from "../Footer";
@@ -79,11 +79,15 @@ const Speakers = () => {
   };
 
   const handleClick = (member) => {
-    //  const speakerName = member.eventSpeakerName.replace(/\s+/g, '_');
     const speakerName = member.eventSpeakerName
       .toLowerCase()
       .replace(/\s+/g, "-");
     navigate(`/speakerprofile/${speakerName}`, { state: member }); // ✅ Pass member object in route state
+  };
+
+  const getSpeakerUrl = (speaker) => {
+    const slug = speaker.eventSpeakerName.toLowerCase().replace(/\s+/g, "-");
+    return `/speakerprofile/${slug}`;
   };
 
   const submitBtnClk = (e) => {
@@ -186,10 +190,12 @@ const Speakers = () => {
           >
             <div className="SpeakersSection_speakersContainer__zaJfH">
               {speakerList.map((speaker) => (
-                <div
+                <Link
                   key={speaker.id}
+                  to={getSpeakerUrl(speaker)}
+                  state={speaker}
                   className="SpeakersSection_speakerImageContainer__dwWJ1"
-                  onClick={() => handleClick(speaker)}
+                  style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <img
                     src={speaker.eventSpeakerFeaturedPageImage}
@@ -202,7 +208,7 @@ const Speakers = () => {
                     <p>{speaker.eventSpeakerName}</p>
                     <p>{speaker.eventSpeakerCompany}</p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

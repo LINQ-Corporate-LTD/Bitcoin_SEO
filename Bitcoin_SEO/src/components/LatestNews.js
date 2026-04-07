@@ -1,7 +1,7 @@
 // src/components/LatestNews.js
 // Data now comes from SSR (window.__INITIAL_DATA__.news). No client-side fetch.
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../assets/css/LatestNews.css";
 import { useSSRData } from "../common/useSSRData";
 
@@ -11,13 +11,13 @@ const LatestNews = () => {
   const ssrNews = useSSRData("news");
   const newsList = ssrNews || [];
 
-  const handleClick = (member) => {
-    const newsTitle = member.newsTitle
+  const getNewsUrl = (item) => {
+    const slug = item.newsTitle
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "")
       .replace(/\s+/g, "-")
       .replace(/-+/g, "-");
-    navigate(`/newsdescription/${newsTitle}`, { state: member });
+    return `/newsdescription/${slug}`;
   };
 
   let featuredLatestArticle = null;
@@ -46,20 +46,19 @@ const LatestNews = () => {
               <ul>
                 {latestNewsItems?.map((item, index) => (
                   <li key={index}>
-                    <div className="NewsSection_categoryAndDate__WBz4R">
-                      <p onClick={() => handleClick(item)}>
-                        {item?.newsCategoryDetails?.newsCategory}
-                      </p>
-                      <p onClick={() => handleClick(item)}>
-                        {formatDate(item?.newsCreatedDate)}
-                      </p>
-                    </div>
-                    <div
-                      className="NewsSection_newsTitle__1tiob"
-                      onClick={() => handleClick(item)}
+                    <Link
+                      to={getNewsUrl(item)}
+                      state={item}
+                      style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      {item?.newsTitle}
-                    </div>
+                      <div className="NewsSection_categoryAndDate__WBz4R">
+                        <p>{item?.newsCategoryDetails?.newsCategory}</p>
+                        <p>{formatDate(item?.newsCreatedDate)}</p>
+                      </div>
+                      <div className="NewsSection_newsTitle__1tiob">
+                        {item?.newsTitle}
+                      </div>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -74,30 +73,30 @@ const LatestNews = () => {
               </button>
             </div>
             <div className="NewsSection_featuredNews__ENl3B" style={{ height: "639PX" }}>
-              <h3 onClick={() => handleClick(featuredLatestArticle)}>
-                {featuredLatestArticle?.newsTitle}
-              </h3>
-              <img
-                src={featuredLatestArticle?.newsImage}
-                alt={featuredLatestArticle?.newsTitle}
-                style={{ maxWidth: "100%", height: "auto", objectFit: "cover" }}
-                onClick={() => handleClick(featuredLatestArticle)}
-              />
-              <div className="NewsSection_featuredcategoryAndDate__WZuqu">
-                <p onClick={() => handleClick(featuredLatestArticle)}>
-                  {featuredLatestArticle?.newsCategoryDetails?.newsCategory}
-                </p>
-                <p onClick={() => handleClick(featuredLatestArticle)}>
-                  {formatDate(featuredLatestArticle?.newsCreatedDate)}
-                </p>
-              </div>
-              <p
-                lang="en"
-                dangerouslySetInnerHTML={{
-                  __html: featuredLatestArticle?.newsShortDescription?.replace(/^"(.*)"$/, "$1"),
-                }}
-                onClick={() => handleClick(featuredLatestArticle)}
-              />
+              {featuredLatestArticle && (
+                <Link
+                  to={getNewsUrl(featuredLatestArticle)}
+                  state={featuredLatestArticle}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <h3>{featuredLatestArticle?.newsTitle}</h3>
+                  <img
+                    src={featuredLatestArticle?.newsImage}
+                    alt={featuredLatestArticle?.newsTitle}
+                    style={{ maxWidth: "100%", height: "auto", objectFit: "cover" }}
+                  />
+                  <div className="NewsSection_featuredcategoryAndDate__WZuqu">
+                    <p>{featuredLatestArticle?.newsCategoryDetails?.newsCategory}</p>
+                    <p>{formatDate(featuredLatestArticle?.newsCreatedDate)}</p>
+                  </div>
+                  <p
+                    lang="en"
+                    dangerouslySetInnerHTML={{
+                      __html: featuredLatestArticle?.newsShortDescription?.replace(/^"(.*)"$/, "$1"),
+                    }}
+                  />
+                </Link>
+              )}
             </div>
           </div>
         </div>
