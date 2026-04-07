@@ -241,7 +241,9 @@ async function fetchSSRData(pathname) {
     // ---- SPEAKER PROFILE (dynamic) ----
     if (pathname.startsWith("/speakerprofile/")) {
         const slug = pathname.replace("/speakerprofile/", "");
-        const speakers = await fetchSpeakers();
+        const [speakers, news, sponsors, trends] = await Promise.all([
+            fetchSpeakers(), fetchNews(), fetchSponsors(), fetchTrends(),
+        ]);
         const matched = speakers.find(
             (s) => s.eventSpeakerName?.toLowerCase().replace(/\s+/g, "-") === slug
         );
@@ -249,27 +251,30 @@ async function fetchSSRData(pathname) {
         if (matched) {
             speakerProfile = await fetchSpeakerById(matched.id);
         }
-        return { ...base, speakers, speakerProfile };
+        return { ...base, speakers, speakerProfile, news, sponsors, trends };
     }
 
     // ---- SPONSORS ----
     if (pathname === "/sponsors") {
-        const sponsors = await fetchSponsors();
-        const sponsorPageData = await fetchSponsorPageData();
-        const mediaPartners = await fetchMediaPartners();
-        return { ...base, sponsors, sponsorPageData, mediaPartners };
+        const [sponsors, sponsorPageData, mediaPartners, news, speakers, trends] = await Promise.all([
+            fetchSponsors(), fetchSponsorPageData(), fetchMediaPartners(),
+            fetchNews(), fetchSpeakers(), fetchTrends(),
+        ]);
+        return { ...base, sponsors, sponsorPageData, mediaPartners, news, speakers, trends };
     }
 
     // ---- SPONSOR DESCRIPTION (dynamic) ----
     if (pathname.startsWith("/sponsor/")) {
         const slug = pathname.replace("/sponsor/", "");
-        const sponsors = await fetchSponsors();
+        const [sponsors, news, speakers, trends] = await Promise.all([
+            fetchSponsors(), fetchNews(), fetchSpeakers(), fetchTrends(),
+        ]);
         const matched = sponsors.find((s) => toSlug(s.sponsorComapnyName) === slug);
         let sponsorProfile = null;
         if (matched) {
             sponsorProfile = await fetchSponsorById(matched.id);
         }
-        return { ...base, sponsors, sponsorProfile };
+        return { ...base, sponsors, sponsorProfile, news, speakers, trends };
     }
 
     // ---- EXHIBITOR PACKAGES ----
@@ -293,14 +298,18 @@ async function fetchSSRData(pathname) {
 
     // ---- NEWS LIST ----
     if (pathname === "/news") {
-        const news = await fetchNews();
-        return { ...base, news };
+        const [news, sponsors, speakers, trends] = await Promise.all([
+            fetchNews(), fetchSponsors(), fetchSpeakers(), fetchTrends(),
+        ]);
+        return { ...base, news, sponsors, speakers, trends };
     }
 
     // ---- NEWS DESCRIPTION (dynamic) ----
     if (pathname.startsWith("/newsdescription/")) {
         const slug = pathname.replace("/newsdescription/", "");
-        const news = await fetchNews();
+        const [news, sponsors, speakers, trends] = await Promise.all([
+            fetchNews(), fetchSponsors(), fetchSpeakers(), fetchTrends(),
+        ]);
         const matched = news.find((n) => {
             const s = n.newsTitle
                 .toLowerCase()
@@ -313,19 +322,21 @@ async function fetchSSRData(pathname) {
         if (matched) {
             newsDetail = await fetchNewsById(matched.id);
         }
-        return { ...base, news, newsDetail };
+        return { ...base, news, newsDetail, sponsors, speakers, trends };
     }
 
     // ---- TREND DESCRIPTION (dynamic) ----
     if (pathname.startsWith("/trenddescription/")) {
         const slug = pathname.replace("/trenddescription/", "");
-        const [trends, sponsors, speakers] = await Promise.all([fetchTrends(), fetchSponsors(), fetchSpeakers(),]);
+        const [trends, sponsors, speakers, news] = await Promise.all([
+            fetchTrends(), fetchSponsors(), fetchSpeakers(), fetchNews(),
+        ]);
         const matched = trends.find((t) => toTrendSlug(t.trendTitle) === slug);
         let trendDetail = null;
         if (matched) {
             trendDetail = await fetchTrendById(matched.id);
         }
-        return { ...base, trends, sponsors, trendDetail, speakers };
+        return { ...base, trends, sponsors, trendDetail, speakers, news };
     }
 
     // ---- FAQ ----
