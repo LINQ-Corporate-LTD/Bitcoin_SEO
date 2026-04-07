@@ -50,7 +50,7 @@ const ProfileDropdown = () => {
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-end">
                     <h6 className="dropdown-header">Welcome {userName}!</h6>
-                    <DropdownItem className='p-0'>
+                    {/* <DropdownItem className='p-0'>
                         <Link to= "/profile" className="dropdown-item">
                             <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
                             <span className="align-middle">Profile</span>
@@ -96,7 +96,7 @@ const ProfileDropdown = () => {
                             <i
                                 className="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Lock screen</span>
                         </Link>
-                    </DropdownItem>
+                    </DropdownItem> */}
                     <DropdownItem className='p-0'>
                         <Link to= "/logout" className="dropdown-item">
                             <i
