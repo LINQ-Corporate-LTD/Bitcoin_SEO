@@ -406,6 +406,14 @@ const Footer = () => {
           </p>
           <p>©2026 Bitcoin Innovation & Market Evolution 2026</p>
         </div>
+        <div style={{ position: "absolute", left: "-9999px", top: "0", width: "1px", height: "1px", overflow: "hidden" }}>
+          <a href="/news">News</a>
+          <a href="/featured-Speakers">Featured Speakers</a>
+          <a href="/sponsor-packages">Sponsor Packages</a>
+          <a href="/attandees">Attendees</a>
+          <a href="/sponsor-booking">Sponsor Booking</a>
+          <a href="/featuredSpeaker">Featured Speaker</a>
+        </div>
       </div>
     </footer>
     // <footer style={footerStyle}>
