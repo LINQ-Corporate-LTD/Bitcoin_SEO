@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./assets/css/footer.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSSRData } from "./common/useSSRData";
 const emailImage =
   "https://www.desalination-resource-recovery.com/images/icons/icon-mail.png";
 const linkedInIcon =
@@ -18,6 +19,17 @@ const Footer = () => {
   const [linkedin, setLinkedin] = useState("");
   console.log("linkedin: ", linkedin);
   const [email, setEmail] = useState("");
+  const sponsors = useSSRData("sponsors") || [];
+  const news = useSSRData("news") || [];
+  const speakers = useSSRData("speakers") || [];
+  const trends = useSSRData("trends") || [];
+
+  const toSlug = (str) =>
+    (str || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -405,6 +417,37 @@ const Footer = () => {
             ABCD Company
           </p>
           <p>©2026 Bitcoin Innovation & Market Evolution 2026</p>
+        </div>
+        <div style={{ position: "absolute", left: "-9999px", top: "0", width: "1px", height: "1px", overflow: "hidden" }}>
+          {/* Universal Hubs */}
+          <a href="/news">News Hub</a>
+          <a href="/featured-Speakers">Featured Speakers Hub</a>
+          <a href="/sponsor-packages">Sponsorship Packages Hub</a>
+          <a href="/attandees">Attendees Hub</a>
+          <a href="/sponsor-booking">Sponsor Booking Hub</a>
+          <a href="/featuredSpeaker">Featured Speaker Hub</a>
+
+          {/* Dynamic Slugs Harvested from SSR Data */}
+          {sponsors.map((s, i) => (
+            <a key={`seosp-${i}`} href={`/sponsor/${toSlug(s.sponsorComapnyName)}`}>
+              {s.sponsorComapnyName}
+            </a>
+          ))}
+          {news.map((n, i) => (
+            <a key={`seonw-${i}`} href={`/newsdescription/${toSlug(n.newsTitle)}`}>
+              {n.newsTitle}
+            </a>
+          ))}
+          {speakers.map((s, i) => (
+            <a key={`seosk-${i}`} href={`/speakerprofile/${(s.eventSpeakerName || "").toLowerCase().replace(/\s+/g, "-")}`}>
+              {s.eventSpeakerName}
+            </a>
+          ))}
+          {trends.map((t, i) => (
+            <a key={`seotr-${i}`} href={`/trenddescription/${(t.trendTitle || "").replace(/\s+/g, "-")}`}>
+              {t.trendTitle}
+            </a>
+          ))}
         </div>
       </div>
     </footer>
