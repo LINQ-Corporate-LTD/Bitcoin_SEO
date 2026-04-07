@@ -418,7 +418,7 @@ const Footer = () => {
           </p>
           <p>©2026 Bitcoin Innovation & Market Evolution 2026</p>
         </div>
-        <div style={{ position: "absolute", left: "-9999px", top: "0", width: "1px", height: "1px", overflow: "hidden" }}>
+        <div style={{ visibility: "hidden", height: 0, overflow: "hidden", position: "absolute" }}>
           {/* Universal Hubs */}
           <a href="/news">News Hub</a>
           <a href="/featured-Speakers">Featured Speakers Hub</a>
