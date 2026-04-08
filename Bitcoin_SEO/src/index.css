@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities; */
 /* Hide Google Translate banner and elements */
-body > .skiptranslate:first-child,
+body>.skiptranslate:first-child,
 .goog-te-banner-frame,
 .goog-te-banner-frame.skiptranslate {
   display: none !important;
@@ -18,4 +18,35 @@ body {
 
 .skiptranslate iframe {
   display: none !important;
+}
+
+.popup-content {
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  margin: auto;
+  padding: 5px;
+  width: 50%;
+}
+
+.popup-arrow {
+  stroke-width: 2px;
+  stroke: #d7d7d7;
+  stroke-dasharray: 30px;
+  stroke-dashoffset: -54px;
+  bottom: 0;
+  color: #fff;
+  filter: drop-shadow(0 -3px 3px rgba(0, 0, 0, .16));
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+[role=tooltip].popup-content {
+  border-radius: 5px;
+  box-shadow: 0 0 3px #00000029;
+  width: 200px;
+}
+
+[data-popup=tooltip].popup-overlay {
+  background: #0000;
 }

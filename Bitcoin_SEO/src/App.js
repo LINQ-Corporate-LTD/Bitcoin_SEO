@@ -80,7 +80,7 @@ function App({ ssrData }) {
             <Route path="featuredSpeaker" element={<FeaturedSpeaker />} />
             <Route path="faq" element={<Faq />} />
             <Route path="speakers" element={<CallForPresentation />} />
-            <Route path="featured-Speakers" element={<Speakers />} />
+            <Route path="featured-speakers" element={<Speakers />} />
             <Route
               path="trenddescription/:slug"
               element={<TrendDescriptionPage />}

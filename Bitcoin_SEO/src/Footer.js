@@ -421,7 +421,7 @@ const Footer = () => {
         <div style={{ visibility: "hidden", height: 0, overflow: "hidden", position: "absolute" }}>
           {/* Universal Hubs */}
           <a href="/news">News Hub</a>
-          <a href="/featured-Speakers">Featured Speakers Hub</a>
+          <a href="/featured-speakers">Featured Speakers Hub</a>
           <a href="/sponsor-packages">Sponsorship Packages Hub</a>
           <a href="/attandees">Attendees Hub</a>
           <a href="/sponsor-booking">Sponsor Booking Hub</a>

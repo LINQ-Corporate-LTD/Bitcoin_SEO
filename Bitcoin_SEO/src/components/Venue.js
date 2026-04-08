@@ -31,13 +31,32 @@ const Venue = () => {
   const contactSectionRef = useRef(null);
   const [lightboxIndex, setLightboxIndex] = useState(-1);
 
+  const getCleanUrl = (raw) => {
+    if (!raw) return "";
+    let s = raw;
+    let prev = null;
+    while (prev !== s) {
+      prev = s;
+      s = s.replace(/^"(.*)"$/s, "$1")
+        .replace(/\\"/g, '"')
+        .replace(/\\\\/g, "\\");
+      if (s.startsWith('"') && s.endsWith('"')) {
+        try { s = JSON.parse(s); } catch (e) { }
+      }
+    }
+    const hrefMatch = s.match(/href=["']([^"']+)["']/i);
+    if (hrefMatch) return hrefMatch[1];
+    s = s.replace(/<[^>]+>/g, "").trim();
+    try { new URL(s); return s; } catch { return ""; }
+  };
+
   const venuePlace = venueData[0]?.venueFirstSectionFirstTitle || "";
   const venueDescription = venueData[0]?.venueFirstSectionDescription?.replace(/^"(.*)"$/, "$1") || "";
-  const venueWebsiteLink = venueData[0]?.venueAddressLink?.replace(/^"(.*)"$/, "$1") || "";
+  const venueWebsiteLink = getCleanUrl(venueData[0]?.venueAddressLink);
   const venueLocation = venueData[0]?.venueLocation?.replace(/^"(.*)"$/, "$1") || "";
   const venueContact = venueData[0]?.venueContact?.replace(/^"(.*)"$/, "$1") || "";
-  const venueMapLink = venueData[0]?.venueMapLink?.replace(/^"(.*)"$/, "$1") || "";
-  const venueWebAddress = venueData[0]?.venueWebsiteAddress?.replace(/^"(.*)"$/, "$1") || "";
+  const venueMapLink = getCleanUrl(venueData[0]?.venueMapLink);
+  const venueWebAddress = getCleanUrl(venueData[0]?.venueWebsiteAddress);
 
   const venueGalleryImg1 = venueGalleryData[0]?.gallerySectionOneBigImage || "";
   const venueGalleryImg2 = venueGalleryData[0]?.gallerySectionOneSmallImage || "";
@@ -81,9 +100,6 @@ const Venue = () => {
     });
     return cleaned;
   };
-
-  const getCleanUrl = (htmlString) =>
-    htmlString ? htmlString.replace(/<\/?[^>]+(>|$)/g, "").trim() : "";
 
   const scrollToContact = () => {
     if (contactSectionRef.current) {
