@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Error404 from "./Error404";
 import { Helmet } from "react-helmet-async";
+import { useSSRData } from "../common/useSSRData";
 
 const SpeakerProfile = () => {
   const { slug } = useParams();
@@ -18,14 +19,33 @@ const SpeakerProfile = () => {
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200
   );
-  const [speakerData, setSpeakerData] = useState([]);
+
+  // ✅ SSR data — pre-fetched by server.js before renderToString
+  const ssrSpeakerProfile = useSSRData("speakerProfile");
+  const ssrSpeakers = useSSRData("speakers");
+
+  const [speakerData, setSpeakerData] = useState(ssrSpeakerProfile || []);
   const [isNotFound, setIsNotFound] = useState(false);
 
   useEffect(() => {
+    // Skip initial fetch if SSR already resolved this speaker
+    if (ssrSpeakerProfile && ssrSpeakerProfile.length > 0) return;
+
     // ✅ If state is missing (e.g. user directly entered URL)
     if (!state?.id) {
-      // Try to fetch by slug instead of ID
-      fetchSpeakerBySlug(slug);
+      // Use SSR speakers list first, fall back to client fetch
+      if (ssrSpeakers && ssrSpeakers.length > 0) {
+        const matched = ssrSpeakers.find(
+          (s) => s.eventSpeakerName?.toLowerCase().replace(/\s+/g, "-") === slug
+        );
+        if (matched) {
+          fetchSpeakerById(matched.id);
+        } else {
+          setIsNotFound(true);
+        }
+      } else {
+        fetchSpeakerBySlug(slug);
+      }
     } else {
       // Fetch using the passed state.id
       fetchSpeakerById(state.id);

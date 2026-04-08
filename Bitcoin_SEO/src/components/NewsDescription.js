@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Error404 from "./Error404";
 import { Helmet } from "react-helmet-async";
+import { useSSRData } from "../common/useSSRData";
 const newsImg =
   "https://www.desalination-resource-recovery.com/api/images/news/1749734842198.jpg";
 const linkedInLogo =
@@ -24,8 +25,13 @@ const NewsDescription = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
   const { state } = useLocation();
-  const [newsData, setNewsData] = useState([]);
-  const [newsList, setNewsList] = useState([]);
+
+  // ✅ SSR data — pre-fetched by server.js before renderToString
+  const ssrNewsDetail = useSSRData("newsDetail");
+  const ssrNews = useSSRData("news");
+
+  const [newsData, setNewsData] = useState(ssrNewsDetail || []);
+  const [newsList, setNewsList] = useState(ssrNews || []);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200
   );
@@ -33,7 +39,10 @@ const NewsDescription = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    callNewsListApi();
+    // Only fetch news list client-side if SSR didn't provide it
+    if (!ssrNews || ssrNews.length === 0) {
+      callNewsListApi();
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -58,6 +67,8 @@ const NewsDescription = () => {
   };
 
   useEffect(() => {
+    // Skip if SSR already provided news detail
+    if (ssrNewsDetail && ssrNewsDetail.length > 0) return;
     if (state?.id) {
       fetchNewsData(state.id);
     }
@@ -65,6 +76,8 @@ const NewsDescription = () => {
 
   useEffect(() => {
     if (!state?.id) {
+      // Skip slug-matching fetch if SSR already resolved this news item
+      if (ssrNewsDetail && ssrNewsDetail.length > 0) return;
       const matchedNews = newsList.find((news) => {
         const formattedSlug = news.newsTitle
           .toLowerCase()
@@ -480,7 +493,7 @@ Read the full article: ${currentUrl}`);
                             // </li>
                             <li key={index}>
                               <Link
-                                to={`/news/${item.newsTitle
+                                to={`/newsdescription/${item.newsTitle
                                   .toLowerCase()
                                   .replace(/[^a-z0-9\s-]/g, "") // remove special characters like ':'
                                   .replace(/\s+/g, "-") // replace spaces with hyphens

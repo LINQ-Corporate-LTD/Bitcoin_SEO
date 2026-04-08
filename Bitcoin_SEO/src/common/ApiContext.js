@@ -7,7 +7,7 @@ import React, { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Create the context
-const ApiDataContext = createContext();
+export const ApiDataContext = createContext();
 
 // Custom hook to use the context
 export const useApiData = () => {
@@ -37,7 +37,10 @@ function buildValue(data) {
 // Provider component
 export const ApiDataProvider = ({ children, initialData }) => {
   // Build value from SSR-injected data — no client-side fetch ever
-  const value = buildValue(initialData);
+  const value = {
+    ...buildValue(initialData),
+    __allData: initialData, // expose full data so useSSRData works during SSR
+  };
 
   return (
     <ApiDataContext.Provider value={value}>

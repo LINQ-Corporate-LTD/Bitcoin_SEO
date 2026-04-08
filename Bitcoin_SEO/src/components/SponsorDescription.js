@@ -10,12 +10,18 @@ import "react-toastify/dist/ReactToastify.css";
 import "../assets/css/popUp.css";
 import LogoCarousel from "./LogoCarousel";
 import Error404 from "./Error404";
+import { useSSRData } from "../common/useSSRData";
 const SponsorDescription = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
   const { state } = useLocation();
   const [isNotFound, setIsNotFound] = useState(false);
-  const [sponsorData, setSponsorData] = useState([]);
+
+  // ✅ SSR data — pre-fetched by server.js before renderToString
+  const ssrSponsorProfile = useSSRData("sponsorProfile");
+  const ssrSponsors = useSSRData("sponsors");
+
+  const [sponsorData, setSponsorData] = useState(ssrSponsorProfile || []);
   const [fullName, setFullName] = useState("");
   const [fullNameErr, setFullNameErr] = useState(false);
   const [companyName, setCompanyName] = useState("");
@@ -37,12 +43,24 @@ const SponsorDescription = () => {
   );
 
   useEffect(() => {
-    // ✅ If state is missing (e.g. user directly entered URL)
+    // Skip initial fetch if SSR already resolved this sponsor
+    if (ssrSponsorProfile && ssrSponsorProfile.length > 0) return;
+
     if (!state?.id) {
-      // Try to fetch by slug instead of ID
-      fetchSponsorBySlug(slug);
+      // Use SSR sponsors list first, fall back to client fetch
+      if (ssrSponsors && ssrSponsors.length > 0) {
+        const toSlug = (str = "") =>
+          str.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-");
+        const matched = ssrSponsors.find((s) => toSlug(s.sponsorComapnyName) === slug);
+        if (matched) {
+          fetchSponsorById(matched.id);
+        } else {
+          setIsNotFound(true);
+        }
+      } else {
+        fetchSponsorBySlug(slug);
+      }
     } else {
-      // Fetch using the passed state.id
       fetchSponsorById(state.id);
     }
   }, [state, slug]);

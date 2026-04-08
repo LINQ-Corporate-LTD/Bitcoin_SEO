@@ -1,13 +1,22 @@
 // src/common/useSSRData.js
-// Returns server-injected data for a given key from window.__INITIAL_DATA__
-// Falls back to null if not available (e.g. during pure CSR).
-// This is the ONLY place components should read page-level SSR data from.
+// Returns server-injected data for a given key.
+// Reads from ApiDataContext first (works during SSR where window is undefined),
+// then falls back to window.__INITIAL_DATA__ for CSR without a provider.
+
+import { useContext } from "react";
+import { ApiDataContext } from "./ApiContext";
 
 /**
  * @param {string} key - e.g. 'speakers', 'news', 'venue', 'sponsors', etc.
  * @returns {any} The SSR-injected data for this key, or null.
  */
 export function useSSRData(key) {
+    // Primary: context value — populated from prop during SSR AND CSR
+    const ctx = useContext(ApiDataContext);
+    if (ctx?.__allData?.[key] !== undefined) {
+        return ctx.__allData[key];
+    }
+    // Fallback: window (CSR only, when used outside ApiDataProvider)
     if (typeof window !== "undefined" && window.__INITIAL_DATA__) {
         return window.__INITIAL_DATA__[key] ?? null;
     }
@@ -15,9 +24,11 @@ export function useSSRData(key) {
 }
 
 /**
- * Returns entire __INITIAL_DATA__ object (or null on server-side/no data).
+ * Returns entire __INITIAL_DATA__ object (or null if unavailable).
  */
 export function useAllSSRData() {
+    const ctx = useContext(ApiDataContext);
+    if (ctx?.__allData) return ctx.__allData;
     if (typeof window !== "undefined") {
         return window.__INITIAL_DATA__ ?? null;
     }

@@ -38,12 +38,14 @@ import RemindMeLater from "./components/RemindMe";
 import SlideShare from "./components/slideShare";
 import PayOnline from "./components/payOnline";
 
-function App() {
-  // ✅ Get initial data from window if available (from SSR)
+function App({ ssrData }) {
+  // ✅ During SSR: use the prop injected by server.js before renderToString.
+  // ✅ During CSR:  use window.__INITIAL_DATA__ set by the inline <script> in the HTML.
   const initialData =
-    typeof window !== "undefined" && window.__INITIAL_DATA__
+    ssrData ??
+    (typeof window !== "undefined" && window.__INITIAL_DATA__
       ? window.__INITIAL_DATA__
-      : null;
+      : null);
 
   // ✅ Theme is injected server-side as <style id="ssr-theme"> in <head>.
   // No client-side theme fetch needed. The CSS variables are already applied.
