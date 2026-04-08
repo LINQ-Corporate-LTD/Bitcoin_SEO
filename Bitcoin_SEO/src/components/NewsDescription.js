@@ -36,7 +36,8 @@ const NewsDescription = () => {
     typeof window !== "undefined" ? window.innerWidth : 1200
   );
   const [isNotFound, setIsNotFound] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // Start in loading state if SSR didn't provide data — prevents Helmet rendering with empty values
+  const [loading, setLoading] = useState(!ssrNewsDetail || ssrNewsDetail.length === 0);
 
   useEffect(() => {
     // Only fetch news list client-side if SSR didn't provide it
@@ -47,6 +48,7 @@ const NewsDescription = () => {
   }, []);
 
   const fetchNewsData = async (id) => {
+    setLoading(true);
     let formData = new FormData();
     formData.append("newsId", id);
     console.log("newsId: ", id);
@@ -314,18 +316,18 @@ Read the full article: ${currentUrl}`);
   return (
     <div id="root">
       <Helmet>
-        <title>{seoTitle}</title>
-        <meta name="description" content={seoDesc} />
+        {seoTitle && <title>{seoTitle}</title>}
+        {seoDesc && <meta name="description" content={seoDesc} />}
         <link rel="canonical" href={canonicalUrl} />
         {/* Open Graph */}
-        <meta property="og:title" content={seoTitle} />
-        <meta property="og:description" content={seoDesc} />
+        {seoTitle && <meta property="og:title" content={seoTitle} />}
+        {seoDesc && <meta property="og:description" content={seoDesc} />}
         <meta property="og:type" content="profile" />
         <meta property="og:url" content={canonicalUrl} />
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={seoTitle} />
-        <meta name="twitter:description" content={seoDesc} />
+        {seoTitle && <meta name="twitter:title" content={seoTitle} />}
+        {seoDesc && <meta name="twitter:description" content={seoDesc} />}
       </Helmet>
       <div style={{ opacity: 1 }}>
         <div style={{ marginTop: windowWidth > 1024 ? "150px" : "" }}>
