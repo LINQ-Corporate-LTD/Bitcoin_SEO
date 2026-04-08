@@ -254,8 +254,8 @@ Read the full article: ${currentUrl}`);
     return <Error404 />;
   }
   const newsSeo = newsData[0];
-  const seoTitle = newsSeo?.newsMetaTitle || " ";
-  const seoDesc = newsSeo?.newsMetaDescription || " ";
+  const seoTitle = newsSeo?.newsMetaTitle?.trim() || newsSeo?.newsTitle?.trim() || "";
+  const seoDesc = newsSeo?.newsMetaDescription?.trim() || newsSeo?.newsShortDescription?.replace(/<[^>]*>/g, "").trim() || "";
   const seoImage = newsSeo?.newsImage;
   const canonicalUrl = slug
     ? `https://www.bitcoin-innovation-market-evolution.online/newsdescription/${slug}`
