@@ -249,66 +249,14 @@ Read the full article: ${currentUrl}`);
       });
   };
 
-  // ---------------- Meta Tags for SEO and Social Sharing ----------------
-
-  useEffect(() => {
-    if (newsData && newsData[0]) {
-      const news = newsData[0];
-
-      // Update page title
-      document.title = news.newsTitle || "News Article";
-
-      // Remove existing meta tags
-      const existingOgTags = document.querySelectorAll(
-        'meta[property^="og:"], meta[name="twitter:"]'
-      );
-      existingOgTags.forEach((tag) => tag.remove());
-
-      // Create meta tags
-      const metaTags = [
-        { property: "og:title", content: news.newsTitle },
-        {
-          property: "og:description",
-          content: news.newsShortDescription
-            ?.replace(/<[^>]*>/g, "")
-            .substring(0, 200),
-        },
-        { property: "og:image", content: news.newsImage }, // MUST be absolute URL
-        { property: "og:url", content: window.location.href },
-        { property: "og:type", content: "article" },
-        {
-          property: "og:site_name",
-          content: "Bitcoin Innovation & Market Evolution",
-        },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: news.newsTitle },
-        {
-          name: "twitter:description",
-          content: news.newsShortDescription
-            ?.replace(/<[^>]*>/g, "")
-            .substring(0, 200),
-        },
-        { name: "twitter:image", content: news.newsImage },
-      ];
-
-      metaTags.forEach(({ property, name, content }) => {
-        if (content) {
-          const meta = document.createElement("meta");
-          if (property) meta.setAttribute("property", property);
-          if (name) meta.setAttribute("name", name);
-          meta.setAttribute("content", content);
-          document.head.appendChild(meta);
-        }
-      });
-    }
-  }, [newsData]);
   if (loading) return <div>Loading...</div>;
   if (isNotFound) {
     return <Error404 />;
   }
   const newsSeo = newsData[0];
-  const seoTitle = newsSeo?.newsMetaTitle
-  const seoDesc = newsSeo?.newsMetaDescription
+  const seoTitle = newsSeo?.newsMetaTitle || " ";
+  const seoDesc = newsSeo?.newsMetaDescription || " ";
+  const seoImage = newsSeo?.newsImage;
   const canonicalUrl = slug
     ? `https://www.bitcoin-innovation-market-evolution.online/newsdescription/${slug}`
     : "https://www.bitcoin-innovation-market-evolution.online/news";
@@ -322,12 +270,14 @@ Read the full article: ${currentUrl}`);
         {/* Open Graph */}
         {seoTitle && <meta property="og:title" content={seoTitle} />}
         {seoDesc && <meta property="og:description" content={seoDesc} />}
-        <meta property="og:type" content="profile" />
+        {seoImage && <meta property="og:image" content={seoImage} />}
+        <meta property="og:type" content="article" />
         <meta property="og:url" content={canonicalUrl} />
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         {seoTitle && <meta name="twitter:title" content={seoTitle} />}
         {seoDesc && <meta name="twitter:description" content={seoDesc} />}
+        {seoImage && <meta name="twitter:image" content={seoImage} />}
       </Helmet>
       <div style={{ opacity: 1 }}>
         <div style={{ marginTop: windowWidth > 1024 ? "150px" : "" }}>
