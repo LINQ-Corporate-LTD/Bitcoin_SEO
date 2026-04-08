@@ -427,6 +427,7 @@ const AddSponsorDelegateForm = () => {
         <div className="SponsorFormV2_container__d5aHK">
           <div>
             <div className="SponsorFormV2_companyDetails__0Q7OJ">
+              <h1>Exhibitors Registration</h1>
               <form
                 action="#"
                 className="WDRM_2025_sponsor_form form_WDRM"

@@ -44,6 +44,18 @@
     width: 90%;
 }
 
+.SponsorFormV2_container__d5aHK .SponsorFormV2_companyDetails__0Q7OJ h1 {
+    color: #333;
+    font-family: Montserrat;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 100%;
+    margin-bottom: 50px;
+    margin-top: 70px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 .SponsorFormV2_container__d5aHK .SponsorFormV2_companyDetails__0Q7OJ .SponsorFormV2_companyForm__5tp\+y .SponsorFormV2_bar__B7FvC {
     align-items: center;
     background-color: #e5e5e5;
@@ -310,6 +322,13 @@
     outline: none;
 }
 
+@media only screen and (max-width: 1460px) {
+    .SponsorFormV2_container__d5aHK .SponsorFormV2_companyDetails__0Q7OJ h1 {
+        font-size: 32px;
+        margin-top: 40px;
+    }
+}
+
 @media only screen and (max-width: 1231px) {
     .PageForm_container__NA5Wr .PageForm_header__7W2Cz .PageForm_headerInner__sdlhn {
         max-width: 960px;
@@ -398,6 +417,12 @@
 
     .SponsorFormV2_container__d5aHK {
         padding: 30px 0;
+    }
+
+    .SponsorFormV2_container__d5aHK .SponsorFormV2_companyDetails__0Q7OJ h1 {
+        font-size: 28px;
+        margin-bottom: 30px;
+        margin-top: 10px;
     }
 
     .SponsorFormV2_container__d5aHK .SponsorFormV2_addbtnContainer__IVtkM {
