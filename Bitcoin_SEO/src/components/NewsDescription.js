@@ -254,30 +254,35 @@ Read the full article: ${currentUrl}`);
     return <Error404 />;
   }
   const newsSeo = newsData[0];
-  const seoTitle = newsSeo?.newsMetaTitle?.trim() || newsSeo?.newsTitle?.trim() || "";
-  const seoDesc = newsSeo?.newsMetaDescription?.trim() || newsSeo?.newsShortDescription?.replace(/<[^>]*>/g, "").trim() || "";
+  const seoTitle = newsSeo?.newsMetaTitle ? newsSeo?.newsMetaTitle?.trim() : 'Bitcoin News & Market Updates | BIM Evolution';
+  const seoDesc = newsSeo?.newsMetaDescription ? newsSeo?.newsMetaDescription?.trim() : "Stay informed with the latest Bitcoin news, market trends, and crypto innovations. Get in-depth analysis and updates on Bitcoin's evolving market landscape.";
   const seoImage = newsSeo?.newsImage;
   const canonicalUrl = slug
     ? `https://www.bitcoin-innovation-market-evolution.online/newsdescription/${slug}`
     : "https://www.bitcoin-innovation-market-evolution.online/news";
 
+  console.log('newsSeo', newsSeo);
+  console.log('canonicalUrl', canonicalUrl);
+  console.log('seoTitle', seoTitle);
+  console.log('seoDesc', seoDesc);
+  console.log('seoImage', seoImage);
+
+
   return (
     <div id="root">
       <Helmet>
-        {seoTitle && <title>{seoTitle}</title>}
-        {seoDesc && <meta name="description" content={seoDesc} />}
+        {<title>{seoTitle}</title>}
+        {<meta name="description" content={seoDesc} />}
         <link rel="canonical" href={canonicalUrl} />
-        {/* Open Graph */}
-        {seoTitle && <meta property="og:title" content={seoTitle} />}
-        {seoDesc && <meta property="og:description" content={seoDesc} />}
-        {seoImage && <meta property="og:image" content={seoImage} />}
+        {<meta property="og:title" content={seoTitle} />}
+        {<meta property="og:description" content={seoDesc} />}
+        {<meta property="og:image" content={seoImage} />}
         <meta property="og:type" content="article" />
         <meta property="og:url" content={canonicalUrl} />
-        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        {seoTitle && <meta name="twitter:title" content={seoTitle} />}
-        {seoDesc && <meta name="twitter:description" content={seoDesc} />}
-        {seoImage && <meta name="twitter:image" content={seoImage} />}
+        {<meta name="twitter:title" content={seoTitle} />}
+        {<meta name="twitter:description" content={seoDesc} />}
+        {<meta name="twitter:image" content={seoImage} />}
       </Helmet>
       <div style={{ opacity: 1 }}>
         <div style={{ marginTop: windowWidth > 1024 ? "150px" : "" }}>
