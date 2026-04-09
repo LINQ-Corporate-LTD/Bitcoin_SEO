@@ -364,5 +364,11 @@ urlpatterns = [
 
     path('savenavcheckstatus', views.save_nav_checked_status),
 
+    path('footeroptions', views.footerOptionsFun),
+    path('addfooteroption', views.add_footerOption),
+    path('editfooteroption', views.edit_footerOption),
+    path('deletefooteroption', views.delete_footerOption),
+    path('savefootercheckstatus', views.save_footer_checked_status),
+
 
 ]

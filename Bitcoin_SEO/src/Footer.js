@@ -12,7 +12,7 @@ const linkedInIcon =
 const Footer = () => {
   const navigate = useNavigate();
   const [windowWidth, setWindowWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 1200
+    typeof window !== "undefined" ? window.innerWidth : 1200,
   );
   const [socialMediaData, setSocialMediaData] = useState([]);
   const [relatedEventList, setRelatedEventList] = useState([]);
@@ -23,6 +23,7 @@ const Footer = () => {
   const news = useSSRData("news") || [];
   const speakers = useSSRData("speakers") || [];
   const trends = useSSRData("trends") || [];
+  const [footerNavOptions, setFooterNavOptions] = useState([]);
 
   const toSlug = (str) =>
     (str || "")
@@ -42,6 +43,7 @@ const Footer = () => {
   useEffect(() => {
     callSocialMediaOptionsApi();
     callRelatedEventListApi();
+    callFooterOptionsApi();
     // eslint-disable-next-line
   }, []);
   const callSocialMediaOptionsApi = () => {
@@ -50,7 +52,7 @@ const Footer = () => {
     };
     fetch(
       `https://harsh7541.pythonanywhere.com/admin1/footersocialmediaoptions`,
-      requestOptions
+      requestOptions,
     )
       .then((response) => response.json())
       .then((data) => {
@@ -86,7 +88,10 @@ const Footer = () => {
     const requestOptions = {
       method: "GET",
     };
-    fetch(`https://harsh7541.pythonanywhere.com/admin1/relatedevents`, requestOptions)
+    fetch(
+      `https://harsh7541.pythonanywhere.com/admin1/relatedevents`,
+      requestOptions,
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data && data.status) {
@@ -95,6 +100,36 @@ const Footer = () => {
         }
       })
       .catch((error) => {
+        setTimeout(() => {
+          toast.error("There was an error, Please try again later.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }, 1000);
+      });
+  };
+
+  const callFooterOptionsApi = () => {
+    fetch(`https://harsh7541.pythonanywhere.com/admin1/footeroptions`, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.status) {
+          const checked = data.footerOptions.filter(
+            (item) => item.isChecked === "Yes",
+          );
+          setFooterNavOptions(checked);
+        } else {
+          toast.error(data?.message);
+        }
+      })
+      .catch(() => {
         setTimeout(() => {
           toast.error("There was an error, Please try again later.", {
             position: "top-right",
@@ -294,7 +329,7 @@ const Footer = () => {
               ></img>
             </div>
           </div>
-          <div className="Footer_footerNav__ipo0e">
+          {/* <div className="Footer_footerNav__ipo0e">
             <div className="Footer_footerNavItem__k2FUW">
               <a href="/">Event Details</a>
               <a href="/speakers">Speakers</a>
@@ -327,6 +362,45 @@ const Footer = () => {
               <a href="/venue#gallery">Gallery</a>
               <a href="/faq">FAQ</a>
             </div>
+          </div> */}
+          <div className="Footer_footerNav__ipo0e">
+            {Array.from(
+              { length: Math.ceil(footerNavOptions.length / 2) },
+              (_, colIndex) => {
+                const colItems = footerNavOptions.slice(
+                  colIndex * 2,
+                  colIndex * 2 + 2,
+                );
+
+                // On mobile (<= 1023), split paired items into separate divs
+                if (lessThen1023 && colItems.length === 2) {
+                  return (
+                    <React.Fragment key={colIndex}>
+                      <div className="Footer_footerNavItem__k2FUW">
+                        <a href={colItems[0].footerOptionsPath}>
+                          {colItems[0].footerOptionsName}
+                        </a>
+                      </div>
+                      <div className="Footer_footerNavItem__k2FUW">
+                        <a href={colItems[1].footerOptionsPath}>
+                          {colItems[1].footerOptionsName}
+                        </a>
+                      </div>
+                    </React.Fragment>
+                  );
+                }
+
+                return (
+                  <div className="Footer_footerNavItem__k2FUW" key={colIndex}>
+                    {colItems.map((item) => (
+                      <a key={item.id} href={item.footerOptionsPath}>
+                        {item.footerOptionsName}
+                      </a>
+                    ))}
+                  </div>
+                );
+              },
+            )}
           </div>
         </div>
         <div className="Footer_hr__LZlee"></div>
@@ -364,21 +438,6 @@ const Footer = () => {
                   {event?.eventName}
                 </a>
               ))}
-
-              {/* <a
-                target="_blank"
-                href="https://www.membrane-technology-show.com/"
-                style={{ textTransform: "uppercase", pointerEvents: "auto" }}
-              >
-                Membrane Technology USA 2025
-              </a>
-              <a
-                target="_blank"
-                href="https://www.europe.pfas-summit.com/"
-                style={{ textTransform: "uppercase", pointerEvents: "auto" }}
-              >
-                PFAS Treatment Europe 2025
-              </a> */}
             </div>
             <div className="Footer_footerQuickLinks__dTpfQ">
               <h5>QUICK LINKS</h5>
@@ -400,9 +459,7 @@ const Footer = () => {
               >
                 Email
               </a>
-              <a href="/pay-online">
-                Pay Online
-              </a>
+              <a href="/pay-online">Pay Online</a>
               <a target="_blank" href="/terms-and-conditions">
                 Terms and Conditions
               </a>
@@ -418,7 +475,14 @@ const Footer = () => {
           </p>
           <p>©2026 Bitcoin Innovation & Market Evolution 2026</p>
         </div>
-        <div style={{ visibility: "hidden", height: 0, overflow: "hidden", position: "absolute" }}>
+        <div
+          style={{
+            visibility: "hidden",
+            height: 0,
+            overflow: "hidden",
+            position: "absolute",
+          }}
+        >
           {/* Universal Hubs */}
           <a href="/news">News Hub</a>
           <a href="/featured-speakers">Featured Speakers Hub</a>
@@ -429,22 +493,34 @@ const Footer = () => {
 
           {/* Dynamic Slugs Harvested from SSR Data */}
           {sponsors.map((s, i) => (
-            <a key={`seosp-${i}`} href={`/sponsor/${toSlug(s.sponsorComapnyName)}`}>
+            <a
+              key={`seosp-${i}`}
+              href={`/sponsor/${toSlug(s.sponsorComapnyName)}`}
+            >
               {s.sponsorComapnyName}
             </a>
           ))}
           {news.map((n, i) => (
-            <a key={`seonw-${i}`} href={`/newsdescription/${toSlug(n.newsTitle)}`}>
+            <a
+              key={`seonw-${i}`}
+              href={`/newsdescription/${toSlug(n.newsTitle)}`}
+            >
               {n.newsTitle}
             </a>
           ))}
           {speakers.map((s, i) => (
-            <a key={`seosk-${i}`} href={`/speakerprofile/${(s.eventSpeakerName || "").toLowerCase().replace(/\s+/g, "-")}`}>
+            <a
+              key={`seosk-${i}`}
+              href={`/speakerprofile/${(s.eventSpeakerName || "").toLowerCase().replace(/\s+/g, "-")}`}
+            >
               {s.eventSpeakerName}
             </a>
           ))}
           {trends.map((t, i) => (
-            <a key={`seotr-${i}`} href={`/trenddescription/${(t.trendTitle || "").replace(/\s+/g, "-")}`}>
+            <a
+              key={`seotr-${i}`}
+              href={`/trenddescription/${(t.trendTitle || "").replace(/\s+/g, "-")}`}
+            >
               {t.trendTitle}
             </a>
           ))}

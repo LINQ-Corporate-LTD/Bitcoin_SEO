@@ -392,7 +392,7 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
   const [activeMobileDropdown, setActiveMobileDropdown] = useState(null);
   const [activeNavItem, setActiveNavItem] = useState(null);
   // Use SSR navItems; fall back to empty array while waiting (won't trigger a fetch)
-  const navItems = ssrNavItems || [];
+  const navItems = (ssrNavItems || []).filter(item => item.isChecked === "Yes");
 
   // ✅ Client-side fallback: fetch navLogos if SSR data is null
   useEffect(() => {
@@ -576,7 +576,9 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
                           <a href={item.href}>{item.name}</a>
                         </li>
 
-                        {item.dropdown.map((sub, sIdx) => (
+                        {item.dropdown
+                        .filter(sub => sub.isChecked === "Yes")
+                        .map((sub, sIdx) => (
                           <li key={sIdx}>
                             <a href={sub.href}>{sub.name}</a>
                           </li>
@@ -625,7 +627,9 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
                         }}
                       >
                         <div className="NewNavbar_expansionMenu__KBWXI">
-                          {item.dropdown.map((sub, sIdx) => (
+                          {item.dropdown
+                          .filter(sub => sub.isChecked === "Yes")
+                          .map((sub, sIdx) => (
                             <a key={sIdx} href={sub.href}>
                               {sub.name}
                             </a>

@@ -19,7 +19,7 @@ from django.db.models import F
 from Myadmin.serializers import eventAgendaSerializer, eventIndustryTrendsSerializer
 from rest_framework.throttling import AnonRateThrottle
 # Create your views here.
-from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSubCategories,themeColorSettings,homePageVideoSectionInput,videoSectionUserOptions,speakerSection,homePageThirdSection,keyPointsSection,keyPointsSectionPoints,countSection,countSectionTopic,testimonialSection,pastAttandeesSection,sponsorSection, footerFirstSectionOptions, footerSocialMediaOptions,companiesLogoSection,registerPageSettings,whoShouldAttendPageData,speakerPageData,speakerPageSectionThreePoints,sponsorPageData,sponsorPageBulletData,venuePageData,venuePageGallery,newsCategory,generalNewsPoint,latestNews,topNews,subscribers,contactUsData,contactUsPageData,contactUsHelpData,pressMediaPageData,pressMediaPageBoxData,mediaPageHelpers,standOutCrowdRequestData,becomeSpeakerRequestData,quickProposalRequestData,endUserPassRegistrationRequestData,pastAttandeeHomeData
+from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSubCategories,themeColorSettings,homePageVideoSectionInput,videoSectionUserOptions,speakerSection,homePageThirdSection,keyPointsSection,keyPointsSectionPoints,countSection,countSectionTopic,testimonialSection,pastAttandeesSection,sponsorSection, footerFirstSectionOptions, footerSocialMediaOptions,companiesLogoSection,registerPageSettings,whoShouldAttendPageData,speakerPageData,speakerPageSectionThreePoints,sponsorPageData,sponsorPageBulletData,venuePageData,venuePageGallery,newsCategory,generalNewsPoint,latestNews,topNews,subscribers,contactUsData,contactUsPageData,contactUsHelpData,pressMediaPageData,pressMediaPageBoxData,mediaPageHelpers,standOutCrowdRequestData,becomeSpeakerRequestData,quickProposalRequestData,endUserPassRegistrationRequestData,pastAttandeeHomeData, footerOptions
 from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees,slideSharesAccessPersons,payOnlineTransectionData,blockedEmailDomains
 import requests
 import jwt
@@ -6243,6 +6243,87 @@ def save_nav_checked_status(request):
             obj.save()
 
         return JsonResponse({'status': True, 'message': 'Checked status saved successfully'})
+
+    except Exception as e:
+        return JsonResponse({'status': False, 'message': str(e)})
+    
+#------------------- Api For Add Footer Options  -------------------#
+@api_view(['POST'])
+def add_footerOption(request):
+    response = request.data
+    check_db = footerOptions()
+
+    if 'footerOptionsName' in request.POST:
+        check_db.footerOptionsName = response['footerOptionsName']
+
+    if 'footerOptionsPath' in request.POST:
+        check_db.footerOptionsPath = response['footerOptionsPath']
+
+    check_db.created_by = "Admin"
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Edit Footer Options-------------------#
+@api_view(['POST'])
+def edit_footerOption(request):
+    response = request.data
+    check_db = footerOptions.objects.get(id=response['id'])
+
+    if 'footerOptionsName' in request.POST:
+        check_db.footerOptionsName = response['footerOptionsName']
+
+    if 'footerOptionsPath' in request.POST:
+        check_db.footerOptionsPath = response['footerOptionsPath']
+ 
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Delete Footer Options -------------------#
+@api_view(['POST'])
+def delete_footerOption(request):
+    response = request.data
+    check_db = footerOptions.objects.get(id=response['id'])
+    check_db.isDelete = response['isDelete']
+    check_db.save()
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#---------------------------- Api For Get Footer Options ----------------------------#
+@permission_classes((AllowAny,))
+@api_view(['GET'])
+def footerOptionsFun(request):
+    footerOption_list = footerOptions.objects.all().filter(isDelete='No')
+    footerOptionsArr = []
+    for op in footerOption_list:
+        x={
+            'id':op.id,
+            'footerOptionsName':op.footerOptionsName,
+            'footerOptionsPath':op.footerOptionsPath,
+            'isChecked':op.isChecked,
+            'created_at': op.created_at,
+            'updated_at': op.updated_at,
+            'created_by': op.created_by,
+            'updated_by': op.updated_by,
+        }
+        footerOptionsArr.append(x)
+    return JsonResponse({'footerOptions': footerOptionsArr, 'status': True})
+
+#------------------- Api For Save Footer Options isChecked Status -------------------#
+@api_view(['POST'])
+def save_footer_checked_status(request):
+    try:
+        footer_list = json.loads(request.data.get('footerOptions', '[]'))
+
+        for item in footer_list:
+            obj = footerOptions.objects.get(id=item['id'])
+            obj.isChecked  = item['isChecked']
+            obj.updated_by = "Admin"
+            obj.save()
+
+        return JsonResponse({'status': True, 'message': 'Footer checked status saved successfully'})
 
     except Exception as e:
         return JsonResponse({'status': False, 'message': str(e)})

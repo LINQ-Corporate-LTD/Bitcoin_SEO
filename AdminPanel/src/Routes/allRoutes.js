@@ -304,6 +304,7 @@ import SlideShareAccessors from "../pages/SlideShareAccessors/SlideShareAccessor
 import PayOnlineResponse from "../pages/PayOnlineResponse";
 import BlockDomains from "../pages/BlockDomains/BlockDomains";
 import NavCategoryTree from "../pages/Navbar/NavCategoryTree";
+import FooterNavigation from "../Footer/FooterNavigation";
 
 
 
@@ -582,6 +583,8 @@ const authProtectedRoutes = [
   { path: "/payonlineresponse", component: <PayOnlineResponse /> },
   { path: "/blockdomains", component: <BlockDomains /> },
   { path: "/navtree", component: <NavCategoryTree /> },
+  { path: "/footernavigation", component: <FooterNavigation /> },
+
 
 
   // this route should be at the end of all other routes

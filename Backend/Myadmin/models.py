@@ -572,3 +572,13 @@ class AdminUser(models.Model):
     isDelete = models.CharField(default="No", max_length=10)
 
     objects = AdminUserManager()
+
+class footerOptions(models.Model):
+    footerOptionsName = models.CharField(default="",max_length=50,null=True, blank=True)
+    footerOptionsPath = models.CharField(default="",max_length=50,null=True, blank=True)
+    isChecked = models.CharField(default="No", max_length=10)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.CharField(null=False,max_length=50,default='No')
+    updated_by = models.CharField(null=False,max_length=50,default='No')
+    isDelete = models.CharField(default="No",max_length=10)
