@@ -714,6 +714,7 @@ const CompanyRegistrationForm = () => {
         <div className="BookingFormV2_container__XPZAc">
           <div>
             <div className="BookingFormV2_companyDetails__gy3Kt">
+              <h1>Registration</h1>
               <form
                 action="#"
                 className="WDRM_2025_booking_form form_WDRM"

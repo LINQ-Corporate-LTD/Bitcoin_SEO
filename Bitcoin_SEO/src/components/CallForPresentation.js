@@ -637,6 +637,9 @@ const CallForPresentation = () => {
                   </button>
                 }
                 position={windowWidth < 941 ? "bottom center" : "right center"}
+                portal={true}
+                arrow={true}
+                offsetY={windowWidth > 1024 ? -115 : 0}
               >
                 <div>
                   <form

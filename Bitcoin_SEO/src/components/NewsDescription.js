@@ -249,291 +249,248 @@ Read the full article: ${currentUrl}`);
       });
   };
 
-  // ---------------- Meta Tags for SEO and Social Sharing ----------------
-
-  useEffect(() => {
-    if (newsData && newsData[0]) {
-      const news = newsData[0];
-
-      // Update page title
-      document.title = news.newsTitle || "News Article";
-
-      // Remove existing meta tags
-      const existingOgTags = document.querySelectorAll(
-        'meta[property^="og:"], meta[name="twitter:"]'
-      );
-      existingOgTags.forEach((tag) => tag.remove());
-
-      // Create meta tags
-      const metaTags = [
-        { property: "og:title", content: news.newsTitle },
-        {
-          property: "og:description",
-          content: news.newsShortDescription
-            ?.replace(/<[^>]*>/g, "")
-            .substring(0, 200),
-        },
-        { property: "og:image", content: news.newsImage }, // MUST be absolute URL
-        { property: "og:url", content: window.location.href },
-        { property: "og:type", content: "article" },
-        {
-          property: "og:site_name",
-          content: "Bitcoin Innovation & Market Evolution",
-        },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: news.newsTitle },
-        {
-          name: "twitter:description",
-          content: news.newsShortDescription
-            ?.replace(/<[^>]*>/g, "")
-            .substring(0, 200),
-        },
-        { name: "twitter:image", content: news.newsImage },
-      ];
-
-      metaTags.forEach(({ property, name, content }) => {
-        if (content) {
-          const meta = document.createElement("meta");
-          if (property) meta.setAttribute("property", property);
-          if (name) meta.setAttribute("name", name);
-          meta.setAttribute("content", content);
-          document.head.appendChild(meta);
-        }
-      });
-    }
-  }, [newsData]);
   if (loading) return <div>Loading...</div>;
   if (isNotFound) {
     return <Error404 />;
   }
   const newsSeo = newsData[0];
-  const seoTitle = newsSeo?.newsMetaTitle
-  const seoDesc = newsSeo?.newsMetaDescription
+  const seoTitle = newsSeo?.newsMetaTitle ? newsSeo?.newsMetaTitle?.trim() : 'Bitcoin News & Market Updates | BIM Evolution';
+  const seoDesc = newsSeo?.newsMetaDescription ? newsSeo?.newsMetaDescription?.trim() : "Stay informed with the latest Bitcoin news, market trends, and crypto innovations. Get in-depth analysis and updates on Bitcoin's evolving market landscape.";
+  const seoImage = newsSeo?.newsImage;
   const canonicalUrl = slug
     ? `https://www.bitcoin-innovation-market-evolution.online/newsdescription/${slug}`
     : "https://www.bitcoin-innovation-market-evolution.online/news";
 
+  console.log('newsSeo', newsSeo);
+  console.log('canonicalUrl', canonicalUrl);
+  console.log('seoTitle', seoTitle);
+  console.log('seoDesc', seoDesc);
+  console.log('seoImage', seoImage);
+
+
   return (
-    <div id="root">
+    <>
       <Helmet>
-        {seoTitle && <title>{seoTitle}</title>}
-        {seoDesc && <meta name="description" content={seoDesc} />}
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
         <link rel="canonical" href={canonicalUrl} />
-        {/* Open Graph */}
-        {seoTitle && <meta property="og:title" content={seoTitle} />}
-        {seoDesc && <meta property="og:description" content={seoDesc} />}
-        <meta property="og:type" content="profile" />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:image" content={seoImage} />
+        <meta property="og:type" content="article" />
         <meta property="og:url" content={canonicalUrl} />
-        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        {seoTitle && <meta name="twitter:title" content={seoTitle} />}
-        {seoDesc && <meta name="twitter:description" content={seoDesc} />}
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <meta name="twitter:image" content={seoImage} />
       </Helmet>
-      <div style={{ opacity: 1 }}>
-        <div style={{ marginTop: windowWidth > 1024 ? "150px" : "" }}>
-          <Navbar forceScrolled />
-          <div className="NewsDetails_container__goqTf">
-            <div className="NewsDetails_backButtonContainer__hgOHX">
-              <div className="NewsDetails_backButtonPartContainer__YHRKV">
-                <a href="/news">
-                  <svg
-                    width="14"
-                    height="11"
-                    viewBox="0 0 14 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.2227 5.75C13.2227 6.24219 12.8398 6.625 12.375 6.625H3.98047L6.85156 9.52344C7.20703 9.85156 7.20703 10.4258 6.85156 10.7539C6.6875 10.918 6.46875 11 6.25 11C6.00391 11 5.78516 10.918 5.62109 10.7539L1.24609 6.37891C0.890625 6.05078 0.890625 5.47656 1.24609 5.14844L5.62109 0.773438C5.94922 0.417969 6.52344 0.417969 6.85156 0.773438C7.20703 1.10156 7.20703 1.67578 6.85156 2.00391L3.98047 4.875H12.375C12.8398 4.875 13.2227 5.28516 13.2227 5.75Z"
-                      fill="#171717"
-                    ></path>
-                  </svg>
-                  Back to all News
-                </a>
-              </div>
-            </div>
-            <div className="NewsDetails_upperPartContainer__iGJWB">
-              <div className="NewsDetails_upperPart__RvrUr">
-                <p>{newsData[0]?.newsCategoryDetails?.newsCategory}</p>
-                <h1>{newsData[0]?.newsTitle}</h1>
-                <div className="NewsDetails_descriptionText__ifgC7">
-                  <p
-                    lang="en"
-                    dangerouslySetInnerHTML={{
-                      __html: newsData[0]?.newsShortDescription.replace(
-                        /^"(.*)"$/,
-                        "$1"
-                      ),
-                    }}
-                  ></p>
+      <div id="root">
+        <div style={{ opacity: 1 }}>
+          <div style={{ marginTop: windowWidth > 1024 ? "150px" : "" }}>
+            <Navbar forceScrolled />
+            <div className="NewsDetails_container__goqTf">
+              <div className="NewsDetails_backButtonContainer__hgOHX">
+                <div className="NewsDetails_backButtonPartContainer__YHRKV">
+                  <a href="/news">
+                    <svg
+                      width="14"
+                      height="11"
+                      viewBox="0 0 14 11"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M13.2227 5.75C13.2227 6.24219 12.8398 6.625 12.375 6.625H3.98047L6.85156 9.52344C7.20703 9.85156 7.20703 10.4258 6.85156 10.7539C6.6875 10.918 6.46875 11 6.25 11C6.00391 11 5.78516 10.918 5.62109 10.7539L1.24609 6.37891C0.890625 6.05078 0.890625 5.47656 1.24609 5.14844L5.62109 0.773438C5.94922 0.417969 6.52344 0.417969 6.85156 0.773438C7.20703 1.10156 7.20703 1.67578 6.85156 2.00391L3.98047 4.875H12.375C12.8398 4.875 13.2227 5.28516 13.2227 5.75Z"
+                        fill="#171717"
+                      ></path>
+                    </svg>
+                    Back to all News
+                  </a>
                 </div>
-                <div className="NewsDetails_categoryContainer__pmy7Y">
-                  <p>{formatDate(newsData[0]?.newsCreatedDate)}</p>
-                  {shareOpen === true && (
-                    <div>
-                      <button onClick={scrollToQuickProposal}>Subscribe</button>
-                      <button
-                        className="NewsDetails_share__laT4U"
-                        onClick={openCloseShare}
-                      >
-                        Share
-                      </button>
-                    </div>
-                  )}
-                  {shareOpen === false && (
-                    <div className="NewsDetails_sharePopUpContainer__UB1au">
-                      <button onClick={openCloseShare}>X</button>
-                      <h6>Share</h6>
-                      <div className="NewsDetails_shareIconsContainer__ZkpQn">
-                        <div className="NewsDetails_shareIconBox__E6cI5">
-                          <button
-                            class="react-share__ShareButton"
-                            style={{
-                              backgroundColor: "transparent",
-                              border: "none",
-                              padding: "0px",
-                              font: "inherit",
-                              color: "inherit",
-                              cursor: "pointer",
-                            }}
-                            onClick={handleLinkedInShare}
-                          >
-                            <img src={linkedInLogo} alt="Share on LinkedIn" />
-                          </button>
-                        </div>
-                        <div className="NewsDetails_shareIconBox__E6cI5">
-                          <button
-                            class="react-share__ShareButton"
-                            style={{
-                              backgroundColor: "transparent",
-                              border: "none",
-                              padding: "0px",
-                              font: "inherit",
-                              color: "inherit",
-                              cursor: "pointer",
-                            }}
-                            onClick={handleWhatsAppShare}
-                          >
-                            <img src={whatsappLogo} alt="Share via WhatsApp" />
-                          </button>
-                        </div>
-                        <div className="NewsDetails_shareIconBox__E6cI5">
-                          <button
-                            class="react-share__ShareButton"
-                            style={{
-                              backgroundColor: "transparent",
-                              border: "none",
-                              padding: "0px",
-                              font: "inherit",
-                              color: "inherit",
-                              cursor: "pointer",
-                            }}
-                            onClick={handleGmailShare}
-                          >
-                            <img src={emailLogo} alt="Share via Email" />
-                          </button>
-                        </div>
-                        <div className="NewsDetails_shareIconBox__E6cI5">
-                          <button
-                            class="react-share__ShareButton"
-                            style={{
-                              backgroundColor: "transparent",
-                              border: "none",
-                              padding: "0px",
-                              font: "inherit",
-                              color: "inherit",
-                              cursor: "pointer",
-                            }}
-                            onClick={handleCopyLink}
-                          >
-                            <img src={copyLogo} alt="Copy" />
-                          </button>
+              </div>
+              <div className="NewsDetails_upperPartContainer__iGJWB">
+                <div className="NewsDetails_upperPart__RvrUr">
+                  <p>{newsData[0]?.newsCategoryDetails?.newsCategory}</p>
+                  <h1>{newsData[0]?.newsTitle}</h1>
+                  <div className="NewsDetails_descriptionText__ifgC7">
+                    <p
+                      lang="en"
+                      dangerouslySetInnerHTML={{
+                        __html: newsData[0]?.newsShortDescription.replace(
+                          /^"(.*)"$/,
+                          "$1"
+                        ),
+                      }}
+                    ></p>
+                  </div>
+                  <div className="NewsDetails_categoryContainer__pmy7Y">
+                    <p>{formatDate(newsData[0]?.newsCreatedDate)}</p>
+                    {shareOpen === true && (
+                      <div>
+                        <button onClick={scrollToQuickProposal}>Subscribe</button>
+                        <button
+                          className="NewsDetails_share__laT4U"
+                          onClick={openCloseShare}
+                        >
+                          Share
+                        </button>
+                      </div>
+                    )}
+                    {shareOpen === false && (
+                      <div className="NewsDetails_sharePopUpContainer__UB1au">
+                        <button onClick={openCloseShare}>X</button>
+                        <h6>Share</h6>
+                        <div className="NewsDetails_shareIconsContainer__ZkpQn">
+                          <div className="NewsDetails_shareIconBox__E6cI5">
+                            <button
+                              class="react-share__ShareButton"
+                              style={{
+                                backgroundColor: "transparent",
+                                border: "none",
+                                padding: "0px",
+                                font: "inherit",
+                                color: "inherit",
+                                cursor: "pointer",
+                              }}
+                              onClick={handleLinkedInShare}
+                            >
+                              <img src={linkedInLogo} alt="Share on LinkedIn" />
+                            </button>
+                          </div>
+                          <div className="NewsDetails_shareIconBox__E6cI5">
+                            <button
+                              class="react-share__ShareButton"
+                              style={{
+                                backgroundColor: "transparent",
+                                border: "none",
+                                padding: "0px",
+                                font: "inherit",
+                                color: "inherit",
+                                cursor: "pointer",
+                              }}
+                              onClick={handleWhatsAppShare}
+                            >
+                              <img src={whatsappLogo} alt="Share via WhatsApp" />
+                            </button>
+                          </div>
+                          <div className="NewsDetails_shareIconBox__E6cI5">
+                            <button
+                              class="react-share__ShareButton"
+                              style={{
+                                backgroundColor: "transparent",
+                                border: "none",
+                                padding: "0px",
+                                font: "inherit",
+                                color: "inherit",
+                                cursor: "pointer",
+                              }}
+                              onClick={handleGmailShare}
+                            >
+                              <img src={emailLogo} alt="Share via Email" />
+                            </button>
+                          </div>
+                          <div className="NewsDetails_shareIconBox__E6cI5">
+                            <button
+                              class="react-share__ShareButton"
+                              style={{
+                                backgroundColor: "transparent",
+                                border: "none",
+                                padding: "0px",
+                                font: "inherit",
+                                color: "inherit",
+                                cursor: "pointer",
+                              }}
+                              onClick={handleCopyLink}
+                            >
+                              <img src={copyLogo} alt="Copy" />
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="NewsDetails_lowerPart__F5RRQ">
-              <div className="NewsDetails_left__SL1Qe">
-                <div className="NewsDetails_content__0+gd8">
-                  <img src={newsData[0]?.newsImage} alt={newsData[0]?.newsImageAltText}></img>
-                  <p
-                    lang="en"
-                    dangerouslySetInnerHTML={{
-                      __html: newsData[0]?.newsDescription.replace(
-                        /^"(.*)"$/,
-                        "$1"
-                      ),
-                    }}
-                  ></p>
+              <div className="NewsDetails_lowerPart__F5RRQ">
+                <div className="NewsDetails_left__SL1Qe">
+                  <div className="NewsDetails_content__0+gd8">
+                    <img src={newsData[0]?.newsImage} alt={newsData[0]?.newsImageAltText}></img>
+                    <p
+                      lang="en"
+                      dangerouslySetInnerHTML={{
+                        __html: newsData[0]?.newsDescription.replace(
+                          /^"(.*)"$/,
+                          "$1"
+                        ),
+                      }}
+                    ></p>
+                  </div>
                 </div>
-              </div>
-              <div className="NewsDetails_right__P72yX">
-                <div className="NewsSection_wholeContainer__t5qCK">
-                  <div className="NewsSection_latestNewsLightContainer__M19xp">
-                    {windowWidth < 1024 && <h2>Latest News</h2>}
-                    <div className="NewsSection_latestNews__9sDlt">
-                      <div className="NewsSection_newsList__tnQsK">
-                        {windowWidth > 1024 && <h2>Latest News</h2>}
-                        <ul>
-                          {latestNewsItems?.map((item, index) => (
-                            // add a tag due to Semrush warning
-                            // <li>
-                            //   <div className="NewsSection_categoryAndDate__WBz4R">
-                            //     <p onClick={() => handleClick(item)}>
-                            //       {formatDate(item?.newsCreatedDate)}
-                            //     </p>
-                            //   </div>
-                            //   <div
-                            //     className="NewsSection_newsTitle__1tiob"
-                            //     onClick={() => handleClick(item)}
-                            //   >
-                            //     {item?.newsTitle}
-                            //   </div>
-                            // </li>
-                            <li key={index}>
-                              <Link
-                                to={`/newsdescription/${item.newsTitle
-                                  .toLowerCase()
-                                  .replace(/[^a-z0-9\s-]/g, "") // remove special characters like ':'
-                                  .replace(/\s+/g, "-") // replace spaces with hyphens
-                                  .replace(/-+/g, "-")}`}
-                                state={item}
-                                style={{ textDecoration: "none", color: "inherit" }} // keeps original look
-                              >
-                                <div className="NewsSection_categoryAndDate__WBz4R">
-                                  <p>{formatDate(item?.newsCreatedDate)}</p>
-                                </div>
-                                <div className="NewsSection_newsTitle__1tiob">
-                                  {item?.newsTitle}
-                                </div>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
+                <div className="NewsDetails_right__P72yX">
+                  <div className="NewsSection_wholeContainer__t5qCK">
+                    <div className="NewsSection_latestNewsLightContainer__M19xp">
+                      {windowWidth < 1024 && <h2>Latest News</h2>}
+                      <div className="NewsSection_latestNews__9sDlt">
+                        <div className="NewsSection_newsList__tnQsK">
+                          {windowWidth > 1024 && <h2>Latest News</h2>}
+                          <ul>
+                            {latestNewsItems?.map((item, index) => (
+                              // add a tag due to Semrush warning
+                              // <li>
+                              //   <div className="NewsSection_categoryAndDate__WBz4R">
+                              //     <p onClick={() => handleClick(item)}>
+                              //       {formatDate(item?.newsCreatedDate)}
+                              //     </p>
+                              //   </div>
+                              //   <div
+                              //     className="NewsSection_newsTitle__1tiob"
+                              //     onClick={() => handleClick(item)}
+                              //   >
+                              //     {item?.newsTitle}
+                              //   </div>
+                              // </li>
+                              <li key={index}>
+                                <Link
+                                  to={`/newsdescription/${item.newsTitle
+                                    .toLowerCase()
+                                    .replace(/[^a-z0-9\s-]/g, "") // remove special characters like ':'
+                                    .replace(/\s+/g, "-") // replace spaces with hyphens
+                                    .replace(/-+/g, "-")}`}
+                                  state={item}
+                                  style={{ textDecoration: "none", color: "inherit" }} // keeps original look
+                                >
+                                  <div className="NewsSection_categoryAndDate__WBz4R">
+                                    <p>{formatDate(item?.newsCreatedDate)}</p>
+                                  </div>
+                                  <div className="NewsSection_newsTitle__1tiob">
+                                    {item?.newsTitle}
+                                  </div>
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div style={{ width: "100%" }}></div>
+              <div
+                ref={subscribeSectionRef}
+                style={{
+                  transition: "margin-top 0.3s ease",
+                  width: "100%",
+                }}
+              >
+                <SubscribeForm />
+              </div>
             </div>
-            <div style={{ width: "100%" }}></div>
-            <div
-              ref={subscribeSectionRef}
-              style={{
-                transition: "margin-top 0.3s ease",
-                width: "100%",
-              }}
-            >
-              <SubscribeForm />
-            </div>
+            <Footer />
           </div>
-          <Footer />
         </div>
-      </div>
-    </div >
+      </div >
+    </>
   );
 };
 

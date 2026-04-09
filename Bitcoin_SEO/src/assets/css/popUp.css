@@ -9,14 +9,12 @@
     min-width: 300px;
     padding: 10px 20px !important;
     width: 20% !important;
+    margin: 0 !important;
 }
 
 .popup-content>div {
     width: 100%;
 }
-
-.popup-content>div svg{
-color: #000;}
 
 .popup-content form {
     align-items: center;

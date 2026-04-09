@@ -37,6 +37,18 @@
     padding-top: 30px;
 }
 
+.BookingFormV2_container__XPZAc .BookingFormV2_companyDetails__gy3Kt h1 {
+    color: #333;
+    font-family: Montserrat;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 100%;
+    margin-bottom: 50px;
+    margin-top: 70px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 .BookingFormV2_container__XPZAc .BookingFormV2_companyDetails__gy3Kt .BookingFormV2_companyForm__2HuYv {
     background-color: #f7f7f7;
     margin: 0 auto;
@@ -310,6 +322,13 @@
     outline: none;
 }
 
+@media only screen and (max-width: 1460px) {
+    .BookingFormV2_container__XPZAc .BookingFormV2_companyDetails__gy3Kt h1 {
+        font-size: 32px;
+        margin-top: 40px;
+    }
+}
+
 @media only screen and (max-width: 1231px) {
     .PageForm_container__NA5Wr .PageForm_header__7W2Cz .PageForm_headerInner__sdlhn {
         max-width: 960px;
@@ -398,6 +417,12 @@
 
     .BookingFormV2_container__XPZAc {
         padding: 30px 0;
+    }
+
+    .BookingFormV2_container__XPZAc .BookingFormV2_companyDetails__gy3Kt h1 {
+        font-size: 28px;
+        margin-bottom: 30px;
+        margin-top: 10px;
     }
 
     .BookingFormV2_container__XPZAc .BookingFormV2_addbtnContainer__AsQQo {
