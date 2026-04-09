@@ -240,7 +240,7 @@ const SponsorDescription = () => {
           <div className="Form_container__jwPCR">
             <div>
               <div>
-                <h1>quick proposal</h1>
+                <h2>quick proposal</h2>
                 <form
                   className="AFS_2026_sponsor_form Form_form__nhNBc form_AFS"
                   method="POST"

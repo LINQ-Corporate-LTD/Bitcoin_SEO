@@ -221,11 +221,11 @@ const News = () => {
                           </p>
                         </div>
                         <div className="NewsCard_titleDescContainer__PExXU">
-                          <h1 onClick={() => handleClick(featuredArticle)}>
+                          <h2 onClick={() => handleClick(featuredArticle)}>
                             <Link to={getNewsUrl(featuredArticle)} state={featuredArticle} style={{ textDecoration: "none", color: "inherit" }}>
                               {featuredArticle?.newsTitle}
                             </Link>
-                          </h1>
+                          </h2>
                           <p
                             lang="en"
                             dangerouslySetInnerHTML={{
@@ -265,14 +265,14 @@ const News = () => {
                               </p>
                             </div>
                             <div className="NewsCard_titleDescContainer__PExXU">
-                              <h1
+                              <h2
                                 style={{ fontSize: "18px", lineHeight: "24px" }}
                                 onClick={() => handleClick(news)}
                               >
                                 <Link to={getNewsUrl(news)} state={news} style={{ textDecoration: "none", color: "inherit" }}>
                                   {news?.newsTitle}
                                 </Link>
-                              </h1>
+                              </h2>
                             </div>
                           </div>
                         </div>
@@ -416,7 +416,7 @@ const News = () => {
           <div className="TopicsOnAgenda_container__86lkR">
             <div className="TopicsOnAgenda_agendaContainer__TBsgc">
               <div>
-                <h1>topics on the agenda</h1>
+                <h2>topics on the agenda</h2>
                 <div className="TopicsOnAgenda_cardContainer__r-nhg">
                   {allTopics.map((topic, index) => (
                     <div className="TopicsOnAgenda_card__pUjOu">

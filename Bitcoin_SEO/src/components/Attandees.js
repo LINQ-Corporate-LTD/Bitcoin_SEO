@@ -714,7 +714,7 @@ const Attandees = () => {
             <div className="TopicsOnAgenda_container__86lkR">
               <div className="TopicsOnAgenda_agendaContainer__TBsgc">
                 <div>
-                  <h1>topics on the agenda</h1>
+                  <h2>topics on the agenda</h2>
                   <div className="TopicsOnAgenda_cardContainer__r-nhg">
                     {allTopics.map((topic, index) => (
                       <div key={index} className="TopicsOnAgenda_card__pUjOu">
@@ -734,7 +734,7 @@ const Attandees = () => {
             </div>
             <div className="Operators_container__Pn2Qp">
               <div className="Operators_AttendeesContainer__ZP8rw">
-                <h1>Meet The Leaders</h1>
+                <h2>Meet The Leaders</h2>
                 {/* Only render slider when data is loaded */}
                 {isDataLoaded && chunkedLeaders.length > 0 ? (
                   <div className="Operators_cardContainerOuter__A0koD">

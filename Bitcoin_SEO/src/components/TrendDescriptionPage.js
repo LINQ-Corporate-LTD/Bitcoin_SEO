@@ -1072,7 +1072,7 @@ const TrendDescriptionPage = () => {
           <div className="TopicsOnAgenda_container__86lkR">
             <div className="TopicsOnAgenda_agendaContainer__TBsgc">
               <div>
-                <h1>topics on the agenda</h1>
+                <h2>topics on the agenda</h2>
                 <div className="TopicsOnAgenda_cardContainer__r-nhg">
                   {allTopics.map((topic) => (
                     <div key={topic.id} className="TopicsOnAgenda_card__pUjOu">
