@@ -12,6 +12,7 @@ import { MuiTelInput } from "mui-tel-input";
 import Button from "@mui/material/Button";
 import { FormControl, FormHelperText } from "@mui/material";
 import { useApiData } from "../../src/common/ApiContext";
+import { useSSRData } from "../common/useSSRData";
 const logo =
   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
 const plusIcon =
@@ -28,6 +29,8 @@ const CompanyRegistrationForm = () => {
   console.log("selectedQty: ", selectedQty);
   console.log("selectedPackage: ", selectedPackage);
   const phoneInputRef = useRef(null);
+  const toEmails = useSSRData("toEmails") || "benny.scott@iq-hub.com";
+  console.log('toEmailsAddDelegateForm: ', toEmails);
   const {
     homeVideoSettings,
     eventDetails,
@@ -544,7 +547,7 @@ const CompanyRegistrationForm = () => {
         // Prepare email payload
         const emailPayload = {
           // toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
-          toemail: "sam.razura@iq-hub.com,benny.scott@iq-hub.com,",
+          toemail: toEmails,
           cc: "",
           subject: "BIME - Booking Form Step 1",
           html: htmlContent,

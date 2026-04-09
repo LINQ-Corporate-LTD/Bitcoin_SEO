@@ -19,7 +19,7 @@ from django.db.models import F
 from Myadmin.serializers import eventAgendaSerializer, eventIndustryTrendsSerializer
 from rest_framework.throttling import AnonRateThrottle
 # Create your views here.
-from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSubCategories,themeColorSettings,homePageVideoSectionInput,videoSectionUserOptions,speakerSection,homePageThirdSection,keyPointsSection,keyPointsSectionPoints,countSection,countSectionTopic,testimonialSection,pastAttandeesSection,sponsorSection, footerFirstSectionOptions, footerSocialMediaOptions,companiesLogoSection,registerPageSettings,whoShouldAttendPageData,speakerPageData,speakerPageSectionThreePoints,sponsorPageData,sponsorPageBulletData,venuePageData,venuePageGallery,newsCategory,generalNewsPoint,latestNews,topNews,subscribers,contactUsData,contactUsPageData,contactUsHelpData,pressMediaPageData,pressMediaPageBoxData,mediaPageHelpers,standOutCrowdRequestData,becomeSpeakerRequestData,quickProposalRequestData,endUserPassRegistrationRequestData,pastAttandeeHomeData, footerOptions
+from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSubCategories,themeColorSettings,homePageVideoSectionInput,videoSectionUserOptions,speakerSection,homePageThirdSection,keyPointsSection,keyPointsSectionPoints,countSection,countSectionTopic,testimonialSection,pastAttandeesSection,sponsorSection, footerFirstSectionOptions, footerSocialMediaOptions,companiesLogoSection,registerPageSettings,whoShouldAttendPageData,speakerPageData,speakerPageSectionThreePoints,sponsorPageData,sponsorPageBulletData,venuePageData,venuePageGallery,newsCategory,generalNewsPoint,latestNews,topNews,subscribers,contactUsData,contactUsPageData,contactUsHelpData,pressMediaPageData,pressMediaPageBoxData,mediaPageHelpers,standOutCrowdRequestData,becomeSpeakerRequestData,quickProposalRequestData,endUserPassRegistrationRequestData,pastAttandeeHomeData,footerOptions,toEmails
 from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees,slideSharesAccessPersons,payOnlineTransectionData,blockedEmailDomains
 import requests
 import jwt
@@ -6327,3 +6327,43 @@ def save_footer_checked_status(request):
 
     except Exception as e:
         return JsonResponse({'status': False, 'message': str(e)})
+
+@api_view(['GET'])
+def get_to_emails(request):
+    try:
+        obj = toEmails.objects.filter(isDelete="No").first()
+        if obj:
+            return Response({
+                "status": True,
+                "toemails": obj.toemails,
+                "id": obj.id
+            })
+        return Response({"status": True, "toemails": "", "id": None})
+    except Exception as e:
+        return Response({"status": False, "message": str(e)}, status=500)
+    
+@api_view(['POST'])
+def save_to_emails(request):
+    try:
+        emails = request.data.get("toemails", "")
+        updated_by = request.data.get("updated_by", "Admin")
+        obj_id = request.data.get("id", None)
+
+        if obj_id:
+            obj = toEmails.objects.filter(id=obj_id, isDelete="No").first()
+            if obj:
+                obj.toemails = emails
+                obj.updated_by = updated_by
+                obj.save()
+                return Response({"status": True, "message": "Emails updated successfully.", "id": obj.id})
+
+        # Create new if not found
+        new_obj = toEmails.objects.create(
+            toemails=emails,
+            created_by=updated_by,
+            updated_by=updated_by,
+        )
+        return Response({"status": True, "message": "Emails saved successfully.", "id": new_obj.id})
+
+    except Exception as e:
+        return Response({"status": False, "message": str(e)}, status=500)

@@ -6,7 +6,7 @@ import SimpleStripeForm from "./PaymentForm";
 import { useApiData } from "../../src/common/ApiContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useSSRData } from "../common/useSSRData";
 const ticket =
   "https://www.desalination-resource-recovery.com/images/ticket.svg";
 const logo =
@@ -22,6 +22,7 @@ const SponsorBookingForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   console.log("location: ", location);
+  const toEmails = useSSRData("toEmails") || "benny.scott@iq-hub.com";
   const selectedPackage = location?.state?.selectedPackage;
   console.log("selectedPackage: ", selectedPackage);
   const delegates = location?.state?.delegates;
@@ -150,7 +151,7 @@ const SponsorBookingForm = () => {
       // Prepare email payload
       const emailPayload = {
         // toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
-        toemail: "sam.razura@iq-hub.com,benny.scott@iq-hub.com,",
+        toemail: toEmails,
         cc: "",
         subject: "BIME - Sponsor Booking Form Step 2",
         html: step2Html,
@@ -439,7 +440,7 @@ const SponsorBookingForm = () => {
       // Prepare email payload
       const emailPayload = {
         // toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com",
-        toemail: "sam.razura@iq-hub.com,benny.scott@iq-hub.com,",
+        toemail: toEmails,
         cc: "",
         subject: "BIME - Sponsor Booking Confirmation - Payment Successful",
         html: step3Html,

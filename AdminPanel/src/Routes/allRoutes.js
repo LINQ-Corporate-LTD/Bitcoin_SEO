@@ -305,6 +305,7 @@ import PayOnlineResponse from "../pages/PayOnlineResponse";
 import BlockDomains from "../pages/BlockDomains/BlockDomains";
 import NavCategoryTree from "../pages/Navbar/NavCategoryTree";
 import FooterNavigation from "../Footer/FooterNavigation";
+import ToEmails from "../Footer/ToEmails";
 
 
 
@@ -584,6 +585,8 @@ const authProtectedRoutes = [
   { path: "/blockdomains", component: <BlockDomains /> },
   { path: "/navtree", component: <NavCategoryTree /> },
   { path: "/footernavigation", component: <FooterNavigation /> },
+  { path: "/toemails", component: <ToEmails /> },
+
 
 
 
