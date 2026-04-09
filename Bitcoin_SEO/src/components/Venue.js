@@ -33,26 +33,15 @@ const Venue = () => {
 
   const getCleanUrl = (raw) => {
     if (!raw) return "";
-    let s = raw;
-    let prev = null;
-    while (prev !== s) {
-      prev = s;
-      s = s.replace(/^"(.*)"$/s, "$1")
-        .replace(/\\"/g, '"')
-        .replace(/\\\\/g, "\\");
-      if (s.startsWith('"') && s.endsWith('"')) {
-        try { s = JSON.parse(s); } catch (e) { }
-      }
-    }
-    const hrefMatch = s.match(/href=["']([^"']+)["']/i);
-    if (hrefMatch) return hrefMatch[1];
-    s = s.replace(/<[^>]+>/g, "").trim();
-    try { new URL(s); return s; } catch { return ""; }
+    // Directly extract the https?:// URL — ignores all surrounding escape chars and quotes
+    const urlMatch = raw.match(/https?:\/\/[^\s"'\\>]*/);
+    return urlMatch ? urlMatch[0] : "";
   };
 
   const venuePlace = venueData[0]?.venueFirstSectionFirstTitle || "";
   const venueDescription = venueData[0]?.venueFirstSectionDescription?.replace(/^"(.*)"$/, "$1") || "";
   const venueWebsiteLink = getCleanUrl(venueData[0]?.venueAddressLink);
+  const venueWebsiteLinkDisplay = venueData[0]?.venueAddressLink?.replace(/^"(.*)"$/, "$1") || "";
   const venueLocation = venueData[0]?.venueLocation?.replace(/^"(.*)"$/, "$1") || "";
   const venueContact = venueData[0]?.venueContact?.replace(/^"(.*)"$/, "$1") || "";
   const venueMapLink = getCleanUrl(venueData[0]?.venueMapLink);
@@ -91,12 +80,24 @@ const Venue = () => {
 
   const cleanHtml = (html) => {
     if (!html) return "";
-    let cleaned = html.replace(/^"(.*)"$/, "$1").replace(/\\"/g, '"');
-    cleaned = cleaned.replace(/\<a\s+href=["']([^"']+)["'][^\>]*\>/gi, (match, url) => {
-      if (url.startsWith("http://") || url.startsWith("https://")) {
-        return `<a href="${url}" target="_blank" rel="noopener noreferrer">`;
+    // Iteratively unescape until string stops changing (handles multi-level escaping)
+    let cleaned = html;
+    let prev = null;
+    while (prev !== cleaned) {
+      prev = cleaned;
+      cleaned = cleaned
+        .replace(/^"(.*)"$/s, "$1")
+        .replace(/\\"/g, '"')
+        .replace(/\\\\/g, "\\");
+    }
+    // Rebuild every <a> tag: directly extract the https?:// URL from it
+    // regardless of how many layers of escaping still surround the href value
+    cleaned = cleaned.replace(/<a\b[^>]*>/gi, (aTag) => {
+      const urlMatch = aTag.match(/https?:\/\/[^\s"'\\>]+/);
+      if (urlMatch) {
+        return `<a href="${urlMatch[0]}" target="_blank" rel="noopener noreferrer">`;
       }
-      return match;
+      return aTag;
     });
     return cleaned;
   };
@@ -208,7 +209,7 @@ const Venue = () => {
                     <img src={webIcon} alt="web icon" />
                     <p style={{ marginLeft: "5px" }}>
                       <p>
-                        <a href={getCleanUrl(venueWebsiteLink)} dangerouslySetInnerHTML={{ __html: cleanHtml(venueWebsiteLink) }} />
+                        <a href={getCleanUrl(venueWebsiteLink)} dangerouslySetInnerHTML={{ __html: cleanHtml(venueWebsiteLinkDisplay) }} />
                       </p>
                     </p>
                   </p>
