@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import cardLabel from "../../src/assets/images/card-labels.png";
 import SimpleStripeForm from "./PaymentForm";
 import { Helmet } from "react-helmet-async";
+import { useSSRData } from "../common/useSSRData";
 const lockIcon = "https://img.icons8.com/ios-filled/50/ffffff/lock.png";
 
 const PayOnline = () => {
@@ -26,6 +27,8 @@ const PayOnline = () => {
     invoiceNumber: "",
     email: "",
   });
+
+  const toEmails = useSSRData("toEmails") || "benny.scott@iq-hub.com";
 
   const handlePayFormChange = (e) => {
     const { name, value } = e.target;
@@ -82,7 +85,7 @@ const PayOnline = () => {
 
       const emailPayload = {
         // toemail:"sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
-        toemail: "sam.razura@iq-hub.com,benny.scott@iq-hub.com,",
+        toemail: toEmails,
         cc: "",
         subject: "BIME - Pay Online Request",
         html: payOnlineHtml,

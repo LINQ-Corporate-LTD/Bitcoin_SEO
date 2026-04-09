@@ -8,185 +8,190 @@ const BASE_URL = "https://harsh7541.pythonanywhere.com/admin1";
 
 /* -------- helpers -------- */
 async function get(endpoint) {
-    try {
-        const res = await fetch(`${BASE_URL}/${endpoint}`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-        });
-        if (!res.ok) return null;
-        return await res.json();
-    } catch (e) {
-        console.error(`❌ SSR fetch error [${endpoint}]:`, e.message);
-        return null;
-    }
+  try {
+    const res = await fetch(`${BASE_URL}/${endpoint}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (e) {
+    console.error(`❌ SSR fetch error [${endpoint}]:`, e.message);
+    return null;
+  }
+}
+
+async function fetchToEmails() {
+  const d = await get("toemails");
+  return d?.status ? d.toemails : "";
 }
 
 async function post(endpoint, formData) {
-    try {
-        const res = await fetch(`${BASE_URL}/${endpoint}`, {
-            method: "POST",
-            body: formData,
-        });
-        if (!res.ok) return null;
-        return await res.json();
-    } catch (e) {
-        console.error(`❌ SSR post error [${endpoint}]:`, e.message);
-        return null;
-    }
+  try {
+    const res = await fetch(`${BASE_URL}/${endpoint}`, {
+      method: "POST",
+      body: formData,
+    });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (e) {
+    console.error(`❌ SSR post error [${endpoint}]:`, e.message);
+    return null;
+  }
 }
 
 /* -------- slug helpers -------- */
 function toSlug(str = "") {
-    return str
-        .toLowerCase()
-        .replace(/[^a-z0-9\s-]/g, "")
-        .replace(/\s+/g, "-")
-        .replace(/-+/g, "-");
+  return str
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
 }
 
 function toTrendSlug(str = "") {
-    return str.replace(/\s+/g, "-");
+  return str.replace(/\s+/g, "-");
 }
 
 /* -------- individual fetchers -------- */
 async function fetchTheme() {
-    const d = await get("gettheme");
-    return d?.status ? d.themecolors : null;
+  const d = await get("gettheme");
+  return d?.status ? d.themecolors : null;
 }
 
 async function fetchNavLogos() {
-    // Try the dedicated endpoint first
-    const d = await get("getnavlogos");
-    if (d?.status && d.navLogos) {
-        const raw = d.navLogos;
-        return Array.isArray(raw) ? raw[0] : raw;
-    }
-    // Fallback: extract navLogos from homepagedata (always available)
-    const home = await get("homepagedata");
-    if (home?.status && home.homePageSettings?.navLogos) {
-        const raw = home.homePageSettings.navLogos;
-        return Array.isArray(raw) ? raw[0] : raw;
-    }
-    return null;
+  // Try the dedicated endpoint first
+  const d = await get("getnavlogos");
+  if (d?.status && d.navLogos) {
+    const raw = d.navLogos;
+    return Array.isArray(raw) ? raw[0] : raw;
+  }
+  // Fallback: extract navLogos from homepagedata (always available)
+  const home = await get("homepagedata");
+  if (home?.status && home.homePageSettings?.navLogos) {
+    const raw = home.homePageSettings.navLogos;
+    return Array.isArray(raw) ? raw[0] : raw;
+  }
+  return null;
 }
 
 async function fetchNavItems() {
-    const d = await get("getnavitems");
-    return d?.status ? d.navItems : [];
+  const d = await get("getnavitems");
+  return d?.status ? d.navItems : [];
 }
 
 async function fetchHomeData() {
-    const d = await get("homepagedata");
-    return d?.status ? d.homePageSettings : null;
+  const d = await get("homepagedata");
+  return d?.status ? d.homePageSettings : null;
 }
 
 async function fetchSponsors() {
-    const d = await get("eventsponsors");
-    return d?.status ? d.eventSponsors : [];
+  const d = await get("eventsponsors");
+  return d?.status ? d.eventSponsors : [];
 }
 
 async function fetchSpeakers() {
-    const d = await get("eventspeakers");
-    return d?.status ? d.eventSpeakersList : [];
+  const d = await get("eventspeakers");
+  return d?.status ? d.eventSpeakersList : [];
 }
 
 async function fetchSpeakerById(id) {
-    const { FormData } = require("formdata-node");
-    const fd = new FormData();
-    fd.append("speakerId", String(id));
-    const d = await post("speakerbyid", fd);
-    return d?.status && d.speakerData?.length > 0 ? d.speakerData : null;
+  const { FormData } = require("formdata-node");
+  const fd = new FormData();
+  fd.append("speakerId", String(id));
+  const d = await post("speakerbyid", fd);
+  return d?.status && d.speakerData?.length > 0 ? d.speakerData : null;
 }
 
 async function fetchNews() {
-    const d = await get("generalnews");
-    return d?.status ? d.generalNews : [];
+  const d = await get("generalnews");
+  return d?.status ? d.generalNews : [];
 }
 
 async function fetchNewsById(id) {
-    const { FormData } = require("formdata-node");
-    const fd = new FormData();
-    fd.append("newsId", String(id));
-    const d = await post("newsbyid", fd);
-    return d?.status && d.NewsData?.length > 0 ? d.NewsData : null;
+  const { FormData } = require("formdata-node");
+  const fd = new FormData();
+  fd.append("newsId", String(id));
+  const d = await post("newsbyid", fd);
+  return d?.status && d.NewsData?.length > 0 ? d.NewsData : null;
 }
 
 async function fetchVenueData() {
-    const d = await get("getvenuedata");
-    return d?.status ? d.venuePageStaticData : [];
+  const d = await get("getvenuedata");
+  return d?.status ? d.venuePageStaticData : [];
 }
 
 async function fetchVenueGallery() {
-    const d = await get("venuegalleryimages");
-    return d?.status ? d.venueGalleryImages : [];
+  const d = await get("venuegalleryimages");
+  return d?.status ? d.venueGalleryImages : [];
 }
 
 async function fetchFaqs() {
-    const d = await get("eventfaqs");
-    return d?.status ? d.faqsList : [];
+  const d = await get("eventfaqs");
+  return d?.status ? d.faqsList : [];
 }
 
 async function fetchTrends() {
-    const d = await get("eventindustrytrends");
-    return d?.status ? d.eventIndustryTrends : [];
+  const d = await get("eventindustrytrends");
+  return d?.status ? d.eventIndustryTrends : [];
 }
 
 async function fetchTrendById(id) {
-    const { FormData } = require("formdata-node");
-    const fd = new FormData();
-    fd.append("trendId", String(id));
-    const d = await post("trendbyid", fd);
-    return d?.status ? d.trendData : null;
+  const { FormData } = require("formdata-node");
+  const fd = new FormData();
+  fd.append("trendId", String(id));
+  const d = await post("trendbyid", fd);
+  return d?.status ? d.trendData : null;
 }
 
 async function fetchMediaPartners() {
-    const d = await get("mediapagehelpers");
-    return d?.status ? d.mediaPageHelpers : [];
+  const d = await get("mediapagehelpers");
+  return d?.status ? d.mediaPageHelpers : [];
 }
 
 async function fetchLogoCarousel() {
-    const d = await get("homepagecompanieslogo");
-    return d?.status ? d.homePageCompaniesList : [];
+  const d = await get("homepagecompanieslogo");
+  return d?.status ? d.homePageCompaniesList : [];
 }
 
 async function fetchSponsorById(id) {
-    const { FormData } = require("formdata-node");
-    const fd = new FormData();
-    fd.append("sponsorId", String(id));
-    const d = await post("sponsorbyid", fd);
-    return d?.status && d.sponsorData?.length > 0 ? d.sponsorData : null;
+  const { FormData } = require("formdata-node");
+  const fd = new FormData();
+  fd.append("sponsorId", String(id));
+  const d = await post("sponsorbyid", fd);
+  return d?.status && d.sponsorData?.length > 0 ? d.sponsorData : null;
 }
 
 /* ---- WhoShouldAttend / Attendees ---- */
 async function fetchWhoShouldAttend() {
-    // Use homepagedata which contains whoshouldattend info, or a dedicated endpoint if it exists
-    const d = await get("whoshouldattendpagedata");
-    return d?.status ? d : null;
+  // Use homepagedata which contains whoshouldattend info, or a dedicated endpoint if it exists
+  const d = await get("whoshouldattendpagedata");
+  return d?.status ? d : null;
 }
 
 async function fetchAttendees() {
-    const d = await get("eventattendees");
-    return d?.status ? d : null;
+  const d = await get("eventattendees");
+  return d?.status ? d : null;
 }
 
 async function fetchContactHelpers() {
-    const d = await get("contactushelpers");
-    return d?.status ? d.contactUsHelpers : [];
+  const d = await get("contactushelpers");
+  return d?.status ? d.contactUsHelpers : [];
 }
 
 async function fetchContactPageData() {
-    const d = await get("contactusstaticdata");
-    return d?.status ? d.contatusPageStaticData : [];
+  const d = await get("contactusstaticdata");
+  return d?.status ? d.contatusPageStaticData : [];
 }
 
 async function fetchSponsorPageData() {
-    const d = await get("getsponsorpagedata");
-    return d?.status ? d.sponsorPageStaticData : [];
+  const d = await get("getsponsorpagedata");
+  return d?.status ? d.sponsorPageStaticData : [];
 }
 
 async function fetchDelegatePackages() {
-    const d = await get("deligatepackageslist");
-    return d?.status ? d.delegatePackages : [];
+  const d = await get("deligatepackageslist");
+  return d?.status ? d.delegatePackages : [];
 }
 
 /* -------- main export -------- */
@@ -195,217 +200,247 @@ async function fetchDelegatePackages() {
  * @returns {Promise<object>} - Structured initial data object keyed by domain
  */
 async function fetchSSRData(pathname) {
-    // Always fetch theme + logoCarousel + navLogos + navItems (needed on every page)
-    const [theme, logoCarousel, navLogos, navItems] = await Promise.all([
-        fetchTheme(),
-        fetchLogoCarousel(),
-        fetchNavLogos(),
-        fetchNavItems(),
+  // Always fetch theme + logoCarousel + navLogos + navItems (needed on every page)
+  const [theme, logoCarousel, navLogos, navItems, toEmails] = await Promise.all([
+    fetchTheme(),
+    fetchLogoCarousel(),
+    fetchNavLogos(),
+    fetchNavItems(),
+    fetchToEmails(),
+
+  ]);
+
+  const base = { theme, logoCarousel, navLogos, navItems, toEmails };
+
+  // ---- HOME ----
+  if (pathname === "/" || pathname === "") {
+    const [home, sponsors, speakers, news, trends] = await Promise.all([
+      fetchHomeData(),
+      fetchSponsors(),
+      fetchSpeakers(),
+      fetchNews(),
+      fetchTrends(),
     ]);
+    return { ...base, home, sponsors, speakers, news, trends };
+  }
 
-    const base = { theme, logoCarousel, navLogos, navItems };
+  // ---- VENUE ----
+  if (pathname === "/venue") {
+    const [venue, venueGallery] = await Promise.all([
+      fetchVenueData(),
+      fetchVenueGallery(),
+    ]);
+    return { ...base, venue, venueGallery };
+  }
 
-    // ---- HOME ----
-    if (pathname === "/" || pathname === "") {
-        const [home, sponsors, speakers, news, trends] = await Promise.all([
-            fetchHomeData(),
-            fetchSponsors(),
-            fetchSpeakers(),
-            fetchNews(),
-            fetchTrends(),
-        ]);
-        return { ...base, home, sponsors, speakers, news, trends };
+  // ---- FEATURED SPEAKERS (full page) ----
+  if (pathname === "/featured-speakers") {
+    const speakers = await fetchSpeakers();
+    return { ...base, speakers };
+  }
+
+  // ---- CALL FOR PRESENTATION / BECOME A SPEAKER ----
+  if (pathname === "/speakers") {
+    const speakers = await fetchSpeakers();
+    return { ...base, speakers };
+  }
+
+  // ---- SPEAKER PROFILE (dynamic) ----
+  if (pathname.startsWith("/speakerprofile/")) {
+    const slug = pathname.replace("/speakerprofile/", "");
+    const [speakers, news, sponsors, trends] = await Promise.all([
+      fetchSpeakers(),
+      fetchNews(),
+      fetchSponsors(),
+      fetchTrends(),
+    ]);
+    const matched = speakers.find(
+      (s) => s.eventSpeakerName?.toLowerCase().replace(/\s+/g, "-") === slug,
+    );
+    let speakerProfile = null;
+    if (matched) {
+      speakerProfile = await fetchSpeakerById(matched.id);
     }
+    return { ...base, speakers, speakerProfile, news, sponsors, trends };
+  }
 
-    // ---- VENUE ----
-    if (pathname === "/venue") {
-        const [venue, venueGallery] = await Promise.all([
-            fetchVenueData(),
-            fetchVenueGallery(),
-        ]);
-        return { ...base, venue, venueGallery };
+  // ---- SPONSORS ----
+  if (pathname === "/sponsors") {
+    const [sponsors, sponsorPageData, mediaPartners, news, speakers, trends] =
+      await Promise.all([
+        fetchSponsors(),
+        fetchSponsorPageData(),
+        fetchMediaPartners(),
+        fetchNews(),
+        fetchSpeakers(),
+        fetchTrends(),
+      ]);
+    return {
+      ...base,
+      sponsors,
+      sponsorPageData,
+      mediaPartners,
+      news,
+      speakers,
+      trends,
+    };
+  }
+
+  // ---- SPONSOR DESCRIPTION (dynamic) ----
+  if (pathname.startsWith("/sponsor/")) {
+    const slug = pathname.replace("/sponsor/", "");
+    const [sponsors, news, speakers, trends] = await Promise.all([
+      fetchSponsors(),
+      fetchNews(),
+      fetchSpeakers(),
+      fetchTrends(),
+    ]);
+    const matched = sponsors.find((s) => toSlug(s.sponsorComapnyName) === slug);
+    let sponsorProfile = null;
+    if (matched) {
+      sponsorProfile = await fetchSponsorById(matched.id);
     }
+    return { ...base, sponsors, sponsorProfile, news, speakers, trends };
+  }
 
-    // ---- FEATURED SPEAKERS (full page) ----
-    if (pathname === "/featured-speakers") {
-        const speakers = await fetchSpeakers();
-        return { ...base, speakers };
+  // ---- EXHIBITOR PACKAGES ----
+  if (pathname === "/sponsor-packages") {
+    const sponsors = await fetchSponsors();
+    return { ...base, sponsors };
+  }
+
+  // ---- MEDIA PARTNERS ----
+  if (pathname === "/media-partners") {
+    const mediaPartners = await fetchMediaPartners();
+    return { ...base, mediaPartners };
+  }
+
+  // ---- AGENDA (uses homepagedata + custom agenda endpoint) ----
+  if (pathname === "/agenda") {
+    const home = await fetchHomeData();
+    const speakers = await fetchSpeakers();
+    return { ...base, home, speakers };
+  }
+
+  // ---- NEWS LIST ----
+  if (pathname === "/news") {
+    const [news, sponsors, speakers, trends] = await Promise.all([
+      fetchNews(),
+      fetchSponsors(),
+      fetchSpeakers(),
+      fetchTrends(),
+    ]);
+    return { ...base, news, sponsors, speakers, trends };
+  }
+
+  // ---- NEWS DESCRIPTION (dynamic) ----
+  if (pathname.startsWith("/newsdescription/")) {
+    const slug = pathname.replace("/newsdescription/", "");
+    const [news, sponsors, speakers, trends] = await Promise.all([
+      fetchNews(),
+      fetchSponsors(),
+      fetchSpeakers(),
+      fetchTrends(),
+    ]);
+    const matched = news.find((n) => {
+      const s = n.newsTitle
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-");
+      return s === slug;
+    });
+    let newsDetail = null;
+    if (matched) {
+      newsDetail = await fetchNewsById(matched.id);
     }
+    return { ...base, news, newsDetail, sponsors, speakers, trends };
+  }
 
-    // ---- CALL FOR PRESENTATION / BECOME A SPEAKER ----
-    if (pathname === "/speakers") {
-        const speakers = await fetchSpeakers();
-        return { ...base, speakers };
+  // ---- TREND DESCRIPTION (dynamic) ----
+  if (pathname.startsWith("/trenddescription/")) {
+    const slug = pathname.replace("/trenddescription/", "");
+    const [trends, sponsors, speakers, news] = await Promise.all([
+      fetchTrends(),
+      fetchSponsors(),
+      fetchSpeakers(),
+      fetchNews(),
+    ]);
+    const matched = trends.find((t) => toTrendSlug(t.trendTitle) === slug);
+    let trendDetail = null;
+    if (matched) {
+      trendDetail = await fetchTrendById(matched.id);
     }
+    return { ...base, trends, sponsors, trendDetail, speakers, news };
+  }
 
-    // ---- SPEAKER PROFILE (dynamic) ----
-    if (pathname.startsWith("/speakerprofile/")) {
-        const slug = pathname.replace("/speakerprofile/", "");
-        const [speakers, news, sponsors, trends] = await Promise.all([
-            fetchSpeakers(), fetchNews(), fetchSponsors(), fetchTrends(),
-        ]);
-        const matched = speakers.find(
-            (s) => s.eventSpeakerName?.toLowerCase().replace(/\s+/g, "-") === slug
-        );
-        let speakerProfile = null;
-        if (matched) {
-            speakerProfile = await fetchSpeakerById(matched.id);
-        }
-        return { ...base, speakers, speakerProfile, news, sponsors, trends };
-    }
+  // ---- FAQ ----
+  if (pathname === "/faq") {
+    const faqs = await fetchFaqs();
+    return { ...base, faqs };
+  }
 
-    // ---- SPONSORS ----
-    if (pathname === "/sponsors") {
-        const [sponsors, sponsorPageData, mediaPartners, news, speakers, trends] = await Promise.all([
-            fetchSponsors(), fetchSponsorPageData(), fetchMediaPartners(),
-            fetchNews(), fetchSpeakers(), fetchTrends(),
-        ]);
-        return { ...base, sponsors, sponsorPageData, mediaPartners, news, speakers, trends };
-    }
+  // ---- WHO SHOULD ATTEND ----
+  if (pathname === "/who-should-attend") {
+    const whoShouldAttend = await fetchWhoShouldAttend();
+    const speakers = await fetchSpeakers();
+    return { ...base, whoShouldAttend, speakers };
+  }
 
-    // ---- SPONSOR DESCRIPTION (dynamic) ----
-    if (pathname.startsWith("/sponsor/")) {
-        const slug = pathname.replace("/sponsor/", "");
-        const [sponsors, news, speakers, trends] = await Promise.all([
-            fetchSponsors(), fetchNews(), fetchSpeakers(), fetchTrends(),
-        ]);
-        const matched = sponsors.find((s) => toSlug(s.sponsorComapnyName) === slug);
-        let sponsorProfile = null;
-        if (matched) {
-            sponsorProfile = await fetchSponsorById(matched.id);
-        }
-        return { ...base, sponsors, sponsorProfile, news, speakers, trends };
-    }
+  // ---- ATTENDEES ----
+  if (pathname === "/attandees") {
+    const attendees = await fetchAttendees();
+    return { ...base, attendees };
+  }
 
-    // ---- EXHIBITOR PACKAGES ----
-    if (pathname === "/sponsor-packages") {
-        const sponsors = await fetchSponsors();
-        return { ...base, sponsors };
-    }
+  // ---- FEATURED SPEAKER (section) ----
+  if (pathname === "/featuredSpeaker") {
+    const speakers = await fetchSpeakers();
+    return { ...base, speakers };
+  }
 
-    // ---- MEDIA PARTNERS ----
-    if (pathname === "/media-partners") {
-        const mediaPartners = await fetchMediaPartners();
-        return { ...base, mediaPartners };
-    }
+  // ---- REGISTER ----
+  if (pathname === "/booking") {
+    const [delegatePackages, home] = await Promise.all([
+      fetchDelegatePackages(),
+      fetchHomeData(), // ← add this
+    ]);
+    return { ...base, delegatePackages, home };
+  }
 
-    // ---- AGENDA (uses homepagedata + custom agenda endpoint) ----
-    if (pathname === "/agenda") {
-        const home = await fetchHomeData();
-        const speakers = await fetchSpeakers();
-        return { ...base, home, speakers };
-    }
+  // ---- BOOKING FORM ----
+  if (pathname === "/booking-form") {
+    const home = await fetchHomeData();
+    return { ...base, home };
+  }
 
-    // ---- NEWS LIST ----
-    if (pathname === "/news") {
-        const [news, sponsors, speakers, trends] = await Promise.all([
-            fetchNews(), fetchSponsors(), fetchSpeakers(), fetchTrends(),
-        ]);
-        return { ...base, news, sponsors, speakers, trends };
-    }
+  // ----SPONSOR BOOKING FORM ----
+  if (pathname === "/sponsor-booking") {
+    const home = await fetchHomeData();
+    return { ...base, home };
+  }
 
-    // ---- NEWS DESCRIPTION (dynamic) ----
-    if (pathname.startsWith("/newsdescription/")) {
-        const slug = pathname.replace("/newsdescription/", "");
-        const [news, sponsors, speakers, trends] = await Promise.all([
-            fetchNews(), fetchSponsors(), fetchSpeakers(), fetchTrends(),
-        ]);
-        const matched = news.find((n) => {
-            const s = n.newsTitle
-                .toLowerCase()
-                .replace(/[^a-z0-9\s-]/g, "")
-                .replace(/\s+/g, "-")
-                .replace(/-+/g, "-");
-            return s === slug;
-        });
-        let newsDetail = null;
-        if (matched) {
-            newsDetail = await fetchNewsById(matched.id);
-        }
-        return { ...base, news, newsDetail, sponsors, speakers, trends };
-    }
+  // ---- CONTACT US ----
+  if (pathname === "/contact-us") {
+    const [contactHelpers, contactPageData] = await Promise.all([
+      fetchContactHelpers(),
+      fetchContactPageData(),
+    ]);
+    return { ...base, contactHelpers, contactPageData };
+  }
 
-    // ---- TREND DESCRIPTION (dynamic) ----
-    if (pathname.startsWith("/trenddescription/")) {
-        const slug = pathname.replace("/trenddescription/", "");
-        const [trends, sponsors, speakers, news] = await Promise.all([
-            fetchTrends(), fetchSponsors(), fetchSpeakers(), fetchNews(),
-        ]);
-        const matched = trends.find((t) => toTrendSlug(t.trendTitle) === slug);
-        let trendDetail = null;
-        if (matched) {
-            trendDetail = await fetchTrendById(matched.id);
-        }
-        return { ...base, trends, sponsors, trendDetail, speakers, news };
-    }
+  // ---- SPONSORS PAGE ----
+  if (pathname === "/sponsors") {
+    const [sponsors, sponsorPageData, mediaPartners] = await Promise.all([
+      fetchSponsors(),
+      fetchSponsorPageData(),
+      fetchMediaPartners(),
+    ]);
+    return { ...base, sponsors, sponsorPageData, mediaPartners };
+  }
 
-    // ---- FAQ ----
-    if (pathname === "/faq") {
-        const faqs = await fetchFaqs();
-        return { ...base, faqs };
-    }
-
-    // ---- WHO SHOULD ATTEND ----
-    if (pathname === "/who-should-attend") {
-        const whoShouldAttend = await fetchWhoShouldAttend();
-        const speakers = await fetchSpeakers();
-        return { ...base, whoShouldAttend, speakers };
-    }
-
-    // ---- ATTENDEES ----
-    if (pathname === "/attandees") {
-        const attendees = await fetchAttendees();
-        return { ...base, attendees };
-    }
-
-    // ---- FEATURED SPEAKER (section) ----
-    if (pathname === "/featuredSpeaker") {
-        const speakers = await fetchSpeakers();
-        return { ...base, speakers };
-    }
-
-    // ---- REGISTER ----
-    if (pathname === "/booking") {
-        const [delegatePackages, home] = await Promise.all([
-            fetchDelegatePackages(),
-            fetchHomeData(),        // ← add this
-        ]);
-        return { ...base, delegatePackages, home };
-    }
-
-    // ---- BOOKING FORM ----
-    if (pathname === "/booking-form") {
-        const home = await fetchHomeData();
-        return { ...base, home };
-    }
-
-    // ----SPONSOR BOOKING FORM ----
-    if (pathname === "/sponsor-booking") {
-        const home = await fetchHomeData();
-        return { ...base, home };
-    }
-
-    // ---- CONTACT US ----
-    if (pathname === "/contact-us") {
-        const [contactHelpers, contactPageData] = await Promise.all([
-            fetchContactHelpers(),
-            fetchContactPageData(),
-        ]);
-        return { ...base, contactHelpers, contactPageData };
-    }
-
-    // ---- SPONSORS PAGE ----
-    if (pathname === "/sponsors") {
-        const [sponsors, sponsorPageData, mediaPartners] = await Promise.all([
-            fetchSponsors(),
-            fetchSponsorPageData(),
-            fetchMediaPartners(),
-        ]);
-        return { ...base, sponsors, sponsorPageData, mediaPartners };
-    }
-
-    // ---- Default: all other pages (contact, booking, forms, etc.) — theme only ----
-    return { ...base };
+  // ---- Default: all other pages (contact, booking, forms, etc.) — theme only ----
+  return { ...base };
 }
 
 module.exports = { fetchSSRData };

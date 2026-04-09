@@ -370,5 +370,7 @@ urlpatterns = [
     path('deletefooteroption', views.delete_footerOption),
     path('savefootercheckstatus', views.save_footer_checked_status),
 
+    path('toemails', views.get_to_emails),
+    path('savetoemails', views.save_to_emails),
 
 ]

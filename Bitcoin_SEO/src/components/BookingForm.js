@@ -5,6 +5,7 @@ import SimpleStripeForm from "./PaymentForm";
 import { useApiData } from "../../src/common/ApiContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSSRData } from "../common/useSSRData";
 const logo =
   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
 
@@ -39,6 +40,7 @@ const BookingForm = () => {
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200,
   );
+  const toEmails = useSSRData("toEmails") || "benny.scott@iq-hub.com";
 
   const {
     homeVideoSettings,
@@ -154,7 +156,7 @@ const BookingForm = () => {
       // Prepare email payload
       const emailPayload = {
         // toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
-        toemail: "sam.razura@iq-hub.com,benny.scott@iq-hub.com,",
+        toemail: toEmails,
         cc: "",
         subject: "BIME - Booking Form Step 2",
         html: step2Html,
@@ -552,7 +554,7 @@ const BookingForm = () => {
       // Prepare email payload
       const emailPayload = {
         // toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com",
-        toemail: "sam.razura@iq-hub.com,benny.scott@iq-hub.com,",
+        toemail: toEmails,
         cc: "",
         subject: "BIME - Booking Confirmation - Payment Successful",
         html: step3Html,

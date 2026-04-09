@@ -10,6 +10,7 @@ import { MuiTelInput } from "mui-tel-input";
 import Button from "@mui/material/Button";
 import "../assets/css/AddSponsorDelegateForm.css";
 import { FormControl, FormHelperText } from "@mui/material";
+import { useSSRData } from "../common/useSSRData";
 const logo =
   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
 const plusIcon =
@@ -68,6 +69,8 @@ const AddSponsorDelegateForm = () => {
 
   const portalId = "4000965";
   const formGuid = "1e2e18e4-1877-4d07-9a22-6c2dbca5c2f8";
+
+  const toEmails = useSSRData("toEmails") || "benny.scott@iq-hub.com";
 
   // Get country options from react-select-country-list
   const countryOptions = [
@@ -326,7 +329,7 @@ const AddSponsorDelegateForm = () => {
         // Prepare email payload
         const emailPayload = {
           // toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
-          toemail: "sam.razura@iq-hub.com,benny.scott@iq-hub.com,",
+          toemail: toEmails,
           cc: "",
           subject: "BIME - Sponsor Booking Form Step 1",
           html: htmlContent,
