@@ -120,8 +120,8 @@ const SpeakerProfile = () => {
   }
 
   const speaker = speakerData[0];
-  const seoTitle = speaker?.eventSpeakerMetaTitle
-  const seoDesc = speaker?.eventSpeakerMetaDescription
+  const seoTitle = speaker?.eventSpeakerMetaTitle ? speaker.eventSpeakerMetaTitle : 'Featured Speaker | BIM Evolution';
+  const seoDesc = speaker?.eventSpeakerMetaDescription ? speaker.eventSpeakerMetaDescription : 'Meet our expert speakers at Bitcoin Innovation Market Evolution. Explore their backgrounds, expertise, and upcoming session topics.';
   const canonicalUrl = slug
     ? `https://www.bitcoin-innovation-market-evolution.online/speakerprofile/${slug}`
     : "https://www.bitcoin-innovation-market-evolution.online/featured-speakers";

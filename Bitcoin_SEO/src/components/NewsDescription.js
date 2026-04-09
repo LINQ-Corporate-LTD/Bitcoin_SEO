@@ -269,22 +269,22 @@ Read the full article: ${currentUrl}`);
 
 
   return (
-    <>
-      <Helmet>
-        <title>{seoTitle}</title>
-        <meta name="description" content={seoDesc} />
-        <link rel="canonical" href={canonicalUrl} />
-        <meta property="og:title" content={seoTitle} />
-        <meta property="og:description" content={seoDesc} />
-        <meta property="og:image" content={seoImage} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={canonicalUrl} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={seoTitle} />
-        <meta name="twitter:description" content={seoDesc} />
-        <meta name="twitter:image" content={seoImage} />
-      </Helmet>
-      <div id="root">
+    <div id="root">
+      <>
+        <Helmet>
+          <title>{seoTitle}</title>
+          <meta name="description" content={seoDesc} />
+          <link rel="canonical" href={canonicalUrl} />
+          <meta property="og:title" content={seoTitle} />
+          <meta property="og:description" content={seoDesc} />
+          <meta property="og:image" content={seoImage} />
+          <meta property="og:type" content="article" />
+          <meta property="og:url" content={canonicalUrl} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={seoTitle} />
+          <meta name="twitter:description" content={seoDesc} />
+          <meta name="twitter:image" content={seoImage} />
+        </Helmet>
         <div style={{ opacity: 1 }}>
           <div style={{ marginTop: windowWidth > 1024 ? "150px" : "" }}>
             <Navbar forceScrolled />
@@ -489,8 +489,8 @@ Read the full article: ${currentUrl}`);
             <Footer />
           </div>
         </div>
-      </div >
-    </>
+      </>
+    </div >
   );
 };
 
