@@ -15,6 +15,7 @@ class homePageNavLogoData(models.Model):
 class homePageNavMainCategories(models.Model):
     navMainCategoryName = models.CharField(default="",max_length=50,null=True, blank=True)
     navMainCategoryPath = models.CharField(default="",max_length=50,null=True, blank=True)
+    isChecked = models.CharField(default="No", max_length=10)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.CharField(null=False,max_length=50,default='No')
@@ -25,6 +26,7 @@ class homePageNavSubCategories(models.Model):
     navMainCategoryId = models.ForeignKey(homePageNavMainCategories,default='',on_delete=CASCADE,null=True,blank=True)
     navSubCategoryName = models.CharField(default="",max_length=50,null=True, blank=True)
     navSubCategoryPath = models.CharField(default="",max_length=50,null=True, blank=True)
+    isChecked = models.CharField(default="No", max_length=10)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.CharField(null=False,max_length=50,default='No')

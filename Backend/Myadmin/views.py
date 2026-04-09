@@ -160,6 +160,7 @@ def navMainCategoriesFun(request):
             'id':mainCat.id,
             'navMainCategoryName':mainCat.navMainCategoryName,
             'navMainCategoryPath':mainCat.navMainCategoryPath,
+            'isChecked':mainCat.isChecked,
             'created_at': mainCat.created_at,
             'updated_at': mainCat.updated_at,
             'created_by': mainCat.created_by,
@@ -181,12 +182,14 @@ def navSubCategoriesFun(request):
                 'id':subCat.navMainCategoryId.id,
                 'navMainCategoryName':subCat.navMainCategoryId.navMainCategoryName,
                 'navMainCategoryPath':subCat.navMainCategoryId.navMainCategoryPath,
+                'isChecked': subCat.navMainCategoryId.isChecked,
             }
         x={
             'id':subCat.id,
             'relatedMainCategory': mainCatDetais,
             'navSubCategoryName':subCat.navSubCategoryName,
             'navSubCategoryPath':subCat.navSubCategoryPath,
+            'isChecked': subCat.isChecked,
             'created_at': subCat.created_at,
             'updated_at': subCat.updated_at,
             'created_by': subCat.created_by,
@@ -4851,6 +4854,7 @@ def navItemsFun(request):
         nav_item = {
                 'name': main.navMainCategoryName,
                 'href': main.navMainCategoryPath,
+                'isChecked':main.isChecked,
             }
         # Get subcategories for this main category
         subcategories = homePageNavSubCategories.objects.filter(
@@ -4863,6 +4867,7 @@ def navItemsFun(request):
                     dropdown.append({
                         'name': subcategory.navSubCategoryName,
                         'href': subcategory.navSubCategoryPath,
+                        'isChecked': subcategory.isChecked,
                     })
                 nav_item['dropdown'] = dropdown
             
@@ -6214,3 +6219,27 @@ def blockDomainListFun(request):
         }
         blockDomains.append(x) 
     return JsonResponse({'blockDomains': blockDomains, 'status': True})
+
+@api_view(['POST'])
+def save_nav_checked_status(request):
+    try:
+        # FormData sends JSON as a plain string — must parse it first
+        main_list = json.loads(request.data.get('mainCategories', '[]'))
+        sub_list  = json.loads(request.data.get('subCategories',  '[]'))
+
+        for item in main_list:
+            obj = homePageNavMainCategories.objects.get(id=item['id'])
+            obj.isChecked  = item['isChecked']
+            obj.updated_by = "Admin"
+            obj.save()
+
+        for item in sub_list:
+            obj = homePageNavSubCategories.objects.get(id=item['id'])
+            obj.isChecked  = item['isChecked']
+            obj.updated_by = "Admin"
+            obj.save()
+
+        return JsonResponse({'status': True, 'message': 'Checked status saved successfully'})
+
+    except Exception as e:
+        return JsonResponse({'status': False, 'message': str(e)})

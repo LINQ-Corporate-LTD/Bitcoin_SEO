@@ -362,5 +362,7 @@ urlpatterns = [
     path('editblockdomain', views.edit_blockDomain),
     path('deleteblockdomain', views.delete_blockDomain),
 
+    path('savenavcheckstatus', views.save_nav_checked_status),
+
 
 ]

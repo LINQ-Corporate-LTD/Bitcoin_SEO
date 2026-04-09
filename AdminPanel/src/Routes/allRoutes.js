@@ -303,6 +303,7 @@ import SlideShareAttandees from "../pages/SlideShareAttandees/SlideShareAttandee
 import SlideShareAccessors from "../pages/SlideShareAccessors/SlideShareAccessors";
 import PayOnlineResponse from "../pages/PayOnlineResponse";
 import BlockDomains from "../pages/BlockDomains/BlockDomains";
+import NavCategoryTree from "../pages/Navbar/NavCategoryTree";
 
 
 
@@ -580,6 +581,8 @@ const authProtectedRoutes = [
   { path: "/eventslideshareaccessors", component: <SlideShareAccessors /> },
   { path: "/payonlineresponse", component: <PayOnlineResponse /> },
   { path: "/blockdomains", component: <BlockDomains /> },
+  { path: "/navtree", component: <NavCategoryTree /> },
+
 
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name
