@@ -590,3 +590,19 @@ class toEmails(models.Model):
     created_by = models.CharField(null=False,max_length=50,default='No')
     updated_by = models.CharField(null=False,max_length=50,default='No')
     isDelete = models.CharField(default="No",max_length=10)
+
+class agendaSubscriber(models.Model):
+    subscriber = models.CharField(null=False,max_length=50,default='No')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.CharField(null=False,max_length=50,default='No')
+    updated_by = models.CharField(null=False,max_length=50,default='No')
+    isDelete = models.CharField(default="No",max_length=10)
+
+class calenderSubscriber(models.Model):
+    calenderSubscriber = models.CharField(null=False,max_length=50,default='No')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.CharField(null=False,max_length=50,default='No')
+    updated_by = models.CharField(null=False,max_length=50,default='No')
+    isDelete = models.CharField(default="No",max_length=10)

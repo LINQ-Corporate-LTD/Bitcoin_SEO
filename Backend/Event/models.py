@@ -304,6 +304,18 @@ class offerCoupon(models.Model):
     updated_by = models.CharField(null=False,max_length=50,default='No')
     isDelete = models.CharField(default="No",max_length=10)
 
+class sponsorOfferCoupon(models.Model):
+    couponCode = models.CharField(default="",max_length=150,null=True, blank=True)
+    discountType = models.CharField(default="",max_length=150,null=True, blank=True)
+    discountAmount = models.CharField(default="",max_length=150,null=True, blank=True)
+    couponFor = models.CharField(default="",max_length=150,null=True, blank=True)
+    eventSpecialWord = models.CharField(default="",max_length=150,null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.CharField(null=False,max_length=50,default='No')
+    updated_by = models.CharField(null=False,max_length=50,default='No')
+    isDelete = models.CharField(default="No",max_length=10)
+
 class delegateTransectionData(models.Model):
     relatedCompanyId = models.ForeignKey(registeredCompanyDetails,default='',on_delete=CASCADE,null=True,blank=True)
     invoiceNo = models.CharField(default="",max_length=150,null=True, blank=True)

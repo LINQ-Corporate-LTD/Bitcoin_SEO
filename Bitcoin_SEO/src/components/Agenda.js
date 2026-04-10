@@ -10,8 +10,8 @@ import FeaturedSpeaker from "./FeaturedSpeaker";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useApiData } from "../common/ApiContext";
-import speakerDummy from '../../src/assets/images/Speaker_photos/Speaker_dummy.jpg'
-import companyDummy from '../../src/assets/images/Speaker_photos/companyLogo_dummy.png'
+import speakerDummy from "../../src/assets/images/Speaker_photos/Speaker_dummy.jpg";
+import companyDummy from "../../src/assets/images/Speaker_photos/companyLogo_dummy.png";
 
 const Agenda = () => {
   const navigate = useNavigate();
@@ -25,7 +25,10 @@ const Agenda = () => {
     const requestOptions = {
       method: "GET",
     };
-    fetch(`https://harsh7541.pythonanywhere.com/admin1/getagenda`, requestOptions)
+    fetch(
+      `https://harsh7541.pythonanywhere.com/admin1/getagenda`,
+      requestOptions,
+    )
       .then((response) => response.json())
       .then((data) => {
         if (
@@ -231,7 +234,7 @@ const Agenda = () => {
   };
 
   const [windowWidth, setWindowWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 1200
+    typeof window !== "undefined" ? window.innerWidth : 1200,
   );
   const [emailVerification, setEmailVerification] = useState("");
   const [emailVerificationError, setEmailVerificationError] = useState("");
@@ -258,7 +261,7 @@ const Agenda = () => {
     eventGeneralSettings,
     themeSettings,
   } = useApiData();
-  const agendaVersion = eventDetails?.agendaVersion
+  const agendaVersion = eventDetails?.agendaVersion;
   console.log("agendaVersion: ", agendaVersion);
 
   useEffect(() => {
@@ -501,7 +504,10 @@ const Agenda = () => {
         method: "POST",
         body: finalData,
       };
-      fetch("https://harsh7541.pythonanywhere.com/admin1/addcontactusrequest", requestOptions)
+      fetch(
+        "https://harsh7541.pythonanywhere.com/admin1/addcontactusrequest",
+        requestOptions,
+      )
         .then((response) => response.json())
         .then((data) => {
           if (data.status) {
@@ -538,6 +544,64 @@ const Agenda = () => {
     }
   };
 
+  // const emailSubmitBtnClk = async (e) => {
+  //   e.preventDefault();
+
+  //   if (emailVerification === "") {
+  //     toast.error("Email Address is Required", {
+  //       position: "top-right",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //     });
+  //     setEmailVerificationError(true);
+  //     return;
+  //   }
+
+  //   setIsVerify(true);
+  //   try {
+  //     const response = await fetch("https://harsh7541.pythonanywhere.com/admin1/verifyemaildomain", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ email: emailVerification }),
+  //     });
+
+  //     const data = await response.json();
+
+  //     if (!data.status) {
+  //       setIsVerify(false);
+  //       setBlockedDomainError(true);
+  //       toast.error(data.message, {
+  //         position: "top-right",
+  //         autoClose: 5000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //       });
+  //       setEmailVerificationError(true);
+  //       return;
+  //     }
+  //     setBlockedDomainError(false);
+  //     // ✅ Domain is valid — proceed
+  //     Cookies.set("agendaEmailVerify", emailVerification, { expires: 200 });
+  //     setAgendaVerification(true);
+
+  //   } catch (error) {
+  //     setIsVerify(false);
+  //     toast.error("Something went wrong. Please try again.", {
+  //       position: "top-right",
+  //       autoClose: 5000,
+  //     });
+  //   }
+  // };
+
   const emailSubmitBtnClk = async (e) => {
     e.preventDefault();
 
@@ -556,16 +620,28 @@ const Agenda = () => {
     }
 
     setIsVerify(true);
+
     try {
-      const response = await fetch("https://harsh7541.pythonanywhere.com/admin1/verifyemaildomain", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://harsh7541.pythonanywhere.com/admin1/verifyemaildomain",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: emailVerification }),
         },
-        body: JSON.stringify({ email: emailVerification }),
-      });
+      );
 
       const data = await response.json();
+
+      // ✅ Save entry in DB regardless of blocked or valid
+      await fetch(
+        "https://harsh7541.pythonanywhere.com/admin1/addagendasubscriber",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ subscriber: emailVerification }),
+        },
+      );
 
       if (!data.status) {
         setIsVerify(false);
@@ -582,11 +658,10 @@ const Agenda = () => {
         setEmailVerificationError(true);
         return;
       }
+
       setBlockedDomainError(false);
-      // ✅ Domain is valid — proceed
       Cookies.set("agendaEmailVerify", emailVerification, { expires: 200 });
       setAgendaVerification(true);
-
     } catch (error) {
       setIsVerify(false);
       toast.error("Something went wrong. Please try again.", {
@@ -650,7 +725,8 @@ const Agenda = () => {
   }, []);
 
   const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Explore Agenda`;
-  const seoDesc = "Explore sessions, key topics and program highlights shaping Bitcoin markets in Bitcoin Innovation & Market Evolution 2026.";
+  const seoDesc =
+    "Explore sessions, key topics and program highlights shaping Bitcoin markets in Bitcoin Innovation & Market Evolution 2026.";
 
   return (
     <>
@@ -663,7 +739,10 @@ const Agenda = () => {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDesc} />
-        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/agenda" />
+        <link
+          rel="canonical"
+          href="https://www.bitcoin-innovation-market-evolution.online/agenda"
+        />
       </Helmet>
       <Navbar forceScrolled />
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
@@ -1308,7 +1387,7 @@ const Agenda = () => {
 
                   agendaList
                     .sort(
-                      (a, b) => parseInt(a.sortOrder) - parseInt(b.sortOrder)
+                      (a, b) => parseInt(a.sortOrder) - parseInt(b.sortOrder),
                     )
                     .forEach((item) => {
                       // Use the item's day property for grouping
@@ -1434,7 +1513,35 @@ const Agenda = () => {
                               <div className="Agenda_speakerContainer__av+wf">
                                 <div className="Agenda_keyContainer__ZlvJV">
                                   {/* <img src={clockIcon} alt="clock icon"></img> */}
-                                  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" style={{ width: '45px', height: '45px' }}><g><path d="M22.71,3.66C11.4,3.66,2.24,12.83,2.24,24.13s9.16,20.47,20.47,20.47,20.47-9.16,20.47-20.47S34.01,3.66,22.71,3.66ZM22.68,41.78c-9.74,0-17.68-7.93-17.65-17.65.03-9.73,7.92-17.62,17.63-17.63,9.72-.01,17.66,7.94,17.65,17.66-.02,9.73-7.91,17.61-17.63,17.62Z" style={{ fill: 'rgb(46, 41, 45)' }}></path><path d="M22.71,3.66C11.4,3.66,2.24,12.83,2.24,24.13s9.16,20.47,20.47,20.47,20.47-9.16,20.47-20.47S34.01,3.66,22.71,3.66ZM22.68,41.78c-9.74,0-17.68-7.93-17.65-17.65.03-9.73,7.92-17.62,17.63-17.63,9.72-.01,17.66,7.94,17.65,17.66-.02,9.73-7.91,17.61-17.63,17.62Z" style={{ fill: 'rgb(46, 41, 45)' }}></path><path d="M24.15,18.45c0,1.98,0,3.97,0,5.95,0,.19-.09.44-.22.57-2,2.02-4.02,4.03-6.03,6.04-.42.42-.92.61-1.51.43-.55-.17-.89-.54-1.02-1.1-.13-.56.07-1.03.47-1.42,1.67-1.67,3.34-3.35,5.02-5.01.25-.24.35-.48.35-.84-.01-3.5,0-7,0-10.5,0-.97.58-1.62,1.44-1.64.87-.02,1.51.63,1.51,1.57,0,1.98,0,3.97,0,5.95Z" style={{ fill: 'rgb(46, 41, 45)' }}></path></g><path d="M15.39,3.22c-7.17,2.86-9.71,5.14-13.16,11.77C.27,12.6-.49,9.94.31,6.97,1.26,3.49,3.57,1.28,7.11.54c3.2-.67,5.94.34,8.28,2.68Z" style={{ fill: 'rgb(46, 41, 45)' }}></path><path d="M42.72,14.52c-2.64-5.77-6.92-9.62-12.95-11.59,2.3-2.4,5.05-3.4,8.26-2.72,3.49.74,5.77,2.93,6.68,6.38.78,2.94,0,5.57-1.98,7.93Z" style={{ fill: 'rgb(46, 41, 45)' }}></path></svg>
+                                  <svg
+                                    id="Layer_1"
+                                    data-name="Layer 1"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    style={{ width: "45px", height: "45px" }}
+                                  >
+                                    <g>
+                                      <path
+                                        d="M22.71,3.66C11.4,3.66,2.24,12.83,2.24,24.13s9.16,20.47,20.47,20.47,20.47-9.16,20.47-20.47S34.01,3.66,22.71,3.66ZM22.68,41.78c-9.74,0-17.68-7.93-17.65-17.65.03-9.73,7.92-17.62,17.63-17.63,9.72-.01,17.66,7.94,17.65,17.66-.02,9.73-7.91,17.61-17.63,17.62Z"
+                                        style={{ fill: "rgb(46, 41, 45)" }}
+                                      ></path>
+                                      <path
+                                        d="M22.71,3.66C11.4,3.66,2.24,12.83,2.24,24.13s9.16,20.47,20.47,20.47,20.47-9.16,20.47-20.47S34.01,3.66,22.71,3.66ZM22.68,41.78c-9.74,0-17.68-7.93-17.65-17.65.03-9.73,7.92-17.62,17.63-17.63,9.72-.01,17.66,7.94,17.65,17.66-.02,9.73-7.91,17.61-17.63,17.62Z"
+                                        style={{ fill: "rgb(46, 41, 45)" }}
+                                      ></path>
+                                      <path
+                                        d="M24.15,18.45c0,1.98,0,3.97,0,5.95,0,.19-.09.44-.22.57-2,2.02-4.02,4.03-6.03,6.04-.42.42-.92.61-1.51.43-.55-.17-.89-.54-1.02-1.1-.13-.56.07-1.03.47-1.42,1.67-1.67,3.34-3.35,5.02-5.01.25-.24.35-.48.35-.84-.01-3.5,0-7,0-10.5,0-.97.58-1.62,1.44-1.64.87-.02,1.51.63,1.51,1.57,0,1.98,0,3.97,0,5.95Z"
+                                        style={{ fill: "rgb(46, 41, 45)" }}
+                                      ></path>
+                                    </g>
+                                    <path
+                                      d="M15.39,3.22c-7.17,2.86-9.71,5.14-13.16,11.77C.27,12.6-.49,9.94.31,6.97,1.26,3.49,3.57,1.28,7.11.54c3.2-.67,5.94.34,8.28,2.68Z"
+                                      style={{ fill: "rgb(46, 41, 45)" }}
+                                    ></path>
+                                    <path
+                                      d="M42.72,14.52c-2.64-5.77-6.92-9.62-12.95-11.59,2.3-2.4,5.05-3.4,8.26-2.72,3.49.74,5.77,2.93,6.68,6.38.78,2.94,0,5.57-1.98,7.93Z"
+                                      style={{ fill: "rgb(46, 41, 45)" }}
+                                    ></path>
+                                  </svg>
                                 </div>
                                 <div className="Agenda_speakerDetailsContainer__mOEC6">
                                   <div
@@ -1448,7 +1555,7 @@ const Agenda = () => {
                                           <ul key={bulletIndex}>
                                             <li>{bullet.value}</li>
                                           </ul>
-                                        )
+                                        ),
                                     )}
                                     <span></span>
                                   </div>
@@ -1732,7 +1839,8 @@ const Agenda = () => {
                         // }
                         else if (item.status === "Speaker") {
                           const industryTrends =
-                            item.industryTrends && item.industryTrends !== "null"
+                            item.industryTrends &&
+                            item.industryTrends !== "null"
                               ? JSON.parse(item.industryTrends)
                               : [];
 
@@ -1740,23 +1848,32 @@ const Agenda = () => {
                             ? JSON.parse(item.bulletPoints)
                             : [];
 
-                          const isTwoSpeakers = item?.speakerFormat === "Two Speakers";
-                          const isPanelSpeaker = item?.speakerFormat === "Panel Speaker";
+                          const isTwoSpeakers =
+                            item?.speakerFormat === "Two Speakers";
+                          const isPanelSpeaker =
+                            item?.speakerFormat === "Panel Speaker";
 
                           // ── Single Speaker ──
                           const selectedSpeaker =
-                            item.selectedSpeakers && item.selectedSpeakers !== "null"
+                            item.selectedSpeakers &&
+                            item.selectedSpeakers !== "null"
                               ? JSON.parse(item.selectedSpeakers)
                               : null;
 
                           // ── Two Speakers: split bulletPoints in half ──
                           const midPoint = Math.ceil(bulletPoints.length / 2);
-                          const speaker1BulletsSplit = isTwoSpeakers ? bulletPoints.slice(0, midPoint) : [];
-                          const speaker2BulletsSplit = isTwoSpeakers ? bulletPoints.slice(midPoint) : [];
+                          const speaker1BulletsSplit = isTwoSpeakers
+                            ? bulletPoints.slice(0, midPoint)
+                            : [];
+                          const speaker2BulletsSplit = isTwoSpeakers
+                            ? bulletPoints.slice(midPoint)
+                            : [];
 
                           // ── Panel Speakers: use new panelSpeakers array ──
                           const panelSpeakers =
-                            isPanelSpeaker && item.panelSpeakers && item.panelSpeakers !== "null"
+                            isPanelSpeaker &&
+                            item.panelSpeakers &&
+                            item.panelSpeakers !== "null"
                               ? JSON.parse(item.panelSpeakers)
                               : [];
 
@@ -1765,34 +1882,56 @@ const Agenda = () => {
                               {isPanelSpeaker ? (
                                 <>
                                   <div>
-                                    <div className="Agenda_bar__ht+6s" style={{ backgroundColor: "#dcdcdc" }}>
-                                      <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.startTime} - {item.endTime}</h6>
-                                      <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.heading}</h6>
+                                    <div
+                                      className="Agenda_bar__ht+6s"
+                                      style={{ backgroundColor: "#dcdcdc" }}
+                                    >
+                                      <h6
+                                        style={{
+                                          color: "#181818",
+                                          fontWeight: 900,
+                                        }}
+                                      >
+                                        {item.startTime} - {item.endTime}
+                                      </h6>
+                                      <h6
+                                        style={{
+                                          color: "#181818",
+                                          fontWeight: 900,
+                                        }}
+                                      >
+                                        {item.heading}
+                                      </h6>
                                     </div>
                                     <div className="Agenda_speakerContainer__av+wf">
                                       <div className="Agenda_keyContainer__ZlvJV">
-                                        {industryTrends.map((trend, trendIndex) => (
-                                          <p key={trendIndex}>{trend.label}</p>
-                                        ))}
+                                        {industryTrends.map(
+                                          (trend, trendIndex) => (
+                                            <p key={trendIndex}>
+                                              {trend.label}
+                                            </p>
+                                          ),
+                                        )}
                                       </div>
                                       <div className="Agenda_speakerDetailsContainer__mOEC6">
                                         {/* Panel speaker images row */}
                                         <div className="Agenda_upper__9vYZH">
-                                          {panelSpeakers.map((speaker, speakerIndex) =>
-                                            speaker.agendaImage ? (
-                                              <img
-                                                key={speakerIndex}
-                                                src={speaker.agendaImage}
-                                                alt={speaker.name}
-                                                width="100"
-                                                height="50"
-                                                style={{
-                                                  cursor: "pointer",
-                                                  marginRight: "10px",
-                                                  marginTop: "10px",
-                                                }}
-                                              />
-                                            ) : null
+                                          {panelSpeakers.map(
+                                            (speaker, speakerIndex) =>
+                                              speaker.agendaImage ? (
+                                                <img
+                                                  key={speakerIndex}
+                                                  src={speaker.agendaImage}
+                                                  alt={speaker.name}
+                                                  width="100"
+                                                  height="50"
+                                                  style={{
+                                                    cursor: "pointer",
+                                                    marginRight: "10px",
+                                                    marginTop: "10px",
+                                                  }}
+                                                />
+                                              ) : null,
                                           )}
                                         </div>
                                         <div className="Agenda_lower__Oy-1W">
@@ -1803,20 +1942,27 @@ const Agenda = () => {
                                                 <ul key={bulletIndex}>
                                                   <li>{bullet.value}</li>
                                                 </ul>
-                                              )
+                                              ),
                                           )}
                                           <span></span>
                                           {/* Panel speaker name + company listing */}
                                           <div className="Agenda_panelSpeakerListing__y9DIl">
                                             <span>
                                               <p>
-                                                {panelSpeakers.map((speaker, speakerIndex) => (
-                                                  <span key={speakerIndex}>
-                                                    {speaker.name} |
-                                                    <strong> {speaker.companyName}</strong>
-                                                    {speakerIndex < panelSpeakers.length - 1 && <br />}
-                                                  </span>
-                                                ))}
+                                                {panelSpeakers.map(
+                                                  (speaker, speakerIndex) => (
+                                                    <span key={speakerIndex}>
+                                                      {speaker.name} |
+                                                      <strong>
+                                                        {" "}
+                                                        {speaker.companyName}
+                                                      </strong>
+                                                      {speakerIndex <
+                                                        panelSpeakers.length -
+                                                          1 && <br />}
+                                                    </span>
+                                                  ),
+                                                )}
                                               </p>
                                             </span>
                                           </div>
@@ -1830,76 +1976,54 @@ const Agenda = () => {
                                   {/* ── Speaker 1 ── */}
                                   {agendaVersion === "Version-1" ? (
                                     <div>
-                                      <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
-                                        <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.startTime} - {item.endTime}</h6>
-                                        <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.heading}</h6>
-                                      </div>
-                                      <div className='Agenda_speakerContainer__av+wf'>
-                                        <div className='Agenda_keyContainer__ZlvJV'>
-                                          {industryTrends.map((trend, trendIndex) => (
-                                            <p key={trendIndex}>{trend.label}</p>
-                                          ))}
-                                        </div>
-                                        <div className='Agenda_speakerDetailsContainer__mOEC6'>
-                                          <div className='Agenda_upper__9vYZH'>
-                                            <div className="Agenda_upperInnerV2__SAsL1">
-                                              <img src={!item.Speaker1CompanyImg ? companyDummy : item.Speaker1CompanyImg}
-                                                alt={item.speaker1CompanyName}
-                                                width="100"></img>
-                                              <div>
-                                                <p>{item.speaker1Name}</p>
-                                                <p>{item.speaker1CompanyName}</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div className='Agenda_lower__Oy-1W'>
-                                            {speaker1BulletsSplit.map(
-                                              (bullet, bulletIndex) =>
-                                                bullet.value && (
-                                                  <ul key={bulletIndex}>
-                                                    <li>{bullet.value}</li>
-                                                  </ul>
-                                                )
-                                            )}
-                                            <span></span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  ) : (
-                                    <div>
-                                      <div className="Agenda_bar__ht+6s" style={{ backgroundColor: "#dcdcdc" }}>
-                                        <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.startTime} - {item.endTime}</h6>
-                                        <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.heading}</h6>
+                                      <div
+                                        className="Agenda_bar__ht+6s"
+                                        style={{ backgroundColor: "#dcdcdc" }}
+                                      >
+                                        <h6
+                                          style={{
+                                            color: "#181818",
+                                            fontWeight: 900,
+                                          }}
+                                        >
+                                          {item.startTime} - {item.endTime}
+                                        </h6>
+                                        <h6
+                                          style={{
+                                            color: "#181818",
+                                            fontWeight: 900,
+                                          }}
+                                        >
+                                          {item.heading}
+                                        </h6>
                                       </div>
                                       <div className="Agenda_speakerContainer__av+wf">
                                         <div className="Agenda_keyContainer__ZlvJV">
-                                          {industryTrends.map((trend, trendIndex) => (
-                                            <p key={trendIndex}>{trend.label}</p>
-                                          ))}
+                                          {industryTrends.map(
+                                            (trend, trendIndex) => (
+                                              <p key={trendIndex}>
+                                                {trend.label}
+                                              </p>
+                                            ),
+                                          )}
                                         </div>
                                         <div className="Agenda_speakerDetailsContainer__mOEC6">
                                           <div className="Agenda_upper__9vYZH">
-                                            {/* {item.Speaker1AgendaImg && ( */}
-                                            <img
-                                              src={!item.Speaker1AgendaImg ? speakerDummy : item.Speaker1AgendaImg}
-                                              alt={item.speaker1Name}
-                                              width="100"
-                                              height="50"
-                                              style={{ cursor: "pointer" }}
-                                            />
-                                            {/* )} */}
-                                            <div className="Agenda_upperInnerV1__VkoVw">
-                                              {/* {item.Speaker1CompanyImg && ( */}
+                                            <div className="Agenda_upperInnerV2__SAsL1">
                                               <img
-                                                src={!item.Speaker1CompanyImg ? companyDummy : item.Speaker1CompanyImg}
+                                                src={
+                                                  !item.Speaker1CompanyImg
+                                                    ? companyDummy
+                                                    : item.Speaker1CompanyImg
+                                                }
                                                 alt={item.speaker1CompanyName}
                                                 width="100"
-                                              />
-                                              {/* )} */}
+                                              ></img>
                                               <div>
                                                 <p>{item.speaker1Name}</p>
-                                                <p>{item.speaker1CompanyName}</p>
+                                                <p>
+                                                  {item.speaker1CompanyName}
+                                                </p>
                                               </div>
                                             </div>
                                           </div>
@@ -1910,7 +2034,89 @@ const Agenda = () => {
                                                   <ul key={bulletIndex}>
                                                     <li>{bullet.value}</li>
                                                   </ul>
-                                                )
+                                                ),
+                                            )}
+                                            <span></span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <div>
+                                      <div
+                                        className="Agenda_bar__ht+6s"
+                                        style={{ backgroundColor: "#dcdcdc" }}
+                                      >
+                                        <h6
+                                          style={{
+                                            color: "#181818",
+                                            fontWeight: 900,
+                                          }}
+                                        >
+                                          {item.startTime} - {item.endTime}
+                                        </h6>
+                                        <h6
+                                          style={{
+                                            color: "#181818",
+                                            fontWeight: 900,
+                                          }}
+                                        >
+                                          {item.heading}
+                                        </h6>
+                                      </div>
+                                      <div className="Agenda_speakerContainer__av+wf">
+                                        <div className="Agenda_keyContainer__ZlvJV">
+                                          {industryTrends.map(
+                                            (trend, trendIndex) => (
+                                              <p key={trendIndex}>
+                                                {trend.label}
+                                              </p>
+                                            ),
+                                          )}
+                                        </div>
+                                        <div className="Agenda_speakerDetailsContainer__mOEC6">
+                                          <div className="Agenda_upper__9vYZH">
+                                            {/* {item.Speaker1AgendaImg && ( */}
+                                            <img
+                                              src={
+                                                !item.Speaker1AgendaImg
+                                                  ? speakerDummy
+                                                  : item.Speaker1AgendaImg
+                                              }
+                                              alt={item.speaker1Name}
+                                              width="100"
+                                              height="50"
+                                              style={{ cursor: "pointer" }}
+                                            />
+                                            {/* )} */}
+                                            <div className="Agenda_upperInnerV1__VkoVw">
+                                              {/* {item.Speaker1CompanyImg && ( */}
+                                              <img
+                                                src={
+                                                  !item.Speaker1CompanyImg
+                                                    ? companyDummy
+                                                    : item.Speaker1CompanyImg
+                                                }
+                                                alt={item.speaker1CompanyName}
+                                                width="100"
+                                              />
+                                              {/* )} */}
+                                              <div>
+                                                <p>{item.speaker1Name}</p>
+                                                <p>
+                                                  {item.speaker1CompanyName}
+                                                </p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div className="Agenda_lower__Oy-1W">
+                                            {speaker1BulletsSplit.map(
+                                              (bullet, bulletIndex) =>
+                                                bullet.value && (
+                                                  <ul key={bulletIndex}>
+                                                    <li>{bullet.value}</li>
+                                                  </ul>
+                                                ),
                                             )}
                                             <span></span>
                                           </div>
@@ -1920,74 +2126,39 @@ const Agenda = () => {
                                   )}
 
                                   {/* ── Speaker 2 ── */}
-                                  {
-                                    agendaVersion === "Version-1" ? (
-                                      <div>
-                                        {/* <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                                  {agendaVersion === "Version-1" ? (
+                                    <div>
+                                      {/* <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
                                           <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.startTime} - {item.endTime}</h6>
                                           <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.heading}</h6>
                                         </div> */}
-                                        <div className='Agenda_speakerContainer__av+wf'>
-                                          <div className='Agenda_keyContainer__ZlvJV'>
-                                            {industryTrends.map((trend, trendIndex) => (
-                                              <p key={trendIndex}>{trend.label}</p>
-                                            ))}
-                                          </div>
-                                          <div className='Agenda_speakerDetailsContainer__mOEC6'>
-                                            <div className='Agenda_upper__9vYZH'>
-                                              <div className="Agenda_upperInnerV2__SAsL1">
-                                                <img src={!item.Speaker2CompanyImg ? companyDummy : item.Speaker2CompanyImg}
-                                                  alt={item.speaker2CompanyName}
-                                                  width="100"></img>
-                                                <div>
-                                                  <p>{item.speaker2Name}</p>
-                                                  <p>{item.speaker2CompanyName}</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div className='Agenda_lower__Oy-1W'>
-                                              {speaker2BulletsSplit.map(
-                                                (bullet, bulletIndex) =>
-                                                  bullet.value && (
-                                                    <ul key={bulletIndex}>
-                                                      <li>{bullet.value}</li>
-                                                    </ul>
-                                                  )
-                                              )}
-                                              <span></span>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    ) : (
                                       <div className="Agenda_speakerContainer__av+wf">
                                         <div className="Agenda_keyContainer__ZlvJV">
-                                          {industryTrends.map((trend, trendIndex) => (
-                                            <p key={trendIndex}>{trend.label}</p>
-                                          ))}
+                                          {industryTrends.map(
+                                            (trend, trendIndex) => (
+                                              <p key={trendIndex}>
+                                                {trend.label}
+                                              </p>
+                                            ),
+                                          )}
                                         </div>
                                         <div className="Agenda_speakerDetailsContainer__mOEC6">
                                           <div className="Agenda_upper__9vYZH">
-                                            {/* {item.Speaker2AgendaImg && ( */}
-                                            <img
-                                              src={!item.Speaker2AgendaImg ? speakerDummy : item.Speaker2AgendaImg}
-                                              alt={item.speaker2Name}
-                                              width="100"
-                                              height="50"
-                                              style={{ cursor: "pointer" }}
-                                            />
-                                            {/* )} */}
-                                            <div className="Agenda_upperInnerV1__VkoVw">
-                                              {/* {item.Speaker2CompanyImg && ( */}
+                                            <div className="Agenda_upperInnerV2__SAsL1">
                                               <img
-                                                src={!item.Speaker2CompanyImg ? companyDummy : item.Speaker2CompanyImg}
+                                                src={
+                                                  !item.Speaker2CompanyImg
+                                                    ? companyDummy
+                                                    : item.Speaker2CompanyImg
+                                                }
                                                 alt={item.speaker2CompanyName}
                                                 width="100"
-                                              />
-                                              {/* )} */}
+                                              ></img>
                                               <div>
                                                 <p>{item.speaker2Name}</p>
-                                                <p>{item.speaker2CompanyName}</p>
+                                                <p>
+                                                  {item.speaker2CompanyName}
+                                                </p>
                                               </div>
                                             </div>
                                           </div>
@@ -1998,110 +2169,233 @@ const Agenda = () => {
                                                   <ul key={bulletIndex}>
                                                     <li>{bullet.value}</li>
                                                   </ul>
-                                                )
+                                                ),
                                             )}
                                             <span></span>
                                           </div>
                                         </div>
                                       </div>
-                                    )
-                                  }
+                                    </div>
+                                  ) : (
+                                    <div className="Agenda_speakerContainer__av+wf">
+                                      <div className="Agenda_keyContainer__ZlvJV">
+                                        {industryTrends.map(
+                                          (trend, trendIndex) => (
+                                            <p key={trendIndex}>
+                                              {trend.label}
+                                            </p>
+                                          ),
+                                        )}
+                                      </div>
+                                      <div className="Agenda_speakerDetailsContainer__mOEC6">
+                                        <div className="Agenda_upper__9vYZH">
+                                          {/* {item.Speaker2AgendaImg && ( */}
+                                          <img
+                                            src={
+                                              !item.Speaker2AgendaImg
+                                                ? speakerDummy
+                                                : item.Speaker2AgendaImg
+                                            }
+                                            alt={item.speaker2Name}
+                                            width="100"
+                                            height="50"
+                                            style={{ cursor: "pointer" }}
+                                          />
+                                          {/* )} */}
+                                          <div className="Agenda_upperInnerV1__VkoVw">
+                                            {/* {item.Speaker2CompanyImg && ( */}
+                                            <img
+                                              src={
+                                                !item.Speaker2CompanyImg
+                                                  ? companyDummy
+                                                  : item.Speaker2CompanyImg
+                                              }
+                                              alt={item.speaker2CompanyName}
+                                              width="100"
+                                            />
+                                            {/* )} */}
+                                            <div>
+                                              <p>{item.speaker2Name}</p>
+                                              <p>{item.speaker2CompanyName}</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div className="Agenda_lower__Oy-1W">
+                                          {speaker2BulletsSplit.map(
+                                            (bullet, bulletIndex) =>
+                                              bullet.value && (
+                                                <ul key={bulletIndex}>
+                                                  <li>{bullet.value}</li>
+                                                </ul>
+                                              ),
+                                          )}
+                                          <span></span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )}
                                 </>
                               ) : (
                                 // ── Single Speaker ──
                                 <>
-                                  {
-                                    agendaVersion === "Version-1" ? (
-                                      <div>
-                                        <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
-                                          <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.startTime} - {item.endTime}</h6>
-                                          <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.heading}</h6>
+                                  {agendaVersion === "Version-1" ? (
+                                    <div>
+                                      <div
+                                        className="Agenda_bar__ht+6s"
+                                        style={{ backgroundColor: "#dcdcdc" }}
+                                      >
+                                        <h6
+                                          style={{
+                                            color: "#181818",
+                                            fontWeight: 900,
+                                          }}
+                                        >
+                                          {item.startTime} - {item.endTime}
+                                        </h6>
+                                        <h6
+                                          style={{
+                                            color: "#181818",
+                                            fontWeight: 900,
+                                          }}
+                                        >
+                                          {item.heading}
+                                        </h6>
+                                      </div>
+                                      <div className="Agenda_speakerContainer__av+wf">
+                                        <div className="Agenda_keyContainer__ZlvJV">
+                                          {industryTrends.map(
+                                            (trend, trendIndex) => (
+                                              <p key={trendIndex}>
+                                                {trend.label}
+                                              </p>
+                                            ),
+                                          )}
                                         </div>
-                                        <div className='Agenda_speakerContainer__av+wf'>
-                                          <div className='Agenda_keyContainer__ZlvJV'>
-                                            {industryTrends.map((trend, trendIndex) => (
-                                              <p key={trendIndex}>{trend.label}</p>
-                                            ))}
-                                          </div>
-                                          <div className='Agenda_speakerDetailsContainer__mOEC6'>
-                                            <div className='Agenda_upper__9vYZH'>
-                                              <div className="Agenda_upperInnerV2__SAsL1">
-                                                <img src={!item.singleSpeakerCompanyImg ? companyDummy : item.singleSpeakerCompanyImg}
-                                                  alt={item.singleSpeakerCompanyName}
-                                                  width="100"></img>
-                                                <div>
-                                                  <p>{item.singleSpeakerName}</p>
-                                                  <p>{item.singleSpeakerCompanyName}</p>
-                                                </div>
+                                        <div className="Agenda_speakerDetailsContainer__mOEC6">
+                                          <div className="Agenda_upper__9vYZH">
+                                            <div className="Agenda_upperInnerV2__SAsL1">
+                                              <img
+                                                src={
+                                                  !item.singleSpeakerCompanyImg
+                                                    ? companyDummy
+                                                    : item.singleSpeakerCompanyImg
+                                                }
+                                                alt={
+                                                  item.singleSpeakerCompanyName
+                                                }
+                                                width="100"
+                                              ></img>
+                                              <div>
+                                                <p>{item.singleSpeakerName}</p>
+                                                <p>
+                                                  {
+                                                    item.singleSpeakerCompanyName
+                                                  }
+                                                </p>
                                               </div>
                                             </div>
-                                            <div className='Agenda_lower__Oy-1W'>
-                                              {bulletPoints.map(
-                                                (bullet, bulletIndex) =>
-                                                  bullet.value && (
-                                                    <ul key={bulletIndex}>
-                                                      <li>{bullet.value}</li>
-                                                    </ul>
-                                                  )
-                                              )}
-                                              <span></span>
-                                            </div>
+                                          </div>
+                                          <div className="Agenda_lower__Oy-1W">
+                                            {bulletPoints.map(
+                                              (bullet, bulletIndex) =>
+                                                bullet.value && (
+                                                  <ul key={bulletIndex}>
+                                                    <li>{bullet.value}</li>
+                                                  </ul>
+                                                ),
+                                            )}
+                                            <span></span>
                                           </div>
                                         </div>
                                       </div>
-                                    ) : (
-                                      <div>
-                                        <div className="Agenda_bar__ht+6s" style={{ backgroundColor: "#dcdcdc" }}>
-                                          <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.startTime} - {item.endTime}</h6>
-                                          <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.heading}</h6>
+                                    </div>
+                                  ) : (
+                                    <div>
+                                      <div
+                                        className="Agenda_bar__ht+6s"
+                                        style={{ backgroundColor: "#dcdcdc" }}
+                                      >
+                                        <h6
+                                          style={{
+                                            color: "#181818",
+                                            fontWeight: 900,
+                                          }}
+                                        >
+                                          {item.startTime} - {item.endTime}
+                                        </h6>
+                                        <h6
+                                          style={{
+                                            color: "#181818",
+                                            fontWeight: 900,
+                                          }}
+                                        >
+                                          {item.heading}
+                                        </h6>
+                                      </div>
+                                      <div className="Agenda_speakerContainer__av+wf">
+                                        <div className="Agenda_keyContainer__ZlvJV">
+                                          {industryTrends.map(
+                                            (trend, trendIndex) => (
+                                              <p key={trendIndex}>
+                                                {trend.label}
+                                              </p>
+                                            ),
+                                          )}
                                         </div>
-                                        <div className="Agenda_speakerContainer__av+wf">
-                                          <div className="Agenda_keyContainer__ZlvJV">
-                                            {industryTrends.map((trend, trendIndex) => (
-                                              <p key={trendIndex}>{trend.label}</p>
-                                            ))}
-                                          </div>
-                                          <div className="Agenda_speakerDetailsContainer__mOEC6">
-                                            <div className="Agenda_upper__9vYZH">
-                                              {/* {item.singleSpeakerAgendaImg && ( */}
+                                        <div className="Agenda_speakerDetailsContainer__mOEC6">
+                                          <div className="Agenda_upper__9vYZH">
+                                            {/* {item.singleSpeakerAgendaImg && ( */}
+                                            <img
+                                              src={
+                                                !item.singleSpeakerAgendaImg
+                                                  ? speakerDummy
+                                                  : item.singleSpeakerAgendaImg
+                                              }
+                                              alt={item.singleSpeakerName}
+                                              width="100"
+                                              height="50"
+                                              style={{ cursor: "pointer" }}
+                                            />
+                                            {/* )} */}
+                                            <div className="Agenda_upperInnerV1__VkoVw">
+                                              {/* {item.singleSpeakerCompanyImg && ( */}
                                               <img
-                                                src={!item.singleSpeakerAgendaImg ? speakerDummy : item.singleSpeakerAgendaImg}
-                                                alt={item.singleSpeakerName}
+                                                src={
+                                                  !item.singleSpeakerCompanyImg
+                                                    ? companyDummy
+                                                    : item.singleSpeakerCompanyImg
+                                                }
+                                                alt={
+                                                  item.singleSpeakerCompanyName
+                                                }
                                                 width="100"
-                                                height="50"
-                                                style={{ cursor: "pointer" }}
                                               />
                                               {/* )} */}
-                                              <div className="Agenda_upperInnerV1__VkoVw">
-                                                {/* {item.singleSpeakerCompanyImg && ( */}
-                                                <img
-                                                  src={!item.singleSpeakerCompanyImg ? companyDummy : item.singleSpeakerCompanyImg}
-                                                  alt={item.singleSpeakerCompanyName}
-                                                  width="100"
-                                                />
-                                                {/* )} */}
-                                                <div>
-                                                  <p>{item.singleSpeakerName}</p>
-                                                  <p>{item.singleSpeakerCompanyName}</p>
-                                                </div>
+                                              <div>
+                                                <p>{item.singleSpeakerName}</p>
+                                                <p>
+                                                  {
+                                                    item.singleSpeakerCompanyName
+                                                  }
+                                                </p>
                                               </div>
                                             </div>
-                                            <div className="Agenda_lower__Oy-1W">
-                                              {bulletPoints.map(
-                                                (bullet, bulletIndex) =>
-                                                  bullet.value && (
-                                                    <ul key={bulletIndex}>
-                                                      <li>{bullet.value}</li>
-                                                    </ul>
-                                                  )
-                                              )}
-                                              <span></span>
-                                            </div>
+                                          </div>
+                                          <div className="Agenda_lower__Oy-1W">
+                                            {bulletPoints.map(
+                                              (bullet, bulletIndex) =>
+                                                bullet.value && (
+                                                  <ul key={bulletIndex}>
+                                                    <li>{bullet.value}</li>
+                                                  </ul>
+                                                ),
+                                            )}
+                                            <span></span>
                                           </div>
                                         </div>
                                       </div>
-                                    )
-                                  }
+                                    </div>
+                                  )}
                                 </>
                               )}
                             </div>
@@ -2336,7 +2630,10 @@ const Agenda = () => {
                     </p>
                   )}
                 </div>
-                <input type="submit" value={isVerify ? "verifying" : "verify"}></input>
+                <input
+                  type="submit"
+                  value={isVerify ? "verifying" : "verify"}
+                ></input>
               </form>
             </div>
           </div>

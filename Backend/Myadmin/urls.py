@@ -373,4 +373,17 @@ urlpatterns = [
     path('toemails', views.get_to_emails),
     path('savetoemails', views.save_to_emails),
 
+    path('addagendasubscriber', views.add_agendaSubscriber),
+    path('agendasubscribers', views.agendaSubscriberListFun),
+
+    path('addcalendersubscriber', views.add_calenderSubscriber),
+    path('calendersubscribers', views.calenderSubscriberListFun),
+
+    path('sponsoroffercoupons',views.sponsorOfferCouponsFun),
+    path('addsponsoroffercoupon',views.add_sponsorOfferCoupon),
+    path('editsponsoroffercoupon',views.edit_sponsorOfferCoupon),
+    path('deletesponsoroffercoupon',views.delete_sponsorOfferCoupon),
+    path('sponsoroffercouponbycode',views.sponsorOfferCouponByCodeFun),
+
+
 ]

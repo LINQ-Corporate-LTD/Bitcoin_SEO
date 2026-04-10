@@ -16,17 +16,17 @@ const override = css`
   color: black;
   height: 100%;
 `;
-const EditOfferCoupon = ({
+const EditSponsorOfferCoupon = ({
   row,
-  editOfferCouponModal,
+  editSponsorCouponModal,
   onCloseModal,
   onModalSubmitBtnClk,
 }) => {
   console.log("row: ", row);
   const navigate = useNavigate();
   const location = useLocation();
-  const [couponCode, setCouponCode] = useState("");
-  const [couponCodeError, setCouponCodeError] = useState(false);
+  const [sponsorCode, setSponsorCode] = useState("");
+  const [sponsorCodeError, setSponsorCodeError] = useState(false);
   const [discount, setDiscount] = useState("");
   const [discountError, setDiscountError] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -35,15 +35,15 @@ const EditOfferCoupon = ({
 
   useEffect(() => {
     if (row) {
-      setCouponCode(row?.couponCode);
+      setSponsorCode(row?.couponCode);
       setDiscount(row?.discountAmount);
     }
   }, [location]);
 
   const submitBtnClk = (e) => {
     e.preventDefault();
-    if (couponCode === "") {
-      toast.error("Coupon Code is Required", {
+    if (sponsorCode === "") {
+      toast.error("Sponsor Code is Required", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -52,7 +52,7 @@ const EditOfferCoupon = ({
         draggable: true,
         progress: undefined,
       });
-      setCouponCodeError(true);
+      setSponsorCodeError(true);
       setVisible(false);
     } else if (discount === "") {
       toast.error("Discount is Required", {
@@ -70,14 +70,14 @@ const EditOfferCoupon = ({
       setVisible(true);
       const finalData = new FormData();
       finalData.append("id", row?.id);
-      finalData.append("couponCode", couponCode);
+      finalData.append("couponCode", sponsorCode);
       finalData.append("discountAmount", discount);
 
       const requestOptions = {
         method: "POST",
         body: finalData,
       };
-      fetch("https://harsh7541.pythonanywhere.com/admin1/editoffercoupon", requestOptions)
+      fetch("https://harsh7541.pythonanywhere.com/admin1/editsponsoroffercoupon", requestOptions)
         .then((response) => response.json())
         .then((data) => {
           if (
@@ -135,13 +135,13 @@ const EditOfferCoupon = ({
       <Modal
         id="showModal"
         size="lg"
-        isOpen={editOfferCouponModal}
+        isOpen={editSponsorCouponModal}
         toggle={onCloseModal}
         centered
       >
         <ModalHeader className="bg-light p-3" toggle={onCloseModal}>
           <h5 className="modal-title" id="exampleModalLabel">
-            Edit Offer Coupon
+            Edit Sponsor Coupon
           </h5>
         </ModalHeader>
         <Form action="#">
@@ -151,19 +151,19 @@ const EditOfferCoupon = ({
               <div className="col-md-12">
                 <div>
                   <Label htmlFor="customername-field" className="form-label">
-                    Coupon Code <span className="required_span">*</span>
+                    Sponsor Code <span className="required_span">*</span>
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${couponCodeError ? "border-danger " : ""
+                    className={`form-control ${sponsorCodeError ? "border-danger " : ""
                       }`}
-                    placeholder="Enter Coupon Code"
+                    placeholder="Enter Sponsor Code"
                     aria-label="name"
                     aria-describedby="basic-addon1"
-                    value={couponCode}
+                    value={sponsorCode}
                     onChange={(e) => {
-                      setCouponCode(e.target.value);
-                      setCouponCodeError(false);
+                      setSponsorCode(e.target.value);
+                      setSponsorCodeError(false);
                     }}
                   />
                 </div>
@@ -211,7 +211,7 @@ const EditOfferCoupon = ({
                 }}
                 disabled={visible}
               >
-                Edit Offer Coupon
+                Edit Sponsor Coupon
               </button>
             </div>
           </div>
@@ -220,4 +220,4 @@ const EditOfferCoupon = ({
     </>
   );
 };
-export default EditOfferCoupon;
+export default EditSponsorOfferCoupon;

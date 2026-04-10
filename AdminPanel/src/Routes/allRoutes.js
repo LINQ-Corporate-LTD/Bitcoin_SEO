@@ -306,6 +306,9 @@ import BlockDomains from "../pages/BlockDomains/BlockDomains";
 import NavCategoryTree from "../pages/Navbar/NavCategoryTree";
 import FooterNavigation from "../Footer/FooterNavigation";
 import ToEmails from "../Footer/ToEmails";
+import AgendaSubscribers from "../pages/AgendaSubscribers";
+import CalenderSubscribers from "../pages/CalenderSubscribers";
+import SponsorOfferCoupons from "../pages/OfferCoupons/SponsorOfferCoupons";
 
 
 
@@ -586,6 +589,9 @@ const authProtectedRoutes = [
   { path: "/navtree", component: <NavCategoryTree /> },
   { path: "/footernavigation", component: <FooterNavigation /> },
   { path: "/toemails", component: <ToEmails /> },
+  { path: "/agendasubscribers", component: <AgendaSubscribers /> },
+  { path: "/calendersubscribers", component: <CalenderSubscribers /> },
+  { path: "/sponsoroffercoupons", component: <SponsorOfferCoupons /> },
 
 
 

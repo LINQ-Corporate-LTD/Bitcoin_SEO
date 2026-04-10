@@ -41,6 +41,7 @@ const BookingForm = () => {
     typeof window !== "undefined" ? window.innerWidth : 1200,
   );
   const toEmails = useSSRData("toEmails") || "benny.scott@iq-hub.com";
+  const discountInputRef = useRef(null);
 
   const {
     homeVideoSettings,
@@ -703,42 +704,95 @@ const BookingForm = () => {
     }
   };
 
-  const applyDiscountCode = () => {
-    // Replace with actual API call to validate discount code
-    if (discountCode.trim()) {
-      let formData = new FormData();
-      formData.append("couponCode", discountCode.trim());
-      const requestOptions = {
-        method: "POST",
-        body: formData,
-      };
-      fetch(
-        `https://harsh7541.pythonanywhere.com/admin1/offercouponbycode`,
-        requestOptions,
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          if (data && data.status) {
-            setDiscountData(data["offerCoupons"]);
-            setDiscountPercent(data["offerCoupons"][0]?.discountAmount);
-          } else {
-            toast.error(data?.message);
-          }
-        })
-        .catch((error) => {
-          setTimeout(() => {
-            toast.error("There was an error, Please try again later.", {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-          }, 1000);
-        });
+  // const applyDiscountCode = () => {
+  //   // Replace with actual API call to validate discount code
+  //   if (discountCode.trim()) {
+  //     let formData = new FormData();
+  //     formData.append("couponCode", discountCode.trim());
+  //     const requestOptions = {
+  //       method: "POST",
+  //       body: formData,
+  //     };
+  //     fetch(
+  //       `https://harsh7541.pythonanywhere.com/admin1/offercouponbycode`,
+  //       requestOptions,
+  //     )
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         if (data && data.status) {
+  //           setDiscountData(data["offerCoupons"]);
+  //           setDiscountPercent(data["offerCoupons"][0]?.discountAmount);
+  //         } else {
+  //           toast.error(data?.message);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         setTimeout(() => {
+  //           toast.error("There was an error, Please try again later.", {
+  //             position: "top-right",
+  //             autoClose: 5000,
+  //             hideProgressBar: false,
+  //             closeOnClick: true,
+  //             pauseOnHover: true,
+  //             draggable: true,
+  //             progress: undefined,
+  //           });
+  //         }, 1000);
+  //       });
+  //   }
+  // };
+
+  const applyDiscountCode = (codeOverride) => {
+    const code = (codeOverride ?? discountCode).trim();
+
+    if (!code) {
+      setDiscountData("");
+      setDiscountPercent(0);
+      return;
     }
+
+    let formData = new FormData();
+    formData.append("couponCode", code);
+
+    fetch(`https://harsh7541.pythonanywhere.com/admin1/offercouponbycode`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.status) {
+          const returnedCoupon = data["offerCoupons"]?.[0];
+
+          // ✅ Only apply discount if returned coupon code EXACTLY matches what user typed
+          if (
+            returnedCoupon?.couponCode?.toUpperCase().trim() ===
+            code.toUpperCase().trim()
+          ) {
+            setDiscountData(data["offerCoupons"]);
+            setDiscountPercent(returnedCoupon?.discountAmount);
+          } else {
+            // Partial match returned — reset discount
+            setDiscountData("");
+            setDiscountPercent(0);
+          }
+        } else {
+          // API returned no match — reset discount
+          setDiscountData("");
+          setDiscountPercent(0);
+        }
+      })
+      .catch(() => {
+        toast.error("There was an error, Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   const calculatePrices = () => {
@@ -791,13 +845,33 @@ const BookingForm = () => {
         </p>
       </div>
       <div className="BookingFormV2_inputContainer__UHPNl">
-        <div>
+        {/* <div>
           <input
             type="text"
             placeholder="Discount Code"
             value={discountCode}
             onChange={(e) => setDiscountCode(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && applyDiscountCode()}
+          />
+        </div> */}
+        <div>
+          <input
+            ref={discountInputRef}
+            type="text"
+            placeholder="Discount Code"
+            value={discountCode}
+            onChange={(e) => {
+              const upperValue = e.target.value.toUpperCase();
+              setDiscountCode(upperValue);
+              if (upperValue.trim() === "") {
+                setDiscountData("");
+                setDiscountPercent(0);
+              } else {
+                applyDiscountCode(upperValue);
+              }
+              // Keep focus on input after state update
+              setTimeout(() => discountInputRef.current?.focus(), 0);
+            }}
           />
         </div>
       </div>
@@ -1041,10 +1115,12 @@ const BookingForm = () => {
                           ""
                         }
                         companyName={companyDetails?.companyName || ""}
-                        orderDescription={`Payment for ${delegates?.length || 1
-                          } delegate pass(es) - ${selectedPackage?.deligatePackageName ||
+                        orderDescription={`Payment for ${
+                          delegates?.length || 1
+                        } delegate pass(es) - ${
+                          selectedPackage?.deligatePackageName ||
                           "Delegate Package"
-                          } - Event: ${eventDetails?.eventName || ""}`}
+                        } - Event: ${eventDetails?.eventName || ""}`}
                         onPaymentSuccess={handlePaymentSuccess}
                         onPaymentError={handlePaymentError}
                       />
