@@ -501,6 +501,7 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
       <div className="NewNavbar_container__dGANs">
         <div className="NewNavbar_logo__D1qkF">
           <a className="notranslate" href="/">
+            <span className="sr-only">Home</span>
             {navLogos ? (
               <img
                 src={showWhiteNavbar ? navLogos.blackLogo : navLogos.whiteLogo}
