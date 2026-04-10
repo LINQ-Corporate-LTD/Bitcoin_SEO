@@ -1169,6 +1169,7 @@
 .NewsListing_container__44PGn .NewsListing_darkContainer__Pa9P7 .NewsListing_topNewsContainerOuter__PGH7l .NewsListing_topNewsContainer__kFBcy .NewsListing_left__JLN1s {
   margin-right: 1.8%;
   width: 66%;
+  border-bottom: 5px solid var(--primary-color);
 }
 
 .NewsCard_container__njErT {

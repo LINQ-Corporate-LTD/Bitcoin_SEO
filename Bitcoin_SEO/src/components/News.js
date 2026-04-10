@@ -160,14 +160,7 @@ const News = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
-  const handleClick = (member) => {
-    const newsTitle = member.newsTitle
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "") // remove special characters like ':'
-      .replace(/\s+/g, "-") // replace spaces with hyphens
-      .replace(/-+/g, "-");
-    navigate(`/newsdescription/${newsTitle}`, { state: member }); // ✅ Pass member object in route state
-  };
+
 
   const getNewsUrl = (item) => {
     if (!item) return "#";
@@ -202,30 +195,26 @@ const News = () => {
               <h1 className="NewsListing_top_news_heding__ffzau">Top News</h1>
               <div className="NewsListing_topNewsContainer__kFBcy">
                 <div className="NewsListing_left__JLN1s">
-                  <div className="NewsCard_container__njErT">
+                  <Link
+                    to={getNewsUrl(featuredArticle)}
+                    state={featuredArticle}
+                    className="NewsCard_container__njErT"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
                     <div className="NewsCard_innerContainer__8EUva">
                       <div className="NewsCard_upperContainer__FPKzO">
                         <img
                           src={featuredArticle?.newsImage}
-                          alt="news-image"
-                          onClick={() => handleClick(featuredArticle)}
+                          alt={featuredArticle?.newsTitle}
                         />
                       </div>
                       <div className="NewsCard_lowerContainer__Jsamo">
                         <div className="NewsCard_nameDate__JcfXL NewsListing_left_sub__176br">
-                          <p onClick={() => handleClick(featuredArticle)}>
-                            {featuredArticle?.newsCategoryDetails?.newsCategory}
-                          </p>
-                          <p onClick={() => handleClick(featuredArticle)}>
-                            {formatDate(featuredArticle?.newsCreatedDate)}
-                          </p>
+                          <p>{featuredArticle?.newsCategoryDetails?.newsCategory}</p>
+                          <p>{formatDate(featuredArticle?.newsCreatedDate)}</p>
                         </div>
                         <div className="NewsCard_titleDescContainer__PExXU">
-                          <h2 onClick={() => handleClick(featuredArticle)}>
-                            <Link to={getNewsUrl(featuredArticle)} state={featuredArticle} style={{ textDecoration: "none", color: "inherit" }}>
-                              {featuredArticle?.newsTitle}
-                            </Link>
-                          </h2>
+                          <h2>{featuredArticle?.newsTitle}</h2>
                           <p
                             lang="en"
                             dangerouslySetInnerHTML={{
@@ -235,48 +224,43 @@ const News = () => {
                                   "$1"
                                 ),
                             }}
-                            onClick={() => handleClick(featuredArticle)}
                           ></p>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
                 <div className="NewsListing_right__onLH8">
                   <div className="NewsListing_rightTop__K0nYw">
                     {sidebarItems?.map((news, index) => (
-                      <div className="NewsCard_container__njErT">
+                      <Link
+                        key={index}
+                        to={getNewsUrl(news)}
+                        state={news}
+                        className="NewsCard_container__njErT"
+                        style={{ textDecoration: "none", color: "inherit" }}
+                      >
                         <div className="NewsCard_innerContainer__8EUva">
                           <div className="NewsCard_upperContainer__FPKzO">
                             <img
                               src={news?.newsImage}
-                              alt="news-image"
+                              alt={news?.newsTitle}
                               style={{ height: "208px" }}
-                              onClick={() => handleClick(news)}
                             />
                           </div>
                           <div className="NewsCard_lowerContainer__Jsamo">
                             <div className="NewsCard_nameDate__JcfXL NewsListing_left_sub__176br">
-                              <p onClick={() => handleClick(news)}>
-                                {news?.newsCategoryDetails?.newsCategory}
-                              </p>
-                              <p onClick={() => handleClick(news)}>
-                                {formatDate(news?.newsCreatedDate)}
-                              </p>
+                              <p>{news?.newsCategoryDetails?.newsCategory}</p>
+                              <p>{formatDate(news?.newsCreatedDate)}</p>
                             </div>
                             <div className="NewsCard_titleDescContainer__PExXU">
-                              <h2
-                                style={{ fontSize: "18px", lineHeight: "24px" }}
-                                onClick={() => handleClick(news)}
-                              >
-                                <Link to={getNewsUrl(news)} state={news} style={{ textDecoration: "none", color: "inherit" }}>
-                                  {news?.newsTitle}
-                                </Link>
+                              <h2 style={{ fontSize: "18px", lineHeight: "24px" }}>
+                                {news?.newsTitle}
                               </h2>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 </div>

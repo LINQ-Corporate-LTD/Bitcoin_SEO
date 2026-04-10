@@ -41,9 +41,9 @@ const Venue = () => {
   const venuePlace = venueData[0]?.venueFirstSectionFirstTitle || "";
   const venueDescription = venueData[0]?.venueFirstSectionDescription?.replace(/^"(.*)"$/, "$1") || "";
   const venueWebsiteLink = getCleanUrl(venueData[0]?.venueAddressLink);
-  const venueWebsiteLinkDisplay = venueData[0]?.venueAddressLink?.replace(/^"(.*)"$/, "$1") || "";
-  const venueLocation = venueData[0]?.venueLocation?.replace(/^"(.*)"$/, "$1") || "";
-  const venueContact = venueData[0]?.venueContact?.replace(/^"(.*)"$/, "$1") || "";
+  const venueWebsiteLinkDisplay = venueData[0]?.venueAddressLink?.replace(/<[^>]+>/g, "").replace(/\\"/g, "").replace(/"/g, "").trim() || "";
+  const venueLocation = venueData[0]?.venueLocation?.replace(/^"(.*)"$/, "$1").replace(/<\/?p>/gi, "") || "";
+  const venueContact = venueData[0]?.venueContact?.replace(/<[^>]+>/g, "").replace(/\\"/g, "").replace(/"/g, "").trim() || "";
   const venueMapLink = getCleanUrl(venueData[0]?.venueMapLink);
   const venueWebAddress = getCleanUrl(venueData[0]?.venueWebsiteAddress);
 
@@ -194,22 +194,22 @@ const Venue = () => {
                   <h5>Location</h5>
                   <p>
                     <img src={locationIcon} alt="location icon" style={{ width: "14px" }} />
-                    <a href={getCleanUrl(venueMapLink)}>
-                      <div dangerouslySetInnerHTML={{ __html: cleanHtml(venueLocation) }} />
-                    </a>
+                    <a href={venueMapLink} target="_blank" rel="nofollow noreferrer"
+                      dangerouslySetInnerHTML={{ __html: cleanHtml(venueLocation) }}
+                    />
                   </p>
                 </div>
                 <div>
                   <h5>Contact</h5>
                   <p style={{ marginTop: "auto" }}>
                     <img src={phoneIcon} alt="phone icon" />
-                    <a href="tel:+97142281111" dangerouslySetInnerHTML={{ __html: cleanHtml(venueContact) }} />
+                    <a href="tel:+97142281111">{venueContact}</a>
                   </p>
                   <p>
                     <img src={webIcon} alt="web icon" />
                     <p style={{ marginLeft: "5px" }}>
                       <p>
-                        <a href={getCleanUrl(venueWebsiteLink)} dangerouslySetInnerHTML={{ __html: cleanHtml(venueWebsiteLinkDisplay) }} />
+                        <a href={getCleanUrl(venueWebsiteLink)} >{venueWebsiteLinkDisplay}</a>
                       </p>
                     </p>
                   </p>
