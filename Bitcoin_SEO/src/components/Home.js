@@ -184,7 +184,7 @@ const Home = () => {
                                 .toLowerCase()
                                 .replace(/[^a-z0-9\s-]/g, "")
                                 .replace(/\s+/g, "-")
-                                .replace(/-+/g, "-")}` : "#"}
+                                .replace(/-+/g, "-")}` : undefined}
                               className={`SponsorCards_card__8eNkT ${item?.sponsorType !== "Dummy"
                                 ? "clickable"
                                 : ""
@@ -201,10 +201,10 @@ const Home = () => {
                                 alt={`Sponsor ${i + 1}`}
                               />
                               {item?.sponsorType !== "Dummy" && (
-                                <a className="SponsorCards_overlay__7MT16">
+                                <div className="SponsorCards_overlay__7MT16">
                                   <h4>{item?.sponsorComapnyName}</h4>
                                   <h4>{item?.sponsorType} Sponsor</h4>
-                                </a>
+                                </div>
                               )}
                             </a>
                           );

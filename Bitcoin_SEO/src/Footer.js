@@ -322,11 +322,13 @@ const Footer = () => {
         <div className="Footer_footerUpperContainer__crT6t">
           <div className="Footer_footerLogo__6mJFB">
             <div className="lazyload-wrapper ">
-              <img
-                src="https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png"
-                alt="Bitcoin Innovation & Market EvolutionLogo"
-                height={64}
-              ></img>
+              <a href="/" style={{ textDecoration: "none", color: "inherit" }}>
+                <img
+                  src="https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png"
+                  alt="Bitcoin Innovation & Market EvolutionLogo"
+                  height={64}
+                ></img>
+              </a>
             </div>
           </div>
           {/* <div className="Footer_footerNav__ipo0e">

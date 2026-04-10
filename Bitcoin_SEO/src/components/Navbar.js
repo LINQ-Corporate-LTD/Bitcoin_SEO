@@ -577,12 +577,12 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
                         </li>
 
                         {item.dropdown
-                        .filter(sub => sub.isChecked === "Yes")
-                        .map((sub, sIdx) => (
-                          <li key={sIdx}>
-                            <a href={sub.href}>{sub.name}</a>
-                          </li>
-                        ))}
+                          .filter(sub => sub.isChecked === "Yes")
+                          .map((sub, sIdx) => (
+                            <li key={sIdx}>
+                              <a href={sub.href}>{sub.name}</a>
+                            </li>
+                          ))}
                       </React.Fragment>
                     );
                   }
@@ -628,12 +628,12 @@ const Navbar = ({ disableScrollEffect = false, forceScrolled = false }) => {
                       >
                         <div className="NewNavbar_expansionMenu__KBWXI">
                           {item.dropdown
-                          .filter(sub => sub.isChecked === "Yes")
-                          .map((sub, sIdx) => (
-                            <a key={sIdx} href={sub.href}>
-                              {sub.name}
-                            </a>
-                          ))}
+                            .filter(sub => sub.isChecked === "Yes")
+                            .map((sub, sIdx) => (
+                              <a key={sIdx} href={sub.href}>
+                                {sub.name}
+                              </a>
+                            ))}
                         </div>
                       </div>
                     )}
