@@ -194,7 +194,7 @@ const Venue = () => {
                   <h5>Location</h5>
                   <p>
                     <img src={locationIcon} alt="location icon" style={{ width: "14px" }} />
-                    <a href={venueMapLink} target="_blank" rel="nofollow noreferrer"
+                    <a href={venueMapLink} target="_blank" rel="noopener noreferrer"
                       dangerouslySetInnerHTML={{ __html: cleanHtml(venueLocation) }}
                     />
                   </p>
