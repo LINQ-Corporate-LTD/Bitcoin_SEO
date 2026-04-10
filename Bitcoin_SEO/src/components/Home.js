@@ -113,7 +113,7 @@ const Home = () => {
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
-        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/" />
+        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/home" />
       </Helmet>
       <Navbar />
       <article className="HomeScreen_wholeContainer__oE8Au">
