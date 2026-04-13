@@ -11,6 +11,14 @@ import "../assets/css/popUp.css";
 import LogoCarousel from "./LogoCarousel";
 import Error404 from "./Error404";
 import { useSSRData } from "../common/useSSRData";
+import { Helmet } from "react-helmet-async";
+
+const toSlug = (str = "") =>
+  str
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
 const SponsorDescription = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
@@ -21,7 +29,16 @@ const SponsorDescription = () => {
   const ssrSponsorProfile = useSSRData("sponsorProfile");
   const ssrSponsors = useSSRData("sponsors");
 
-  const [sponsorData, setSponsorData] = useState(ssrSponsorProfile || []);
+  const [sponsorData, setSponsorData] = useState(ssrSponsorProfile || ssrSponsors || []);
+
+  const activeSponsor = sponsorData.find((s) => toSlug(s.sponsorComapnyName) === slug);
+
+  const metaTitle = activeSponsor?.eventSponsorMetaTitle?.trim();
+  const metaDesc = activeSponsor?.eventSponsorMetaDescription?.trim();
+
+  const canonicalUrl = slug
+    ? `https://www.bitcoin-innovation-market-evolution.online/sponsor/${slug}`
+    : "https://www.bitcoin-innovation-market-evolution.online/sponsors";
   const [fullName, setFullName] = useState("");
   const [fullNameErr, setFullNameErr] = useState(false);
   const [companyName, setCompanyName] = useState("");
@@ -49,8 +66,6 @@ const SponsorDescription = () => {
     if (!state?.id) {
       // Use SSR sponsors list first, fall back to client fetch
       if (ssrSponsors && ssrSponsors.length > 0) {
-        const toSlug = (str = "") =>
-          str.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-");
         const matched = ssrSponsors.find((s) => toSlug(s.sponsorComapnyName) === slug);
         if (matched) {
           fetchSponsorById(matched.id);
@@ -204,6 +219,23 @@ const SponsorDescription = () => {
 
   return (
     <>
+      {/* ✅ STRICT: Render Helmet ONLY if exact backend data is available */}
+      {metaTitle && metaDesc && (
+        <Helmet>
+          <title>{metaTitle}</title>
+          <meta name="description" content={metaDesc} />
+          <link rel="canonical" href={canonicalUrl} />
+          {/* Open Graph */}
+          <meta property="og:title" content={metaTitle} />
+          <meta property="og:description" content={metaDesc} />
+          <meta property="og:type" content="profile" />
+          <meta property="og:url" content={canonicalUrl} />
+          {/* Twitter Card */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={metaTitle} />
+          <meta name="twitter:description" content={metaDesc} />
+        </Helmet>
+      )}
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
         <Navbar forceScrolled />
         <article className="SponsorBio_container__pvxrT">
