@@ -285,17 +285,18 @@ app.get("*", async (req, res) => {
         return res.status(500).send("Internal Server Error");
       }
 
-      // ✅ Build the Helmet head tags string
-      const helmetHeadTags = helmet
-        ? [
+      // ✅ Build the Helmet head tags string (honoring strict backend-only meta)
+      let helmetHeadTags = "";
+      if (helmet) {
+        helmetHeadTags = [
           helmet.title.toString(),
           helmet.meta.toString(),
           helmet.link.toString(),
           helmet.script.toString(),
         ]
           .filter(Boolean)
-          .join("\n          ")
-        : "";
+          .join("\n          ");
+      }
 
       // ✅ KEY FIX: Remove any leftover <title> tag from index.html
       // before injecting Helmet tags, preventing duplicates
@@ -311,6 +312,13 @@ app.get("*", async (req, res) => {
         .replace(
           "</head>",
           `  ${helmetHeadTags}
+          <!-- SSR DEBUG: 
+               Path: ${req.url}
+               hasTheme: ${!!initialData?.theme}
+               newsDetailCount: ${initialData?.newsDetail?.length || 0}
+               newsListCount: ${initialData?.news?.length || 0}
+               HelmetTitle: ${helmet?.title?.toString().length || 0}
+          -->
           ${themeStyle}
         </head>`
         )

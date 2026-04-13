@@ -430,14 +430,14 @@ async function fetchSSRData(pathname) {
   }
 
   // ---- SPONSORS PAGE ----
-  if (pathname === "/sponsors") {
-    const [sponsors, sponsorPageData, mediaPartners] = await Promise.all([
-      fetchSponsors(),
-      fetchSponsorPageData(),
-      fetchMediaPartners(),
-    ]);
-    return { ...base, sponsors, sponsorPageData, mediaPartners };
-  }
+  // if (pathname === "/sponsors") {
+  //   const [sponsors, sponsorPageData, mediaPartners] = await Promise.all([
+  //     fetchSponsors(),
+  //     fetchSponsorPageData(),
+      
+  //   ]);
+  //   return { ...base, sponsors, sponsorPageData, mediaPartners };
+  // }
 
   // ---- Default: all other pages (contact, booking, forms, etc.) — theme only ----
   return { ...base };

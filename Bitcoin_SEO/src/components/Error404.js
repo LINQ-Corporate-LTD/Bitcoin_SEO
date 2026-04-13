@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "../Footer";
 import "./../assets/css/Error404.css";
+import { Helmet } from "react-helmet-async";
 
 const Error404 = () => {
+  const { slug } = useParams();
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200
   );
@@ -17,10 +20,29 @@ const Error404 = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const seoTitle = '404 - Page Not Found';
+  const seoDesc = 'The page you are looking for does not exist.';
+  const canonicalUrl = slug
+    ? `https://www.bitcoin-innovation-market-evolution.online/${slug}`
+    : "https://www.bitcoin-innovation-market-evolution.online/404";
 
 
   return (
     <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <link rel="canonical" href={canonicalUrl} />
+        {/* Open Graph */}
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="profile" />
+        <meta property="og:url" content={canonicalUrl} />
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+      </Helmet>
       <div style={{ opacity: 1 }}>
         <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
           <Navbar forceScrolled />

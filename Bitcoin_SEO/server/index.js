@@ -1,6 +1,8 @@
 // server/index.js
 // 🧩 Ignore all non-JavaScript imports for SSR
-require('ignore-styles').default(['.css', '.scss', '.sass', '.less', '.styl']);
+require("ignore-styles").default([
+  ".css", ".scss", ".sass", ".less", ".styl"
+]);
 
 // 🧩 Ignore image, font, and other static assets
 const assetExtensions = [
