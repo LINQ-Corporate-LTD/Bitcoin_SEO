@@ -43,9 +43,9 @@ const RelatedEventsSection = () => {
   const settings = {
     dots: false,
     arrows: false,
-    infinite: true,
+    infinite: relatedEventList.length > 3,
     speed: 500,
-    slidesToShow: 3, // show 3 cards in a row
+    slidesToShow: 3,
     slidesToScroll: 1,
     responsive: [
       {
@@ -53,6 +53,7 @@ const RelatedEventsSection = () => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
+          infinite: relatedEventList.length > 2,
         },
       },
       {
@@ -60,6 +61,7 @@ const RelatedEventsSection = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          infinite: relatedEventList.length > 1,
         },
       },
     ],

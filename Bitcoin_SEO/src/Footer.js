@@ -491,7 +491,7 @@ const Footer = () => {
           <a href="/sponsor-packages">Sponsorship Packages Hub</a>
           <a href="/attandees">Attendees Hub</a>
           <a href="/sponsor-booking">Sponsor Booking Hub</a>
-          <a href="/featuredSpeaker">Featured Speaker Hub</a>
+
 
           {/* Dynamic Slugs Harvested from SSR Data */}
           {sponsors.map((s, i) => (

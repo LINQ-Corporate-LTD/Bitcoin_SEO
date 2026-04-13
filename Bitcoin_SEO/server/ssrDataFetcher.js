@@ -393,12 +393,6 @@ async function fetchSSRData(pathname) {
     return { ...base, attendees };
   }
 
-  // ---- FEATURED SPEAKER (section) ----
-  if (pathname === "/featuredSpeaker") {
-    const speakers = await fetchSpeakers();
-    return { ...base, speakers };
-  }
-
   // ---- REGISTER ----
   if (pathname === "/booking") {
     const [delegatePackages, home] = await Promise.all([

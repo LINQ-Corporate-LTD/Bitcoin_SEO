@@ -7,6 +7,7 @@ import { useApiData } from "../../src/common/ApiContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSSRData } from "../common/useSSRData";
+import { Helmet } from "react-helmet-async";
 const ticket =
   "https://www.desalination-resource-recovery.com/images/ticket.svg";
 const logo =
@@ -60,6 +61,10 @@ const SponsorBookingForm = () => {
     eventGeneralSettings,
     themeSettings,
   } = useApiData();
+
+  const seoTitle = "Sponsor Booking | Bitcoin Innovation & Market Evolution 2026";
+  const seoDesc = "Book your sponsorship package for Bitcoin Innovation & Market Evolution 2026. Secure your presence at the premier Bitcoin event.";
+  const canonicalUrl = "https://www.bitcoin-innovation-market-evolution.online/sponsor-booking";
 
   const numDelegates = delegates?.length;
   const sponsorPackageDelegateQty = parseInt(selectedPackage?.delegatePassQty);
@@ -967,7 +972,19 @@ const SponsorBookingForm = () => {
   );
 
   return (
-    <div id="root">
+    <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
+        <link rel="canonical" href={canonicalUrl} />
+      </Helmet>
+      <div id="root">
       <div className="PageForm_container__NA5Wr">
         <div className="PageForm_header__7W2Cz">
           <div
@@ -1353,7 +1370,8 @@ const SponsorBookingForm = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

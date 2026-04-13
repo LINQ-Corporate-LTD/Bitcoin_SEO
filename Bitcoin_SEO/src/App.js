@@ -77,7 +77,6 @@ function App({ ssrData }) {
             <Route path="media-partners" element={<MediaPartners />} />
             <Route path="agenda" element={<Agenda />} />
             <Route path="who-should-attend" element={<WhoShouldAttend />} />
-            <Route path="featuredSpeaker" element={<FeaturedSpeaker />} />
             <Route path="faq" element={<Faq />} />
             <Route path="speakers" element={<CallForPresentation />} />
             <Route path="featured-speakers" element={<Speakers />} />

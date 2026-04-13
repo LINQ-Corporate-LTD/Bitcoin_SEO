@@ -232,6 +232,11 @@ function buildThemeStyle(theme) {
   return `<style id="ssr-theme">:root { ${vars.join("; ")}; }</style>`;
 }
 
+/* -------------------- REDIRECTS -------------------- */
+app.get("/featuredSpeaker", (req, res) => {
+  res.redirect(301, "/featured-speakers");
+});
+
 /* -------------------- SSR ROUTE -------------------- */
 app.get("*", async (req, res) => {
   const staticFileRegex =
