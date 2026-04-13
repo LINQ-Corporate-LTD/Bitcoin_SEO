@@ -3,22 +3,72 @@
 // No read-only API calls will happen client-side when this data is available.
 
 const fetch = require("node-fetch");
+// AbortController is a global in Node.js v15+ — no import needed
 
 const BASE_URL = "https://harsh7541.pythonanywhere.com/admin1";
 
+// How long to wait for a single API call before giving up (ms)
+const FETCH_TIMEOUT_MS = 12000;
+// How many times to retry a failed/timed-out request
+const MAX_RETRIES = 2;
+// Backoff between retries in ms (doubles each attempt)
+const RETRY_BASE_DELAY_MS = 500;
+
 /* -------- helpers -------- */
-async function get(endpoint) {
-  try {
-    const res = await fetch(`${BASE_URL}/${endpoint}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (e) {
-    console.error(`❌ SSR fetch error [${endpoint}]:`, e.message);
-    return null;
+
+/**
+ * GET with timeout + retry. Returns parsed JSON or null on failure.
+ * PythonAnywhere free tier hibernates and can return HTML on first hit —
+ * retries catch the "server waking up" window.
+ */
+async function get(endpoint, retries = MAX_RETRIES) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+    try {
+      const res = await fetch(`${BASE_URL}/${endpoint}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
+
+      if (!res.ok) {
+        console.warn(`⚠️  SSR [${endpoint}] HTTP ${res.status} (attempt ${attempt + 1})`);
+        if (attempt < retries) {
+          await delay(RETRY_BASE_DELAY_MS * Math.pow(2, attempt));
+          continue;
+        }
+        return null;
+      }
+
+      // Guard: PythonAnywhere sometimes returns HTML with 200 while waking up
+      const ct = res.headers.get("content-type") || "";
+      if (!ct.includes("json")) {
+        console.warn(`⚠️  SSR [${endpoint}] non-JSON response (${ct}), attempt ${attempt + 1}`);
+        await delay(RETRY_BASE_DELAY_MS * Math.pow(2, attempt));
+        continue;
+      }
+
+      return await res.json();
+    } catch (e) {
+      clearTimeout(timer);
+      const isTimeout = e.name === "AbortError";
+      console.error(
+        `❌ SSR ${isTimeout ? "TIMEOUT" : "ERROR"} [${endpoint}] attempt ${attempt + 1}:`,
+        e.message
+      );
+      if (attempt < retries) {
+        await delay(RETRY_BASE_DELAY_MS * Math.pow(2, attempt));
+      }
+    }
   }
+  return null;
+}
+
+/** Simple promise-based sleep */
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function fetchToEmails() {
@@ -26,18 +76,57 @@ async function fetchToEmails() {
   return d?.status ? d.toemails : "";
 }
 
-async function post(endpoint, formData) {
-  try {
-    const res = await fetch(`${BASE_URL}/${endpoint}`, {
-      method: "POST",
-      body: formData,
-    });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (e) {
-    console.error(`❌ SSR post error [${endpoint}]:`, e.message);
-    return null;
+/**
+ * POST with timeout + retry. Now uses URLSearchParams for maximum compatibility
+ * with Django backends when sending simple IDs.
+ */
+async function post(endpoint, data, retries = MAX_RETRIES) {
+  const body = new URLSearchParams();
+  for (const [key, val] of Object.entries(data)) {
+    body.append(key, String(val));
   }
+
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+    try {
+      const res = await fetch(`${BASE_URL}/${endpoint}`, {
+        method: "POST",
+        body: body, // node-fetch automatically sets Content-Type to application/x-www-form-urlencoded
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
+
+      if (!res.ok) {
+        console.warn(`⚠️  SSR POST [${endpoint}] HTTP ${res.status} (attempt ${attempt + 1})`);
+        if (attempt < retries) {
+          await delay(RETRY_BASE_DELAY_MS * Math.pow(2, attempt));
+          continue;
+        }
+        return null;
+      }
+
+      const ct = res.headers.get("content-type") || "";
+      if (!ct.includes("json")) {
+        console.warn(`⚠️  SSR POST [${endpoint}] non-JSON (${ct}), attempt ${attempt + 1}`);
+        await delay(RETRY_BASE_DELAY_MS * Math.pow(2, attempt));
+        continue;
+      }
+
+      return await res.json();
+    } catch (e) {
+      clearTimeout(timer);
+      const isTimeout = e.name === "AbortError";
+      console.error(
+        `❌ SSR POST ${isTimeout ? "TIMEOUT" : "ERROR"} [${endpoint}] attempt ${attempt + 1}:`,
+        e.message
+      );
+      if (attempt < retries) {
+        await delay(RETRY_BASE_DELAY_MS * Math.pow(2, attempt));
+      }
+    }
+  }
+  return null;
 }
 
 /* -------- slug helpers -------- */
@@ -96,10 +185,7 @@ async function fetchSpeakers() {
 }
 
 async function fetchSpeakerById(id) {
-  const { FormData } = require("formdata-node");
-  const fd = new FormData();
-  fd.append("speakerId", String(id));
-  const d = await post("speakerbyid", fd);
+  const d = await post("speakerbyid", { speakerId: id });
   return d?.status && d.speakerData?.length > 0 ? d.speakerData : null;
 }
 
@@ -109,10 +195,7 @@ async function fetchNews() {
 }
 
 async function fetchNewsById(id) {
-  const { FormData } = require("formdata-node");
-  const fd = new FormData();
-  fd.append("newsId", String(id));
-  const d = await post("newsbyid", fd);
+  const d = await post("newsbyid", { newsId: id });
   return d?.status && d.NewsData?.length > 0 ? d.NewsData : null;
 }
 
@@ -137,10 +220,7 @@ async function fetchTrends() {
 }
 
 async function fetchTrendById(id) {
-  const { FormData } = require("formdata-node");
-  const fd = new FormData();
-  fd.append("trendId", String(id));
-  const d = await post("trendbyid", fd);
+  const d = await post("trendbyid", { trendId: id });
   return d?.status ? d.trendData : null;
 }
 
@@ -155,10 +235,7 @@ async function fetchLogoCarousel() {
 }
 
 async function fetchSponsorById(id) {
-  const { FormData } = require("formdata-node");
-  const fd = new FormData();
-  fd.append("sponsorId", String(id));
-  const d = await post("sponsorbyid", fd);
+  const d = await post("sponsorbyid", { sponsorId: id });
   return d?.status && d.sponsorData?.length > 0 ? d.sponsorData : null;
 }
 
@@ -200,6 +277,11 @@ async function fetchDelegatePackages() {
  * @returns {Promise<object>} - Structured initial data object keyed by domain
  */
 async function fetchSSRData(pathname) {
+  // ─── WAKE UP the Django backend ───────────────────────────────────────────
+  // PythonAnywhere free tier hibernates. A sequential "ping" before the main
+  // parallel fetch burst ensures the server is alive and returning JSON.
+  await get("toemails"); // lightweight endpoint, just to wake the process
+
   // Always fetch theme + logoCarousel + navLogos + navItems (needed on every page)
   const [theme, logoCarousel, navLogos, navItems, toEmails] = await Promise.all([
     fetchTheme(),
@@ -207,7 +289,6 @@ async function fetchSSRData(pathname) {
     fetchNavLogos(),
     fetchNavItems(),
     fetchToEmails(),
-
   ]);
 
   const base = { theme, logoCarousel, navLogos, navItems, toEmails };
@@ -254,12 +335,17 @@ async function fetchSSRData(pathname) {
       fetchSponsors(),
       fetchTrends(),
     ]);
-    const matched = speakers.find(
+
+    const matched = speakers?.find(
       (s) => s.eventSpeakerName?.toLowerCase().replace(/\s+/g, "-") === slug,
     );
+
+    console.log(`🔍 Speaker SSR: slug="${slug}" | speakers.length=${speakers?.length ?? "FETCH_FAILED"} | matched=${matched ? matched.eventSpeakerName : "NOT_FOUND"}`);
+
     let speakerProfile = null;
     if (matched) {
       speakerProfile = await fetchSpeakerById(matched.id);
+      console.log(`🧑 speakerProfile fetched: ${speakerProfile ? `${speakerProfile.length} record(s), title="${speakerProfile[0]?.eventSpeakerMetaTitle}"` : "FAILED"}`);
     }
     return { ...base, speakers, speakerProfile, news, sponsors, trends };
   }

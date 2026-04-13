@@ -120,6 +120,8 @@ const SpeakerProfile = () => {
   }
 
   const speaker = speakerData[0];
+
+  // ✅ STRICT: derive SEO fields ONLY from backend data — no fallbacks
   const seoTitle = speaker?.eventSpeakerMetaTitle;
   const seoDesc = speaker?.eventSpeakerMetaDescription;
   const canonicalUrl = slug
@@ -128,20 +130,28 @@ const SpeakerProfile = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{seoTitle}</title>
-        <meta name="description" content={seoDesc} />
-        <link rel="canonical" href={canonicalUrl} />
-        {/* Open Graph */}
-        <meta property="og:title" content={seoTitle} />
-        <meta property="og:description" content={seoDesc} />
-        <meta property="og:type" content="profile" />
-        <meta property="og:url" content={canonicalUrl} />
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={seoTitle} />
-        <meta name="twitter:description" content={seoDesc} />
-      </Helmet>
+      {/*
+        ✅ CRITICAL SEO FIX:
+        Render <Helmet> ONLY when seoTitle is a real non-empty string from the backend.
+        If we always render <Helmet>, React-Helmet emits <title></title> when data is
+        absent (i.e. during SSR when backend fetch failed or is still loading).
+        SEO crawlers like Semrush read the FIRST <title> they find — an empty one =
+        "Missing title tag". By gating on seoTitle we guarantee zero empty tags.
+      */}
+      {seoTitle && (
+        <Helmet>
+          <title>{seoTitle}</title>
+          {seoDesc && <meta name="description" content={seoDesc} />}
+          <link rel="canonical" href={canonicalUrl} />
+          <meta property="og:title" content={seoTitle} />
+          {seoDesc && <meta property="og:description" content={seoDesc} />}
+          <meta property="og:type" content="profile" />
+          <meta property="og:url" content={canonicalUrl} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={seoTitle} />
+          {seoDesc && <meta name="twitter:description" content={seoDesc} />}
+        </Helmet>
+      )}
       <Navbar forceScrolled />
       <div style={{ opacity: 1 }}>
         <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>

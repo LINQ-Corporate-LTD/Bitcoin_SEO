@@ -293,8 +293,13 @@ app.get("*", async (req, res) => {
       // ✅ Build the Helmet head tags string (honoring strict backend-only meta)
       let helmetHeadTags = "";
       if (helmet) {
+        const titleTag = helmet.title.toString();
+        // 🚨 CRITICAL: react-helmet-async emits '<title data-rh="true"></title>' if title is empty.
+        // We MUST filter this out to prevent SEO tools from seeing an empty tag as "Missing title".
+        const isTitleEmpty = titleTag === '<title data-rh="true"></title>' || titleTag === '<title data-rh="true"> </title>';
+        
         helmetHeadTags = [
-          helmet.title.toString(),
+          isTitleEmpty ? "" : titleTag,
           helmet.meta.toString(),
           helmet.link.toString(),
           helmet.script.toString(),
