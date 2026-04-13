@@ -19,8 +19,8 @@ from django.db.models import F
 from Myadmin.serializers import eventAgendaSerializer, eventIndustryTrendsSerializer
 from rest_framework.throttling import AnonRateThrottle
 # Create your views here.
-from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSubCategories,themeColorSettings,homePageVideoSectionInput,videoSectionUserOptions,speakerSection,homePageThirdSection,keyPointsSection,keyPointsSectionPoints,countSection,countSectionTopic,testimonialSection,pastAttandeesSection,sponsorSection, footerFirstSectionOptions, footerSocialMediaOptions,companiesLogoSection,registerPageSettings,whoShouldAttendPageData,speakerPageData,speakerPageSectionThreePoints,sponsorPageData,sponsorPageBulletData,venuePageData,venuePageGallery,newsCategory,generalNewsPoint,latestNews,topNews,subscribers,contactUsData,contactUsPageData,contactUsHelpData,pressMediaPageData,pressMediaPageBoxData,mediaPageHelpers,standOutCrowdRequestData,becomeSpeakerRequestData,quickProposalRequestData,endUserPassRegistrationRequestData,pastAttandeeHomeData,footerOptions,toEmails
-from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees,slideSharesAccessPersons,payOnlineTransectionData,blockedEmailDomains
+from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSubCategories,themeColorSettings,homePageVideoSectionInput,videoSectionUserOptions,speakerSection,homePageThirdSection,keyPointsSection,keyPointsSectionPoints,countSection,countSectionTopic,testimonialSection,pastAttandeesSection,sponsorSection, footerFirstSectionOptions, footerSocialMediaOptions,companiesLogoSection,registerPageSettings,whoShouldAttendPageData,speakerPageData,speakerPageSectionThreePoints,sponsorPageData,sponsorPageBulletData,venuePageData,venuePageGallery,newsCategory,generalNewsPoint,latestNews,topNews,subscribers,contactUsData,contactUsPageData,contactUsHelpData,pressMediaPageData,pressMediaPageBoxData,mediaPageHelpers,standOutCrowdRequestData,becomeSpeakerRequestData,quickProposalRequestData,endUserPassRegistrationRequestData,pastAttandeeHomeData,footerOptions,toEmails,agendaSubscriber,calenderSubscriber
+from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees,slideSharesAccessPersons,payOnlineTransectionData,blockedEmailDomains,sponsorOfferCoupon
 import requests
 import jwt
 from django.conf import settings
@@ -5057,7 +5057,7 @@ def offerCouponByCodeFun(request):
     print("===================couponCode", couponCode)
 
     offerCoupons_list = offerCoupon.objects.filter(
-        couponCode__icontains=couponCode,
+        couponCode=couponCode,
         isDelete='No'
     ).all()
 
@@ -6336,7 +6336,10 @@ def get_to_emails(request):
             return Response({
                 "status": True,
                 "toemails": obj.toemails,
-                "id": obj.id
+                "id": obj.id,
+                "created_at": obj.created_at,
+                "updated_at": obj.updated_at
+
             })
         return Response({"status": True, "toemails": "", "id": None})
     except Exception as e:
@@ -6367,3 +6370,189 @@ def save_to_emails(request):
 
     except Exception as e:
         return Response({"status": False, "message": str(e)}, status=500)
+
+#------------------- Api For Add Agenda Subscriber  -------------------#
+@api_view(['POST'])
+def add_agendaSubscriber(request):
+    response = request.data
+    check_db = agendaSubscriber()
+
+    # ✅ Fixed — use response (request.data) instead of request.POST
+    if 'subscriber' in response:
+        check_db.subscriber = response['subscriber']
+
+    check_db.created_by = "Admin"
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#---------------------------- Api For List Agenda Subscriber ----------------------------#
+@permission_classes((AllowAny,))
+@api_view(['GET'])
+def agendaSubscriberListFun(request):
+    agendaSubscriber_list = agendaSubscriber.objects.all().filter(isDelete='No')
+    agendaSubscriberArr = []
+    for op in agendaSubscriber_list:
+        x={
+            'id':op.id,
+            'subscriber':op.subscriber,
+            'created_at': op.created_at,
+            'updated_at': op.updated_at,        
+            'created_by': op.created_by,
+            'updated_by': op.updated_by,
+        }
+        agendaSubscriberArr.append(x)
+    return JsonResponse({'agendaSubscribers': agendaSubscriberArr, 'status': True})
+
+#------------------- Api For Add Agenda Subscriber  -------------------#
+@api_view(['POST'])
+def add_calenderSubscriber(request):
+    response = request.data
+    check_db = calenderSubscriber()
+
+    if 'calenderSubscriber' in response:
+        check_db.calenderSubscriber = response['calenderSubscriber']
+
+    check_db.created_by = "Admin"
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#---------------------------- Api For List Agenda Subscriber ----------------------------#
+@permission_classes((AllowAny,))
+@api_view(['GET'])
+def calenderSubscriberListFun(request):
+    calenderSubscriber_list = calenderSubscriber.objects.all().filter(isDelete='No')
+    calenderSubscriberArr = []
+    for op in calenderSubscriber_list:
+        x={
+            'id':op.id,
+            'calenderSubscriber':op.calenderSubscriber,
+            'created_at': op.created_at,
+            'updated_at': op.updated_at,        
+            'created_by': op.created_by,
+            'updated_by': op.updated_by,
+        }
+        calenderSubscriberArr.append(x)
+    return JsonResponse({'calenderSubscribers': calenderSubscriberArr, 'status': True})
+
+#---------------------------- Api For get List of Spnsor Offer Coupons  ----------------------------#
+@permission_classes((AllowAny,))
+@api_view(['GET'])
+def sponsorOfferCouponsFun(request):
+    sponsorOfferCoupons_list = sponsorOfferCoupon.objects.all().filter(isDelete='No')
+    sponsorOfferCouponsList = []
+    for coupon in sponsorOfferCoupons_list:  
+        x={
+            'id':coupon.id,
+            'couponCode':coupon.couponCode,
+            'discountType':coupon.discountType,
+            'discountAmount':coupon.discountAmount,
+            'couponFor':coupon.couponFor,
+            'eventSpecialWord':coupon.eventSpecialWord,
+            'created_at': coupon.created_at,
+            'updated_at': coupon.updated_at,
+            'created_by': coupon.created_by,
+            'updated_by': coupon.updated_by,
+        }
+        sponsorOfferCouponsList.append(x)
+    return JsonResponse({'sponsorOfferCoupons': sponsorOfferCouponsList, 'status': True})
+
+#------------------- Api For Add Offer Coupon-------------------#
+@api_view(['POST'])
+def add_sponsorOfferCoupon(request):
+    response = request.data
+    check_db = sponsorOfferCoupon()
+
+    if 'couponCode' in request.POST:
+        check_db.couponCode = response['couponCode']
+
+    if 'discountType' in request.POST:
+        check_db.discountType = response['discountType']
+
+    if 'discountAmount' in request.POST:
+        check_db.discountAmount = response['discountAmount']
+
+    if 'couponFor' in request.POST:
+        check_db.couponFor = response['couponFor']
+
+    if 'eventSpecialWord' in request.POST:
+        check_db.eventSpecialWord = response['eventSpecialWord']
+
+    check_db.created_by = "Admin"
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Edit Offer Coupon-------------------#
+@api_view(['POST'])
+def edit_sponsorOfferCoupon(request):
+    response = request.data
+    check_db = sponsorOfferCoupon.objects.get(id=response['id'])
+
+    if 'couponCode' in request.POST:
+        check_db.couponCode = response['couponCode']
+
+    if 'discountType' in request.POST:
+        check_db.discountType = response['discountType']
+
+    if 'discountAmount' in request.POST:
+        check_db.discountAmount = response['discountAmount']
+
+    if 'couponFor' in request.POST:
+        check_db.couponFor = response['couponFor']
+
+    if 'eventSpecialWord' in request.POST:
+        check_db.eventSpecialWord = response['eventSpecialWord']
+
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Delete Offer Coupon-------------------#
+@api_view(['POST'])
+def delete_sponsorOfferCoupon(request):
+    response = request.data
+    check_db = sponsorOfferCoupon.objects.get(id=response['id'])
+    check_db.isDelete = response['isDelete']
+    check_db.save()
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#---------------------------- Api For get Offer Coupon by Code   ----------------------------#
+@api_view(['POST'])
+def sponsorOfferCouponByCodeFun(request):
+    response = request.data
+    couponCode = response['couponCode']
+    print("===================couponCode", couponCode)
+
+    offerCoupons_list = sponsorOfferCoupon.objects.filter(
+        couponCode=couponCode,
+        isDelete='No'
+    ).all()
+
+    print("===================offerCoupons_list", offerCoupons_list)
+    print("===================offerCoupons_list", len(offerCoupons_list))
+
+    if offerCoupons_list.exists():  # ✅ check queryset, not empty list
+        offerCouponsList = []
+        for coupon in offerCoupons_list:  
+            x = {
+                'id': coupon.id,
+                'couponCode': coupon.couponCode,
+                'discountType': coupon.discountType,
+                'discountAmount': coupon.discountAmount,
+                'couponFor': coupon.couponFor,
+                'eventSpecialWord': coupon.eventSpecialWord,
+                'created_at': coupon.created_at,
+                'updated_at': coupon.updated_at,
+                'created_by': coupon.created_by,
+                'updated_by': coupon.updated_by,
+            }
+            offerCouponsList.append(x)
+        return JsonResponse({'offerCoupons': offerCouponsList, 'status': True})
+    else:
+        return JsonResponse({'status': False, 'message': 'Invalid Coupon Code'})

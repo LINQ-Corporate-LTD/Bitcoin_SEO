@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Modal, ModalHeader, Form, ModalBody, Label, Input } from "reactstrap";
 import "../../assets/css/ApplicationMain.css";
 import { toast } from "react-toastify";
@@ -8,42 +8,27 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/react";
 import "../../assets/css/dropzone.css";
 import "../../assets/css/ckeditor.css";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 const override = css`
   display: block;
   margin: 0 auto;
   color: black;
   height: 100%;
 `;
-const EditOfferCoupon = ({
-  row,
-  editOfferCouponModal,
-  onCloseModal,
-  onModalSubmitBtnClk,
-}) => {
-  console.log("row: ", row);
+const AddSponsorOfferCoupon = (props) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [couponCode, setCouponCode] = useState("");
-  const [couponCodeError, setCouponCodeError] = useState(false);
+  const { addSponsorCouponModal } = props;
+  const [sponsorCode, setSponsorCode] = useState("");
+  const [sponsorCodeError, setSponsorCodeError] = useState(false);
   const [discount, setDiscount] = useState("");
   const [discountError, setDiscountError] = useState(false);
   const [visible, setVisible] = useState(false);
   const [loading, setloading] = useState(false);
   let color = "#405189";
 
-  useEffect(() => {
-    if (row) {
-      setCouponCode(row?.couponCode);
-      setDiscount(row?.discountAmount);
-    }
-  }, [location]);
-
   const submitBtnClk = (e) => {
     e.preventDefault();
-    if (couponCode === "") {
-      toast.error("Coupon Code is Required", {
+    if (sponsorCode === "") {
+      toast.error("Sponsor Code is Required", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -52,7 +37,7 @@ const EditOfferCoupon = ({
         draggable: true,
         progress: undefined,
       });
-      setCouponCodeError(true);
+      setSponsorCodeError(true);
       setVisible(false);
     } else if (discount === "") {
       toast.error("Discount is Required", {
@@ -69,15 +54,14 @@ const EditOfferCoupon = ({
     } else {
       setVisible(true);
       const finalData = new FormData();
-      finalData.append("id", row?.id);
-      finalData.append("couponCode", couponCode);
+      finalData.append("couponCode", sponsorCode);
       finalData.append("discountAmount", discount);
 
       const requestOptions = {
         method: "POST",
         body: finalData,
       };
-      fetch("https://harsh7541.pythonanywhere.com/admin1/editoffercoupon", requestOptions)
+      fetch("https://harsh7541.pythonanywhere.com/admin1/addsponsoroffercoupon", requestOptions)
         .then((response) => response.json())
         .then((data) => {
           if (
@@ -90,8 +74,8 @@ const EditOfferCoupon = ({
           }
           if (data.status) {
             setVisible(true);
-            onModalSubmitBtnClk();
-            toast.success("Record Updated Successfully.", {
+            props.onModalSubmitBtnClk();
+            toast.success("Record Added Successfully.", {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -134,14 +118,17 @@ const EditOfferCoupon = ({
     <>
       <Modal
         id="showModal"
-        size="lg"
-        isOpen={editOfferCouponModal}
-        toggle={onCloseModal}
+        size="md"
+        isOpen={addSponsorCouponModal}
+        toggle={() => props.onCloseModal(false)}
         centered
       >
-        <ModalHeader className="bg-light p-3" toggle={onCloseModal}>
+        <ModalHeader
+          className="bg-light p-3"
+          toggle={() => props.onCloseModal(false)}
+        >
           <h5 className="modal-title" id="exampleModalLabel">
-            Edit Offer Coupon
+            Add Sponsor Coupon
           </h5>
         </ModalHeader>
         <Form action="#">
@@ -151,19 +138,19 @@ const EditOfferCoupon = ({
               <div className="col-md-12">
                 <div>
                   <Label htmlFor="customername-field" className="form-label">
-                    Coupon Code <span className="required_span">*</span>
+                    Sponsor Code <span className="required_span">*</span>
                   </Label>
                   <Input
                     type="text"
-                    className={`form-control ${couponCodeError ? "border-danger " : ""
+                    className={`form-control ${sponsorCodeError ? "border-danger " : ""
                       }`}
-                    placeholder="Enter Coupon Code"
+                    placeholder="Enter Sponsor Code"
                     aria-label="name"
                     aria-describedby="basic-addon1"
-                    value={couponCode}
+                    value={sponsorCode}
                     onChange={(e) => {
-                      setCouponCode(e.target.value);
-                      setCouponCodeError(false);
+                      setSponsorCode(e.target.value);
+                      setSponsorCodeError(false);
                     }}
                   />
                 </div>
@@ -195,9 +182,9 @@ const EditOfferCoupon = ({
             <div className="hstack gap-2 justify-content-end">
               <button
                 type="button"
-                className="btn btn-light border"
+                className="btn btn-light"
                 onClick={() => {
-                  onCloseModal();
+                  props.onCloseModal(false);
                 }}
               >
                 Close
@@ -211,7 +198,7 @@ const EditOfferCoupon = ({
                 }}
                 disabled={visible}
               >
-                Edit Offer Coupon
+                Add Sponsor Coupon
               </button>
             </div>
           </div>
@@ -220,4 +207,4 @@ const EditOfferCoupon = ({
     </>
   );
 };
-export default EditOfferCoupon;
+export default AddSponsorOfferCoupon;

@@ -32,6 +32,7 @@ const CallForPresentation = () => {
   const [emailErrMsg, setEmailErrMsg] = useState("");
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
+  const [calendarEmail, setCalendarEmail] = useState("");
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -506,7 +507,8 @@ const CallForPresentation = () => {
   };
 
   const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Submit Talk`;
-  const seoDesc = "Submit your speaker proposal for Bitcoin Innovation & Market Evolution 2026 and contribute insights on adoption, regulation, scalability, mining and markets.";
+  const seoDesc =
+    "Submit your speaker proposal for Bitcoin Innovation & Market Evolution 2026 and contribute insights on adoption, regulation, scalability, mining and markets.";
 
   return (
     <>
@@ -520,7 +522,10 @@ const CallForPresentation = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDesc} />
-        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/speakers" />
+        <link
+          rel="canonical"
+          href="https://www.bitcoin-innovation-market-evolution.online/speakers"
+        />
       </Helmet>
       <Navbar forceScrolled />
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
@@ -644,17 +649,37 @@ const CallForPresentation = () => {
                 <div>
                   <form
                     className="row g-3 needs-validation"
-                    onSubmit={(e) => {
-                      e.preventDefault(); // stop page reload
-                      // 👉 do your submit logic here (API / validation)
-                      setOpen(false); // ✅ close popup ONLY on submit
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+
+                      try {
+                        await fetch(
+                          "https://harsh7541.pythonanywhere.com/admin1/addcalendersubscriber",
+                          {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                              calenderSubscriber: calendarEmail,
+                            }),
+                          },
+                        );
+                      } catch (error) {
+                        console.error(
+                          "Failed to save calendar subscriber:",
+                          error,
+                        );
+                      }
+
+                      setOpen(false);
                     }}
                   >
                     <input
                       type="email"
                       placeholder="Email address"
                       required
-                    ></input>
+                      value={calendarEmail}
+                      onChange={(e) => setCalendarEmail(e.target.value)}
+                    />
                     <input
                       type="submit"
                       value="Submit"

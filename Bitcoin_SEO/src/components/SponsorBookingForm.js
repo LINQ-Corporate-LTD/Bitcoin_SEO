@@ -49,9 +49,9 @@ const SponsorBookingForm = () => {
   console.log("activeDelPackageData: ", activeDelPackageData);
   const invopiceNo = location?.state?.uniqueInvoiceNo;
   const paymentFormRef = useRef(null);
-
+  const discountInputRef = useRef(null);
   const [windowWidth, setWindowWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 1200
+    typeof window !== "undefined" ? window.innerWidth : 1200,
   );
 
   const {
@@ -87,7 +87,7 @@ const SponsorBookingForm = () => {
     // Validate delegates
     if (!delegates || delegates.length === 0) {
       toast.error(
-        "No delegates found. Please go back and add delegate information."
+        "No delegates found. Please go back and add delegate information.",
       );
       return;
     }
@@ -488,7 +488,10 @@ const SponsorBookingForm = () => {
         finalData.append("couponCode", discountCode);
       }
       finalData.append("totalPassAmount", prices.initialPrice);
-      finalData.append("additionalDelegateAmoount", prices.additionalDelegatePrice);
+      finalData.append(
+        "additionalDelegateAmoount",
+        prices.additionalDelegatePrice,
+      );
       finalData.append("discountAmount", prices.discountAmount);
       finalData.append("addOnsAmount", prices.addOnsTotal);
       finalData.append("taxableCharge", prices.taxAmount);
@@ -500,7 +503,10 @@ const SponsorBookingForm = () => {
         body: finalData,
       };
 
-      fetch("https://harsh7541.pythonanywhere.com/admin1/addnewsponsor", requestOptions)
+      fetch(
+        "https://harsh7541.pythonanywhere.com/admin1/addnewsponsor",
+        requestOptions,
+      )
         .then((response) => response.json())
         .then(async (data) => {
           if (data.status) {
@@ -566,7 +572,10 @@ const SponsorBookingForm = () => {
     const requestOptions = {
       method: "GET",
     };
-    fetch(`https://harsh7541.pythonanywhere.com/admin1/sponsoraddons`, requestOptions)
+    fetch(
+      `https://harsh7541.pythonanywhere.com/admin1/sponsoraddons`,
+      requestOptions,
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data && data.status) {
@@ -605,18 +614,18 @@ const SponsorBookingForm = () => {
           const marketingLiteratureAddOns = allAddOns.filter(
             (addon) =>
               addon.addOnTypeDetails.addOnTypeName ===
-              "Pre-event Marketing Add-ons" ||
+                "Pre-event Marketing Add-ons" ||
               addon.addOnTypeDetails.addOnTypeName ===
-              "Literature Distribution Add-ons"
+                "Literature Distribution Add-ons",
           );
 
           // Filter and group for array 2 (Session and On Site)
           const sessionOnSiteAddOns = allAddOns.filter(
             (addon) =>
               addon.addOnTypeDetails.addOnTypeName ===
-              "Session Branding Add-ons" ||
+                "Session Branding Add-ons" ||
               addon.addOnTypeDetails.addOnTypeName ===
-              "On Site Branding Add-ons"
+                "On Site Branding Add-ons",
           );
 
           setMarketingAndLiterature(groupByType(marketingLiteratureAddOns));
@@ -630,7 +639,7 @@ const SponsorBookingForm = () => {
     };
     fetch(
       `https://harsh7541.pythonanywhere.com/admin1/getactivedelegatepackage`,
-      requestOptions
+      requestOptions,
     )
       .then((response) => response.json())
       .then((data) => {
@@ -648,39 +657,95 @@ const SponsorBookingForm = () => {
     }
   };
 
-  const applyDiscountCode = () => {
-    // Replace with actual API call to validate discount code
-    if (discountCode.trim()) {
-      let formData = new FormData();
-      formData.append("couponCode", discountCode.trim());
-      const requestOptions = {
-        method: "POST",
-        body: formData,
-      };
-      fetch(`https://harsh7541.pythonanywhere.com/admin1/offercouponbycode`, requestOptions)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data && data.status) {
-            setDiscountData(data["offerCoupons"]);
-            setDiscountPercent(data["offerCoupons"][0]?.discountAmount);
-          } else {
-            toast.error(data?.message);
-          }
-        })
-        .catch((error) => {
-          setTimeout(() => {
-            toast.error("There was an error, Please try again later.", {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-          }, 1000);
-        });
+  // const applyDiscountCode = () => {
+  //   // Replace with actual API call to validate discount code
+  //   if (discountCode.trim()) {
+  //     let formData = new FormData();
+  //     formData.append("couponCode", discountCode.trim());
+  //     const requestOptions = {
+  //       method: "POST",
+  //       body: formData,
+  //     };
+  //     fetch(
+  //       `https://harsh7541.pythonanywhere.com/admin1/sponsoroffercouponbycode`,
+  //       requestOptions,
+  //     )
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         if (data && data.status) {
+  //           setDiscountData(data["offerCoupons"]);
+  //           setDiscountPercent(data["offerCoupons"][0]?.discountAmount);
+  //         } else {
+  //           toast.error(data?.message);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         setTimeout(() => {
+  //           toast.error("There was an error, Please try again later.", {
+  //             position: "top-right",
+  //             autoClose: 5000,
+  //             hideProgressBar: false,
+  //             closeOnClick: true,
+  //             pauseOnHover: true,
+  //             draggable: true,
+  //             progress: undefined,
+  //           });
+  //         }, 1000);
+  //       });
+  //   }
+  // };
+
+  const applyDiscountCode = (codeOverride) => {
+    const code = (codeOverride ?? discountCode).trim();
+
+    if (!code) {
+      setDiscountData("");
+      setDiscountPercent(0);
+      return;
     }
+
+    let formData = new FormData();
+    formData.append("couponCode", code);
+
+    fetch(`https://harsh7541.pythonanywhere.com/admin1/sponsoroffercouponbycode`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.status) {
+          const returnedCoupon = data["offerCoupons"]?.[0];
+
+          // ✅ Only apply discount if returned coupon code EXACTLY matches what user typed
+          if (
+            returnedCoupon?.couponCode?.toUpperCase().trim() ===
+            code.toUpperCase().trim()
+          ) {
+            setDiscountData(data["offerCoupons"]);
+            setDiscountPercent(returnedCoupon?.discountAmount);
+          } else {
+            // Partial match returned — reset discount
+            setDiscountData("");
+            setDiscountPercent(0);
+          }
+        } else {
+          // API returned no match — reset discount
+          setDiscountData("");
+          setDiscountPercent(0);
+        }
+      })
+      .catch(() => {
+        toast.error("There was an error, Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   // const calculatePrices = () => {
@@ -740,7 +805,7 @@ const SponsorBookingForm = () => {
       parseFloat(activeDelPackageData[0]?.deligatePackagePrice || 0);
 
     const taxPercent = parseFloat(
-      eventGeneralSettings?.purchaseTaxPercent || 0
+      eventGeneralSettings?.purchaseTaxPercent || 0,
     );
     console.log("taxPercent: ", taxPercent);
 
@@ -819,11 +884,22 @@ const SponsorBookingForm = () => {
       <div className="SponsorFormV2_inputContainer__shBEi">
         <div>
           <input
+            ref={discountInputRef}
             type="text"
             placeholder="Discount Code"
             value={discountCode}
-            onChange={(e) => setDiscountCode(e.target.value)}
-            onKeyPress={(e) => e.key === "Enter" && applyDiscountCode()}
+            onChange={(e) => {
+              const upperValue = e.target.value.toUpperCase();
+              setDiscountCode(upperValue);
+              if (upperValue.trim() === "") {
+                setDiscountData("");
+                setDiscountPercent(0);
+              } else {
+                applyDiscountCode(upperValue);
+              }
+              // Keep focus on input after state update
+              setTimeout(() => discountInputRef.current?.focus(), 0);
+            }}
           />
         </div>
       </div>
@@ -1114,9 +1190,11 @@ const SponsorBookingForm = () => {
                           ""
                         }
                         companyName={companyDetails?.companyName || ""}
-                        orderDescription={`Payment for Sponsor- ${companyDetails?.companyName
-                          } - Type: ${selectedPackage?.sponsorPackageType
-                          } - Event: ${eventDetails?.eventName || ""}`}
+                        orderDescription={`Payment for Sponsor- ${
+                          companyDetails?.companyName
+                        } - Type: ${
+                          selectedPackage?.sponsorPackageType
+                        } - Event: ${eventDetails?.eventName || ""}`}
                         onPaymentSuccess={handlePaymentSuccess}
                         onPaymentError={handlePaymentError}
                       />
@@ -1271,8 +1349,7 @@ const SponsorBookingForm = () => {
               <span className="PageForm_divide__vwhn0">|</span>
               ABCD Company
             </p>
-            <p>©2026 Bitcoin Innovation & Market
-              Evolution 2026</p>
+            <p>©2026 Bitcoin Innovation & Market Evolution 2026</p>
           </div>
         </div>
       </div>
