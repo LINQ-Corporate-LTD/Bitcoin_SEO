@@ -33,6 +33,10 @@ const lockIcon =
   "https://www.desalination-resource-recovery.com/images/icons/lock.png";
 
 const countries = getNames();
+const metaSeoTitle = "Sponsor Booking | Bitcoin Innovation & Market Evolution 2026";
+const metaSeoDesc = "Book your sponsorship package for Bitcoin Innovation & Market Evolution 2026.";
+const metaCanonicalUrl = "https://www.bitcoin-innovation-market-evolution.online/sponsor-booking";
+
 
 const AddSponsorDelegateForm = () => {
   const location = useLocation();
@@ -1028,9 +1032,13 @@ const AddSponsorDelegateForm = () => {
     return (
       <>
         <Helmet>
-          <title>{seoTitle}</title>
-          <meta name="description" content={seoDesc} />
-          <link rel="canonical" href={canonicalUrl} />
+          <title>{metaSeoTitle}</title>
+          <meta name="debug-ssr" content="AddSponsorDelegateForm Step 2" />
+          <meta property="og:title" content={metaSeoTitle} />
+          <meta property="og:description" content={metaSeoDesc} />
+          <meta property="og:image" content={logo} />
+          <link rel="canonical" href={metaCanonicalUrl} />
+          <meta name="description" content={metaSeoDesc} />
         </Helmet>
         <div id="root">
           <div className="PageForm_container__NA5Wr">
@@ -1242,7 +1250,17 @@ const AddSponsorDelegateForm = () => {
   }
 
   return (
-    <div id="root">
+    <>
+      <Helmet>
+        <title>{metaSeoTitle}</title>
+        <meta name="debug-ssr" content="AddSponsorDelegateForm Step 1" />
+        <meta property="og:title" content={metaSeoTitle} />
+        <meta property="og:description" content={metaSeoDesc} />
+        <meta property="og:image" content={logo} />
+        <link rel="canonical" href={metaCanonicalUrl} />
+        <meta name="description" content={metaSeoDesc} />
+      </Helmet>
+      <div id="root">
       <div className="PageForm_container__NA5Wr">
         <div className="PageForm_header__7W2Cz">
           <div
@@ -1947,7 +1965,8 @@ const AddSponsorDelegateForm = () => {
         </div>
       </div>
     </div>
-  );
+  </>
+);
 };
 
 export default AddSponsorDelegateForm;
