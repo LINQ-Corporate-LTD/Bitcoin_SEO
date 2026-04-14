@@ -805,21 +805,21 @@ const ExhibitorPackages = () => {
                         <td></td>
                         <td>
                           <button onClick={() =>
-                            navigate("/addsponsordelegate", {
+                            navigate("/sponsor-booking", {
                               state: { selectedPackage: sponsorPackageList[0] },
                             })
                           }>Book your booth</button>
                         </td>
                         <td>
                           <button onClick={() =>
-                            navigate("/addsponsordelegate", {
+                            navigate("/sponsor-booking", {
                               state: { selectedPackage: sponsorPackageList[1] },
                             })
                           }>Book your booth</button>
                         </td>
                         <td>
                           <button onClick={() =>
-                            navigate("/addsponsordelegate", {
+                            navigate("/sponsor-booking", {
                               state: { selectedPackage: sponsorPackageList[2] },
                             })
                           }>Book your booth</button>

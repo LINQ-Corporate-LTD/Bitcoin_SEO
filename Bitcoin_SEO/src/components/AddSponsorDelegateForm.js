@@ -9,14 +9,29 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { MuiTelInput } from "mui-tel-input";
 import Button from "@mui/material/Button";
 import "../assets/css/AddSponsorDelegateForm.css";
+import "../../src/assets/css/BookingForm.css";
+import "../assets/css/SponsorBookingPay.css";
 import { FormControl, FormHelperText } from "@mui/material";
 import { useSSRData } from "../common/useSSRData";
+import SimpleStripeForm from "./PaymentForm";
+import { useApiData } from "../common/ApiContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet-async";
+
 const logo =
   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
 const plusIcon =
   "https://www.desalination-resource-recovery.com/images/icons/plus.png";
 const closeBtn =
   "https://www.desalination-resource-recovery.com/images/icons/del-cross.png";
+const toggle =
+  "https://www.desalination-resource-recovery.com/images/icons/toggle.png";
+const cardLabel =
+  "https://www.desalination-resource-recovery.com/images/logos/card-labels.png";
+const lockIcon =
+  "https://www.desalination-resource-recovery.com/images/icons/lock.png";
+
 const countries = getNames();
 
 const AddSponsorDelegateForm = () => {
@@ -26,6 +41,15 @@ const AddSponsorDelegateForm = () => {
   const phoneInputRef = useRef(null);
   const selectedPackage = location?.state?.selectedPackage;
   console.log("selectedPackage: ", selectedPackage);
+
+  const {
+    homeVideoSettings,
+    eventDetails,
+    eventGeneralSettings,
+    themeSettings,
+  } = useApiData();
+
+  // â”€â”€â”€ Step 1 state â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const [delegateCount, setDelegateCount] = useState(1);
   const [delegates, setDelegates] = useState([
     {
@@ -62,59 +86,60 @@ const AddSponsorDelegateForm = () => {
   const [termsAgreement, setTermsAgreement] = useState(false);
   const [termsError, setTermsError] = useState(false);
   const [submitAttempted, setSubmitAttempted] = useState(false);
-
   const [validationErrors, setValidationErrors] = useState({});
   const [submitBtnCheck, setSubmitBtnCheck] = useState(false);
 
+  // â”€â”€â”€ Step transition state â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  const [showStep2, setShowStep2] = useState(false);
+  const [step2Data, setStep2Data] = useState(null); // holds { selectedPackage, companyData, delegates, termsAgreement, uniqueInvoiceNo }
+
+  // â”€â”€â”€ Step 2 state (migrated from SponsorBookingFormInline) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  const paymentFormRef = useRef(null);
+  const discountInputRef = useRef(null);
+  const [sponsorAddOns, setSponsorAddOns] = useState([]);
+  const [marketingAndLiterature, setMarketingAndLiterature] = useState([]);
+  const [sessionAndOnSite, setSessionAndOnSite] = useState([]);
+  const [selectedAddOns, setSelectedAddOns] = useState([]);
+  const [discountCode, setDiscountCode] = useState("");
+  const [discountPercent, setDiscountPercent] = useState(0);
+  const [discountData, setDiscountData] = useState("");
+  const [activeDelPackageData, setActiveDelPackageData] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1200
+  );
 
   const portalId = "4000965";
   const formGuid = "1e2e18e4-1877-4d07-9a22-6c2dbca5c2f8";
 
   const toEmails = useSSRData("toEmails") || "benny.scott@iq-hub.com";
 
-  // Get country options from react-select-country-list
   const countryOptions = [
     { value: "", label: "Select a country" },
     ...countryList().getData(),
   ];
 
-  // Handle company data changes
+  // â”€â”€â”€ Step 1 handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const handleCompanyDataChange = (field, value) => {
-    setCompanyData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-
-    // Clear validation error for this field
+    setCompanyData((prev) => ({ ...prev, [field]: value }));
     if (companyErrors[field]) {
-      setCompanyErrors((prev) => ({
-        ...prev,
-        [field]: false,
-      }));
+      setCompanyErrors((prev) => ({ ...prev, [field]: false }));
     }
   };
 
-  // Handle delegate data changes
   const handleDelegateChange = (delegateId, field, value) => {
     setDelegates((prev) =>
       prev.map((delegate) =>
         delegate.id === delegateId ? { ...delegate, [field]: value } : delegate
       )
     );
-
-    // Clear validation error for this field
     if (submitAttempted) {
       const errorKey = `delegate_${delegateId}_${field}`;
       if (value.trim() !== "" || (field === "email" && isValidEmail(value))) {
-        setDelegateErrors((prev) => ({
-          ...prev,
-          [errorKey]: false,
-        }));
+        setDelegateErrors((prev) => ({ ...prev, [errorKey]: false }));
       }
     }
   };
 
-  // Add new delegate (copy of first delegate structure)
   const addDelegate = () => {
     const newDelegateId = delegateCount + 1;
     const newDelegate = {
@@ -125,25 +150,21 @@ const AddSponsorDelegateForm = () => {
       email: "",
       mobile: "",
     };
-
     setDelegates((prev) => [...prev, newDelegate]);
     setDelegateCount(newDelegateId);
   };
 
-  // Remove delegate
   const removeDelegate = (delegateId) => {
     setDelegates((prev) =>
       prev.filter((delegate) => delegate.id !== delegateId)
     );
   };
 
-  // Form validation
   const validateForm = () => {
     const newCompanyErrors = {};
     const newDelegateErrors = {};
     let isValid = true;
 
-    // Validate company data
     const requiredCompanyFields = [
       "companyName",
       "address",
@@ -160,7 +181,6 @@ const AddSponsorDelegateForm = () => {
       }
     });
 
-    // Validate delegates
     delegates.forEach((delegate) => {
       const requiredDelegateFields = [
         "firstName",
@@ -169,7 +189,6 @@ const AddSponsorDelegateForm = () => {
         "email",
         "mobile",
       ];
-
       requiredDelegateFields.forEach((field) => {
         const errorKey = `delegate_${delegate.id}_${field}`;
         if (!delegate[field] || !delegate[field].trim()) {
@@ -184,7 +203,6 @@ const AddSponsorDelegateForm = () => {
       });
     });
 
-    // Validate terms agreement
     if (!termsAgreement) {
       setTermsError(true);
       isValid = false;
@@ -198,13 +216,11 @@ const AddSponsorDelegateForm = () => {
     return isValid;
   };
 
-  // Email validation helper
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitAttempted(true);
@@ -217,11 +233,6 @@ const AddSponsorDelegateForm = () => {
       };
       console.log("formData: ", formData);
 
-      // const invoiceNumber = `WDRM25TBC-${Math.floor(
-      //   1000 + Math.random() * 9000
-      // )}`;
-
-      // ADD THIS ✅
       let invoiceNumber;
       try {
         const invoiceRes = await fetch(
@@ -230,17 +241,16 @@ const AddSponsorDelegateForm = () => {
         const invoiceData = await invoiceRes.json();
         invoiceNumber = invoiceData.invoiceNo;
       } catch (error) {
-        console.error("❌ Failed to generate invoice number:", error);
+        console.error("âŒ Failed to generate invoice number:", error);
         alert("Could not generate invoice number. Please try again.");
-        return; // Stop submission if invoice generation fails
+        return;
       }
 
-      // Static values
       const disposition = "Confirmed";
       const emailStatus = "Confirmed Old";
 
-      setSubmitBtnCheck(true)
-      // Function to submit to HubSpot (no delay)
+      setSubmitBtnCheck(true);
+
       async function submitCompanyDelegatesToHubSpot(formData) {
         const submissions = formData.delegates.map(async (delegate) => {
           const payload = {
@@ -266,7 +276,6 @@ const AddSponsorDelegateForm = () => {
               pageName: document.title,
             },
           };
-
           try {
             const response = await fetch(
               `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`,
@@ -278,23 +287,19 @@ const AddSponsorDelegateForm = () => {
             );
             const result = await response.json();
             console.log(
-              `✅ Submitted ${delegate.firstName} ${delegate.lastName}:`,
+              `âœ… Submitted ${delegate.firstName} ${delegate.lastName}:`,
               result
             );
           } catch (error) {
-            console.error(`❌ Error submitting ${delegate.firstName}:`, error);
+            console.error(`âŒ Error submitting ${delegate.firstName}:`, error);
           }
         });
-
-        // Run all submissions simultaneously
         await Promise.all(submissions);
-
-        console.log(`🎟️ Company: ${formData.company.companyName}`);
-        console.log(`🧾 Invoice Number: ${invoiceNumber}`);
+        console.log(`ðŸŽŸï¸ Company: ${formData.company.companyName}`);
+        console.log(`ðŸ§¾ Invoice Number: ${invoiceNumber}`);
       }
-      // Function to send email
+
       async function sendBookingEmail() {
-        // Build HTML content for email
         let htmlContent = `
         <div style='width: 60%; background-color: transparent; color: black;'>
           <table style='width: 100%; border-collapse: collapse;'>
@@ -308,8 +313,6 @@ const AddSponsorDelegateForm = () => {
             <tr><td style='width: 50%; padding: 8px;'>State:</td><td style='width: 50%; padding: 8px;'>${companyData.state}</td></tr>
             <tr><td style='width: 50%; padding: 8px;'>Invoice no:</td><td style='width: 50%; padding: 8px;'>${invoiceNumber}</td></tr>
       `;
-
-        // Add each delegate
         delegates.forEach((delegate, index) => {
           htmlContent += `
             <tr><td colspan='2' style='font-weight: bold; padding: 8px; background-color: #f0f0f0;'>Delegate ${index + 1} Details:</td></tr>
@@ -320,21 +323,14 @@ const AddSponsorDelegateForm = () => {
             <tr><td style='width: 50%; padding: 8px;'>Position:</td><td style='width: 50%; padding: 8px;'>${delegate.position}</td></tr>
         `;
         });
+        htmlContent += `</table></div>`;
 
-        htmlContent += `
-          </table>
-        </div>
-      `;
-
-        // Prepare email payload
         const emailPayload = {
-          // toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
           toemail: toEmails,
           cc: "",
           subject: "BIME - Sponsor Booking Form Step 1",
           html: htmlContent,
         };
-
         try {
           const emailResponse = await fetch(
             "https://harsh7541.pythonanywhere.com/admin1/sendmail",
@@ -342,58 +338,57 @@ const AddSponsorDelegateForm = () => {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(emailPayload),
-            },
+            }
           );
-
           const emailResult = await emailResponse.json();
-
           if (emailResult.status === "success") {
-            console.log("✅ Email sent successfully");
+            console.log("âœ… Email sent successfully");
           } else {
-            console.error("❌ Email sending failed:", emailResult.message);
+            console.error("âŒ Email sending failed:", emailResult.message);
           }
         } catch (error) {
-          console.error("❌ Error sending email:", error);
+          console.error("âŒ Error sending email:", error);
         }
       }
 
       try {
-        // Run HubSpot submission, email sending, and Zoho in parallel
         await Promise.all([
           submitCompanyDelegatesToHubSpot(formData),
           sendBookingEmail(),
-          // submitToZoho(),
         ]);
-        // Navigate to booking-form after both complete
-        navigate("/sponsor-booking", {
-          state: {
-            selectedPackage: selectedPackage,
-            companyData: companyData,
-            delegates: delegates,
-            termsAgreement: termsAgreement,
-            uniqueInvoiceNo: invoiceNumber,
-          },
+        console.log('selectedPackage', selectedPackage);
+        console.log('companyData', companyData);
+        console.log('delegates', delegates);
+        console.log('termsAgreement', termsAgreement);
+        console.log('invoiceNumber', invoiceNumber);
+
+        // â”€â”€ Instead of navigating, store the data and show Step 2 inline â”€â”€
+        setStep2Data({
+          selectedPackage: selectedPackage,
+          companyData: companyData,
+          delegates: delegates,
+          termsAgreement: termsAgreement,
+          uniqueInvoiceNo: invoiceNumber,
         });
+        setShowStep2(true);
+        setSubmitBtnCheck(false);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (error) {
-        setSubmitBtnCheck(false)
-        console.error("❌ Error in submission process:", error);
-        // Optionally show error message to user
+        setSubmitBtnCheck(false);
+        console.error("âŒ Error in submission process:", error);
         alert("There was an error submitting your booking. Please try again.");
       }
     }
   };
 
-  // Helper function to get delegate field error
   const getDelegateFieldError = (delegateId, field) => {
     const errorKey = `delegate_${delegateId}_${field}`;
     return submitAttempted && delegateErrors[errorKey];
   };
 
-  // Helper function to get delegate field error message
   const getDelegateFieldErrorMessage = (delegateId, field) => {
     const hasError = getDelegateFieldError(delegateId, field);
     if (!hasError) return "";
-
     switch (field) {
       case "firstName":
         return "First name is required";
@@ -415,6 +410,836 @@ const AddSponsorDelegateForm = () => {
         return "";
     }
   };
+
+  // â”€â”€â”€ Step 2 handlers & helpers (migrated logic) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  const numDelegates = delegates?.length;
+  const sponsorPackageDelegateQty = parseInt(selectedPackage?.delegatePassQty);
+  let additionalDelegates = 0;
+  if (numDelegates > sponsorPackageDelegateQty) {
+    additionalDelegates = numDelegates - sponsorPackageDelegateQty;
+  }
+
+  useEffect(() => {
+    if (showStep2) {
+      callSponsorAddOnsApi();
+      callGetActiveDelPackageApi();
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, [showStep2]);
+
+  const handlePaymentClick = async () => {
+    const prices = calculatePrices();
+    if (!prices.finalTotal || parseFloat(prices.finalTotal) <= 0) {
+      toast.error("Invalid payment amount.");
+      return;
+    }
+    if (!delegates || delegates.length === 0) {
+      toast.error("No delegates found. Please go back and add delegate information.");
+      return;
+    }
+
+    async function sendStep2Email() {
+      const prices = calculatePrices();
+      console.log("🛒 Selected Add-Ons for Step 2 Email:", selectedAddOns);
+      let step2Html = `
+      <h3>Sponsor Booking Form Step 2</h3>
+      <div style='width: 60%; background-color: transparent; color: black;'>
+        <table style='width: 100%; border-collapse: collapse;'>
+          <tr><td style='width: 50%; padding: 8px;'>Delegate pass ${delegates.length}:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName || ""} ${prices.initialPrice}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Discount:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName || ""} ${prices.discountAmount}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Taxes and Service Charges:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName || ""} ${prices.taxAmount} (${eventGeneralSettings?.purchaseTaxPercantage || eventGeneralSettings?.purchaseTaxPercent || 0}%)</td></tr>
+          <tr><td colspan='2' style='font-weight: bold; padding: 8px;'>Add Ons:</td></tr>
+    `;
+      if (selectedAddOns && selectedAddOns.length > 0) {
+        selectedAddOns.forEach((addOn) => {
+          step2Html += `<tr><td style='width: 50%; padding: 8px;'>${addOn.sponsorAddOnName || "Add-on"}:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName || ""} ${addOn.sponsorAddOnPrice || 0}</td></tr>`;
+        });
+      }
+      step2Html += `
+          <tr><td style='width: 50%; padding: 8px; font-weight: 700;'>Total Amount:</td><td style='width: 35%; padding: 8px; font-weight: 700;'>${eventGeneralSettings?.currencyName || ""} ${prices.finalTotal}</td></tr>
+        </table>
+      </div>
+      <hr style='border:none; height: 2px; background-color: #7c7c7c; margin: 20px 0;'>
+      <h3 style='margin-top: 7px;'>Booking Form Step 1</h3>
+      <div style='width: 60%; background-color: transparent; color: black;'>
+        <table style='width: 100%; border-collapse: collapse;'>
+          <tr><td colspan='2' style='font-weight: bold; padding: 8px; background-color: #f0f0f0;'>Company Details</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Company Name:</td><td style='width: 50%; padding: 8px;'>${companyData?.companyName || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Web Address:</td><td style='width: 50%; padding: 8px;'>${companyData?.webAddress || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Address:</td><td style='width: 50%; padding: 8px;'>${companyData?.address || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>City:</td><td style='width: 50%; padding: 8px;'>${companyData?.city || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Country:</td><td style='width: 50%; padding: 8px;'>${companyData?.country || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Postal Code:</td><td style='width: 50%; padding: 8px;'>${companyData?.postalCode || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>State:</td><td style='width: 50%; padding: 8px;'>${companyData?.state || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Invoice no:</td><td style='width: 50%; padding: 8px;'>${step2Data?.uniqueInvoiceNo || ""}</td></tr>
+    `;
+      delegates.forEach((delegate, index) => {
+        step2Html += `
+          <tr><td colspan='2' style='font-weight: bold; padding: 8px; background-color: #f0f0f0;'>Delegate ${index + 1} Details:</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Email:</td><td style='width: 50%; padding: 8px;'>${delegate.email || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>First Name:</td><td style='width: 50%; padding: 8px;'>${delegate.firstName || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Last Name:</td><td style='width: 50%; padding: 8px;'>${delegate.lastName || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Phone Number:</td><td style='width: 50%; padding: 8px;'>${delegate.mobile || ""}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Position:</td><td style='width: 50%; padding: 8px;'>${delegate.position || ""}</td></tr>
+      `;
+      });
+      step2Html += `</table></div>`;
+
+      const emailPayload = {
+        toemail: toEmails,
+        cc: "",
+        subject: "BIME - Sponsor Booking Form Step 2",
+        html: step2Html,
+      };
+      console.log("📧 Sending Step 2 email with payload:", emailPayload);
+      try {
+        const emailResponse = await fetch("https://harsh7541.pythonanywhere.com/admin1/sendmail", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(emailPayload),
+        });
+        if (emailResponse.ok) {
+          const emailResult = await emailResponse.json();
+          console.log("✅ Step 2 Email result:", emailResult);
+        } else {
+          const errorText = await emailResponse.text();
+          console.error(`❌ Email Step 2 failed with status ${emailResponse.status}:`, errorText);
+        }
+      } catch (error) {
+        console.error("❌ Error sending Step 2 email:", error);
+      }
+    }
+
+    try {
+      sendStep2Email().catch((err) => console.error("Email error:", err));
+      if (paymentFormRef.current) {
+        await paymentFormRef.current.submitPayment();
+      } else {
+        toast.error("Payment form is not ready. Please try again.");
+      }
+    } catch (error) {
+      console.error("❌ Error in payment process:", error);
+      toast.error("An error occurred during payment. Please try again.");
+    }
+  };
+
+  const handlePaymentSuccess = async (stripeResponse) => {
+    const prices = calculatePrices();
+    async function sendStep3Email() {
+      console.log("🛒 Selected Add-Ons for Step 3 Email:", selectedAddOns);
+      let step3Html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background-color: #ffffff; padding: 30px; border-radius: 8px; }
+        h2 { color: #333; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
+        h3 { color: #555; margin-top: 25px; margin-bottom: 15px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        td { padding: 10px 8px; border-bottom: 1px solid #e0e0e0; }
+        .label { width: 50%; color: #666; font-weight: 500; }
+        .value { width: 50%; color: #333; }
+        .section-header { background-color: #f0f0f0; font-weight: bold; color: #333; padding: 12px 8px !important; }
+        .total-row { font-weight: 700; font-size: 16px; background-color: #f9f9f9; }
+        .divider { border: none; height: 2px; background-color: #7c7c7c; margin: 30px 0; }
+        .invoice-header { display: flex; justify-content: space-between; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e0e0e0; }
+        .invoice-label { font-weight: 600; color: #666; }
+        .invoice-value { font-weight: 700; color: #333; }
+        .success-badge { background-color: #4CAF50; color: white; padding: 8px 16px; border-radius: 4px; display: inline-block; margin-bottom: 20px; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-badge">Payment Successful</div>
+        <h2>Sponsor Booking Form Step 3</h2>
+        <div class="invoice-header">
+            <span class="invoice-label">Invoice No:</span>
+            <span class="invoice-value">${step2Data?.uniqueInvoiceNo || ""}</span>
+        </div>
+        <div class="invoice-header">
+            <span class="invoice-label">Transaction ID:</span>
+            <span class="invoice-value">${stripeResponse.paymentIntentId || ""}</span>
+        </div>
+        <h2>Booking Form Step 2</h2>
+        <table>
+            <tr><td class="label">Delegate pass ${delegates.length}:</td><td class="value">${eventGeneralSettings?.currencyName || ""} ${prices.initialPrice}</td></tr>
+            <tr><td class="label">Discount:</td><td class="value">${eventGeneralSettings?.currencyName || ""} ${prices.discountAmount}</td></tr>
+            <tr><td class="label">Taxes and Service Charges (${eventGeneralSettings?.purchaseTaxPercantage || eventGeneralSettings?.purchaseTaxPercent || 0}%):</td><td class="value">${eventGeneralSettings?.currencyName || ""} ${prices.taxAmount}</td></tr>
+            <tr><td colspan="2" class="section-header">Add Ons:</td></tr>
+    `;
+      if (selectedAddOns && selectedAddOns.length > 0) {
+        selectedAddOns.forEach((addOn) => {
+          step3Html += `<tr><td class="label">${addOn.sponsorAddOnName || "Add-on"}:</td><td class="value">${eventGeneralSettings?.currencyName || ""} ${addOn.sponsorAddOnPrice || 0}</td></tr>`;
+        });
+      } else {
+        step3Html += `<tr><td colspan="2" style="padding: 8px; color: #999; font-style: italic;">No add-ons selected</td></tr>`;
+      }
+      step3Html += `
+            <tr class="total-row"><td class="label">Total Amount Paid:</td><td class="value">${eventGeneralSettings?.currencyName || ""} ${prices.finalTotal}</td></tr>
+        </table>
+        <hr class="divider">
+        <h2>Booking Form Step 1</h2>
+        <h3>Company Details</h3>
+        <table>
+            <tr><td class="label">Company Name:</td><td class="value">${companyData?.companyName || ""}</td></tr>
+            <tr><td class="label">Web Address:</td><td class="value">${companyData?.webAddress || ""}</td></tr>
+            <tr><td class="label">Address:</td><td class="value">${companyData?.address || ""}</td></tr>
+            <tr><td class="label">City:</td><td class="value">${companyData?.city || ""}</td></tr>
+            <tr><td class="label">Country:</td><td class="value">${companyData?.country || ""}</td></tr>
+            <tr><td class="label">Postal Code:</td><td class="value">${companyData?.postalCode || ""}</td></tr>
+            <tr><td class="label">State:</td><td class="value">${companyData?.state || ""}</td></tr>
+            <tr><td class="label">Invoice no:</td><td class="value">${step2Data?.uniqueInvoiceNo || ""}</td></tr>
+        </table>
+    `;
+      delegates.forEach((delegate, index) => {
+        step3Html += `
+        <h3>Delegate ${index + 1} Details</h3>
+        <table>
+            <tr><td class="label">Email:</td><td class="value">${delegate.email || ""}</td></tr>
+            <tr><td class="label">First Name:</td><td class="value">${delegate.firstName || ""}</td></tr>
+            <tr><td class="label">Last Name:</td><td class="value">${delegate.lastName || ""}</td></tr>
+            <tr><td class="label">Phone Number:</td><td class="value">${delegate.mobile || ""}</td></tr>
+            <tr><td class="label">Position:</td><td class="value">${delegate.position || ""}</td></tr>
+        </table>
+      `;
+      });
+      step3Html += `
+        <div style="margin-top: 30px; padding: 20px; background-color: #f0f0f0; border-radius: 4px;">
+            <p style="margin: 0; color: #666; font-size: 14px;">Thank you for your booking! If you have any questions, please contact us.</p>
+        </div>
+    </div>
+</body>
+</html>`;
+
+      const emailPayload = {
+        toemail: toEmails,
+        cc: "",
+        subject: "BIME - Sponsor Booking Confirmation - Payment Successful",
+        html: step3Html,
+      };
+      console.log("📧 Sending Step 3 email with payload:", emailPayload);
+      try {
+        const emailResponse = await fetch("https://harsh7541.pythonanywhere.com/admin1/sendmail", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(emailPayload),
+        });
+        if (emailResponse.ok) {
+          const emailResult = await emailResponse.json();
+          return { success: emailResult.status === "success" };
+        } else {
+          const errorText = await emailResponse.text();
+          console.error(`❌ Email Step 3 failed with status ${emailResponse.status}:`, errorText);
+          return { success: false, error: `Server error ${emailResponse.status}` };
+        }
+      } catch (error) {
+        console.error("❌ Error sending Step 3 email:", error);
+        return { success: false, error: error.message };
+      }
+    }
+
+    try {
+      const finalData = new FormData();
+      finalData.append("sponsorPackageTypeId", selectedPackage?.id);
+      finalData.append("companyName", companyData?.companyName);
+      finalData.append("companyWebsite", companyData?.webAddress);
+      finalData.append("companyAddress", companyData?.address);
+      finalData.append("companyCountry", companyData?.country);
+      finalData.append("companyState", companyData?.state);
+      finalData.append("companyCity", companyData?.city);
+      finalData.append("companyPincode", companyData?.postalCode);
+      finalData.append("delegateList", JSON.stringify(delegates));
+      if (selectedAddOns && selectedAddOns.length > 0) {
+        finalData.append("addOns", JSON.stringify(selectedAddOns));
+      }
+      if (discountCode !== "" && discountCode !== null) {
+        finalData.append("couponCode", discountCode);
+      }
+      finalData.append("totalPassAmount", prices.initialPrice);
+      finalData.append("additionalDelegateAmoount", prices.additionalDelegatePrice);
+      finalData.append("discountAmount", prices.discountAmount);
+      finalData.append("addOnsAmount", prices.addOnsTotal);
+      finalData.append("taxableCharge", prices.taxAmount);
+      finalData.append("totalPaidAmount", prices.finalTotal);
+      finalData.append("transectionId", stripeResponse.paymentIntentId);
+
+      fetch("https://harsh7541.pythonanywhere.com/admin1/addnewsponsor", {
+        method: "POST",
+        body: finalData
+      })
+        .then((response) => response.json())
+        .then(async (data) => {
+          if (data.status) {
+            await sendStep3Email();
+            toast.success("Payment completed successfully!");
+            navigate("/thank-you", { state: { authorized: true } });
+          } else {
+            toast.error(data?.message);
+          }
+        })
+        .catch((error) => {
+          console.error("error: ", error);
+          toast.error("There was an error saving booking.");
+        });
+    } catch (err) {
+      console.error("Error saving booking:", err);
+    }
+  };
+
+  const handlePaymentError = (error) => {
+    console.error("Payment failed:", error);
+    toast.error(`Payment failed: ${error}`);
+  };
+
+  const callSponsorAddOnsApi = () => {
+    fetch(`https://harsh7541.pythonanywhere.com/admin1/sponsoraddons`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.status) {
+          const allAddOns = data["sponsorPackageAddOns"];
+          setSponsorAddOns(allAddOns);
+
+          const groupByType = (addOns) => {
+            const grouped = {};
+            addOns.forEach((addon) => {
+              const typeId = addon.addOnTypeDetails.id;
+              const typeName = addon.addOnTypeDetails.addOnTypeName;
+              if (!grouped[typeId]) {
+                grouped[typeId] = {
+                  addOnTypeDetails: { id: typeId, addOnTypeName: typeName },
+                  subAddons: [],
+                };
+              }
+              grouped[typeId].subAddons.push({
+                id: addon.id,
+                sponsorAddOnName: addon.sponsorAddOnName,
+                sponsorAddOnPrice: addon.sponsorAddOnPrice,
+              });
+            });
+            return Object.values(grouped);
+          };
+
+          const marketingLiteratureAddOns = allAddOns.filter(
+            (addon) =>
+              addon.addOnTypeDetails.addOnTypeName === "Pre-event Marketing Add-ons" ||
+              addon.addOnTypeDetails.addOnTypeName === "Literature Distribution Add-ons"
+          );
+          const sessionOnSiteAddOns = allAddOns.filter(
+            (addon) =>
+              addon.addOnTypeDetails.addOnTypeName === "Session Branding Add-ons" ||
+              addon.addOnTypeDetails.addOnTypeName === "On Site Branding Add-ons"
+          );
+          setMarketingAndLiterature(groupByType(marketingLiteratureAddOns));
+          setSessionAndOnSite(groupByType(sessionOnSiteAddOns));
+        }
+      });
+  };
+
+  const callGetActiveDelPackageApi = () => {
+    fetch(`https://harsh7541.pythonanywhere.com/admin1/getactivedelegatepackage`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.status) {
+          setActiveDelPackageData(data["activeDelegatePackage"]);
+        }
+      });
+  };
+
+  const handleAddOnChange = (addOn, isChecked) => {
+    if (isChecked) {
+      setSelectedAddOns([...selectedAddOns, addOn]);
+    } else {
+      setSelectedAddOns(selectedAddOns.filter((item) => item.id !== addOn.id));
+    }
+  };
+
+  const applyDiscountCode = (codeOverride) => {
+    const code = (codeOverride ?? discountCode).trim();
+    if (!code) {
+      setDiscountData("");
+      setDiscountPercent(0);
+      return;
+    }
+    let formData = new FormData();
+    formData.append("couponCode", code);
+    fetch(`https://harsh7541.pythonanywhere.com/admin1/sponsoroffercouponbycode`, {
+      method: "POST",
+      body: formData
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.status) {
+          const returnedCoupon = data["offerCoupons"]?.[0];
+          if (returnedCoupon?.couponCode?.toUpperCase().trim() === code.toUpperCase().trim()) {
+            setDiscountData(data["offerCoupons"]);
+            setDiscountPercent(returnedCoupon?.discountAmount);
+          } else {
+            setDiscountData("");
+            setDiscountPercent(0);
+          }
+        } else {
+          setDiscountData("");
+          setDiscountPercent(0);
+        }
+      })
+      .catch(() => {
+        toast.error("There was an error, Please try again later.");
+      });
+  };
+
+  const calculatePrices = () => {
+    const packagePrice = parseFloat(selectedPackage?.sponsorPackagePrice || 0);
+    const additionalDelegatePrice = additionalDelegates * parseFloat(activeDelPackageData[0]?.deligatePackagePrice || 0);
+    const taxPercent = parseFloat(eventGeneralSettings?.purchaseTaxPercantage || eventGeneralSettings?.purchaseTaxPercent || 0);
+    const sponsorPackagePrice = packagePrice;
+    const discountAmount = additionalDelegates > 0 ? (additionalDelegatePrice * discountPercent) / 100 : 0;
+    const additionalDelegatePriceAfterDiscount = additionalDelegatePrice - discountAmount;
+    const addOnsTotal = selectedAddOns.reduce((sum, addOn) => sum + parseFloat(addOn.sponsorAddOnPrice || 0), 0);
+    const taxOnSponsorPackage = (sponsorPackagePrice * taxPercent) / 100;
+    const taxOnAdditionalDelegates = (additionalDelegatePriceAfterDiscount * taxPercent) / 100;
+    const taxOnAddOns = (addOnsTotal * taxPercent) / 100;
+    const taxAmount = taxOnSponsorPackage + taxOnAdditionalDelegates + taxOnAddOns;
+    const initialPrice = sponsorPackagePrice + additionalDelegatePrice;
+    const finalTotal = sponsorPackagePrice + additionalDelegatePriceAfterDiscount + addOnsTotal + taxAmount;
+
+    return {
+      initialPrice: initialPrice.toFixed(2),
+      sponsorPackagePrice: sponsorPackagePrice.toFixed(2),
+      additionalDelegatePrice: additionalDelegatePrice.toFixed(2),
+      discountAmount: discountAmount.toFixed(2),
+      additionalDelegatePriceAfterDiscount: additionalDelegatePriceAfterDiscount.toFixed(2),
+      addOnsTotal: addOnsTotal.toFixed(2),
+      taxAmount: taxAmount.toFixed(2),
+      finalTotal: finalTotal.toFixed(2),
+    };
+  };
+
+  const prices = calculatePrices();
+  const companyDetails = companyData;
+
+  const OrderSummary = () => (
+    <>
+      <div className="SponsorFormV2_ticket__7LJV6">
+        <p>{delegates?.length} Ticket</p>
+        <p>
+          {eventGeneralSettings?.currencyName || ""}{" "}
+          {numDelegates > sponsorPackageDelegateQty
+            ? prices.additionalDelegatePrice
+            : selectedPackage?.sponsorPackagePrice}
+        </p>
+      </div>
+      <div className="SponsorFormV2_inputContainer__shBEi">
+        <div>
+          <input
+            ref={discountInputRef}
+            type="text"
+            placeholder="Discount Code"
+            value={discountCode}
+            onChange={(e) => {
+              const upperValue = e.target.value.toUpperCase();
+              setDiscountCode(upperValue);
+              if (upperValue.trim() === "") {
+                setDiscountData("");
+                setDiscountPercent(0);
+              } else {
+                applyDiscountCode(upperValue);
+              }
+              setTimeout(() => discountInputRef.current?.focus(), 0);
+            }}
+          />
+        </div>
+      </div>
+      <div className="SponsorFormV2_summary__wdcGC">
+        <div className="SponsorFormV2_toggle__Weatl">
+          <img
+            src={toggle}
+            alt="toggle icon"
+            style={{ cursor: "pointer", transform: "rotate3D(0deg)" }}
+          />
+        </div>
+        <div className="SponsorFormV2_table__wnZwq">
+          <div>
+            <h3>Total</h3>
+            <h3>
+              {eventGeneralSettings?.currencyName || ""} {prices.finalTotal}
+            </h3>
+          </div>
+          <div>
+            <p>Delegate pass x {sponsorPackageDelegateQty}</p>
+            <p>
+              {eventGeneralSettings?.currencyName || ""}{" "}
+              {selectedPackage?.sponsorPackagePrice}
+            </p>
+          </div>
+          <div>
+            <p>Discount {discountPercent > 0 && `(${discountPercent}%)`}</p>
+            <p>
+              -{eventGeneralSettings?.currencyName || ""} {prices.discountAmount}
+            </p>
+          </div>
+          {numDelegates > sponsorPackageDelegateQty && (
+            <div>
+              <p>Additional Delegate x {additionalDelegates}</p>
+              <p>
+                {eventGeneralSettings?.currencyName || ""}{" "}
+                {prices.additionalDelegatePrice}
+              </p>
+            </div>
+          )}
+          <div>
+            <p>Add-ons</p>
+            <p>
+              {eventGeneralSettings?.currencyName || ""} {prices.addOnsTotal}
+            </p>
+          </div>
+          <div>
+            <p>
+              Taxes and Service Charges (
+              {eventGeneralSettings?.purchaseTaxPercantage || eventGeneralSettings?.purchaseTaxPercent}%)
+            </p>
+            <p>
+              {eventGeneralSettings?.currencyName || ""} {prices.taxAmount}
+            </p>
+          </div>
+        </div>
+        <span>
+          <h3>Total</h3>
+          <h3>
+            {eventGeneralSettings?.currencyName || ""} {prices.finalTotal}
+          </h3>
+        </span>
+      </div>
+    </>
+  );
+
+  const TicketSVG = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      id="Layer_2"
+      data-name="Layer 2"
+      viewBox="0 0 547.3 167.88"
+    >
+      <defs></defs>
+      <g id="_3" data-name="3">
+        <g>
+          <path
+            class="cls-2"
+            fill="var(--secondary-color)"
+            d="m418.69,10.18v147.51c0,5.62-6.23,10.19-13.89,10.19H13.89c-7.66,0-13.89-4.57-13.89-10.19v-54.29h.12c10.75,0,19.46-8.71,19.46-19.46S10.87,64.47.12,64.47h-.12V10.18C0,4.56,6.23,0,13.89,0h390.91c7.66,0,13.89,4.56,13.89,10.18Z"
+          ></path>
+          <path
+            class="cls-4"
+            fill="var(--primary-color)"
+            d="m533.41,0h-100.84c-7.66,0-13.89,4.57-13.89,10.19v147.51c0,5.62,6.22,10.19,13.89,10.19h100.84c7.66,0,13.89-4.57,13.89-10.19V10.19c0-5.62-6.22-10.19-13.89-10.19h0Z"
+          ></path>
+          <path
+            class="cls-2"
+            fill="var(--secondary-color)"
+            d="m470.86,22.07v6.05h37.59v-6.05h-37.59Zm-6.85,120.32c-2.98,0-4.47.91-4.47,2.69s1.49,2.74,4.47,2.74,4.51-.91,4.51-2.74-1.48-2.69-4.51-2.69Zm2.81,3.89c-.53.29-1.49.43-2.81.43s-2.29-.14-2.82-.43c-.53-.29-.8-.67-.8-1.2s.27-.91.8-1.2c.53-.24,1.49-.39,2.82-.39s2.28.15,2.81.39c.53.29.8.67.8,1.2s-.27.91-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.91-4.47,2.74s1.49,2.69,4.47,2.69,4.51-.92,4.51-2.69-1.48-2.74-4.51-2.74Zm2.81,3.94c-.53.24-1.49.38-2.81.38s-2.29-.14-2.82-.38c-.53-.29-.8-.68-.8-1.2s.27-.96.8-1.2c.53-.29,1.49-.44,2.82-.44s2.28.15,2.81.44c.53.24.8.67.8,1.2s-.27.91-.8,1.2Zm-2.81-10.38c-2.98,0-4.47.87-4.47,2.69s1.49,2.69,4.47,2.69,4.51-.86,4.51-2.69-1.48-2.69-4.51-2.69Zm2.81,3.89c-.53.29-1.49.39-2.81.39s-2.29-.1-2.82-.39c-.53-.28-.8-.67-.8-1.2s.27-.91.8-1.2c.53-.24,1.49-.38,2.82-.38s2.28.14,2.81.38c.53.29.8.68.8,1.2s-.27.92-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.92-4.47,2.69s1.49,2.74,4.47,2.74,4.51-.91,4.51-2.74-1.48-2.69-4.51-2.69Zm2.81,3.89c-.53.29-1.49.43-2.81.43s-2.29-.14-2.82-.43c-.53-.24-.8-.67-.8-1.2s.27-.91.8-1.15c.53-.29,1.49-.43,2.82-.43s2.28.14,2.81.43c.53.24.8.62.8,1.15s-.27.96-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.92-4.47,2.74s1.49,2.69,4.47,2.69,4.51-.92,4.51-2.69-1.48-2.74-4.51-2.74Zm2.81,3.94c-.53.24-1.49.38-2.81.38s-2.29-.14-2.82-.38c-.53-.29-.8-.67-.8-1.2s.27-.91.8-1.2,1.49-.43,2.82-.43,2.28.14,2.81.43c.53.29.8.67.8,1.2s-.27.91-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.91-4.47,2.69s1.49,2.73,4.47,2.73,4.51-.91,4.51-2.73-1.48-2.69-4.51-2.69Zm2.81,3.89c-.53.29-1.49.43-2.81.43s-2.29-.14-2.82-.43c-.53-.29-.8-.68-.8-1.2s.27-.91.8-1.2c.53-.24,1.49-.39,2.82-.39s2.28.15,2.81.39c.53.29.8.67.8,1.2s-.27.91-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.91-4.47,2.73s1.49,2.69,4.47,2.69,4.51-.91,4.51-2.69-1.48-2.73-4.51-2.73Zm2.81,3.88c-.53.29-1.49.44-2.81.44s-2.29-.15-2.82-.44c-.53-.23-.8-.67-.8-1.15,0-.53.27-.96.8-1.2.53-.29,1.49-.43,2.82-.43s2.28.14,2.81.43c.53.24.8.67.8,1.2,0,.48-.27.92-.8,1.15Zm-2.81-10.32c-2.98,0-4.47.87-4.47,2.69s1.49,2.69,4.47,2.69,4.51-.86,4.51-2.69-1.48-2.69-4.51-2.69Zm2.81,3.89c-.53.29-1.49.39-2.81.39s-2.29-.1-2.82-.39-.8-.67-.8-1.2s.27-.91.8-1.2c.53-.29,1.49-.38,2.82-.38s2.28.09,2.81.38c.53.29.8.67.8,1.2s-.27.91-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.91-4.47,2.69s1.49,2.74,4.47,2.74,4.51-.91,4.51-2.74-1.48-2.69-4.51-2.69Zm2.81,3.89c-.53.29-1.49.43-2.81.43s-2.29-.14-2.82-.43c-.53-.24-.8-.67-.8-1.2s.27-.91.8-1.15c.53-.29,1.49-.44,2.82-.44s2.28.15,2.81.44c.53.24.8.62.8,1.15s-.27.96-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.91-4.47,2.74s1.49,2.68,4.47,2.68,4.51-.91,4.51-2.68-1.48-2.74-4.51-2.74Zm2.81,3.94c-.53.24-1.49.38-2.81.38s-2.29-.14-2.82-.38c-.53-.29-.8-.68-.8-1.2s.27-.92.8-1.2c.53-.29,1.49-.44,2.82-.44s2.28.15,2.81.44c.53.28.8.67.8,1.2s-.27.91-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.86-4.47,2.68s1.49,2.74,4.47,2.74,4.51-.91,4.51-2.74-1.48-2.68-4.51-2.68Zm2.81,3.88c-.53.29-1.49.44-2.81.44s-2.29-.15-2.82-.44c-.53-.28-.8-.67-.8-1.2s.27-.91.8-1.2c.53-.24,1.49-.38,2.82-.38s2.28.14,2.81.38c.53.29.8.68.8,1.2s-.27.92-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.92-4.47,2.69s1.49,2.74,4.47,2.74,4.51-.91,4.51-2.74-1.48-2.69-4.51-2.69Zm2.81,3.89c-.53.29-1.49.43-2.81.43s-2.29-.14-2.82-.43c-.53-.24-.8-.67-.8-1.2,0-.48.27-.91.8-1.15.53-.29,1.49-.43,2.82-.43s2.28.14,2.81.43c.53.24.8.67.8,1.15,0,.53-.27.96-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.92-4.47,2.74s1.49,2.69,4.47,2.69,4.51-.87,4.51-2.69-1.48-2.74-4.51-2.74Zm2.81,3.94c-.53.24-1.49.38-2.81.38s-2.29-.14-2.82-.38c-.53-.29-.8-.67-.8-1.2s.27-.91.8-1.2c.53-.29,1.49-.39,2.82-.39s2.28.1,2.81.39c.53.29.8.67.8,1.2s-.27.91-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.91-4.47,2.69s1.49,2.73,4.47,2.73,4.51-.91,4.51-2.73-1.48-2.69-4.51-2.69Zm2.81,3.89c-.53.29-1.49.43-2.81.43s-2.29-.14-2.82-.43c-.53-.24-.8-.67-.8-1.2s.27-.92.8-1.2c.53-.24,1.49-.39,2.82-.39s2.28.15,2.81.39c.53.28.8.67.8,1.2s-.27.96-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.91-4.47,2.73s1.49,2.69,4.47,2.69,4.51-.91,4.51-2.69-1.48-2.73-4.51-2.73Zm2.81,3.93c-.53.25-1.49.39-2.81.39s-2.29-.14-2.82-.39c-.53-.28-.8-.67-.8-1.2s.27-.91.8-1.2c.53-.28,1.49-.43,2.82-.43s2.28.15,2.81.43c.53.24.8.67.8,1.2s-.27.92-.8,1.2Zm-2.81-10.37c-2.98,0-4.47.87-4.47,2.69s1.49,2.74,4.47,2.74,4.51-.91,4.51-2.74-1.48-2.69-4.51-2.69Zm2.81,3.89c-.53.29-1.49.39-2.81.39s-2.29-.1-2.82-.39c-.53-.28-.8-.67-.8-1.2s.27-.91.8-1.2c.53-.24,1.49-.38,2.82-.38s2.28.14,2.81.38c.53.29.8.67.8,1.2s-.27.92-.8,1.2Zm-7.12-9.7v1.16h1.22v-1.16h-1.22Zm7.6-8.4c-.85-.77-1.91-1.15-3.29-1.15s-2.4.38-3.25,1.15c-.79.72-1.22,1.68-1.22,2.83s.43,2.16,1.22,2.88c.85.73,1.92,1.11,3.25,1.11s2.44-.38,3.29-1.11c.8-.72,1.22-1.68,1.22-2.88s-.42-2.11-1.22-2.83Zm-.69,4.9c-.64.53-1.49.77-2.6.77s-1.97-.24-2.56-.77c-.63-.53-.95-1.25-.95-2.07s.32-1.49.95-2.01c.59-.53,1.49-.82,2.56-.82s1.96.29,2.6.82c.64.52.9,1.2.9,2.06s-.26,1.49-.9,2.02Zm1.75-14.02h-8.66v1.01h6.86l-6.86,4.37v1.15h8.66v-1.06h-6.85l6.85-4.37v-1.1Zm2.5,104.76v1.54h37.59v-1.54h-37.59Zm0,14.36v3.74h37.59v-3.74h-37.59Zm0,5.28v1.49h37.59v-1.49h-37.59Zm0-17.33v2.26h37.59v-2.26h-37.59Zm0,10.51v.77h37.59v-.77h-37.59Zm0-28.61v2.25h37.59v-2.25h-37.59Zm0,21.84v5.28h37.59v-5.28h-37.59Zm0-13.58v6.05h37.59v-6.05h-37.59Zm0-21.08v7.53h37.59v-7.53h-37.59Zm0-36.2v1.49h37.59v-1.49h-37.59Zm0,55.79v.76h37.59v-.76h-37.59Zm0-27.9v1.49h37.59v-1.49h-37.59Zm0,4.51v2.26h37.59v-2.26h-37.59Zm0-42.2v.72h37.59v-.72h-37.59Zm0-6.82v2.26h37.59v-2.26h-37.59Zm0-12.82v.77h37.59v-.77h-37.59Zm0-2.25v1.49h37.59v-1.49h-37.59Zm0,20.36v.76h37.59v-.76h-37.59Zm0,63.33v1.53h37.59v-1.53h-37.59Zm0-6.78v1.49h37.59v-1.49h-37.59Zm0-42.97v1.49h37.59v-1.49h-37.59Zm0,10.57v2.25h37.59v-2.25h-37.59Zm0-1.54v.77h37.59v-.77h-37.59Zm0,4.56v2.26h37.59v-2.26h-37.59Zm0,8.26v1.54h37.59v-1.54h-37.59Zm0-4.52v3.03h37.59v-3.03h-37.59Zm0-13.58v4.56h37.59v-4.56h-37.59Zm0-14.31v6.77h37.59v-6.77h-37.59Zm0-24.87v.72h37.59v-.72h-37.59Zm0,19.59v1.49h37.59v-1.49h-37.59Zm0-5.28v1.49h37.59v-1.49h-37.59Zm0-8.31v6.82h37.59v-6.82h-37.59Z"
+          ></path>
+          <path
+            class="cls-1"
+            d="m418.69,158.14v1.59h.54v-1.59h-.54Zm0-3.26v1.66h.54v-1.66h-.54Zm0-3.25v1.65h.54v-1.65h-.54Zm0-3.2v1.6h.54v-1.6h-.54Zm0-3.26v1.6h.54v-1.6h-.54Zm0-3.25v1.6h.54v-1.6h-.54Zm0-3.26v1.6h.54v-1.6h-.54Zm0-3.25v1.66h.54v-1.66h-.54Zm0-3.25v1.65h.54v-1.65h-.54Zm0-3.2v1.6h.54v-1.6h-.54Zm0-3.25v1.6h.54v-1.6h-.54Zm0-3.26v1.6h.54v-1.6h-.54Zm0-3.25v1.65h.54v-1.65h-.54Zm0-3.25v1.65h.54v-1.65h-.54Zm0-3.26v1.66h.54v-1.66h-.54Zm0-3.19v1.59h.54v-1.59h-.54Zm0-3.26v1.6h.54v-1.6h-.54Zm0-3.26v1.61h.54v-1.61h-.54Zm0-3.25v1.66h.54v-1.66h-.54Zm0-3.25v1.65h.54v-1.65h-.54Zm0-3.26v1.66h.54v-1.66h-.54Zm0-3.2v1.6h.54v-1.6h-.54Zm0-3.25v1.6h.54v-1.6h-.54Zm0-3.25v1.6h.54v-1.6h-.54Zm0-3.25v1.65h.54v-1.65h-.54Zm0-3.26v1.66h.54v-1.66h-.54Zm0-3.2v1.6h.54v-1.6h-.54Zm0-3.25v1.6h.54v-1.6h-.54Zm0-3.25v1.6h.54v-1.6h-.54Zm0-3.26v1.6h.54v-1.6h-.54Zm0-3.25v1.65h.54v-1.65h-.54Zm0-3.26v1.66h.54v-1.66h-.54Zm0-3.2v1.6h.54v-1.6h-.54Zm0-3.25v1.6h.54v-1.6h-.54Zm0-3.25v1.6h.54v-1.6h-.54Zm0-3.26v1.66h.54v-1.66h-.54Zm0-3.25v1.66h.54v-1.66h-.54Zm0-3.25v1.65h.54v-1.65h-.54Zm0-3.2v1.6h.54v-1.6h-.54Zm0-3.25v1.6h.54v-1.6h-.54Zm0-3.26v1.6h.54v-1.6h-.54Zm0-3.25v1.65h.54v-1.65h-.54Zm0-3.26v1.66h.54v-1.66h-.54Zm0-3.25v1.65h.54v-1.65h-.54Zm0-3.2v1.6h.54v-1.6h-.54Zm0-3.25v1.6h.54v-1.6h-.54Zm0-3.26v1.6h.54v-1.6h-.54Z"
+          ></path>
+        </g>
+        <g>
+          <path
+            class="cls-3"
+            fill="var(--primary-color)"
+            d="m145.27,122.48h-6.5v13.76h6.5c4.56,0,7.68-2.65,7.68-6.88s-3.12-6.88-7.68-6.88Zm-.16,10.65h-2.46v-7.55h2.46c2.34,0,3.91,1.4,3.91,3.77s-1.57,3.77-3.91,3.77Z"
+          ></path>
+          <path
+            class="cls-3"
+            fill="var(--primary-color)"
+            d="m160.01,125.41c-3.36,0-5.86,2.28-5.86,5.48s2.46,5.52,6.25,5.52c2.02,0,3.52-.59,4.54-1.73l-1.96-2.04c-.73.63-1.42.92-2.46.92-1.38,0-2.3-.63-2.61-1.71h7.74c.02-.29.06-.65.06-.92,0-3.52-2.55-5.52-5.7-5.52Zm-2.16,4.48c.22-1.12,1.02-1.83,2.18-1.83s1.98.71,2.18,1.83h-4.36Z"
+          ></path>
+          <rect
+            class="cls-3"
+            fill="var(--primary-color)"
+            x="167.44"
+            y="121.65"
+            width="3.73"
+            height="14.58"
+          ></rect>
+          <path
+            class="cls-3"
+            fill="var(--primary-color)"
+            d="m178.78,125.41c-3.36,0-5.86,2.28-5.86,5.48s2.46,5.52,6.25,5.52c2.02,0,3.52-.59,4.54-1.73l-1.96-2.04c-.73.63-1.42.92-2.46.92-1.38,0-2.3-.63-2.61-1.71h7.74c.02-.29.06-.65.06-.92,0-3.52-2.55-5.52-5.7-5.52Zm-2.16,4.48c.22-1.12,1.02-1.83,2.18-1.83s1.98.71,2.18,1.83h-4.36Z"
+          ></path>
+          <path
+            class="cls-3"
+            fill="var(--primary-color)"
+            d="m194.11,126.88c-.73-1-1.87-1.47-3.34-1.47-2.83,0-5.23,2-5.23,5.13s2.4,5.15,5.23,5.15c1.36,0,2.44-.41,3.16-1.26v.35c0,1.67-.85,2.57-2.85,2.57-1.26,0-2.71-.43-3.6-1.14l-1.36,2.61c1.3.92,3.24,1.39,5.29,1.39,3.97,0,6.25-1.91,6.25-5.93v-8.71h-3.56v1.3Zm-2.46,5.84c-1.34,0-2.34-.88-2.34-2.18s1-2.16,2.34-2.16,2.32.86,2.32,2.16-.98,2.18-2.32,2.18Z"
+          ></path>
+          <path
+            class="cls-3"
+            fill="var(--primary-color)"
+            d="m204.6,125.41c-1.67,0-3.48.43-4.7,1.24l1.26,2.54c.73-.57,1.87-.92,2.89-.92,1.47,0,2.2.61,2.26,1.69h-2.12c-3.3,0-4.74,1.22-4.74,3.18,0,1.85,1.42,3.28,3.97,3.28,1.55,0,2.61-.53,3.14-1.55v1.38h3.48v-5.92c0-3.38-1.98-4.91-5.44-4.91Zm1.71,7.41c-.29.85-1.02,1.24-1.85,1.24-.88,0-1.4-.45-1.4-1.08s.43-1.08,1.63-1.08h1.61v.92Z"
+          ></path>
+          <path
+            class="cls-3"
+            fill="var(--primary-color)"
+            d="m217.69,133.53c-.67,0-1.12-.43-1.12-1.22v-3.54h2.44v-2.79h-2.44v-2.77h-3.73v2.77h-1.55v2.79h1.55v3.58c0,2.73,1.59,4.07,4.32,4.07.98,0,1.95-.2,2.59-.61l-.92-2.61c-.31.22-.73.33-1.14.33Z"
+          ></path>
+          <path
+            class="cls-3"
+            fill="var(--primary-color)"
+            d="m226.06,125.41c-3.36,0-5.86,2.28-5.86,5.48s2.46,5.52,6.25,5.52c2.02,0,3.52-.59,4.54-1.73l-1.96-2.04c-.73.63-1.42.92-2.46.92-1.38,0-2.3-.63-2.61-1.71h7.74c.02-.29.06-.65.06-.92,0-3.52-2.55-5.52-5.7-5.52Zm-2.16,4.48c.22-1.12,1.02-1.83,2.18-1.83s1.98.71,2.18,1.83h-4.36Z"
+          ></path>
+          <path
+            class="cls-3"
+            fill="var(--primary-color)"
+            d="m245.68,122.48h-6.29v13.76h3.89v-3.6h2.4c3.75,0,6.11-1.95,6.11-5.07s-2.36-5.09-6.11-5.09Zm-.24,7.09h-2.16v-4.03h2.16c1.61,0,2.42.75,2.42,2.02s-.81,2-2.42,2Z"
+          ></path>
+          <path
+            class="cls-3"
+            fill="var(--primary-color)"
+            d="m257.94,125.41c-1.67,0-3.48.43-4.7,1.24l1.26,2.54c.73-.57,1.87-.92,2.89-.92,1.47,0,2.2.61,2.26,1.69h-2.12c-3.3,0-4.74,1.22-4.74,3.18,0,1.85,1.42,3.28,3.97,3.28,1.55,0,2.61-.53,3.14-1.55v1.38h3.48v-5.92c0-3.38-1.99-4.91-5.44-4.91Zm1.71,7.41c-.29.85-1.02,1.24-1.85,1.24-.88,0-1.4-.45-1.4-1.08s.43-1.08,1.63-1.08h1.61v.92Z"
+          ></path>
+          <path
+            class="cls-3"
+            fill="var(--primary-color)"
+            d="m268.61,128.81c0-.39.45-.75,1.71-.75.94,0,2,.2,3.07.79l1.12-2.54c-1.06-.59-2.71-.9-4.21-.9-3.34,0-5.19,1.53-5.19,3.54,0,4.26,6.29,2.63,6.29,4.07,0,.45-.41.73-1.67.73s-2.73-.37-3.71-.98l-1.12,2.55c1.04.65,2.91,1.1,4.72,1.1,3.46,0,5.27-1.53,5.27-3.5,0-4.23-6.27-2.63-6.27-4.11Z"
+          ></path>
+          <path
+            class="cls-3"
+            fill="var(--primary-color)"
+            d="m279.36,128.81c0-.39.45-.75,1.71-.75.94,0,2,.2,3.07.79l1.12-2.54c-1.06-.59-2.71-.9-4.21-.9-3.34,0-5.19,1.53-5.19,3.54,0,4.26,6.29,2.63,6.29,4.07,0,.45-.41.73-1.67.73s-2.73-.37-3.71-.98l-1.12,2.55c1.04.65,2.91,1.1,4.72,1.1,3.46,0,5.27-1.53,5.27-3.5,0-4.23-6.27-2.63-6.27-4.11Z"
+          ></path>
+        </g>
+      </g>
+      <script xmlns=""></script>
+    </svg>
+  );
+
+  if (showStep2) {
+    const seoTitle =
+      "Sponsor Booking | Bitcoin Innovation & Market Evolution 2026";
+    const seoDesc =
+      "Book your sponsorship package for Bitcoin Innovation & Market Evolution 2026.";
+    const canonicalUrl =
+      "https://www.bitcoin-innovation-market-evolution.online/sponsor-booking";
+
+    return (
+      <>
+        <Helmet>
+          <title>{seoTitle}</title>
+          <meta name="description" content={seoDesc} />
+          <link rel="canonical" href={canonicalUrl} />
+        </Helmet>
+        <div id="root">
+          <div className="PageForm_container__NA5Wr">
+            <div className="PageForm_header__7W2Cz">
+              <div
+                className="PageForm_headerInner__sdlhn"
+                style={{ maxWidth: "1280px" }}
+              >
+                <img
+                  onClick={() => navigate("/")}
+                  src={logo}
+                  alt="Site logo"
+                ></img>
+              </div>
+            </div>
+            <div className="SponsorFormV2_container__d5aHK">
+              <div className="SponsorFormV2_outerContainer__OzLWa">
+                <div className="SponsorFormV2_leftContainer__ShXVb">
+                  <div className="SponsorFormV2_addOnsContainer__L7g1r">
+                    {marketingAndLiterature?.map((item, index) => (
+                      <div className="SponsorFormV2_addOns__FIbDG" key={index}>
+                        <div className="SponsorFormV2_bar__B7FvC">
+                          <h2>{item?.addOnTypeDetails?.addOnTypeName}</h2>
+                        </div>
+
+                        <div className="SponsorFormV2_addOnsInner__NZQ6+">
+                          <div>
+                            {item?.subAddons?.map((subItem, subIndex) => (
+                              <div key={subIndex}>
+                                <div>
+                                  <input
+                                    type="checkbox"
+                                    value={subItem?.sponsorAddOnPrice}
+                                    onChange={(e) =>
+                                      handleAddOnChange(
+                                        subItem,
+                                        e.target.checked
+                                      )
+                                    }
+                                    id={`addon-${subItem.id}`}
+                                  />
+                                  <label htmlFor={`addon-${subItem.id}`}>
+                                    {subItem?.sponsorAddOnName}
+                                  </label>
+                                </div>
+                                <p>
+                                  {eventGeneralSettings?.currencyName || ""}{" "}
+                                  {subItem?.sponsorAddOnPrice}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="SponsorFormV2_addOnsContainer__L7g1r">
+                    {sessionAndOnSite?.map((item, index) => (
+                      <div className="SponsorFormV2_addOns__FIbDG" key={index}>
+                        <div className="SponsorFormV2_bar__B7FvC">
+                          <h2>{item?.addOnTypeDetails?.addOnTypeName}</h2>
+                        </div>
+
+                        <div className="SponsorFormV2_addOnsInner__NZQ6+">
+                          <div>
+                            {item?.subAddons?.map((subItem, subIndex) => (
+                              <div key={subIndex}>
+                                <div>
+                                  <input
+                                    type="checkbox"
+                                    value={subItem?.sponsorAddOnPrice}
+                                    onChange={(e) =>
+                                      handleAddOnChange(
+                                        subItem,
+                                        e.target.checked
+                                      )
+                                    }
+                                    id={`addon-${subItem.id}`}
+                                  />
+                                  <label htmlFor={`addon-${subItem.id}`}>
+                                    {subItem?.sponsorAddOnName}
+                                  </label>
+                                </div>
+                                <p>
+                                  {eventGeneralSettings?.currencyName || ""}{" "}
+                                  {subItem?.sponsorAddOnPrice}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  {windowWidth <= 991 ? (
+                    <div className="SponsorFormV2_rightContainer__PPZGv">
+                      <div className="SponsorFormV2_order__f47+B">
+                        <div className="SponsorFormV2_bar__B7FvC">
+                          <h2>Order Summary</h2>
+                        </div>
+                        <div className="SponsorFormV2_orderInner__bC6o6">
+                          <div className="SponsorFormV2_cardContainer__z1sPq">
+                            <div>
+                              <TicketSVG />
+                              <div className="SponsorFormV2_ticketLogo__Nm2y4">
+                                <img src={logo} alt="logo img"></img>
+                              </div>
+                            </div>
+                          </div>
+                          <OrderSummary />
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  <div className="SponsorFormV2_paymentOptions__x2edh">
+                    <div className="SponsorFormV2_bar__B7FvC">
+                      <h2>Payment options</h2>
+                    </div>
+                    <div className="SponsorFormV2_paymentOptionsInner__K64qJ">
+                      <div className="SponsorFormV2_imagesContainer__CE3+9">
+                        <p>We accept all major credit and debit cards.</p>
+                        <img src={cardLabel} alt="credit card logo"></img>
+                      </div>
+                      <div>
+                        <div className="stripe-input-container">
+                          <SimpleStripeForm
+                            ref={paymentFormRef}
+                            amount={parseFloat(prices.finalTotal)}
+                            userEmail={
+                              delegates?.[0]?.email ||
+                              delegates?.find((d) => d.email)?.email ||
+                              companyDetails?.email ||
+                              ""
+                            }
+                            companyName={companyDetails?.companyName || ""}
+                            orderDescription={`Payment for Sponsor- ${companyDetails?.companyName
+                              } - Type: ${selectedPackage?.sponsorPackageType
+                              } - Event: ${eventDetails?.eventName || ""}`}
+                            onPaymentSuccess={handlePaymentSuccess}
+                            onPaymentError={handlePaymentError}
+                          />
+                        </div>
+                        <div className="stripeBtnContainer">
+                          <button
+                            className="paymentButtonStripe"
+                            onClick={handlePaymentClick}
+                            disabled={paymentFormRef.current?.isProcessing}
+                          >
+                            <img src={lockIcon} alt=""></img>
+                            {paymentFormRef.current?.isProcessing
+                              ? "Processing..."
+                              : "Pay Securely Now"}
+                          </button>
+                          <p>
+                            This is a secure AES-256 bit SSL Encrypted payment.
+                            You're safe.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {windowWidth >= 991 ? (
+                  <div className="SponsorFormV2_rightContainer__PPZGv">
+                    <div className="SponsorFormV2_order__f47+B">
+                      <div className="SponsorFormV2_bar__B7FvC">
+                        <h2>Order Summary</h2>
+                      </div>
+                      <div className="SponsorFormV2_orderInner__bC6o6">
+                        <div className="SponsorFormV2_cardContainer__z1sPq">
+                          <div>
+                            <TicketSVG />
+                            <div className="SponsorFormV2_ticketLogo__Nm2y4">
+                              <img src={logo} alt="logo img"></img>
+                            </div>
+                          </div>
+                        </div>
+                        <OrderSummary />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+            <div className="PageForm_footer__hOO1l">
+              <div
+                className="PageForm_footerInner__5Enax"
+                style={{ maxWidth: "1280px" }}
+              >
+                <p>
+                  <span onClick={() => navigate("/privacy-policy")}>
+                    Privacy Policy
+                  </span>
+                  <span className="PageForm_divide__vwhn0">|</span>
+                  ABCD Company
+                </p>
+                <p>©2026 Bitcoin Innovation & Market Evolution 2026</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <div id="root">
@@ -479,12 +1304,11 @@ const AddSponsorDelegateForm = () => {
                               fontSize: "14px",
                               marginLeft: 0,
                               marginTop: "3px",
-                              color: "#d32f2f !important", // Red color for error text
+                              color: "#d32f2f !important",
                             },
                           },
                         }}
                       />
-
                       <br></br>
                       <TextField
                         label="Web address"
@@ -545,107 +1369,12 @@ const AddSponsorDelegateForm = () => {
                               fontSize: "14px",
                               marginLeft: 0,
                               marginTop: "3px",
-                              color: "#d32f2f !important", // Red color for error text
+                              color: "#d32f2f !important",
                             },
                           },
                         }}
                       />
                       <br></br>
-                      {/* <Autocomplete
-                        options={countries}
-                        getOptionLabel={(option) => option || ""} // For array of strings
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            label="Choose a country"
-                            variant="standard"
-                            sx={{
-                              "& .MuiInputLabel-root": {
-                                fontSize: "18px",
-                                fontWeight: 600,
-                                color: "#5e5e5e !important",
-                              },
-                              "& .MuiInput-underline:after": {
-                                borderBottomColor: "#9d9d9d",
-                              },
-                            }}
-                          />
-                        )}
-                        error={submitAttempted && companyErrors.country}
-                        helperText={
-                          submitAttempted && companyErrors.country
-                            ? "Country is required"
-                            : ""
-                        }
-                        slotProps={{
-                          formHelperText: {
-                            sx: {
-                              fontSize: "14px",
-                              marginLeft: 0,
-                              marginTop: "3px",
-                              color: "#d32f2f !important", // Red color for error text
-                            },
-                          },
-                        }}
-                        id="country"
-                        value={companyData.country}
-                        onChange={(event, newValue) => {
-                          console.log("country: ", newValue);
-                          handleCompanyDataChange("country", newValue); // newValue will be the selected string
-                        }}
-                        fullWidth
-                      /> */}
-                      {/* <Autocomplete
-                        options={countries}
-                        getOptionLabel={(option) => option || ""}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            label="Choose a country"
-                            variant="standard"
-                            sx={{
-                              "& .MuiInputLabel-root": {
-                                fontSize: "18px",
-                                fontWeight: 600,
-                                color: "#5e5e5e !important",
-                              },
-                              "& .MuiInput-underline:after": {
-                                borderBottomColor: "#9d9d9d",
-                              },
-                              "& .MuiInput-underline:before": {
-                                borderBottomColor:
-                                  submitAttempted && companyErrors.country
-                                    ? "#d32f2f !important"
-                                    : "#9d9d9d",
-                              },
-                              "& .MuiInputBase-input": {
-                                color:
-                                  submitAttempted && companyErrors.country
-                                    ? "#d32f2f"
-                                    : "inherit",
-                              },
-                            }}
-                          />
-                        )}
-                        id="country"
-                        value={companyData.country}
-                        onChange={(event, newValue) => {
-                          handleCompanyDataChange("country", newValue);
-                        }}
-                        fullWidth
-                      />
-                      {submitAttempted && companyErrors.country && (
-                        <div
-                          style={{
-                            fontSize: "14px",
-                            marginLeft: 0,
-                            marginTop: "3px",
-                            color: "#d32f2f",
-                          }}
-                        >
-                          Country is required
-                        </div>
-                      )} */}
                       <FormControl
                         fullWidth
                         error={submitAttempted && companyErrors.country}
@@ -741,7 +1470,7 @@ const AddSponsorDelegateForm = () => {
                                 fontSize: "14px",
                                 marginLeft: 0,
                                 marginTop: "3px",
-                                color: "#d32f2f !important", // Red color for error text
+                                color: "#d32f2f !important",
                               },
                             },
                           }}
@@ -815,7 +1544,7 @@ const AddSponsorDelegateForm = () => {
                               fontSize: "14px",
                               marginLeft: 0,
                               marginTop: "3px",
-                              color: "#d32f2f !important", // Red color for error text
+                              color: "#d32f2f !important",
                             },
                           },
                         }}
@@ -987,7 +1716,6 @@ const AddSponsorDelegateForm = () => {
                                       );
                                       return;
                                     }
-
                                     const nationalNumber =
                                       info?.nationalNumber || "";
                                     const digitsOnly = nationalNumber.replace(
@@ -1015,7 +1743,6 @@ const AddSponsorDelegateForm = () => {
                                       const input = event.target;
                                       const cursorPosition =
                                         input.selectionStart;
-
                                       if (
                                         (event.key === "Backspace" ||
                                           event.key === "Delete") &&
@@ -1023,7 +1750,6 @@ const AddSponsorDelegateForm = () => {
                                       ) {
                                         event.preventDefault();
                                       }
-
                                       if (
                                         ["ArrowLeft", "Home"].includes(
                                           event.key
@@ -1192,25 +1918,12 @@ const AddSponsorDelegateForm = () => {
                       >
                         terms and conditions
                       </a>
-                      {/* {submitAttempted && termsError && (
-                        <span
-                          style={{
-                            display: "block",
-                            fontSize: "14px",
-                            color: "#d32f2f",
-                            marginTop: "3px",
-                          }}
-                        >
-                          You must agree to the terms and conditions
-                        </span>
-                      )} */}
                     </label>
                   </div>
                   <input
                     type="submit"
                     className="SponsorFormV2_submitBtn__96h2O"
                     value={submitBtnCheck ? "Please Wait" : "Submit"}
-                  // onClick={() => navigate("/booking-form")}
                   ></input>
                 </div>
               </form>
@@ -1229,749 +1942,11 @@ const AddSponsorDelegateForm = () => {
               <span className="PageForm_divide__vwhn0">|</span>
               ABCD Company
             </p>
-            <p>©2026 Bitcoin Innovation & Market
-              Evolution 2026</p>
+            <p>©2026 Bitcoin Innovation & Market Evolution 2026</p>
           </div>
         </div>
       </div>
     </div>
-    // <div className="bg-gray-50 min-h-screen">
-    //   <style jsx>{`
-    //     .form-section-header {
-    //       background-color: #e5e7eb;
-    //       color: #374151;
-    //       font-weight: 600;
-    //       padding: 12px 20px;
-    //       margin-bottom: 0;
-    //       border-radius: 8px 8px 0 0;
-    //     }
-
-    //     .form-section-content {
-    //       background-color: white;
-    //       padding: 30px 20px;
-    //       border-radius: 0 0 8px 8px;
-    //       border: 1px solid #e5e7eb;
-    //       border-top: none;
-    //     }
-
-    //     /* Common styles for input containers to ensure consistent height */
-    //     .input-container {
-    //       position: relative;
-    //       padding-top: 20px; /* Space for the floating/static label */
-    //       margin-bottom: 20px; /* Space between input groups */
-    //     }
-
-    //     /* Floating Label Input Styles */
-    //     .floating-label {
-    //       position: absolute;
-    //       left: 0;
-    //       top: 20px; /* Initial position: aligned with input text */
-    //       color: #6b7280;
-    //       font-weight: 500;
-    //       transition: all 0.3s ease;
-    //       pointer-events: none;
-    //       z-index: 1;
-    //     }
-
-    //     .floating-input,
-    //     .floating-select {
-    //       border: none;
-    //       border-bottom: 2px solid #d1d5db;
-    //       border-radius: 0;
-    //       padding: 8px 0; /* Padding for text */
-    //       background: transparent;
-    //       transition: border-color 0.3s ease;
-    //       width: 100%;
-    //       outline: none;
-    //       font-size: 16px;
-    //     }
-
-    //     .floating-input:focus {
-    //       border-bottom-color: #3b82f6;
-    //       box-shadow: none;
-    //       background: transparent;
-    //     }
-
-    //     .floating-input:focus + .floating-label,
-    //     .floating-input:not(:placeholder-shown) + .floating-label,
-    //     .floating-input.has-value + .floating-label {
-    //       top: 0px; /* Move to top */
-    //       font-size: 12px;
-    //       color: #3b82f6;
-    //     }
-
-    //     /* Country Select without floating label */
-    //     .country-select-group {
-    //       position: relative; /* Needed for consistent padding-top */
-    //       padding-top: 20px; /* Align with other inputs */
-    //       margin-bottom: 20px;
-    //     }
-
-    //     .floating-select {
-    //       border: none;
-    //       border-bottom: 2px solid #d1d5db;
-    //       border-radius: 0;
-    //       padding: 8px 0;
-    //       background: transparent;
-    //       transition: border-color 0.3s ease;
-    //       width: 100%;
-    //       outline: none;
-    //       font-size: 16px;
-    //       appearance: none;
-    //       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-    //       background-position: right 0 center;
-    //       background-repeat: no-repeat;
-    //       background-size: 16px 12px;
-    //       padding-right: 20px;
-    //     }
-
-    //     .floating-select:focus {
-    //       border-bottom-color: #3b82f6;
-    //       box-shadow: none;
-    //       background: transparent;
-    //     }
-
-    //     .floating-input.is-invalid,
-    //     .floating-select.is-invalid {
-    //       border-bottom-color: #dc3545 !important;
-    //     }
-
-    //     .floating-input.is-invalid + .floating-label {
-    //       color: #dc3545 !important;
-    //     }
-
-    //     .btn-add-delegate {
-    //       background-color: #1f2937;
-    //       color: white;
-    //       border: none;
-    //       padding: 10px 20px;
-    //       border-radius: 6px;
-    //       font-weight: 500;
-    //       transition: background-color 0.3s ease;
-    //       cursor: pointer;
-    //     }
-
-    //     .btn-add-delegate:hover {
-    //       background-color: #111827;
-    //     }
-
-    //     .btn-submit {
-    //       background-color: #1f2937;
-    //       color: white;
-    //       border: none;
-    //       padding: 12px 30px;
-    //       border-radius: 6px;
-    //       font-weight: 500;
-    //       min-width: 120px;
-    //       cursor: pointer;
-    //     }
-
-    //     .btn-submit:hover {
-    //       background-color: #111827;
-    //     }
-
-    //     .delegate-section {
-    //       margin-bottom: 20px;
-    //     }
-
-    //     .remove-delegate-btn {
-    //       background-color: #dc3545;
-    //       color: white;
-    //       border: none;
-    //       padding: 8px 12px;
-    //       border-radius: 4px;
-    //       font-size: 14px;
-    //       cursor: pointer;
-    //       transition: background-color 0.3s ease;
-    //     }
-
-    //     .remove-delegate-btn:hover {
-    //       background-color: #c82333;
-    //     }
-
-    //     .delegate-header {
-    //       display: flex;
-    //       align-items: center;
-    //       background-color: #e5e7eb;
-    //       border-radius: 8px 8px 0 0;
-    //     }
-
-    //     .delegate-title {
-    //       flex: 1;
-    //       color: #374151;
-    //       font-weight: 600;
-    //       padding: 12px 20px;
-    //       margin: 0;
-    //     }
-
-    //     .terms-link {
-    //       color: #3b82f6;
-    //       text-decoration: underline;
-    //     }
-
-    //     .terms-link:hover {
-    //       color: #2563eb;
-    //     }
-
-    //     .form-check-input {
-    //       margin-right: 8px;
-    //     }
-
-    //     /* Mobile input with static label at top and consistent height */
-    //     .mobile-input-group {
-    //       position: relative;
-    //       padding-top: 20px; /* Space for the static label */
-    //       margin-bottom: 20px; /* Space between input groups */
-    //     }
-
-    //     .mobile-static-label {
-    //       position: absolute;
-    //       left: 0;
-    //       top: 0px; /* Always at top */
-    //       color: #6b7280;
-    //       font-weight: 500;
-    //       font-size: 12px; /* Smaller font size */
-    //       z-index: 1;
-    //     }
-
-    //     .mobile-static-label.error {
-    //       color: #dc3545;
-    //     }
-
-    //     .PhoneInput {
-    //       display: flex;
-    //       align-items: flex-end; /* Align content to the bottom */
-    //       width: 100%;
-    //     }
-
-    //     .PhoneInputInput {
-    //       border: none;
-    //       border-bottom: 2px solid #d1d5db;
-    //       border-radius: 0;
-    //       padding: 8px 0; /* Consistent padding */
-    //       background: transparent;
-    //       transition: border-color 0.3s ease;
-    //       width: 100%;
-    //       outline: none;
-    //       font-size: 16px;
-    //       font-family: inherit;
-    //     }
-
-    //     .PhoneInputInput:focus {
-    //       border-bottom-color: #3b82f6;
-    //       box-shadow: none;
-    //       background: transparent;
-    //     }
-
-    //     .PhoneInputInput.is-invalid {
-    //       border-bottom-color: #dc3545 !important;
-    //     }
-
-    //     .PhoneInputCountrySelect {
-    //       border: none;
-    //       border-bottom: 2px solid #d1d5db;
-    //       border-radius: 0;
-    //       padding: 8px 0; /* Consistent padding */
-    //       background: transparent;
-    //       transition: border-color 0.3s ease;
-    //       margin-right: 10px;
-    //       outline: none;
-    //       font-size: 16px;
-    //       font-family: inherit;
-    //     }
-
-    //     .PhoneInputCountrySelect:focus {
-    //       border-bottom-color: #3b82f6;
-    //       box-shadow: none;
-    //       background: transparent;
-    //     }
-
-    //     .PhoneInputCountryIcon {
-    //       margin-right: 5px;
-    //     }
-
-    //     .PhoneInputCountrySelectArrow {
-    //       margin-left: 5px;
-    //     }
-
-    //     @media (max-width: 768px) {
-    //       .form-section-content {
-    //         padding: 20px 15px;
-    //       }
-    //     }
-    //   `}</style>
-    //   <div
-    //     style={{
-    //       alignItems: "center",
-    //       backgroundColor: "#181818",
-    //       display: "flex",
-    //       justifyContent: "center",
-    //       minHeight: "70px",
-    //       width: "100%",
-    //     }}
-    //   >
-    //     <div
-    //       className="container mx-auto "
-    //       style={{
-    //         display: "flex",
-    //         justifyContent: "center",
-    //       }}
-    //     >
-    //       <img
-    //         src="https://www.desalination-resource-recovery.com/api/images/logo/1742534509561.png"
-    //         alt="Site logo"
-    //         style={{ cursor: "pointer", width: "140px" }}
-    //         onClick={() => navigate("/")}
-    //       ></img>
-    //     </div>
-    //   </div>
-    //   <div className="container mx-auto px-4 mt-4 mb-4">
-    //     <div className="flex justify-center">
-    //       <div className="w-full max-w-4xl">
-    //         <form onSubmit={handleSubmit} className="space-y-6">
-    //           {/* Company Details Section */}
-    //           <div className="form-section">
-    //             <h3 className="form-section-header">Company details</h3>
-    //             <div className="form-section-content">
-    //               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    //                 <div className="input-container">
-    //                   {" "}
-    //                   {/* Changed from floating-label-group */}
-    //                   <input
-    //                     type="text"
-    //                     className={`floating-input ${
-    //                       validationErrors.companyName ? "is-invalid" : ""
-    //                     } ${companyData.companyName ? "has-value" : ""}`}
-    //                     id="companyName"
-    //                     value={companyData.companyName}
-    //                     onChange={(e) =>
-    //                       handleCompanyDataChange("companyName", e.target.value)
-    //                     }
-    //                     placeholder=" "
-    //                     required
-    //                   />
-    //                   <label htmlFor="companyName" className="floating-label">
-    //                     Company name
-    //                   </label>
-    //                 </div>
-    //                 <div className="input-container">
-    //                   {" "}
-    //                   {/* Changed from floating-label-group */}
-    //                   <input
-    //                     type="url"
-    //                     className={`floating-input ${
-    //                       companyData.webAddress ? "has-value" : ""
-    //                     }`}
-    //                     id="webAddress"
-    //                     value={companyData.webAddress}
-    //                     onChange={(e) =>
-    //                       handleCompanyDataChange("webAddress", e.target.value)
-    //                     }
-    //                     placeholder=" "
-    //                   />
-    //                   <label htmlFor="webAddress" className="floating-label">
-    //                     Web address
-    //                   </label>
-    //                 </div>
-    //               </div>
-
-    //               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    //                 <div className="input-container">
-    //                   {" "}
-    //                   {/* Changed from floating-label-group */}
-    //                   <input
-    //                     type="text"
-    //                     className={`floating-input ${
-    //                       validationErrors.address ? "is-invalid" : ""
-    //                     } ${companyData.address ? "has-value" : ""}`}
-    //                     id="address"
-    //                     value={companyData.address}
-    //                     onChange={(e) =>
-    //                       handleCompanyDataChange("address", e.target.value)
-    //                     }
-    //                     placeholder=" "
-    //                     required
-    //                   />
-    //                   <label htmlFor="address" className="floating-label">
-    //                     Address
-    //                   </label>
-    //                 </div>
-    //                 <div className="country-select-group">
-    //                   {" "}
-    //                   {/* This group remains as is, but now has padding-top */}
-    //                   <select
-    //                     className={`floating-select ${
-    //                       validationErrors.country ? "is-invalid" : ""
-    //                     }`}
-    //                     id="country"
-    //                     value={companyData.country}
-    //                     onChange={(e) =>
-    //                       handleCompanyDataChange("country", e.target.value)
-    //                     }
-    //                     required
-    //                   >
-    //                     {countryOptions.map((option) => (
-    //                       <option key={option.value} value={option.value}>
-    //                         {option.label}
-    //                       </option>
-    //                     ))}
-    //                   </select>
-    //                 </div>
-    //               </div>
-
-    //               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-    //                 <div className="input-container">
-    //                   {" "}
-    //                   {/* Changed from floating-label-group */}
-    //                   <input
-    //                     type="text"
-    //                     className={`floating-input ${
-    //                       validationErrors.city ? "is-invalid" : ""
-    //                     } ${companyData.city ? "has-value" : ""}`}
-    //                     id="city"
-    //                     value={companyData.city}
-    //                     onChange={(e) =>
-    //                       handleCompanyDataChange("city", e.target.value)
-    //                     }
-    //                     placeholder=" "
-    //                     required
-    //                   />
-    //                   <label htmlFor="city" className="floating-label">
-    //                     City
-    //                   </label>
-    //                 </div>
-    //                 <div className="input-container">
-    //                   {" "}
-    //                   {/* Changed from floating-label-group */}
-    //                   <input
-    //                     type="text"
-    //                     className={`floating-input ${
-    //                       companyData.state ? "has-value" : ""
-    //                     }`}
-    //                     id="state"
-    //                     value={companyData.state}
-    //                     onChange={(e) =>
-    //                       handleCompanyDataChange("state", e.target.value)
-    //                     }
-    //                     placeholder=" "
-    //                   />
-    //                   <label htmlFor="state" className="floating-label">
-    //                     State <span className="text-gray-500">(optional)</span>
-    //                   </label>
-    //                 </div>
-    //                 <div className="input-container">
-    //                   {" "}
-    //                   {/* Changed from floating-label-group */}
-    //                   <input
-    //                     type="text"
-    //                     className={`floating-input ${
-    //                       validationErrors.postalCode ? "is-invalid" : ""
-    //                     } ${companyData.postalCode ? "has-value" : ""}`}
-    //                     id="postalCode"
-    //                     value={companyData.postalCode}
-    //                     onChange={(e) =>
-    //                       handleCompanyDataChange("postalCode", e.target.value)
-    //                     }
-    //                     placeholder=" "
-    //                     required
-    //                   />
-    //                   <label htmlFor="postalCode" className="floating-label">
-    //                     Postal/Zip code
-    //                   </label>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           </div>
-
-    //           {/* Delegates Container */}
-    //           <div id="delegatesContainer">
-    //             {delegates.map((delegate, index) => (
-    //               <div
-    //                 key={delegate.id}
-    //                 className="form-section delegate-section"
-    //               >
-    //                 <div className="delegate-header">
-    //                   <h3 className="delegate-title">Delegate {index + 1}</h3>
-    //                   {index > 0 && (
-    //                     <button
-    //                       type="button"
-    //                       className="remove-delegate-btn mr-3"
-    //                       onClick={() => removeDelegate(delegate.id)}
-    //                     >
-    //                       <i className="fas fa-trash-alt mr-1"></i>Delete
-    //                     </button>
-    //                   )}
-    //                 </div>
-    //                 <div className="form-section-content">
-    //                   {/* First row: First name, Last name, Mobile */}
-    //                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-    //                     <div className="input-container">
-    //                       {" "}
-    //                       {/* Changed from floating-label-group */}
-    //                       <input
-    //                         type="text"
-    //                         className={`floating-input ${
-    //                           validationErrors[
-    //                             `delegate_${delegate.id}_firstName`
-    //                           ]
-    //                             ? "is-invalid"
-    //                             : ""
-    //                         } ${delegate.firstName ? "has-value" : ""}`}
-    //                         id={`firstName${delegate.id}`}
-    //                         value={delegate.firstName}
-    //                         onChange={(e) =>
-    //                           handleDelegateChange(
-    //                             delegate.id,
-    //                             "firstName",
-    //                             e.target.value
-    //                           )
-    //                         }
-    //                         placeholder=" "
-    //                         required
-    //                       />
-    //                       <label
-    //                         htmlFor={`firstName${delegate.id}`}
-    //                         className="floating-label"
-    //                       >
-    //                         First name
-    //                       </label>
-    //                     </div>
-    //                     <div className="input-container">
-    //                       {" "}
-    //                       {/* Changed from floating-label-group */}
-    //                       <input
-    //                         type="text"
-    //                         className={`floating-input ${
-    //                           validationErrors[
-    //                             `delegate_${delegate.id}_lastName`
-    //                           ]
-    //                             ? "is-invalid"
-    //                             : ""
-    //                         } ${delegate.lastName ? "has-value" : ""}`}
-    //                         id={`lastName${delegate.id}`}
-    //                         value={delegate.lastName}
-    //                         onChange={(e) =>
-    //                           handleDelegateChange(
-    //                             delegate.id,
-    //                             "lastName",
-    //                             e.target.value
-    //                           )
-    //                         }
-    //                         placeholder=" "
-    //                         required
-    //                       />
-    //                       <label
-    //                         htmlFor={`lastName${delegate.id}`}
-    //                         className="floating-label"
-    //                       >
-    //                         Last name
-    //                       </label>
-    //                     </div>
-    //                     <div className="mobile-input-group">
-    //                       {" "}
-    //                       {/* This group remains as is, but now has padding-top */}
-    //                       <label
-    //                         className={`mobile-static-label ${
-    //                           validationErrors[`delegate_${delegate.id}_mobile`]
-    //                             ? "error"
-    //                             : ""
-    //                         }`}
-    //                       >
-    //                         Mobile
-    //                       </label>
-    //                       <PhoneInput
-    //                         international
-    //                         countryCallingCodeEditable={false}
-    //                         defaultCountry="US"
-    //                         value={delegate.mobile}
-    //                         onChange={(value) =>
-    //                           handleDelegateChange(
-    //                             delegate.id,
-    //                             "mobile",
-    //                             value || ""
-    //                           )
-    //                         }
-    //                         className={
-    //                           validationErrors[`delegate_${delegate.id}_mobile`]
-    //                             ? "is-invalid"
-    //                             : ""
-    //                         }
-    //                         inputComponent={({ className, ...props }) => (
-    //                           <input
-    //                             {...props}
-    //                             className={`PhoneInputInput ${
-    //                               validationErrors[
-    //                                 `delegate_${delegate.id}_mobile`
-    //                               ]
-    //                                 ? "is-invalid"
-    //                                 : ""
-    //                             }`}
-    //                           />
-    //                         )}
-    //                       />
-    //                     </div>
-    //                   </div>
-
-    //                   {/* Second row: Position, Email */}
-    //                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    //                     <div className="input-container">
-    //                       {" "}
-    //                       {/* Changed from floating-label-group */}
-    //                       <input
-    //                         type="text"
-    //                         className={`floating-input ${
-    //                           validationErrors[
-    //                             `delegate_${delegate.id}_position`
-    //                           ]
-    //                             ? "is-invalid"
-    //                             : ""
-    //                         } ${delegate.position ? "has-value" : ""}`}
-    //                         id={`position${delegate.id}`}
-    //                         value={delegate.position}
-    //                         onChange={(e) =>
-    //                           handleDelegateChange(
-    //                             delegate.id,
-    //                             "position",
-    //                             e.target.value
-    //                           )
-    //                         }
-    //                         placeholder=" "
-    //                         required
-    //                       />
-    //                       <label
-    //                         htmlFor={`position${delegate.id}`}
-    //                         className="floating-label"
-    //                       >
-    //                         Position
-    //                       </label>
-    //                     </div>
-    //                     <div className="input-container">
-    //                       {" "}
-    //                       {/* Changed from floating-label-group */}
-    //                       <input
-    //                         type="email"
-    //                         className={`floating-input ${
-    //                           validationErrors[`delegate_${delegate.id}_email`]
-    //                             ? "is-invalid"
-    //                             : ""
-    //                         } ${delegate.email ? "has-value" : ""}`}
-    //                         id={`email${delegate.id}`}
-    //                         value={delegate.email}
-    //                         onChange={(e) =>
-    //                           handleDelegateChange(
-    //                             delegate.id,
-    //                             "email",
-    //                             e.target.value
-    //                           )
-    //                         }
-    //                         placeholder=" "
-    //                         required
-    //                       />
-    //                       <label
-    //                         htmlFor={`email${delegate.id}`}
-    //                         className="floating-label"
-    //                       >
-    //                         Email address
-    //                       </label>
-    //                     </div>
-    //                   </div>
-    //                 </div>
-    //               </div>
-    //             ))}
-    //           </div>
-
-    //           {/* Add Delegate Button */}
-    //           <div className="mb-4">
-    //             <button
-    //               type="button"
-    //               className="btn-add-delegate"
-    //               onClick={addDelegate}
-    //             >
-    //               <i className="fas fa-plus mr-2"></i>Add Delegate
-    //             </button>
-    //           </div>
-
-    //           {/* Terms and Submit Section */}
-    //           <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-    //             <div className="flex items-start mb-3 md:mb-0">
-    //               <input
-    //                 type="checkbox"
-    //                 className={`form-check-input ${
-    //                   validationErrors.termsAgreement ? "is-invalid" : ""
-    //                 }`}
-    //                 id="termsAgreement"
-    //                 checked={termsAgreement}
-    //                 onChange={(e) => setTermsAgreement(e.target.checked)}
-    //                 required
-    //               />
-    //               <label
-    //                 className="form-check-label ml-2"
-    //                 htmlFor="termsAgreement"
-    //               >
-    //                 Please tick to confirm your agreement to the{" "}
-    //                 <a href="#" className="terms-link">
-    //                   terms and conditions
-    //                 </a>
-    //               </label>
-    //             </div>
-    //             <button
-    //               type="submit"
-    //               className="btn-submit"
-    //               onClick={() => navigate("/booking-form")}
-    //             >
-    //               Submit
-    //             </button>
-    //           </div>
-    //         </form>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <div
-    //     style={{
-    //       alignItems: "center",
-    //       backgroundColor: "#181818",
-    //       display: "flex",
-    //       justifyContent: "center",
-    //       height: "80px",
-    //       width: "100%",
-    //     }}
-    //   >
-    //     <div
-    //       style={{
-    //         maxWidth: "1070px",
-    //         alignItems: "center",
-    //         display: "flex",
-    //         justifyContent: "space-between",
-    //         width: "90%",
-    //       }}
-    //     >
-    //       <p
-    //         style={{
-    //           color: "#fff",
-    //           fontSize: "14px",
-    //           fontWeight: "500",
-    //           margin: "0",
-    //           padding: "0",
-    //         }}
-    //       >
-    //         <span>Privacy Policy</span>
-    //         <span class="PageForm_divide__vwhn0">|</span>IQ International PTe.
-    //         LTD
-    //       </p>
-    //       <p
-    //         style={{
-    //           color: "#fff",
-    //           fontSize: "14px",
-    //           fontWeight: "500",
-    //           margin: "0",
-    //           padding: "0",
-    //         }}
-    //       >
-    //         ©2025 Desalination &amp; Resource Recovery 2025
-    //       </p>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 

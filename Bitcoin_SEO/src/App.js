@@ -27,7 +27,7 @@ import BookingForm from "./components/BookingForm";
 import AddSponsorDelegateForm from "./components/AddSponsorDelegateForm";
 import News from "./components/News";
 import { ToastContainer } from "react-toastify";
-import SponsorBookingForm from "./components/SponsorBookingForm";
+// import SponsorBookingForm from "./components/SponsorBookingForm";
 import { ApiDataProvider } from "./common/ApiContext";
 import PrivacyPolicy from "./components/privacyPolicy";
 import ThankYouPage from "./components/thankyouPage";
@@ -94,12 +94,12 @@ function App({ ssrData }) {
             <Route path="adddelegate" element={<AddDelegateForm />} />
             <Route path="booking-form" element={<BookingForm />} />
             <Route
-              path="addsponsordelegate"
+              path="sponsor-booking"
               element={<AddSponsorDelegateForm />}
             />
             <Route path="news" element={<News />} />
             <Route path="remind-me-later" element={<RemindMeLater />} />
-            <Route path="sponsor-booking" element={<SponsorBookingForm />} />
+            {/* <Route path="sponsor-booking" element={<SponsorBookingForm />} /> */}
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="thank-you" element={<ThankYouPage />} />
