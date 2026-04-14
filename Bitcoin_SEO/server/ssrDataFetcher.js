@@ -8,11 +8,11 @@ const fetch = require("node-fetch");
 const BASE_URL = "https://harsh7541.pythonanywhere.com/admin1";
 
 // How long to wait for a single API call before giving up (ms)
-const FETCH_TIMEOUT_MS = 12000;
+const FETCH_TIMEOUT_MS = 4000;
 // How many times to retry a failed/timed-out request
-const MAX_RETRIES = 2;
+const MAX_RETRIES = 1;
 // Backoff between retries in ms (doubles each attempt)
-const RETRY_BASE_DELAY_MS = 500;
+const RETRY_BASE_DELAY_MS = 200;
 
 /* -------- helpers -------- */
 
@@ -514,7 +514,7 @@ async function fetchSSRData(pathname) {
   //   const [sponsors, sponsorPageData, mediaPartners] = await Promise.all([
   //     fetchSponsors(),
   //     fetchSponsorPageData(),
-      
+
   //   ]);
   //   return { ...base, sponsors, sponsorPageData, mediaPartners };
   // }
