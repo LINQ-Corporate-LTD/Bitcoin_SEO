@@ -103,11 +103,13 @@ async function fetchTrendSlugs() {
 async function fetchSponsorSlugs() {
     const d = await get("eventsponsors");
     const list = d?.status ? d.eventSponsors : [];
-    return list.map((s) => ({
-        url: `/sponsor/${toSlug(s.sponsorComapnyName)}`,
-        changefreq: "monthly",
-        priority: "0.5",
-    }));
+    return list
+        .filter((s) => s.sponsorComapnyName) // 🚨 Filter out null/empty names
+        .map((s) => ({
+            url: `/sponsor/${toSlug(s.sponsorComapnyName)}`,
+            changefreq: "monthly",
+            priority: "0.5",
+        }));
 }
 
 /* -------- XML builder -------- */

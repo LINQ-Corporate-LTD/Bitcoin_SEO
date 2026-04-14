@@ -25,12 +25,14 @@ const Footer = () => {
   const trends = useSSRData("trends") || [];
   const [footerNavOptions, setFooterNavOptions] = useState([]);
 
-  const toSlug = (str) =>
-    (str || "")
+  const toSlug = (str) => {
+    if (!str) return ""; // 🚨 Prevent 'null' stringification
+    return str
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "")
       .replace(/\s+/g, "-")
       .replace(/-+/g, "-");
+  };
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -494,14 +496,18 @@ const Footer = () => {
 
 
           {/* Dynamic Slugs Harvested from SSR Data */}
-          {sponsors.map((s, i) => (
-            <a
-              key={`seosp-${i}`}
-              href={`/sponsor/${toSlug(s.sponsorComapnyName)}`}
-            >
-              {s.sponsorComapnyName}
-            </a>
-          ))}
+          {sponsors.map((s, i) => {
+            const slug = s.sponsorComapnyName ? toSlug(s.sponsorComapnyName) : null;
+            if (!slug) return null; // 🚨 Skip if name is missing to prevent /sponsor/null
+            return (
+              <a
+                key={`seosp-${i}`}
+                href={`/sponsor/${slug}`}
+              >
+                {s.sponsorComapnyName}
+              </a>
+            );
+          })}
           {news.map((n, i) => (
             <a
               key={`seonw-${i}`}

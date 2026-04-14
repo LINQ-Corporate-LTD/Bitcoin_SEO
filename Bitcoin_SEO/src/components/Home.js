@@ -1,5 +1,3 @@
-// src/components/Home.js
-// All data (sponsors, speakers, news, trends) comes from SSR window.__INITIAL_DATA__. No client-side fetch.
 import React, { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
@@ -180,11 +178,15 @@ const Home = () => {
                           return (
                             <a
                               key={i}
-                              href={item?.sponsorType !== "Dummy" ? `/sponsor/${item?.sponsorComapnyName
-                                .toLowerCase()
-                                .replace(/[^a-z0-9\s-]/g, "")
-                                .replace(/\s+/g, "-")
-                                .replace(/-+/g, "-")}` : undefined}
+                              href={(() => {
+                                if (item?.sponsorType === "Dummy" || !item?.sponsorComapnyName) return "#";
+                                const slug = item.sponsorComapnyName
+                                  .toLowerCase()
+                                  .replace(/[^a-z0-9\s-]/g, "")
+                                  .replace(/\s+/g, "-")
+                                  .replace(/-+/g, "-");
+                                return `/sponsor/${slug}`;
+                              })()}
                               className={`SponsorCards_card__8eNkT ${item?.sponsorType !== "Dummy"
                                 ? "clickable"
                                 : ""

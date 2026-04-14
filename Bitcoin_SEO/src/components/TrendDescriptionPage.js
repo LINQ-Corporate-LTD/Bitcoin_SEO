@@ -1022,11 +1022,15 @@ const TrendDescriptionPage = () => {
                             return (
                               <a
                                 key={i}
-                                href={item?.sponsorType !== "Dummy" ? `/sponsor/${item?.sponsorComapnyName
-                                  .toLowerCase()
-                                  .replace(/[^a-z0-9\s-]/g, "")
-                                  .replace(/\s+/g, "-")
-                                  .replace(/-+/g, "-")}` : "#"}
+                                href={(() => {
+                                  if (item?.sponsorType === "Dummy" || !item?.sponsorComapnyName) return "#";
+                                  const slug = item.sponsorComapnyName
+                                    .toLowerCase()
+                                    .replace(/[^a-z0-9\s-]/g, "")
+                                    .replace(/\s+/g, "-")
+                                    .replace(/-+/g, "-");
+                                  return `/sponsor/${slug}`;
+                                })()}
                                 className={`SponsorCards_card__8eNkT ${item?.sponsorType !== "Dummy"
                                   ? "clickable"
                                   : ""
