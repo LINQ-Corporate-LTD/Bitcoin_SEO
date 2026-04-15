@@ -309,6 +309,7 @@ import ToEmails from "../Footer/ToEmails";
 import AgendaSubscribers from "../pages/AgendaSubscribers";
 import CalenderSubscribers from "../pages/CalenderSubscribers";
 import SponsorOfferCoupons from "../pages/OfferCoupons/SponsorOfferCoupons";
+import EventProjects from "../pages/SlideShareAttandees/EventProject";
 
 
 
@@ -592,6 +593,7 @@ const authProtectedRoutes = [
   { path: "/agendasubscribers", component: <AgendaSubscribers /> },
   { path: "/calendersubscribers", component: <CalenderSubscribers /> },
   { path: "/sponsoroffercoupons", component: <SponsorOfferCoupons /> },
+  { path: "/eventprojects", component: <EventProjects /> },
 
 
 

@@ -385,5 +385,10 @@ urlpatterns = [
     path('deletesponsoroffercoupon',views.delete_sponsorOfferCoupon),
     path('sponsoroffercouponbycode',views.sponsorOfferCouponByCodeFun),
 
+    path('eventprojects', views.eventProjectListFun),
+    path('addeventproject', views.add_eventProject),
+    path('editeventproject', views.edit_eventProject),
+    path('deleteeventproject', views.delete_eventProject),
+
 
 ]

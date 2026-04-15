@@ -155,7 +155,7 @@ const SlideShareList = () => {
             {
                 id: "projectYearId",
                 header: "Project Year",
-                accessorKey: "projectYear",
+                accessorKey: "relatedProjectYear.projectYear",
                 filterable: false,
             },
             {

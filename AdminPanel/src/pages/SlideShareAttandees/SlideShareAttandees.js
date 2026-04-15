@@ -144,7 +144,7 @@ const SlideShareAttandees = () => {
             {
                 id: "yearId",
                 header: "Year",
-                accessorKey: "projectYear",
+                accessorKey: "relatedProjectYear.projectYear",
                 filterable: false,
             },
             {

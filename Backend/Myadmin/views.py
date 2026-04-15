@@ -20,7 +20,7 @@ from Myadmin.serializers import eventAgendaSerializer, eventIndustryTrendsSerial
 from rest_framework.throttling import AnonRateThrottle
 # Create your views here.
 from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSubCategories,themeColorSettings,homePageVideoSectionInput,videoSectionUserOptions,speakerSection,homePageThirdSection,keyPointsSection,keyPointsSectionPoints,countSection,countSectionTopic,testimonialSection,pastAttandeesSection,sponsorSection, footerFirstSectionOptions, footerSocialMediaOptions,companiesLogoSection,registerPageSettings,whoShouldAttendPageData,speakerPageData,speakerPageSectionThreePoints,sponsorPageData,sponsorPageBulletData,venuePageData,venuePageGallery,newsCategory,generalNewsPoint,latestNews,topNews,subscribers,contactUsData,contactUsPageData,contactUsHelpData,pressMediaPageData,pressMediaPageBoxData,mediaPageHelpers,standOutCrowdRequestData,becomeSpeakerRequestData,quickProposalRequestData,endUserPassRegistrationRequestData,pastAttandeeHomeData,footerOptions,toEmails,agendaSubscriber,calenderSubscriber
-from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees,slideSharesAccessPersons,payOnlineTransectionData,blockedEmailDomains,sponsorOfferCoupon
+from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees,slideSharesAccessPersons,payOnlineTransectionData,blockedEmailDomains,sponsorOfferCoupon,eventProject
 import requests
 import jwt
 from django.conf import settings
@@ -51,6 +51,9 @@ def homePageDataFun(request):
             'lightColor':theme.lightColor,
             'darkColor':theme.darkColor,
             'gradientColor':theme.gradientColor,
+            'headerContent':theme.headerContent,
+            'editorStyle':theme.editorStyle,
+            'headerType':theme.headerType,
             'created_at': theme.created_at,
             'updated_at': theme.updated_at,
             'created_by': theme.created_by,
@@ -96,13 +99,28 @@ def homePageDataFun(request):
         x={
             'id':eventDetail.id,
             'eventName':eventDetail.eventName,
-            'eventType':eventDetail.eventType,
-            'eventYear':eventDetail.eventYear,
+            'eventShortCode':eventDetail.eventShortCode,
             'eventDate':eventDetail.eventDate,
             'eventLocation':eventDetail.eventLocation,
-            'eventShortCode':eventDetail.eventShortCode,
+            'eventYear':eventDetail.eventYear,
+            'eventShortDate':eventDetail.eventShortDate,
+            'eventShortLocation':eventDetail.eventShortLocation,
+            'eventColorName':eventDetail.eventColorName,
+            'eventCityShortCode':eventDetail.eventCityShortCode,
+            'eventPostponed':eventDetail.eventPostponed,
+            'industryName':eventDetail.industryName,
+            'previousAgenda':eventDetail.previousAgenda,
+            'hubspotDisposition':eventDetail.hubspotDisposition,
+            'hubspotEmailStatus':eventDetail.hubspotEmailStatus,
+            'eventType':eventDetail.eventType,
             'isSeoEnable':eventDetail.isSeoEnable,
             'agendaVersion':eventDetail.agendaVersion,
+            'stripeMode':eventDetail.stripeMode,
+            'recaptchaKey':eventDetail.recaptchaKey,
+            'hubspotId':eventDetail.hubspotId,
+            'contactHubspotId':eventDetail.contactHubspotId,
+            'googleTranslate':eventDetail.googleTranslate,
+            'favicon':eventDetail.favicon,
             'created_at': eventDetail.created_at,
             'updated_at': eventDetail.updated_at,
             'created_by': eventDetail.created_by,
@@ -118,6 +136,7 @@ def homePageDataFun(request):
             'purchaseTaxPercent':genSet.purchaseTaxPercent,
             'currencyName':genSet.currencyName,
             'currencySymbol':genSet.currencySymbol,
+            'currencyPosition':genSet.currencyPosition,
         }
         eventGeneralSettingsOptions.append(x)
 
@@ -4920,28 +4939,68 @@ def add_event_general_data(request):
     # Update eventDetails fields
     if 'eventName' in request.POST:
         check_db.eventName = response['eventName']
-    
-    if 'eventType' in request.POST:
-        check_db.eventType = response['eventType']
-    
-    if 'eventYear' in request.POST:
-        check_db.eventYear = response['eventYear']
-        
-    if 'eventDate' in request.POST:
-        check_db.eventDate = response['eventDate']
-    
-    if 'eventLocation' in request.POST:
-        check_db.eventLocation = response['eventLocation']
-
     if 'eventShortCode' in request.POST:
         check_db.eventShortCode = response['eventShortCode']
+    if 'eventDate' in request.POST:
+        check_db.eventDate = response['eventDate']
+    if 'eventLocation' in request.POST:
+        check_db.eventLocation = response['eventLocation']
+    if 'eventYear' in request.POST:
+        check_db.eventYear = response['eventYear']
+    if 'eventShortDate' in request.POST:
+        check_db.eventShortDate = response['eventShortDate']
+
+    if 'eventShortLocation' in request.POST:
+        check_db.eventShortLocation = response['eventShortLocation']
+
+    if 'eventColorName' in request.POST:
+        check_db.eventColorName = response['eventColorName']
+    
+    if 'eventCityShortCode' in request.POST:
+        check_db.eventCityShortCode = response['eventCityShortCode']
+
+    if 'eventPostponed' in request.POST:
+        check_db.eventPostponed = response['eventPostponed']
+
+    if 'industryName' in request.POST:
+        check_db.industryName = response['industryName']
+
+    if 'previousAgenda' in request.POST:
+        check_db.previousAgenda = response['previousAgenda']
+
+    if 'hubspotDisposition' in request.POST:
+        check_db.hubspotDisposition = response['hubspotDisposition']
+
+    if 'hubspotEmailStatus' in request.POST:
+        check_db.hubspotEmailStatus = response['hubspotEmailStatus']
+
+    if 'eventType' in request.POST:
+        check_db.eventType = response['eventType']
 
     if 'isSeoEnable' in request.POST:
         check_db.isSeoEnable = response['isSeoEnable']
 
     if 'agendaVersion' in request.POST:
         check_db.agendaVersion = response['agendaVersion']
-    
+
+    if 'stripeMode' in request.POST:
+        check_db.stripeMode = response['stripeMode']
+
+    if 'recaptchaKey' in request.POST:
+        check_db.recaptchaKey = response['recaptchaKey']
+
+    if 'hubspotId' in request.POST:
+        check_db.hubspotId = response['hubspotId']
+
+    if 'contactHubspotId' in request.POST:
+        check_db.contactHubspotId = response['contactHubspotId']
+
+    if 'googleTranslate' in request.POST:
+        check_db.googleTranslate = response['googleTranslate']
+
+    if 'favicon' in request.POST:
+        check_db.favicon = response['favicon']
+
     # Update homePageNavLogoData fields
     if 'whiteLogoLink' in request.POST:
         check_db_1.whiteLogoLink = response['whiteLogoLink']
@@ -4983,6 +5042,15 @@ def add_event_general_data(request):
     
     if 'gradientColor' in request.POST:
         check_db_3.gradientColor = response['gradientColor']
+
+    if 'headerContent' in request.POST:
+        check_db_3.headerContent = response['headerContent']
+
+    if 'editorStyle' in request.POST:
+        check_db_3.editorStyle = response['editorStyle']
+
+    if 'headerType' in request.POST:
+        check_db_3.headerType = response['headerType']
     
     # Update eventGeneralSettings fields
     if 'purchaseTaxPercent' in request.POST:
@@ -4993,6 +5061,9 @@ def add_event_general_data(request):
     
     if 'currencySymbol' in request.POST:
         check_db_4.currencySymbol = response['currencySymbol']
+
+    if 'currencyPosition' in request.POST:
+        check_db_4.currencyPosition = response['currencyPosition']
 
     # Set created_by and updated_by fields for new entries
     if not existing_event:
@@ -5830,6 +5901,10 @@ def add_slideShare(request):
     response = request.data
     check_db = eventSlideShares()
 
+    if 'projectId' in request.POST:
+        projectData = eventProject.objects.get(id=response['projectId'])
+        check_db.projectId = projectData
+
     if 'author' in request.POST:
         check_db.author = response['author']
 
@@ -5859,6 +5934,10 @@ def add_slideShare(request):
 def edit_slideShare(request):
     response = request.data
     check_db = eventSlideShares.objects.get(id=response['id'])
+
+    if 'projectId' in request.POST:
+        projectData = eventProject.objects.get(id=response['projectId'])
+        check_db.projectId = projectData
 
     if 'author' in request.POST:
         check_db.author = response['author']
@@ -5899,8 +5978,15 @@ def slideShareListFun(request):
     slideShares_Data = eventSlideShares.objects.all().filter(isDelete='No')
     slideSharesOptions = []
     for slideShare in slideShares_Data:
+        related_project_year = {}
+        if slideShare.projectId != None:
+            related_project_year ={
+                'id':slideShare.projectId.id,
+                'projectYear':slideShare.projectId.projectYear,
+            }
         x={
             'id':slideShare.id,
+            'relatedProjectYear':related_project_year,
             'author':slideShare.author,
             'authorCompany':slideShare.authorCompany,
             'heading':slideShare.heading,
@@ -5920,6 +6006,10 @@ def slideShareListFun(request):
 def add_slideShare_attandee(request):
     response = request.data
     check_db = eventSlideSharesAttandees()
+
+    if 'projectId' in request.POST:
+        projectData = eventProject.objects.get(id=response['projectId'])
+        check_db.projectId = projectData
 
     if 'companyName' in request.POST:
         check_db.companyName = response['companyName']
@@ -5941,6 +6031,10 @@ def add_slideShare_attandee(request):
 def edit_slideShare_attandee(request):
     response = request.data
     check_db = eventSlideSharesAttandees.objects.get(id=response['id'])
+
+    if 'projectId' in request.POST:
+        projectData = eventProject.objects.get(id=response['projectId'])
+        check_db.projectId = projectData
 
     if 'companyName' in request.POST:
         check_db.companyName = response['companyName']
@@ -5972,8 +6066,15 @@ def slideShareAttandeeListFun(request):
     slideSharesAttandee_Data = eventSlideSharesAttandees.objects.all().filter(isDelete='No')
     slideSharesAttandees = []
     for attandee in slideSharesAttandee_Data:
+        related_project_year = {}
+        if attandee.projectId != None:
+            related_project_year ={
+                'id':attandee.projectId.id,
+                'projectYear':attandee.projectId.projectYear,
+            }
         x={
             'id':attandee.id,
+            'relatedProjectYear':related_project_year,
             'companyName':attandee.companyName,
             'delegateName':attandee.delegateName,
             'projectYear':attandee.projectYear,
@@ -5990,6 +6091,10 @@ def slideShareAttandeeListFun(request):
 def add_slideShare_access(request):
     response = request.data
     check_db = slideSharesAccessPersons()
+
+    if 'projectId' in request.POST:
+        projectData = eventProject.objects.get(id=response['projectId'])
+        check_db.projectId = projectData
 
     if 'email' in request.POST:
         check_db.email = response['email']
@@ -6022,11 +6127,18 @@ def slideShareAccessListFun(request):
     slideSharesAccess_Data = slideSharesAccessPersons.objects.all().filter(isDelete='No')
     slideSharesAccess = []
     for a in slideSharesAccess_Data:
+        related_project_year = {}
+        if a.projectId != None:
+            related_project_year ={
+                'id':a.projectId.id,
+                'projectYear':a.projectId.projectYear,
+            }
         x={
             'id':a.id,
+            'relatedProjectYear':related_project_year,
             'email':a.email,
-            'eventPassword':a.eventPassword,
-            'projectYear':a.projectYear,
+            # 'eventPassword':a.eventPassword,
+            # 'projectYear':a.projectYear,
             'created_at': a.created_at,
             'updated_at': a.updated_at,
             'created_by': a.created_by,
@@ -6040,6 +6152,10 @@ def slideShareAccessListFun(request):
 def edit_slideShare_access(request):
     response = request.data
     check_db = slideSharesAccessPersons.objects.get(id=response['id'])
+
+    if 'projectId' in request.POST:
+        projectData = eventProject.objects.get(id=response['projectId'])
+        check_db.projectId = projectData
 
     if 'email' in request.POST:
         check_db.email = response['email']
@@ -6070,7 +6186,17 @@ def secure_login_slideShare(request):
     projectYear = response['projectYear']
 
     try:
-        attendee = slideSharesAccessPersons.objects.get(email=email, eventPassword=eventPassword, projectYear=projectYear)
+        project = eventProject.objects.get(projectYear=projectYear)
+    except eventProject.DoesNotExist:
+        return JsonResponse({'status': False, "message": "Invalid Project Details"})
+
+    # ✅ Compare eventPassword against project.password
+    if project.password != eventPassword:
+        return JsonResponse({'status': False, "message": "Invalid Credentials"})
+
+    try:
+        # ✅ Now just find the attendee by email and project (no eventPassword here)
+        attendee = slideSharesAccessPersons.objects.get(email=email, projectId=project)
     except slideSharesAccessPersons.DoesNotExist:
         return JsonResponse({'status': False, "message": "Invalid Credentials"})
 
@@ -6078,17 +6204,24 @@ def secure_login_slideShare(request):
     expires_at = now + timedelta(hours=2)
 
     payload = {
-            "attendee_id": attendee.id,
-            "email":       attendee.email,
-            "year":        attendee.projectYear,
-            "iat":         int(now.timestamp()),
-            "exp":         int(expires_at.timestamp()),
-        }
+        "attendee_id": attendee.id,
+        "email":       attendee.email,
+        "year":        attendee.projectId.projectYear,
+        "iat":         int(now.timestamp()),
+        "exp":         int(expires_at.timestamp()),
+    }
 
     token = jwt.encode(payload, settings.JWT_SECRET_KEY, algorithm=settings.JWT_ALGORITHM)
 
-    return JsonResponse({'status': True, "message": "Login successful.","token": token, "email": attendee.email,"expires_at": expires_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
-"token_type": "Bearer","success": True,})
+    return JsonResponse({
+        'status': True,
+        "message": "Login successful.",
+        "token": token,
+        "email": attendee.email,
+        "expires_at": expires_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "token_type": "Bearer",
+        "success": True,
+    })
 
 def generate_invoice_number(request):
     while True:
@@ -6556,3 +6689,66 @@ def sponsorOfferCouponByCodeFun(request):
         return JsonResponse({'offerCoupons': offerCouponsList, 'status': True})
     else:
         return JsonResponse({'status': False, 'message': 'Invalid Coupon Code'})
+    
+#---------------------------- Api For Get Event Projects ----------------------------#
+@permission_classes((AllowAny,))
+@api_view(['GET'])
+def eventProjectListFun(request):
+    projects_Data = eventProject.objects.all().filter(isDelete='No')
+    projectList = []
+    for pr in projects_Data:
+        x={
+            'id':pr.id,
+            'projectYear':pr.projectYear,
+            'password':pr.password,
+            'created_at': pr.created_at,
+            'updated_at': pr.updated_at,
+            'created_by': pr.created_by,
+            'updated_by': pr.updated_by,
+        }
+        projectList.append(x) 
+    return JsonResponse({'eventProjects': projectList, 'status': True})
+
+#------------------- Api For Add Event Projects-------------------#
+@api_view(['POST'])
+def add_eventProject(request):
+    response = request.data
+    check_db = eventProject()
+
+    if 'projectYear' in request.POST:
+        check_db.projectYear = response['projectYear']
+
+    if 'password' in request.POST:
+        check_db.password = response['password']
+ 
+    check_db.created_by = "Admin"
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Edit Event Projects-------------------#
+@api_view(['POST'])
+def edit_eventProject(request):
+    response = request.data
+    check_db = eventProject.objects.get(id=response['id'])
+
+    if 'projectYear' in request.POST:
+        check_db.projectYear = response['projectYear']
+
+    if 'password' in request.POST:
+        check_db.password = response['password']
+
+    check_db.updated_by = "Admin"
+    check_db.save()
+
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})
+
+#------------------- Api For Delete Event Projects -------------------#
+@api_view(['POST'])
+def delete_eventProject(request):
+    response = request.data
+    check_db = eventProject.objects.get(id=response['id'])
+    check_db.isDelete = response['isDelete']
+    check_db.save()
+    return JsonResponse({'status': True, "message": "Record Updated Successfully"})

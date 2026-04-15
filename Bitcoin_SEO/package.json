@@ -17,6 +17,7 @@
     "ajv": "^8.18.0",
     "compression": "^1.8.1",
     "country-list": "^2.4.1",
+    "currency-list": "^1.0.8",
     "express": "^4.21.2",
     "formdata-node": "^6.0.3",
     "js-cookie": "^3.0.5",

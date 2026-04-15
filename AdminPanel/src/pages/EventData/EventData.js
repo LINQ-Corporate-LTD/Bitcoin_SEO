@@ -63,6 +63,66 @@ const EventData = () => {
   const [loading, setloading] = useState(false);
   let color = "#405189";
 
+  const [contactHubspotId, setContactHubspotId] = useState("");
+  const [eventCityShortCode, setEventCityShortCode] = useState("");
+  const [eventColorName, setEventColorName] = useState("");
+  const [eventPostponed, setEventPostponed] = useState("");
+  const [eventShortDate, setEventShortDate] = useState("");
+  const [eventShortLocation, setEventShortLocation] = useState("");
+  const [favicon, setFavicon] = useState("");
+  const [googleTranslate, setGoogleTranslate] = useState({
+    label: "False",
+    value: "false",
+  });
+  const [hubspotDisposition, setHubspotDisposition] = useState("");
+  const [hubspotEmailStatus, setHubspotEmailStatus] = useState("");
+  const [hubspotId, setHubspotId] = useState("");
+  const [industryName, setIndustryName] = useState("");
+  const [previousAgenda, setPreviousAgenda] = useState("");
+  const [recaptchaKey, setRecaptchaKey] = useState("");
+  const [stripeMode, setStripeMode] = useState({
+    label: "Test",
+    value: "Test",
+  });
+  const [currencyPosition, setCurrencyPosition] = useState({
+    label: "Top-Left",
+    value: "Top-Left",
+  });
+  const [editorStyle, setEditorStyle] = useState("");
+  const [headerContent, setHeaderContent] = useState("");
+  const [headerType, setHeaderType] = useState({
+    label: "Video",
+    value: "Video",
+  });
+  const [eventShortCode, setEventShortCode] = useState("");
+
+  // Dropdown options
+  const agendaVersionOption = [
+    { label: "Version-1", value: "Version-1" },
+    { label: "Version-2", value: "Version-2" },
+  ];
+
+  const googleTranslateOptions = [
+    { label: "True", value: "true" },
+    { label: "False", value: "false" },
+  ];
+
+  const stripeModeOptions = [
+    { label: "Live", value: "Live" },
+    { label: "Test", value: "Test" },
+  ];
+
+  const currencyPositionOptions = [
+    { label: "Top-Left", value: "Top-Left" },
+    { label: "Top-Right", value: "Top-Right" },
+    { label: "Bottom-Left", value: "Bottom-Left" },
+    { label: "Bottom-Right", value: "Bottom-Right" },
+  ];
+
+  const headerTypeOptions = [
+    { label: "Video", value: "Video" },
+    { label: "Image", value: "Image" },
+  ];
   useEffect(() => {
     callGetEventDataApi();
     // eslint-disable-next-line
@@ -74,7 +134,10 @@ const EventData = () => {
     const requestOptions = {
       method: "GET",
     };
-    fetch(`https://harsh7541.pythonanywhere.com/admin1/homepagedata`, requestOptions)
+    fetch(
+      `https://harsh7541.pythonanywhere.com/admin1/homepagedata`,
+      requestOptions,
+    )
       .then((response) => response.json())
       .then((data) => {
         if (
@@ -106,60 +169,158 @@ const EventData = () => {
         }, 1000);
       });
   };
+  // useEffect(() => {
+  //   if (eventData && Object.keys(eventData).length > 0) {
+  //     console.log("eventData: ", eventData);
+  //     if (eventData?.homeVideoSctionEventDetails?.length > 0) {
+  //       setEventName(eventData?.homeVideoSctionEventDetails[0]?.eventName);
+  //       setEventYear(eventData?.homeVideoSctionEventDetails[0]?.eventYear);
+  //       setEventDate(eventData?.homeVideoSctionEventDetails[0]?.eventDate);
+  //       setEventLocation(
+  //         eventData?.homeVideoSctionEventDetails[0]?.eventLocation
+  //       );
+  //       setIsSeoEnable(
+  //         eventData?.homeVideoSctionEventDetails[0]?.isSeoEnable
+  //       );
+  //       setSelectedAgendaVersion(
+  //         eventData?.homeVideoSctionEventDetails[0]?.agendaVersion,
+  //       );
+  //     }
+  //     if (eventData?.navLogos?.length > 0) {
+  //       setNavWhiteLogo(eventData?.navLogos[0]?.whiteLogo);
+  //       setNavBlackLogo(eventData?.navLogos[0]?.blackLogo);
+  //     }
+
+  //     if (eventData?.homeVideoSctionSettings?.length > 0) {
+  //       setVideomp4(eventData?.homeVideoSctionSettings[0]?.videoLinkmp4);
+  //       setVideoWebm(eventData?.homeVideoSctionSettings[0]?.videoLinkwebm);
+  //       setEventDetailBackImage(
+  //         eventData?.homeVideoSctionSettings[0]?.eventDetailBackImage
+  //       );
+  //       setStataticBgPattern(
+  //         eventData?.homeVideoSctionSettings[0]?.eventStataticsBackImage
+  //       );
+  //       setExpertSpeakerBgPattern(
+  //         eventData?.homeVideoSctionSettings[0]?.eventExpertSpeakerBackImage
+  //       );
+  //       setVideoReplaceImage(
+  //         eventData?.homeVideoSctionSettings[0]?.videoReplaceImage
+  //       );
+  //     }
+
+  //     if (eventData?.eventGeneralSettings?.length > 0) {
+  //       setPurchaseTax(eventData?.eventGeneralSettings[0]?.purchaseTaxPercent);
+  //       setCurrencyName(eventData?.eventGeneralSettings[0]?.currencyName);
+  //       setCurrencySymbol(eventData?.eventGeneralSettings[0]?.currencySymbol);
+  //     }
+
+  //     if (eventData?.themeSetting?.length > 0) {
+  //       setPrimaryColor(eventData?.themeSetting[0]?.primaryColor);
+  //       setSeconaryColor(eventData?.themeSetting[0]?.secondaryColor);
+  //       setLightColor(eventData?.themeSetting[0]?.lightColor);
+  //       setDarkColor(eventData?.themeSetting[0]?.darkColor);
+  //       setGradientColor(eventData?.themeSetting[0]?.gradientColor);
+  //     }
+  //   }
+
+  //   // eslint-disable-next-line
+  // }, [eventData]);
+
   useEffect(() => {
     if (eventData && Object.keys(eventData).length > 0) {
-      console.log("eventData: ", eventData);
       if (eventData?.homeVideoSctionEventDetails?.length > 0) {
-        setEventName(eventData?.homeVideoSctionEventDetails[0]?.eventName);
-        setEventYear(eventData?.homeVideoSctionEventDetails[0]?.eventYear);
-        setEventDate(eventData?.homeVideoSctionEventDetails[0]?.eventDate);
-        setEventLocation(
-          eventData?.homeVideoSctionEventDetails[0]?.eventLocation
-        );
-        setIsSeoEnable(
-          eventData?.homeVideoSctionEventDetails[0]?.isSeoEnable
-        );
-        setSelectedAgendaVersion(
-          eventData?.homeVideoSctionEventDetails[0]?.agendaVersion,
-        );
+        const evDetail = eventData.homeVideoSctionEventDetails[0];
+        setEventName(evDetail?.eventName);
+        setEventYear(evDetail?.eventYear);
+        setEventDate(evDetail?.eventDate);
+        setEventLocation(evDetail?.eventLocation);
+        setIsSeoEnable(evDetail?.isSeoEnable);
+        setContactHubspotId(evDetail?.contactHubspotId || "");
+        setEventCityShortCode(evDetail?.eventCityShortCode || "");
+        setEventColorName(evDetail?.eventColorName || "");
+        setEventPostponed(evDetail?.eventPostponed || "");
+        setEventShortDate(evDetail?.eventShortDate || "");
+        setEventShortLocation(evDetail?.eventShortLocation || "");
+        setHubspotDisposition(evDetail?.hubspotDisposition || "");
+        setHubspotEmailStatus(evDetail?.hubspotEmailStatus || "");
+        setHubspotId(evDetail?.hubspotId || "");
+        setIndustryName(evDetail?.industryName || "");
+        setPreviousAgenda(evDetail?.previousAgenda || "");
+        setRecaptchaKey(evDetail?.recaptchaKey || "");
+        setEventShortCode(evDetail?.eventShortCode || "");
+        if (evDetail?.favicon) setFavicon(evDetail.favicon);
+        if (evDetail?.googleTranslate) {
+          const val = evDetail.googleTranslate;
+          setGoogleTranslate(
+            googleTranslateOptions.find((o) => o.value === val) || {
+              label: "False",
+              value: "false",
+            },
+          );
+        }
+        if (evDetail?.stripeMode) {
+          setStripeMode(
+            stripeModeOptions.find((o) => o.value === evDetail.stripeMode) || {
+              label: "Test",
+              value: "Test",
+            },
+          );
+        }
+        if (evDetail?.agendaVersion) {
+          setSelectedAgendaVersion(
+            eventData?.homeVideoSctionEventDetails[0]?.agendaVersion,
+          );
+        }
       }
+
       if (eventData?.navLogos?.length > 0) {
         setNavWhiteLogo(eventData?.navLogos[0]?.whiteLogo);
         setNavBlackLogo(eventData?.navLogos[0]?.blackLogo);
       }
 
       if (eventData?.homeVideoSctionSettings?.length > 0) {
-        setVideomp4(eventData?.homeVideoSctionSettings[0]?.videoLinkmp4);
-        setVideoWebm(eventData?.homeVideoSctionSettings[0]?.videoLinkwebm);
-        setEventDetailBackImage(
-          eventData?.homeVideoSctionSettings[0]?.eventDetailBackImage
-        );
-        setStataticBgPattern(
-          eventData?.homeVideoSctionSettings[0]?.eventStataticsBackImage
-        );
-        setExpertSpeakerBgPattern(
-          eventData?.homeVideoSctionSettings[0]?.eventExpertSpeakerBackImage
-        );
-        setVideoReplaceImage(
-          eventData?.homeVideoSctionSettings[0]?.videoReplaceImage
-        );
+        const vidSetting = eventData.homeVideoSctionSettings[0];
+        setVideomp4(vidSetting?.videoLinkmp4);
+        setVideoWebm(vidSetting?.videoLinkwebm);
+        setEventDetailBackImage(vidSetting?.eventDetailBackImage);
+        setStataticBgPattern(vidSetting?.eventStataticsBackImage);
+        setExpertSpeakerBgPattern(vidSetting?.eventExpertSpeakerBackImage);
+        setVideoReplaceImage(vidSetting?.videoReplaceImage);
       }
 
       if (eventData?.eventGeneralSettings?.length > 0) {
-        setPurchaseTax(eventData?.eventGeneralSettings[0]?.purchaseTaxPercent);
-        setCurrencyName(eventData?.eventGeneralSettings[0]?.currencyName);
-        setCurrencySymbol(eventData?.eventGeneralSettings[0]?.currencySymbol);
+        const genSetting = eventData.eventGeneralSettings[0];
+        setPurchaseTax(genSetting?.purchaseTaxPercent);
+        setCurrencyName(genSetting?.currencyName);
+        setCurrencySymbol(genSetting?.currencySymbol);
+        if (genSetting?.currencyPosition) {
+          setCurrencyPosition(
+            currencyPositionOptions.find(
+              (o) => o.value === genSetting.currencyPosition,
+            ) || { label: "Top-Left", value: "Top-Left" },
+          );
+        }
       }
 
       if (eventData?.themeSetting?.length > 0) {
-        setPrimaryColor(eventData?.themeSetting[0]?.primaryColor);
-        setSeconaryColor(eventData?.themeSetting[0]?.secondaryColor);
-        setLightColor(eventData?.themeSetting[0]?.lightColor);
-        setDarkColor(eventData?.themeSetting[0]?.darkColor);
-        setGradientColor(eventData?.themeSetting[0]?.gradientColor);
+        const theme = eventData.themeSetting[0];
+        setPrimaryColor(theme?.primaryColor);
+        setSeconaryColor(theme?.secondaryColor);
+        setLightColor(theme?.lightColor);
+        setDarkColor(theme?.darkColor);
+        setGradientColor(theme?.gradientColor);
+        setEditorStyle(theme?.editorStyle || "");
+        setHeaderContent(theme?.headerContent || "");
+        if (theme?.headerType) {
+          setHeaderType(
+            headerTypeOptions.find((o) => o.value === theme.headerType) || {
+              label: "Video",
+              value: "Video",
+            },
+          );
+        }
       }
     }
-
     // eslint-disable-next-line
   }, [eventData]);
 
@@ -173,7 +334,11 @@ const EventData = () => {
   return (
     <div className="page-content">
       <Container fluid>
-        <BreadCrumb title="Event General Detail" pageTitle="Dashboards" pageLink="/dashboard" />
+        <BreadCrumb
+          title="Event General Detail"
+          pageTitle="Dashboards"
+          pageLink="/dashboard"
+        />
         <Row>
           <Col lg={12}>
             <Card>
@@ -253,7 +418,7 @@ const EventData = () => {
                   </div>
                 </Row>
                 <Row>
-                  <div className="col-md-6 mt-2">
+                  <div className="col-md-4 mt-2">
                     <div>
                       <Label htmlFor="sort-order" className="form-label">
                         Event Date{" "}
@@ -269,6 +434,23 @@ const EventData = () => {
                       />
                     </div>
                   </div>
+                  <div className="col-md-2 mt-2">
+                    <div>
+                      <Label htmlFor="sort-order" className="form-label">
+                        Event Short Code{" "}
+                      </Label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Event Short Code"
+                        aria-label="name"
+                        aria-describedby="basic-addon1"
+                        value={eventShortCode}
+                        disabled
+                      />
+                    </div>
+                  </div>
+
                   <div className="col-md-6 mt-2">
                     <div>
                       <Label htmlFor="sort-order" className="form-label">
@@ -284,6 +466,60 @@ const EventData = () => {
                         disabled
                       />
                     </div>
+                  </div>
+                </Row>
+                <Row>
+                  <div className="col-md-6 mt-2">
+                    <Label className="form-label">Event Short Date</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Event Short Date"
+                      value={eventShortDate}
+                      disabled
+                    />
+                  </div>
+                  <div className="col-md-6 mt-2">
+                    <Label className="form-label">Event Short Location</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Event Short Location"
+                      value={eventShortLocation}
+                      disabled
+                    />
+                  </div>
+                </Row>
+                <Row>
+                  <div className="col-md-4 mt-2">
+                    <Label className="form-label">Event Color Name</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Event Color Name"
+                      value={eventColorName}
+                      disabled
+                    />
+                  </div>
+                  <div className="col-md-4 mt-2">
+                    <Label className="form-label">Event City Short Code</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Event City Short Code"
+                      value={eventCityShortCode}
+                      disabled
+                    />
+                  </div>
+                  <div className="col-md-4 mt-2">
+                    <Label className="form-label">Event Postponed</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Event Postponed"
+                      value={eventPostponed}
+                      disabled
+                    />
                   </div>
                 </Row>
                 <Row>
@@ -335,6 +571,30 @@ const EventData = () => {
                           alt="uploaded-Logo"
                           height={100}
                           width={100}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </Row>
+                <Row>
+                  <div className="col-md-6 mt-2">
+                    <Label className="form-label">Favicon</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Event Location"
+                      aria-label="name"
+                      aria-describedby="basic-addon1"
+                      value={favicon}
+                      disabled
+                    />
+                    {favicon?.length > 0 && (
+                      <div className="mt-2">
+                        <img
+                          src={favicon}
+                          alt="favicon"
+                          height={50}
+                          width={50}
                         />
                       </div>
                     )}
@@ -455,7 +715,7 @@ const EventData = () => {
                   </div>
                 </Row>
                 <Row>
-                  <div className="col-md-4 mt-2">
+                  <div className="col-md-3 mt-2">
                     <div>
                       <Label htmlFor="sort-order" className="form-label">
                         Purchase Tax(%){" "}
@@ -471,7 +731,7 @@ const EventData = () => {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4 mt-2">
+                  <div className="col-md-3 mt-2">
                     <div>
                       <Label htmlFor="sort-order" className="form-label">
                         Currency Name{" "}
@@ -487,7 +747,7 @@ const EventData = () => {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4 mt-2">
+                  <div className="col-md-3 mt-2">
                     <div>
                       <Label htmlFor="sort-order" className="form-label">
                         Currency Symbol{" "}
@@ -502,6 +762,18 @@ const EventData = () => {
                         disabled
                       />
                     </div>
+                  </div>
+                  <div className="col-md-3 mt-2">
+                    <Label className="form-label">Currency Position</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Currency Symbol"
+                      aria-label="name"
+                      aria-describedby="basic-addon1"
+                      value={currencyPosition}
+                      disabled
+                    />
                   </div>
                 </Row>
                 <Row>
@@ -612,6 +884,165 @@ const EventData = () => {
                         />
                       </div>
                     )}
+                  </div>
+                </Row>
+                {/* ── NEW: Header Type / Google Translate / Stripe Mode ── */}
+                <Row>
+                  <div className="col-md-4 mt-2">
+                    <Label className="form-label">Header Type</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Video Replace Image"
+                      aria-label="name"
+                      aria-describedby="basic-addon1"
+                      value={headerType}
+                      disabled
+                    />
+                  </div>
+                  <div className="col-md-4 mt-2">
+                    <Label className="form-label">Google Translate</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Video Replace Image"
+                      aria-label="name"
+                      aria-describedby="basic-addon1"
+                      value={googleTranslate}
+                      disabled
+                    />
+                  </div>
+                  <div className="col-md-4 mt-2">
+                    <Label className="form-label">Stripe Mode</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Video Replace Image"
+                      aria-label="name"
+                      aria-describedby="basic-addon1"
+                      value={stripeMode}
+                      disabled
+                    />
+                  </div>
+                </Row>
+
+                {/* ── NEW: Hubspot fields ── */}
+                <Row>
+                  <div className="col-md-4 mt-2">
+                    <Label className="form-label">Hubspot Id</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Hubspot Id"
+                      value={hubspotId}
+                      disabled
+                    />
+                  </div>
+                  <div className="col-md-4 mt-2">
+                    <Label className="form-label">Contact Hubspot Id</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Contact Hubspot Id"
+                      value={contactHubspotId}
+                      disabled
+                    />
+                  </div>
+                  <div className="col-md-4 mt-2">
+                    <Label className="form-label">Hubspot Disposition</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Hubspot Disposition"
+                      value={hubspotDisposition}
+                      disabled
+                    />
+                  </div>
+                </Row>
+
+                <Row>
+                  <div className="col-md-4 mt-2">
+                    <Label className="form-label">Hubspot Email Status</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Hubspot Email Status"
+                      value={hubspotEmailStatus}
+                      disabled
+                    />
+                  </div>
+                  <div className="col-md-4 mt-2">
+                    <Label className="form-label">Industry Name</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Industry Name"
+                      value={industryName}
+                      disabled
+                    />
+                  </div>
+                  <div className="col-md-4 mt-2">
+                    <Label className="form-label">Previous Agenda</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Previous Agenda"
+                      value={previousAgenda}
+                      disabled
+                    />
+                  </div>
+                </Row>
+
+                {/* ── NEW: Recaptcha Key ── */}
+                <Row>
+                  <div className="col-md-12 mt-2">
+                    <Label className="form-label">Recaptcha Key</Label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter Recaptcha Key"
+                      value={recaptchaKey}
+                      disabled
+                    />
+                  </div>
+                </Row>
+
+                {/* ── NEW: Editor Style (scrollable textarea) ── */}
+                <Row>
+                  <div className="col-md-12 mt-2">
+                    <Label className="form-label">Style EditorStyle</Label>
+                    <Input
+                      type="textarea"
+                      className="form-control"
+                      placeholder="Enter Editor Style CSS"
+                      value={editorStyle}
+                      disabled
+                      style={{
+                        height: "160px",
+                        resize: "vertical",
+                        overflowY: "scroll",
+                        fontFamily: "monospace",
+                        fontSize: "13px",
+                      }}
+                    />
+                  </div>
+                </Row>
+
+                {/* ── NEW: Header Content (textarea) ── */}
+                <Row>
+                  <div className="col-md-12 mt-2">
+                    <Label className="form-label">Header Content</Label>
+                    <Input
+                      type="textarea"
+                      className="form-control"
+                      placeholder="Enter Header Content"
+                      value={headerContent}
+                      disabled
+                      style={{
+                        height: "120px",
+                        resize: "vertical",
+                      }}
+                    />
                   </div>
                 </Row>
               </CardBody>

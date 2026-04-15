@@ -135,16 +135,16 @@ const SlideShareAccessors = () => {
                 accessorKey: "email",
                 filterable: false,
             },
-            {
-                id: "password",
-                header: "Password",
-                accessorKey: "eventPassword",
-                filterable: false,
-            },
+            // {
+            //     id: "password",
+            //     header: "Password",
+            //     accessorKey: "eventPassword",
+            //     filterable: false,
+            // },
             {
                 id: "yearId",
                 header: "Year",
-                accessorKey: "projectYear",
+                accessorKey: "relatedProjectYear.projectYear",
                 filterable: false,
             },
             {

@@ -4,13 +4,28 @@ from django.db.models.deletion import CASCADE
 
 class eventDetails(models.Model):
     eventName = models.CharField(default="",max_length=100,null=True, blank=True)
-    eventType = models.CharField(default="",max_length=100,null=True, blank=True)
-    eventYear = models.CharField(default="",max_length=100,null=True, blank=True)
+    eventShortCode = models.CharField(default="",max_length=100,null=True, blank=True)
     eventDate = models.CharField(default="",max_length=100,null=True, blank=True)
     eventLocation = models.CharField(default="",max_length=100,null=True, blank=True)
-    eventShortCode = models.CharField(default="",max_length=100,null=True, blank=True)
+    eventYear = models.CharField(default="",max_length=100,null=True, blank=True)
+    eventShortDate = models.CharField(default="",max_length=100,null=True, blank=True)
+    eventShortLocation = models.CharField(default="",max_length=100,null=True, blank=True)
+    eventColorName = models.CharField(default="",max_length=100,null=True, blank=True)
+    eventCityShortCode = models.CharField(default="",max_length=100,null=True, blank=True)
+    eventPostponed = models.CharField(default="false",max_length=100,null=True, blank=True)
+    industryName = models.CharField(default="",max_length=100,null=True, blank=True)
+    previousAgenda = models.CharField(default="false",max_length=100,null=True, blank=True)
+    hubspotDisposition = models.CharField(default="",max_length=100,null=True, blank=True)
+    hubspotEmailStatus = models.CharField(default="",max_length=100,null=True, blank=True)
+    eventType = models.CharField(default="",max_length=100,null=True, blank=True)
     isSeoEnable = models.CharField(default="",max_length=100,null=True, blank=True)
     agendaVersion = models.CharField(default="",max_length=100,null=True, blank=True)
+    stripeMode = models.CharField(default="",max_length=100,null=True, blank=True)
+    recaptchaKey = models.CharField(default="",max_length=150,null=True, blank=True)
+    hubspotId = models.CharField(default="",max_length=150,null=True, blank=True)
+    contactHubspotId = models.CharField(default="",max_length=150,null=True, blank=True)
+    googleTranslate = models.CharField(default="false",max_length=150,null=True, blank=True)
+    favicon = models.CharField(default="",max_length=150,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.CharField(null=False,max_length=50,default='No')
@@ -336,6 +351,7 @@ class eventGeneralSettings(models.Model):
     purchaseTaxPercent = models.CharField(default="",max_length=150,null=True, blank=True)
     currencyName = models.CharField(default="",max_length=150,null=True, blank=True)
     currencySymbol = models.CharField(default="",max_length=150,null=True, blank=True)
+    currencyPosition = models.CharField(default="",max_length=150,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.CharField(null=False,max_length=50,default='No')
@@ -497,7 +513,16 @@ class eventLeaders(models.Model):
     updated_by = models.CharField(null=False,max_length=50,default='No')
     isDelete = models.CharField(default="No",max_length=10)
 
+class eventProject(models.Model):
+    projectYear = models.CharField(default="",max_length=100,null=True, blank=True)
+    password = models.CharField(default="",max_length=100,null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.CharField(null=False,max_length=50,default='No')
+    updated_by = models.CharField(null=False,max_length=50,default='No')
+    isDelete = models.CharField(default="No",max_length=10)
 class eventSlideShares(models.Model):
+    projectId = models.ForeignKey(eventProject,default='',on_delete=CASCADE,null=True,blank=True)
     author = models.CharField(default="",max_length=100,null=True, blank=True)
     authorCompany = models.CharField(default="",max_length=100,null=True, blank=True)
     heading = models.CharField(default="", max_length=200, null=True, blank=True)
@@ -511,6 +536,7 @@ class eventSlideShares(models.Model):
     isDelete = models.CharField(default="No",max_length=10)
 
 class eventSlideSharesAttandees(models.Model):
+    projectId = models.ForeignKey(eventProject,default='',on_delete=CASCADE,null=True,blank=True)
     companyName = models.CharField(default="",max_length=100,null=True, blank=True)
     delegateName = models.CharField(default="",max_length=100,null=True, blank=True)
     projectYear = models.CharField(default="",max_length=100,null=True, blank=True)
@@ -521,6 +547,7 @@ class eventSlideSharesAttandees(models.Model):
     isDelete = models.CharField(default="No",max_length=10)
 
 class slideSharesAccessPersons(models.Model):
+    projectId = models.ForeignKey(eventProject,default='',on_delete=CASCADE,null=True,blank=True)
     email = models.CharField(default="",max_length=100,null=True, blank=True)
     eventPassword = models.CharField(default="",max_length=100,null=True, blank=True)
     projectYear = models.CharField(default="",max_length=100,null=True, blank=True)

@@ -492,13 +492,20 @@ import Footer from "../Footer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
-
+import { useApiData } from "../../src/common/ApiContext";
 const TOKEN_KEY = "slideShareToken";
 const EMAIL_KEY = "slideShareEmail";
 const EXPIRY_KEY = "slideShareExpiry";
 
 const SlideShare = () => {
     const navigate = useNavigate();
+    const {
+    homeVideoSettings,
+    eventDetails,
+    eventGeneralSettings,
+    themeSettings,
+  } = useApiData();
+  console.log('eventDetails: ', eventDetails);
 
     const [verify, setVerify] = useState("false");
     const [userEmail, setUserEmail] = useState("");
@@ -644,7 +651,7 @@ const SlideShare = () => {
                     body: JSON.stringify({
                         email: emailInput.trim(),
                         eventPassword: passwordInput,
-                        projectYear: "2026",   // adjust if dynamic
+                        projectYear: eventDetails?.eventYear,   // adjust if dynamic
                     }),
                 }
             );

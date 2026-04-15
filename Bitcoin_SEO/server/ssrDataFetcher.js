@@ -520,6 +520,12 @@ async function fetchSSRData(pathname) {
   // }
 
   // ---- Default: all other pages (contact, booking, forms, etc.) — theme only ----
+
+  if (pathname === "/securelogin") {
+    const home = await fetchHomeData();
+    return { ...base, home };
+  }
+  
   return { ...base };
 }
 
