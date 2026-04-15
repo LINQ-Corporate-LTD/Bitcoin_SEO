@@ -771,7 +771,7 @@ const EventData = () => {
                       placeholder="Enter Currency Symbol"
                       aria-label="name"
                       aria-describedby="basic-addon1"
-                      value={currencyPosition}
+                      value={currencyPosition?.label}
                       disabled
                     />
                   </div>
@@ -896,7 +896,7 @@ const EventData = () => {
                       placeholder="Enter Video Replace Image"
                       aria-label="name"
                       aria-describedby="basic-addon1"
-                      value={headerType}
+                      value={headerType?.label}
                       disabled
                     />
                   </div>
@@ -908,7 +908,7 @@ const EventData = () => {
                       placeholder="Enter Video Replace Image"
                       aria-label="name"
                       aria-describedby="basic-addon1"
-                      value={googleTranslate}
+                      value={googleTranslate?.label}
                       disabled
                     />
                   </div>
@@ -920,7 +920,7 @@ const EventData = () => {
                       placeholder="Enter Video Replace Image"
                       aria-label="name"
                       aria-describedby="basic-addon1"
-                      value={stripeMode}
+                      value={stripeMode?.label}
                       disabled
                     />
                   </div>

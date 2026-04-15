@@ -846,7 +846,7 @@ const AddEventData = () => {
       symbol: details.symbol_native, // ✅ this works fine
     }),
   );
-  console.log('currencyOptions: ', currencyOptions);
+  console.log("currencyOptions: ", currencyOptions);
 
   const [eventData, setEventData] = useState([]);
   // Existing states
@@ -1588,12 +1588,24 @@ const AddEventData = () => {
                   </div>
                   <div className="col-md-3 mt-2">
                     <Label className="form-label">Currency Name</Label>
-                    <Input
+                    {/* <Input
                       type="text"
                       className="form-control"
                       placeholder="Enter Currency Name"
                       value={currencyName}
                       onChange={(e) => setCurrencyName(e.target.value)}
+                    /> */}
+                    <Select
+                      value={currencyOptions.find((o) => o.label === currencyName) || null}
+                      onChange={(selected) => {
+                        console.log('selected: ', selected);
+                        setCurrencyName(selected?.label || "");
+                        // setCurrencySymbol(selected?.symbol || "");
+                      }}
+                      options={currencyOptions}
+                      classNamePrefix="select2-selection form-select"
+                      className="w-100"
+                      placeholder="Select Currency"
                     />
                   </div>
                   <div className="col-md-3 mt-2">
