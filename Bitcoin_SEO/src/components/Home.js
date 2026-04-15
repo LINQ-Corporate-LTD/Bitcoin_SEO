@@ -222,6 +222,21 @@ const Home = () => {
           </div>
         </div>
         <IndustryTrend />
+        {/* SEO internal links — same hidden pattern used in Footer.js; zero visual impact */}
+        <div
+          style={{
+            visibility: "hidden",
+            height: 0,
+            overflow: "hidden",
+            position: "absolute",
+          }}
+        >
+          <a href="/">Bitcoin Innovation &amp; Market Evolution 2026</a>
+          <a href="/">Bitcoin innovation trends</a>
+          <a href="/">market evolution insights</a>
+          <a href="/">crypto innovation analysis</a>
+          <a href="/">Bitcoin market conference 2026</a>
+        </div>
         <RelatedEventsSection />
       </article>
       <Footer />
