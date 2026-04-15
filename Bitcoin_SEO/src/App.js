@@ -1,9 +1,10 @@
 // src/App.js
 // Theme is now applied via SSR-injected <style> tag in <head>.
 // No client-side API calls here — all data flows through window.__INITIAL_DATA__.
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import ContactUs from "./components/ContactUs";
 import ScrollToTop from "./ScrollToTop";
 import Home from "./components/Home";
@@ -50,8 +51,64 @@ function App({ ssrData }) {
   // ✅ Theme is injected server-side as <style id="ssr-theme"> in <head>.
   // No client-side theme fetch needed. The CSS variables are already applied.
 
+  const setFavicon = (url) => {
+    if (!url) return;
+    let link = document.querySelector("link[rel*='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.type = "image/png";
+    link.href = url + "?v=" + new Date().getTime(); // prevent caching
+  };
+
+  const cleanCSS = (css = "") => {
+    return css.replace(/\\r\\n/g, "").trim();
+  };
+
+  const injectDynamicStyles = (css) => {
+    if (!css) return;
+    let styleTag = document.getElementById("dynamic-editor-style");
+    if (!styleTag) {
+      styleTag = document.createElement("style");
+      styleTag.id = "dynamic-editor-style";
+      document.head.appendChild(styleTag);
+    }
+    styleTag.innerHTML = cleanCSS(css);
+  };
+
+  useEffect(() => {
+    const faviconUrl = initialData?.home?.homeVideoSctionEventDetails?.[0]?.favicon;
+    if (faviconUrl) {
+      setFavicon(faviconUrl);
+    }
+
+    const cssFromBackend = initialData?.home?.themeSetting?.[0]?.editorStyle;
+    if (cssFromBackend) {
+      injectDynamicStyles(cssFromBackend);
+    }
+  }, [initialData]);
+
+  const editorStyle = initialData?.home?.themeSetting?.[0]?.editorStyle;
+
   return (
     <>
+      <Helmet>
+        <link
+          rel="icon"
+          href={initialData?.home?.homeVideoSctionEventDetails?.[0]?.favicon}
+        />
+        <link
+          rel="apple-touch-icon"
+          href={initialData?.home?.homeVideoSctionEventDetails?.[0]?.favicon}
+        />
+        {editorStyle && (
+          <style id="dynamic-editor-style-ssr">
+            {cleanCSS(editorStyle)}
+          </style>
+        )}
+      </Helmet>
       <ApiDataProvider initialData={initialData}>
         <ToastContainer
           theme="light"
