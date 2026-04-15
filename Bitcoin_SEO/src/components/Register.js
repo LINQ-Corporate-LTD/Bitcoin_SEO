@@ -382,7 +382,7 @@
 //                             : "#b2b2b2",
 //                       }}
 //                     >
-//                       <sup>{eventGeneralSettings?.currencyName}</sup>
+//                       <sup>{eventGeneralSettings?.currencySymbol}</sup>
 //                       {card?.deligatePackagePrice}
 //                     </h2>
 //                     <div>
@@ -837,6 +837,56 @@ const Register = () => {
       [id]: Math.max((prev[id] || 1) - 1, 1),
     }));
 
+  const renderPrice = (card) => {
+    const position = eventGeneralSettings?.currencyPosition;
+    const symbol = eventGeneralSettings?.currencySymbol;
+    const price = card?.deligatePackagePrice;
+
+    if (position === "Top-Left") {
+      return (
+        <>
+          <sup>{symbol}</sup>
+          {price}
+        </>
+      );
+    }
+
+    if (position === "Top-Right") {
+      return (
+        <>
+          {price}
+          <sup>{symbol}</sup>
+        </>
+      );
+    }
+
+    if (position === "Bottom-Left") {
+      return (
+        <>
+          <sup style={{ verticalAlign: "sub", marginTop: "20px" }}>{symbol}</sup>
+          {price}
+        </>
+      );
+    }
+
+    if (position === "Bottom-Right") {
+      return (
+        <>
+          {price}
+          <sup style={{ verticalAlign: "sub", marginTop: "20px" }}>{symbol}</sup>
+        </>
+      );
+    }
+
+    // fallback
+    return (
+      <>
+        <sup>{symbol}</sup>
+        {price}
+      </>
+    );
+  };
+
   const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Book Delegate`;
   const seoDesc = "Book your pass for Bitcoin Innovation & Market Evolution 2026. Choose delegate packages, access networking and materials.";
 
@@ -943,8 +993,7 @@ const Register = () => {
                             : "#b2b2b2",
                       }}
                     >
-                      <sup>{eventGeneralSettings?.currencyName}</sup>
-                      {card?.deligatePackagePrice}
+                      {renderPrice(card)}
                     </h2>
                     <div>
                       <p>Select number of Delegates</p>
