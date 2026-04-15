@@ -828,7 +828,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/react";
 import "../../assets/css/dropzone.css";
 import Select from "react-select";
-import { getAll } from "currency-list";
+import currencyList from "currency-list";
 const override = css`
   display: block;
   margin: 0 auto;
@@ -838,14 +838,17 @@ const override = css`
 
 const AddEventData = () => {
   const navigate = useNavigate();
-  const [eventData, setEventData] = useState([]);
-  const allCurrencies = getAll("en");
-  const currencyOptions = Object.entries(allCurrencies).map(([code, details]) => ({
-  label: `${details.name} (${code})`,
-  value: code,
-  symbol: details.symbol,  // ← change symbol_native to symbol
-}));
+  const allCurrencies = currencyList.currencyList["en"];
+  const currencyOptions = Object.entries(allCurrencies).map(
+    ([code, details]) => ({
+      label: `${details.name} (${code})`,
+      value: code,
+      symbol: details.symbol_native, // ✅ this works fine
+    }),
+  );
   console.log('currencyOptions: ', currencyOptions);
+
+  const [eventData, setEventData] = useState([]);
   // Existing states
   const [eventName, setEventName] = useState("");
   const [eventYear, setEventYear] = useState("");
