@@ -63,13 +63,9 @@ const VideoSection = () => {
               }}
             >
               <div>
-                <h1>
-                  <span>
-                    Bitcoin Innovation
-                    <br /> & Market
-                  </span>
-                  &nbsp; <br />
-                  Evolution 2026
+                <h1 dangerouslySetInnerHTML={{
+                  __html: themeSettings?.headerContent
+                }}>
                 </h1>
               </div>
               <p className="HeaderTextLg">
