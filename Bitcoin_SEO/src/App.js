@@ -63,34 +63,12 @@ function App({ ssrData }) {
     link.href = url + "?v=" + new Date().getTime(); // prevent caching
   };
 
-  const cleanCSS = (css = "") => {
-    return css.replace(/\\r\\n/g, "").trim();
-  };
-
-  const injectDynamicStyles = (css) => {
-    if (!css) return;
-    let styleTag = document.getElementById("dynamic-editor-style");
-    if (!styleTag) {
-      styleTag = document.createElement("style");
-      styleTag.id = "dynamic-editor-style";
-      document.head.appendChild(styleTag);
-    }
-    styleTag.innerHTML = cleanCSS(css);
-  };
-
   useEffect(() => {
     const faviconUrl = initialData?.home?.homeVideoSctionEventDetails?.[0]?.favicon;
     if (faviconUrl) {
       setFavicon(faviconUrl);
     }
-
-    const cssFromBackend = initialData?.home?.themeSetting?.[0]?.editorStyle;
-    if (cssFromBackend) {
-      injectDynamicStyles(cssFromBackend);
-    }
   }, [initialData]);
-
-  const editorStyle = initialData?.home?.themeSetting?.[0]?.editorStyle;
 
   return (
     <>
@@ -103,11 +81,6 @@ function App({ ssrData }) {
           rel="apple-touch-icon"
           href={initialData?.home?.homeVideoSctionEventDetails?.[0]?.favicon}
         />
-        {editorStyle && (
-          <style id="dynamic-editor-style-ssr">
-            {cleanCSS(editorStyle)}
-          </style>
-        )}
       </Helmet>
       <ApiDataProvider initialData={initialData}>
         <ToastContainer
