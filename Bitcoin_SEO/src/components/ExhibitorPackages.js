@@ -28,6 +28,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TestimonialCarousel from "./TestimonialCarousel";
 import { Helmet } from "react-helmet-async";
+import { useApiData } from "../common/ApiContext";
+
 const leftArrowIcon =
   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
 const rightArrowIcon =
@@ -459,6 +461,13 @@ const ExhibitorPackages = () => {
     typeof window !== "undefined" ? window.innerWidth : 1200
   );
 
+  const {
+    homeVideoSettings,
+    eventDetails,
+    eventGeneralSettings,
+    themeSettings,
+  } = useApiData();
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -474,6 +483,56 @@ const ExhibitorPackages = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const renderPrice = (cardPrice) => {
+    const position = eventGeneralSettings?.currencyPosition;
+    const symbol = eventGeneralSettings?.currencySymbol;
+    const price = cardPrice;
+
+    if (position === "Top-Left") {
+      return (
+        <>
+          <sup>{symbol}</sup>
+          {price}
+        </>
+      );
+    }
+
+    if (position === "Top-Right") {
+      return (
+        <>
+          {price}
+          <sup>{symbol}</sup>
+        </>
+      );
+    }
+
+    if (position === "Bottom-Left") {
+      return (
+        <>
+          <sup style={{ verticalAlign: "sub", marginTop: "18px" }}>{symbol}</sup>
+          {price}
+        </>
+      );
+    }
+
+    if (position === "Bottom-Right") {
+      return (
+        <>
+          {price}
+          <sup style={{ verticalAlign: "sub", marginTop: "18px" }}>{symbol}</sup>
+        </>
+      );
+    }
+
+    // fallback
+    return (
+      <>
+        <sup>{symbol}</sup>
+        {price}
+      </>
+    );
+  };
 
   const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Sponsor Plans`;
   const seoDesc = "Explore sponsorship, booths and branding add-ons to boost visibility with decision-makers at Bitcoin Innovation & Market Evolution 2026.";
@@ -544,32 +603,38 @@ const ExhibitorPackages = () => {
                         <th>Benefits</th>
                         <th>
                           <h2>
-                            <sup>USD</sup>
-                            {sponsorPackageList[0]?.sponsorPackagePrice}
+                            {/* <sup>USD</sup>
+                            {sponsorPackageList[0]?.sponsorPackagePrice} */}
+                            {renderPrice(sponsorPackageList[0]?.sponsorPackagePrice)}
                           </h2>
                           <h3>
-                            <sup>USD</sup>
-                            {sponsorPackageList[0]?.sponsorPackageCuttingPrice}
+                            {/* <sup>USD</sup>
+                            {sponsorPackageList[0]?.sponsorPackageCuttingPrice} */}
+                            {renderPrice(sponsorPackageList[0]?.sponsorPackageCuttingPrice)}
                           </h3>
                         </th>
                         <th>
                           <h2>
-                            <sup>USD</sup>
-                            {sponsorPackageList[1]?.sponsorPackagePrice}
+                            {/* <sup>USD</sup>
+                            {sponsorPackageList[1]?.sponsorPackagePrice} */}
+                            {renderPrice(sponsorPackageList[1]?.sponsorPackagePrice)}
                           </h2>
                           <h3>
-                            <sup>USD</sup>
-                            {sponsorPackageList[1]?.sponsorPackageCuttingPrice}
+                            {/* <sup>USD</sup>
+                            {sponsorPackageList[1]?.sponsorPackageCuttingPrice} */}
+                            {renderPrice(sponsorPackageList[1]?.sponsorPackageCuttingPrice)}
                           </h3>
                         </th>
                         <th>
                           <h2>
-                            <sup>USD</sup>
-                            {sponsorPackageList[2]?.sponsorPackagePrice}
+                            {/* <sup>USD</sup>
+                            {sponsorPackageList[2]?.sponsorPackagePrice} */}
+                            {renderPrice(sponsorPackageList[2]?.sponsorPackagePrice)}
                           </h2>
                           <h3>
-                            <sup>USD</sup>
-                            {sponsorPackageList[2]?.sponsorPackageCuttingPrice}
+                            {/* <sup>USD</sup>
+                            {sponsorPackageList[2]?.sponsorPackageCuttingPrice} */}
+                            {renderPrice(sponsorPackageList[2]?.sponsorPackageCuttingPrice)}
                           </h3>
                         </th>
                       </tr>
@@ -914,7 +979,7 @@ const ExhibitorPackages = () => {
                         </div>
                         <div className="SponsorLanding_btn__QNo2m">
                           <button onClick={() =>
-                            navigate("/addsponsordelegate", {
+                            navigate("/sponsor-booking", {
                               state: { selectedPackage: sponsorPackageList[0] },
                             })
                           }>book your booth</button>
@@ -1007,7 +1072,7 @@ const ExhibitorPackages = () => {
                         </div>
                         <div className="SponsorLanding_btn__QNo2m">
                           <button onClick={() =>
-                            navigate("/addsponsordelegate", {
+                            navigate("/sponsor-booking", {
                               state: { selectedPackage: sponsorPackageList[1] },
                             })
                           }>book your booth</button>
@@ -1100,7 +1165,7 @@ const ExhibitorPackages = () => {
                         </div>
                         <div className="SponsorLanding_btn__QNo2m">
                           <button onClick={() =>
-                            navigate("/addsponsordelegate", {
+                            navigate("/sponsor-booking", {
                               state: { selectedPackage: sponsorPackageList[2] },
                             })
                           }>book your booth</button>

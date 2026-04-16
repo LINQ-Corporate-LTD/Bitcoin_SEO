@@ -282,16 +282,17 @@ async function fetchSSRData(pathname) {
   // parallel fetch burst ensures the server is alive and returning JSON.
   await get("toemails"); // lightweight endpoint, just to wake the process
 
-  // Always fetch theme + logoCarousel + navLogos + navItems (needed on every page)
-  const [theme, logoCarousel, navLogos, navItems, toEmails] = await Promise.all([
+  // Always fetch theme + logoCarousel + navLogos + navItems + home + toEmails (needed on every page)
+  const [theme, logoCarousel, navLogos, navItems, toEmails, home] = await Promise.all([
     fetchTheme(),
     fetchLogoCarousel(),
     fetchNavLogos(),
     fetchNavItems(),
     fetchToEmails(),
+    fetchHomeData(),
   ]);
 
-  const base = { theme, logoCarousel, navLogos, navItems, toEmails };
+  const base = { theme, logoCarousel, navLogos, navItems, toEmails, home };
 
   // ---- HOME ----
   if (pathname === "/" || pathname === "") {
@@ -403,9 +404,8 @@ async function fetchSSRData(pathname) {
 
   // ---- AGENDA (uses homepagedata + custom agenda endpoint) ----
   if (pathname === "/agenda") {
-    const home = await fetchHomeData();
     const speakers = await fetchSpeakers();
-    return { ...base, home, speakers };
+    return { ...base, speakers };
   }
 
   // ---- NEWS LIST ----
@@ -481,23 +481,18 @@ async function fetchSSRData(pathname) {
 
   // ---- REGISTER ----
   if (pathname === "/booking") {
-    const [delegatePackages, home] = await Promise.all([
-      fetchDelegatePackages(),
-      fetchHomeData(), // ← add this
-    ]);
-    return { ...base, delegatePackages, home };
+    const delegatePackages = await fetchDelegatePackages();
+    return { ...base, delegatePackages };
   }
 
   // ---- BOOKING FORM ----
   if (pathname === "/booking-form") {
-    const home = await fetchHomeData();
-    return { ...base, home };
+    return { ...base };
   }
 
   // ----SPONSOR BOOKING FORM ----
   if (pathname === "/sponsor-booking") {
-    const home = await fetchHomeData();
-    return { ...base, home };
+    return { ...base };
   }
 
   // ---- CONTACT US ----
@@ -522,10 +517,9 @@ async function fetchSSRData(pathname) {
   // ---- Default: all other pages (contact, booking, forms, etc.) — theme only ----
 
   if (pathname === "/securelogin") {
-    const home = await fetchHomeData();
-    return { ...base, home };
+    return { ...base };
   }
-  
+
   return { ...base };
 }
 

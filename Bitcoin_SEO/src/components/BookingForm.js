@@ -105,21 +105,21 @@ const BookingForm = () => {
       <h3>Booking Form Step 2</h3>
       <div style='width: 60%; background-color: transparent; color: black;'>
         <table style='width: 100%; border-collapse: collapse;'>
-          <tr><td style='width: 50%; padding: 8px;'>Delegate pass ${delegates.length}:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName} ${prices.initialPrice}</td></tr>
-          <tr><td style='width: 50%; padding: 8px;'>Discount:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName} ${prices.discountAmount}</td></tr>
-          <tr><td style='width: 50%; padding: 8px;'>Taxes and Service Charges:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName} ${prices.taxAmount}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Delegate pass ${delegates.length}:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencySymbol} ${prices.initialPrice}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Discount:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencySymbol} ${prices.discountAmount}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Taxes and Service Charges:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencySymbol} ${prices.taxAmount}</td></tr>
           <tr><td colspan='2' style='font-weight: bold; padding: 8px;'>Add Ons:</td></tr>
     `;
 
       // Add selected add-ons
       if (selectedAddOns && selectedAddOns.length > 0) {
         selectedAddOns.forEach((addOn) => {
-          step2Html += `<tr><td style='width: 50%; padding: 8px;'>${addOn.addOnPointName}:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName} ${addOn.additionalPrice}</td></tr>`;
+          step2Html += `<tr><td style='width: 50%; padding: 8px;'>${addOn.addOnPointName}:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencySymbol} ${addOn.additionalPrice}</td></tr>`;
         });
       }
 
       step2Html += `
-          <tr><td style='width: 50%; padding: 8px; font-weight: 700;'>Total Amount:</td><td style='width: 35%; padding: 8px; font-weight: 700;'>${eventGeneralSettings?.currencyName} ${prices.finalTotal}</td></tr>
+          <tr><td style='width: 50%; padding: 8px; font-weight: 700;'>Total Amount:</td><td style='width: 35%; padding: 8px; font-weight: 700;'>${eventGeneralSettings?.currencySymbol} ${prices.finalTotal}</td></tr>
         </table>
       </div>
       <hr style='border:none; height: 2px; background-color: #7c7c7c; margin: 20px 0;'>
@@ -159,7 +159,7 @@ const BookingForm = () => {
         // toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
         toemail: toEmails,
         cc: "",
-        subject: "BIME - Booking Form Step 2",
+        subject: `${eventDetails?.eventShortCode} - Booking Form Step 2`,
         html: step2Html,
       };
 
@@ -430,15 +430,15 @@ const BookingForm = () => {
         <table>
             <tr>
                 <td class="label">Delegate pass ${delegates.length}:</td>
-                <td class="value">${eventGeneralSettings?.currencyName} ${prices.initialPrice}</td>
+                <td class="value">${eventGeneralSettings?.currencySymbol} ${prices.initialPrice}</td>
             </tr>
             <tr>
                 <td class="label">Discount:</td>
-                <td class="value">${eventGeneralSettings?.currencyName} ${prices.discountAmount}</td>
+                <td class="value">${eventGeneralSettings?.currencySymbol} ${prices.discountAmount}</td>
             </tr>
             <tr>
                 <td class="label">Taxes and Service Charges:</td>
-                <td class="value">${eventGeneralSettings?.currencyName} ${prices.taxAmount}</td>
+                <td class="value">${eventGeneralSettings?.currencySymbol} ${prices.taxAmount}</td>
             </tr>
             <tr>
                 <td colspan="2" class="section-header">Add Ons:</td>
@@ -451,7 +451,7 @@ const BookingForm = () => {
           step3Html += `
             <tr>
                 <td class="label">${addOn.addOnPointName}:</td>
-                <td class="value">${eventGeneralSettings?.currencyName} ${addOn.additionalPrice}</td>
+                <td class="value">${eventGeneralSettings?.currencySymbol} ${addOn.additionalPrice}</td>
             </tr>
         `;
         });
@@ -466,7 +466,7 @@ const BookingForm = () => {
       step3Html += `
             <tr class="total-row">
                 <td class="label">Total Amount Paid:</td>
-                <td class="value">${eventGeneralSettings?.currencyName} ${prices.finalTotal}</td>
+                <td class="value">${eventGeneralSettings?.currencySymbol} ${prices.finalTotal}</td>
             </tr>
         </table>
 
@@ -557,7 +557,7 @@ const BookingForm = () => {
         // toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com",
         toemail: toEmails,
         cc: "",
-        subject: "BIME - Booking Confirmation - Payment Successful",
+        subject: `${eventDetails?.eventShortCode} - Booking Confirmation - Payment Successful`,
         html: step3Html,
       };
 
@@ -841,7 +841,7 @@ const BookingForm = () => {
           {(delegates?.length || 1) > 1 ? "s" : ""}
         </p>
         <p>
-          {eventGeneralSettings?.currencyName} {prices.initialPrice}
+          {eventGeneralSettings?.currencySymbol} {prices.initialPrice}
         </p>
       </div>
       <div className="BookingFormV2_inputContainer__UHPNl">
@@ -887,25 +887,25 @@ const BookingForm = () => {
           <div>
             <h3>Total</h3>
             <h3>
-              {eventGeneralSettings?.currencyName} {prices.finalTotal}
+              {eventGeneralSettings?.currencySymbol} {prices.finalTotal}
             </h3>
           </div>
           <div>
             <p>Delegate pass x {delegates?.length || 1}</p>
             <p>
-              {eventGeneralSettings?.currencyName} {prices.initialPrice}
+              {eventGeneralSettings?.currencySymbol} {prices.initialPrice}
             </p>
           </div>
           <div>
             <p>Discount {discountPercent > 0 && `(${discountPercent}%)`}</p>
             <p>
-              -{eventGeneralSettings?.currencyName} {prices.discountAmount}
+              {eventGeneralSettings?.currencySymbol} {prices.discountAmount}
             </p>
           </div>
           <div>
             <p>Add-ons</p>
             <p>
-              {eventGeneralSettings?.currencyName} {prices.addOnsTotal}
+              {eventGeneralSettings?.currencySymbol} {prices.addOnsTotal}
             </p>
           </div>
           <div>
@@ -914,14 +914,14 @@ const BookingForm = () => {
               {eventGeneralSettings?.purchaseTaxPercent}%)
             </p>
             <p>
-              {eventGeneralSettings?.currencyName} {prices.taxAmount}
+              {eventGeneralSettings?.currencySymbol} {prices.taxAmount}
             </p>
           </div>
         </div>
         <span>
           <h3>Total</h3>
           <h3>
-            {eventGeneralSettings?.currencyName} {prices.finalTotal}
+            {eventGeneralSettings?.currencySymbol} {prices.finalTotal}
           </h3>
         </span>
       </div>
@@ -965,7 +965,7 @@ const BookingForm = () => {
                             </label>
                           </div>
                           <p>
-                            {eventGeneralSettings?.currencyName}{" "}
+                            {eventGeneralSettings?.currencySymbol}{" "}
                             {item?.additionalPrice}
                           </p>
                         </div>
@@ -1115,12 +1115,10 @@ const BookingForm = () => {
                           ""
                         }
                         companyName={companyDetails?.companyName || ""}
-                        orderDescription={`Payment for ${
-                          delegates?.length || 1
-                        } delegate pass(es) - ${
-                          selectedPackage?.deligatePackageName ||
+                        orderDescription={`Payment for ${delegates?.length || 1
+                          } delegate pass(es) - ${selectedPackage?.deligatePackageName ||
                           "Delegate Package"
-                        } - Event: ${eventDetails?.eventName || ""}`}
+                          } - Event: ${eventDetails?.eventName || ""}`}
                         onPaymentSuccess={handlePaymentSuccess}
                         onPaymentError={handlePaymentError}
                       />
