@@ -323,6 +323,9 @@ const RemindMeLater = () => {
     return isValid;
   };
 
+  const dispositionKey = eventDetails?.hubspotDisposition; // e.g. "disposition_wdrm_2025"
+  const emailStatusKey = eventDetails?.hubspotEmailStatus;
+
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -361,8 +364,8 @@ const RemindMeLater = () => {
               { name: "jobtitle", value: delegate.position },
               { name: "email", value: delegate.email },
               { name: "invoice_number", value: invoiceNumber },
-              { name: "disposition_wdrm_2025", value: disposition },
-              { name: "email_status_wdrm_2025", value: emailStatus },
+              { name: dispositionKey, value: disposition },
+              { name: emailStatusKey, value: emailStatus },
             ],
             context: {
               pageUri: window.location.href,
