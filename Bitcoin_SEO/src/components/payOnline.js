@@ -12,9 +12,19 @@ import cardLabel from "../../src/assets/images/card-labels.png";
 import SimpleStripeForm from "./PaymentForm";
 import { Helmet } from "react-helmet-async";
 import { useSSRData } from "../common/useSSRData";
+import { useApiData } from "../common/ApiContext";
+
 const lockIcon = "https://img.icons8.com/ios-filled/50/ffffff/lock.png";
 
 const PayOnline = () => {
+  const {
+    homeVideoSettings,
+    eventDetails,
+    eventGeneralSettings,
+    themeSettings,
+  } = useApiData();
+  console.log('eventDetails', eventDetails);
+
   // ✅ Initialize from SSR data (direct URL load) or fetch client-side (button navigation)
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200,
@@ -87,7 +97,7 @@ const PayOnline = () => {
         // toemail:"sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
         toemail: toEmails,
         cc: "",
-        subject: "BIME - Pay Online Request",
+        subject: `${eventDetails?.eventShortCode} - Pay Online Request`,
         html: payOnlineHtml,
       };
 

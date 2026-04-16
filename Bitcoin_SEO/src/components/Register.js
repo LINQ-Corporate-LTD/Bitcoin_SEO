@@ -863,7 +863,7 @@ const Register = () => {
     if (position === "Bottom-Left") {
       return (
         <>
-          <sup style={{ verticalAlign: "sub", marginTop: "20px" }}>{symbol}</sup>
+          <sup style={{ verticalAlign: "sub", marginTop: "18px" }}>{symbol}</sup>
           {price}
         </>
       );
@@ -873,7 +873,7 @@ const Register = () => {
       return (
         <>
           {price}
-          <sup style={{ verticalAlign: "sub", marginTop: "20px" }}>{symbol}</sup>
+          <sup style={{ verticalAlign: "sub", marginTop: "18px" }}>{symbol}</sup>
         </>
       );
     }

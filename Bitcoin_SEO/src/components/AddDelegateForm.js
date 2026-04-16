@@ -552,7 +552,7 @@ const CompanyRegistrationForm = () => {
           // toemail: "sam.razura@iq-hub.com,chris.smith@iq-hub.com,leo.newman@iq-hub.com,arthur.pina@iq-hub.com,ks@iq-hub.com,ken.peters@iq-hub.com,",
           toemail: toEmails,
           cc: "",
-          subject: "BIME - Booking Form Step 1",
+          subject: `${eventDetails?.eventShortCode} - Booking Form Step 1`,
           html: htmlContent,
         };
 
@@ -626,7 +626,7 @@ const CompanyRegistrationForm = () => {
               FormName: "Booking Form",
               FormURL: "https://www.bitcoin-innovation-market-evolution.online/adddelegate",
               AddOnsTotalAmount: "0",
-              Eventcode: "BIME",
+              Eventcode: `${eventDetails?.eventShortCode}`,
             },
           },
         };

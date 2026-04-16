@@ -339,7 +339,7 @@ const AddSponsorDelegateForm = () => {
         const emailPayload = {
           toemail: toEmails,
           cc: "",
-          subject: "BIME - Sponsor Booking Form Step 1",
+          subject: `${eventDetails?.eventShortCode} - Sponsor Booking Form Step 1`,
           html: htmlContent,
         };
         try {
@@ -460,18 +460,18 @@ const AddSponsorDelegateForm = () => {
       <h3>Sponsor Booking Form Step 2</h3>
       <div style='width: 60%; background-color: transparent; color: black;'>
         <table style='width: 100%; border-collapse: collapse;'>
-          <tr><td style='width: 50%; padding: 8px;'>Delegate pass ${delegates.length}:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName || ""} ${prices.initialPrice}</td></tr>
-          <tr><td style='width: 50%; padding: 8px;'>Discount:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName || ""} ${prices.discountAmount}</td></tr>
-          <tr><td style='width: 50%; padding: 8px;'>Taxes and Service Charges:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName || ""} ${prices.taxAmount} (${eventGeneralSettings?.purchaseTaxPercantage || eventGeneralSettings?.purchaseTaxPercent || 0}%)</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Delegate pass ${delegates.length}:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencySymbol || ""} ${prices.initialPrice}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Discount:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencySymbol || ""} ${prices.discountAmount}</td></tr>
+          <tr><td style='width: 50%; padding: 8px;'>Taxes and Service Charges:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencySymbol || ""} ${prices.taxAmount} (${eventGeneralSettings?.purchaseTaxPercantage || eventGeneralSettings?.purchaseTaxPercent || 0}%)</td></tr>
           <tr><td colspan='2' style='font-weight: bold; padding: 8px;'>Add Ons:</td></tr>
     `;
       if (selectedAddOns && selectedAddOns.length > 0) {
         selectedAddOns.forEach((addOn) => {
-          step2Html += `<tr><td style='width: 50%; padding: 8px;'>${addOn.sponsorAddOnName || "Add-on"}:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencyName || ""} ${addOn.sponsorAddOnPrice || 0}</td></tr>`;
+          step2Html += `<tr><td style='width: 50%; padding: 8px;'>${addOn.sponsorAddOnName || "Add-on"}:</td><td style='width: 35%; padding: 8px;'>${eventGeneralSettings?.currencySymbol || ""} ${addOn.sponsorAddOnPrice || 0}</td></tr>`;
         });
       }
       step2Html += `
-          <tr><td style='width: 50%; padding: 8px; font-weight: 700;'>Total Amount:</td><td style='width: 35%; padding: 8px; font-weight: 700;'>${eventGeneralSettings?.currencyName || ""} ${prices.finalTotal}</td></tr>
+          <tr><td style='width: 50%; padding: 8px; font-weight: 700;'>Total Amount:</td><td style='width: 35%; padding: 8px; font-weight: 700;'>${eventGeneralSettings?.currencySymbol || ""} ${prices.finalTotal}</td></tr>
         </table>
       </div>
       <hr style='border:none; height: 2px; background-color: #7c7c7c; margin: 20px 0;'>
@@ -503,7 +503,7 @@ const AddSponsorDelegateForm = () => {
       const emailPayload = {
         toemail: toEmails,
         cc: "",
-        subject: "BIME - Sponsor Booking Form Step 2",
+        subject: `${eventDetails?.eventShortCode} - Sponsor Booking Form Step 2`,
         html: step2Html,
       };
       console.log("📧 Sending Step 2 email with payload:", emailPayload);
@@ -586,20 +586,20 @@ const AddSponsorDelegateForm = () => {
         </div>
         <h2>Booking Form Step 2</h2>
         <table>
-            <tr><td class="label">Delegate pass ${delegates.length}:</td><td class="value">${eventGeneralSettings?.currencyName || ""} ${prices.initialPrice}</td></tr>
-            <tr><td class="label">Discount:</td><td class="value">${eventGeneralSettings?.currencyName || ""} ${prices.discountAmount}</td></tr>
-            <tr><td class="label">Taxes and Service Charges (${eventGeneralSettings?.purchaseTaxPercantage || eventGeneralSettings?.purchaseTaxPercent || 0}%):</td><td class="value">${eventGeneralSettings?.currencyName || ""} ${prices.taxAmount}</td></tr>
+            <tr><td class="label">Delegate pass ${delegates.length}:</td><td class="value">${eventGeneralSettings?.currencySymbol || ""} ${prices.initialPrice}</td></tr>
+            <tr><td class="label">Discount:</td><td class="value">${eventGeneralSettings?.currencySymbol || ""} ${prices.discountAmount}</td></tr>
+            <tr><td class="label">Taxes and Service Charges (${eventGeneralSettings?.purchaseTaxPercantage || eventGeneralSettings?.purchaseTaxPercent || 0}%):</td><td class="value">${eventGeneralSettings?.currencySymbol || ""} ${prices.taxAmount}</td></tr>
             <tr><td colspan="2" class="section-header">Add Ons:</td></tr>
     `;
       if (selectedAddOns && selectedAddOns.length > 0) {
         selectedAddOns.forEach((addOn) => {
-          step3Html += `<tr><td class="label">${addOn.sponsorAddOnName || "Add-on"}:</td><td class="value">${eventGeneralSettings?.currencyName || ""} ${addOn.sponsorAddOnPrice || 0}</td></tr>`;
+          step3Html += `<tr><td class="label">${addOn.sponsorAddOnName || "Add-on"}:</td><td class="value">${eventGeneralSettings?.currencySymbol || ""} ${addOn.sponsorAddOnPrice || 0}</td></tr>`;
         });
       } else {
         step3Html += `<tr><td colspan="2" style="padding: 8px; color: #999; font-style: italic;">No add-ons selected</td></tr>`;
       }
       step3Html += `
-            <tr class="total-row"><td class="label">Total Amount Paid:</td><td class="value">${eventGeneralSettings?.currencyName || ""} ${prices.finalTotal}</td></tr>
+            <tr class="total-row"><td class="label">Total Amount Paid:</td><td class="value">${eventGeneralSettings?.currencySymbol || ""} ${prices.finalTotal}</td></tr>
         </table>
         <hr class="divider">
         <h2>Booking Form Step 1</h2>
@@ -638,7 +638,7 @@ const AddSponsorDelegateForm = () => {
       const emailPayload = {
         toemail: toEmails,
         cc: "",
-        subject: "BIME - Sponsor Booking Confirmation - Payment Successful",
+        subject: `${eventDetails?.eventShortCode} - Sponsor Booking Confirmation - Payment Successful`,
         html: step3Html,
       };
       console.log("📧 Sending Step 3 email with payload:", emailPayload);
@@ -890,7 +890,7 @@ const AddSponsorDelegateForm = () => {
       <div className="SponsorFormV2_ticket__7LJV6">
         <p>{delegates?.length} Ticket</p>
         <p>
-          {eventGeneralSettings?.currencyName || ""}{" "}
+          {eventGeneralSettings?.currencySymbol || ""}{" "}
           {numDelegates > sponsorPackageDelegateQty
             ? prices.additionalDelegatePrice
             : selectedPackage?.sponsorPackagePrice}
@@ -929,28 +929,27 @@ const AddSponsorDelegateForm = () => {
           <div>
             <h3>Total</h3>
             <h3>
-              {eventGeneralSettings?.currencyName || ""} {prices.finalTotal}
+              {eventGeneralSettings?.currencySymbol || ""} {prices.finalTotal}
             </h3>
           </div>
           <div>
             <p>Delegate pass x {sponsorPackageDelegateQty}</p>
             <p>
-              {eventGeneralSettings?.currencyName || ""}{" "}
+              {eventGeneralSettings?.currencySymbol || ""}{" "}
               {selectedPackage?.sponsorPackagePrice}
             </p>
           </div>
           <div>
             <p>Discount {discountPercent > 0 && `(${discountPercent}%)`}</p>
             <p>
-              -{eventGeneralSettings?.currencyName || ""}{" "}
-              {prices.discountAmount}
+              {eventGeneralSettings?.currencySymbol || ""} {prices.discountAmount}
             </p>
           </div>
           {numDelegates > sponsorPackageDelegateQty && (
             <div>
               <p>Additional Delegate x {additionalDelegates}</p>
               <p>
-                {eventGeneralSettings?.currencyName || ""}{" "}
+                {eventGeneralSettings?.currencySymbol || ""}{" "}
                 {prices.additionalDelegatePrice}
               </p>
             </div>
@@ -958,7 +957,7 @@ const AddSponsorDelegateForm = () => {
           <div>
             <p>Add-ons</p>
             <p>
-              {eventGeneralSettings?.currencyName || ""} {prices.addOnsTotal}
+              {eventGeneralSettings?.currencySymbol || ""} {prices.addOnsTotal}
             </p>
           </div>
           <div>
@@ -969,14 +968,14 @@ const AddSponsorDelegateForm = () => {
               %)
             </p>
             <p>
-              {eventGeneralSettings?.currencyName || ""} {prices.taxAmount}
+              {eventGeneralSettings?.currencySymbol || ""} {prices.taxAmount}
             </p>
           </div>
         </div>
         <span>
           <h3>Total</h3>
           <h3>
-            {eventGeneralSettings?.currencyName || ""} {prices.finalTotal}
+            {eventGeneralSettings?.currencySymbol || ""} {prices.finalTotal}
           </h3>
         </span>
       </div>
@@ -1147,7 +1146,7 @@ const AddSponsorDelegateForm = () => {
                                   </label>
                                 </div>
                                 <p>
-                                  {eventGeneralSettings?.currencyName || ""}{" "}
+                                  {eventGeneralSettings?.currencySymbol || ""}{" "}
                                   {subItem?.sponsorAddOnPrice}
                                 </p>
                               </div>
@@ -1186,7 +1185,7 @@ const AddSponsorDelegateForm = () => {
                                   </label>
                                 </div>
                                 <p>
-                                  {eventGeneralSettings?.currencyName || ""}{" "}
+                                  {eventGeneralSettings?.currencySymbol || ""}{" "}
                                   {subItem?.sponsorAddOnPrice}
                                 </p>
                               </div>
@@ -1331,11 +1330,7 @@ const AddSponsorDelegateForm = () => {
               className="PageForm_headerInner__sdlhn"
               style={{ maxWidth: "1070px" }}
             >
-              <img
-                onClick={() => navigate("/")}
-                src={logo}
-                alt="site logo"
-              ></img>
+              <img onClick={() => navigate("/")} src={logo} alt="site logo"></img>
             </div>
           </div>
           <div className="SponsorFormV2_container__d5aHK">
@@ -1375,10 +1370,7 @@ const AddSponsorDelegateForm = () => {
                           id="companyName"
                           value={companyData.companyName}
                           onChange={(e) =>
-                            handleCompanyDataChange(
-                              "companyName",
-                              e.target.value,
-                            )
+                            handleCompanyDataChange("companyName", e.target.value)
                           }
                           fullWidth
                           error={submitAttempted && companyErrors.companyName}
@@ -1416,10 +1408,7 @@ const AddSponsorDelegateForm = () => {
                           id="webAddress"
                           value={companyData.webAddress}
                           onChange={(e) =>
-                            handleCompanyDataChange(
-                              "webAddress",
-                              e.target.value,
-                            )
+                            handleCompanyDataChange("webAddress", e.target.value)
                           }
                           fullWidth
                         />
@@ -1621,10 +1610,7 @@ const AddSponsorDelegateForm = () => {
                           id="postalCode"
                           value={companyData.postalCode}
                           onChange={(e) =>
-                            handleCompanyDataChange(
-                              "postalCode",
-                              e.target.value,
-                            )
+                            handleCompanyDataChange("postalCode", e.target.value)
                           }
                           fullWidth
                           error={submitAttempted && companyErrors.postalCode}
@@ -1693,17 +1679,17 @@ const AddSponsorDelegateForm = () => {
                                       handleDelegateChange(
                                         delegate.id,
                                         "firstName",
-                                        e.target.value,
+                                        e.target.value
                                       )
                                     }
                                     fullWidth
                                     error={getDelegateFieldError(
                                       delegate.id,
-                                      "firstName",
+                                      "firstName"
                                     )}
                                     helperText={getDelegateFieldErrorMessage(
                                       delegate.id,
-                                      "firstName",
+                                      "firstName"
                                     )}
                                     slotProps={{
                                       formHelperText: {
@@ -1738,17 +1724,17 @@ const AddSponsorDelegateForm = () => {
                                       handleDelegateChange(
                                         delegate.id,
                                         "lastName",
-                                        e.target.value,
+                                        e.target.value
                                       )
                                     }
                                     fullWidth
                                     error={getDelegateFieldError(
                                       delegate.id,
-                                      "lastName",
+                                      "lastName"
                                     )}
                                     helperText={getDelegateFieldErrorMessage(
                                       delegate.id,
-                                      "lastName",
+                                      "lastName"
                                     )}
                                     slotProps={{
                                       formHelperText: {
@@ -1807,7 +1793,7 @@ const AddSponsorDelegateForm = () => {
                                         handleDelegateChange(
                                           delegate.id,
                                           "mobile",
-                                          minValue,
+                                          minValue
                                         );
                                         return;
                                       }
@@ -1815,13 +1801,13 @@ const AddSponsorDelegateForm = () => {
                                         info?.nationalNumber || "";
                                       const digitsOnly = nationalNumber.replace(
                                         /\D/g,
-                                        "",
+                                        ""
                                       );
                                       if (digitsOnly.length <= 10) {
                                         handleDelegateChange(
                                           delegate.id,
                                           "mobile",
-                                          value,
+                                          value
                                         );
                                       }
                                     }}
@@ -1847,7 +1833,7 @@ const AddSponsorDelegateForm = () => {
                                         }
                                         if (
                                           ["ArrowLeft", "Home"].includes(
-                                            event.key,
+                                            event.key
                                           ) &&
                                           cursorPosition <= 3
                                         ) {
@@ -1859,11 +1845,11 @@ const AddSponsorDelegateForm = () => {
                                     fullWidth
                                     error={getDelegateFieldError(
                                       delegate.id,
-                                      "mobile",
+                                      "mobile"
                                     )}
                                     helperText={getDelegateFieldErrorMessage(
                                       delegate.id,
-                                      "mobile",
+                                      "mobile"
                                     )}
                                     slotProps={{
                                       formHelperText: {
@@ -1902,17 +1888,17 @@ const AddSponsorDelegateForm = () => {
                                     handleDelegateChange(
                                       delegate.id,
                                       "position",
-                                      e.target.value,
+                                      e.target.value
                                     )
                                   }
                                   fullWidth
                                   error={getDelegateFieldError(
                                     delegate.id,
-                                    "position",
+                                    "position"
                                   )}
                                   helperText={getDelegateFieldErrorMessage(
                                     delegate.id,
-                                    "position",
+                                    "position"
                                   )}
                                   slotProps={{
                                     formHelperText: {
@@ -1945,17 +1931,17 @@ const AddSponsorDelegateForm = () => {
                                     handleDelegateChange(
                                       delegate.id,
                                       "email",
-                                      e.target.value,
+                                      e.target.value
                                     )
                                   }
                                   fullWidth
                                   error={getDelegateFieldError(
                                     delegate.id,
-                                    "email",
+                                    "email"
                                   )}
                                   helperText={getDelegateFieldErrorMessage(
                                     delegate.id,
-                                    "email",
+                                    "email"
                                   )}
                                   slotProps={{
                                     formHelperText: {
@@ -2006,8 +1992,7 @@ const AddSponsorDelegateForm = () => {
                         <a
                           href="/terms-and-conditions"
                           style={{
-                            color:
-                              submitAttempted && termsError ? "#b00020" : "",
+                            color: submitAttempted && termsError ? "#b00020" : "",
                             borderColor:
                               submitAttempted && termsError ? "#b00020" : "",
                           }}
