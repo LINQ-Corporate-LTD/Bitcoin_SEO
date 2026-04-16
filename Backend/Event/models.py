@@ -1,5 +1,5 @@
 from django.db import models
-from tkinter import CASCADE
+from django.db.models import CASCADE
 from django.db.models.deletion import CASCADE
 
 class eventDetails(models.Model):
