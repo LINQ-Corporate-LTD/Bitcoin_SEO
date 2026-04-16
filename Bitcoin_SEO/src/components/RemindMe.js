@@ -12,6 +12,7 @@ import { MuiTelInput } from "mui-tel-input";
 import Button from "@mui/material/Button";
 import { FormControl, FormHelperText } from "@mui/material";
 import { Helmet } from "react-helmet-async";
+import { useApiData } from "../common/ApiContext";
 const logo =
   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
 const plusIcon =
@@ -36,6 +37,13 @@ const RemindMeLater = () => {
     email: "",
     mobile: "",
   });
+  const {
+      homeVideoSettings,
+      eventDetails,
+      eventGeneralSettings,
+      themeSettings,
+    } = useApiData();
+    console.log('eventDetails: ', eventDetails);
 
   // Initialize delegates based on selectedQty
   const initializeDelegates = () => {
