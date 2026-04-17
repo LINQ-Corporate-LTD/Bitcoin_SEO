@@ -98,6 +98,8 @@ const EventData = () => {
 
   // Dropdown options
   const agendaVersionOption = [
+    { label: "ReleasedSoon", value: "ReleasedSoon" },
+    { label: "RollingOutSoon", value: "RollingOutSoon" },
     { label: "Version-1", value: "Version-1" },
     { label: "Version-2", value: "Version-2" },
   ];

@@ -774,6 +774,617 @@ const Agenda = () => {
                 </p>
               </div>
             </div> */}
+            {/* ================ The agenda will be Rolling Out Soon ================ */}
+            {/* <div className='AgendaScreen_agendaContainer__F7gzR'>
+              <div className="AgendaScreen_releaseSoon__K1RT9">
+                <h3>Program 2026: Rolling Out Soon</h3>
+                <p>Interested in speaking at this event? Reach out to
+                  <a href="mailto:sean.collins@iq-hub.com?subject=BioAg%20Congress%202026"> sean.collins@iq-hub.com </a>
+                  with the event name in the subject line.
+                </p>
+              </div>
+              <div className='Agenda_container__6yJM7'>
+                <div className="Agenda_prevBar__B5bBn">
+                  <h6>Program 2025</h6>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "var(--primary-color)", flexDirection: lessThen940 ? "row" : "none" }}>
+                    <h6 style={{ color: "#fff", whiteSpace: lessThen1350 ? "nowrap" : "", width: lessThen940 ? "max-content" : "", marginBottom: lessThen940 ? "0px" : "", marginRight: lessThen940 ? "5px" : "", fontSize: lessThen940 ? "17px" : "" }}>Day 1 :</h6>
+                    <h6 style={{ color: "#fff", width: lessThen940 ? "max-content" : "", fontSize: lessThen940 ? "17px" : "" }}>MONDAY, 27 OCTOBER, 2025	</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#181818" }}>
+                    <h6 style={{ color: "#ffffff" }}>08:30 - 09:30</h6>
+                    <h6 style={{ color: "#ffffff" }}>REGISTRATION AND MORNING REFRESHMENTS</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>09:30 - 09:40</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>OPENING ADDRESS</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>09:40 - 10:10</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>RESERVED PRESENTATION</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>10:10 - 10:30</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>SPEED NETWORKING SESSION</h6>
+                  </div>
+                  <div className='Agenda_speakerContainer__av+wf'>
+                    <div className='Agenda_keyContainer__ZlvJV'>
+                      <img src={clockIcon} alt='clock icon'></img>
+                    </div>
+                    <div className='Agenda_speakerDetailsContainer__mOEC6'>
+                      <div className='Agenda_lower__Oy-1W' style={{ marginTop: '0px' }}>
+                        <h5></h5>
+                        <ul>
+                          <li>Exchange business cards and get connected in short one-to-one meetings</li>
+                        </ul>
+                        <ul>
+                          <li>Start the conversation to arrange a more formal meeting later on in the conference</li>
+                        </ul>
+                        <ul>
+                          <li>Share your professional background and discuss your biggest business issues - don't forget your business cards!</li>
+                        </ul>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#181818" }}>
+                    <h6 style={{ color: "#ffffff" }}>10:30 - 11:00</h6>
+                    <h6 style={{ color: "#ffffff" }}>MORNING COFFEE BREAK IN THE EXHIBIT AREA</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>11:00 - 11:30</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>PANEL DISCUSSION ON DESALINATION & RESOURCE RECOVERY</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>11:30 - 11:55</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>DECARBONISING DESALINATION: THE TRANSITION FROM THERMAL TO MEMBRANE AND THE ROLE OF CLEAN ENERGY</h6>
+                  </div>
+                  <div className='Agenda_speakerContainer__av+wf'>
+                    <div className='Agenda_keyContainer__ZlvJV'>
+                      <p>Decarbonisation</p>
+                      <p>Next-Gen Membranes</p>
+                    </div>
+                    <div className='Agenda_speakerDetailsContainer__mOEC6'>
+                      <div className='Agenda_upper__9vYZH'>
+                        <img src={speaker1} alt='Ahmed Yousry' width="100" height="50" style={{ cursor: "pointer" }}></img>
+                        <div className='Agenda_upperInnerV1__VkoVw'>
+                          <img src={speaker1CompanyLogo} alt='ACWA Power' width="100"></img>
+                          <div>
+                            <p>Ahmed Yousry</p>
+                            <p>ACWA Power</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='Agenda_lower__Oy-1W'>
+                        <ul>
+                          <li>Presenting a case study on the shift from thermal to membrane-based desalination technologies</li>
+                        </ul>
+                        <ul>
+                          <li>Highlighting the role of clean energy integration in large-scale desalination plants</li>
+                        </ul>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>11:55 - 12:00</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>Q&A SESSION ON CLEAN ENERGY PATHWAYS IN DESALINATION</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#181818" }}>
+                    <h6 style={{ color: "#ffffff" }}>12:00 - 13:30</h6>
+                    <h6 style={{ color: "#ffffff" }}>NETWORKING LUNCH AND VISITING THE DESALINATION & RESOURCE RECOVERY EXHIBITION</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818" }}>13:30 - 13:55</h6>
+                    <h6 style={{ color: "#181818" }}>MOBILE DESALINATION PLANTS WITH EFFICIENT SOLUTIONS TO REDUCE OPERATING COSTS</h6>
+                  </div>
+                  <div className='Agenda_speakerContainer__av+wf'>
+                    <div className='Agenda_keyContainer__ZlvJV'>
+                      <p>Next-Gen Membranes</p>
+                      <p>AI-Driven Systems</p>
+                    </div>
+                    <div className='Agenda_speakerDetailsContainer__mOEC6'>
+                      <div className='Agenda_upper__9vYZH'>
+                        <img src={speaker2} alt='Anton Borodastov' width="100" height="50" style={{ cursor: "pointer" }}></img>
+                        <div className='Agenda_upperInnerV1__VkoVw'>
+                          <img src={speaker2CompanyLogo} alt='Membranium' width="100"></img>
+                          <div>
+                            <p>Anton Borodastov</p>
+                            <p>Membranium</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='Agenda_lower__Oy-1W'>
+                        <ul>
+                          <li>Applying Russian membrane elements to enhance performance in compact desalination units</li>
+                        </ul>
+                        <ul>
+                          <li>Automating process control using a built-in module for reverse osmosis system normalisation</li>
+                        </ul>
+                        <ul>
+                          <li>Equipping systems with solar panels for off-grid operation in remote or hard-to-reach areas</li>
+                        </ul>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>13:55 - 14:00</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>Q&A SESSION ON MOBILE SYSTEMS FOR COST-EFFECTIVE DESALINATION</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818" }}>14:00 - 14:25</h6>
+                    <h6 style={{ color: "#181818" }}>SEAWATER INTAKES PREFILTRATION FOR DESALINATION PROJECTS</h6>
+                  </div>
+                  <div className='Agenda_speakerContainer__av+wf'>
+                    <div className='Agenda_keyContainer__ZlvJV'>
+                      <p>Next-Gen Membranes</p>
+                      <p>Water-Energy Nexus</p>
+                      <p>Decarbonisation</p>
+                    </div>
+                    <div className='Agenda_speakerDetailsContainer__mOEC6'>
+                      <div className='Agenda_upper__9vYZH'>
+                        <img src={speaker3} alt='Lars Späth' width="100" height="50" style={{ cursor: "pointer" }}></img>
+                        <div className='Agenda_upperInnerV1__VkoVw'>
+                          <img src={speaker3CompanyLogo} alt='Passavant-Geiger GmbH' width="100"></img>
+                          <div>
+                            <p>Lars Späth</p>
+                            <p>Passavant-Geiger GmbH</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='Agenda_lower__Oy-1W'>
+                        <ul>
+                          <li>Coping with harsh seawater conditions through robust prefiltration intake system designs</li>
+                        </ul>
+                        <ul>
+                          <li>Enhancing operational resilience against rising temperatures, salinity, and biological loads</li>
+                        </ul>
+                        <ul>
+                          <li>Reducing lifecycle costs by optimising intake performance in variable marine environments</li>
+                        </ul>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='Agenda_speakerContainer__av+wf'>
+                    <div className='Agenda_keyContainer__ZlvJV'>
+                      <p>Next-Gen Membranes</p>
+                      <p>Water-Energy Nexus</p>
+                      <p>Decarbonisation</p>
+                    </div>
+                    <div className='Agenda_speakerDetailsContainer__mOEC6'>
+                      <div className='Agenda_upper__9vYZH'>
+                        <img src={speaker3} alt='Lars Späth' width="100" height="50" style={{ cursor: "pointer" }}></img>
+                        <div className='Agenda_upperInnerV1__VkoVw'>
+                          <img src={speaker3CompanyLogo} alt='Passavant-Geiger GmbH' width="100"></img>
+                          <div>
+                            <p>Lars Späth</p>
+                            <p>Passavant-Geiger GmbH</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='Agenda_lower__Oy-1W'>
+                        <ul>
+                          <li>Coping with harsh seawater conditions through robust prefiltration intake system designs</li>
+                        </ul>
+                        <ul>
+                          <li>Enhancing operational resilience against rising temperatures, salinity, and biological loads</li>
+                        </ul>
+                        <ul>
+                          <li>Reducing lifecycle costs by optimising intake performance in variable marine environments</li>
+                        </ul>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>14:25 - 14:30</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>Q&A SESSION ON RESILIENT INTAKE DESIGN FOR CHALLENGING COASTAL CONDITIONS</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#181818" }}>
+                    <h6 style={{ color: "#ffffff" }}>14:30 - 15:00</h6>
+                    <h6 style={{ color: "#ffffff" }}>AFTERNOON COFFEE BREAK IN THE EXHIBIT AREA</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818" }}>15:00 - 15:25</h6>
+                    <h6 style={{ color: "#181818" }}>PERSPECTIVES ON SEAWATER DESALINATION</h6>
+                  </div>
+                  <div className='Agenda_speakerContainer__av+wf'>
+                    <div className='Agenda_keyContainer__ZlvJV'>
+                      <p>Brine Valorisation</p>
+                      <p>Next-Gen Membranes</p>
+                      <p>Water-Energy Nexus</p>
+                    </div>
+                    <div className='Agenda_speakerDetailsContainer__mOEC6'>
+                      <div className='Agenda_upper__9vYZH'>
+                        <img src={speaker4} alt='David Stephenson ' width="100" height="50" style={{ cursor: "pointer" }}></img>
+                        <div className='Agenda_upperInnerV1__VkoVw'>
+                          <img src={speaker4CompanyLogo} alt='Independent Consultant' width="100"></img>
+                          <div>
+                            <p>David Stephenson </p>
+                            <p>Independent Consultant</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='Agenda_lower__Oy-1W'>
+                        <ul>
+                          <li>Exploring seawater's advantages for desalination, including an unlimited supply and easy brine disposal</li>
+                        </ul>
+                        <ul>
+                          <li>Comparing energy demands and costs of RO membranes, solar evaporation, and distillation methods</li>
+                        </ul>
+                        <ul>
+                          <li>Evaluating scalable designs for medium-sized towns using heat recovery and hybrid solar systems</li>
+                        </ul>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>15:25 - 15:30</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>Q&A SESSION ON PRACTICAL CHALLENGES IN SEAWATER DESALINATION</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818" }}>15:30 - 15:55</h6>
+                    <h6 style={{ color: "#181818" }}>UTILISING DIGITAL TOOLS FOR REAL-TIME MONITORING AND PREDICTIVE MAINTENANCE</h6>
+                  </div>
+                  <div className='Agenda_speakerContainer__av+wf'>
+                    <div className='Agenda_keyContainer__ZlvJV'>
+                      <p>AI-Driven Systems</p>
+                      <p>Water-Energy Nexus</p>
+                    </div>
+                    <div className='Agenda_speakerDetailsContainer__mOEC6'>
+                      <div className='Agenda_upper__9vYZH'>
+                        <img src={speaker5} alt='Maher Al Kaabi' width="100" height="50" style={{ cursor: "pointer" }}></img>
+                        <div className='Agenda_upperInnerV1__VkoVw'>
+                          <img src={speaker5CompanyLogo} alt='Alserkal Group' width="100"></img>
+                          <div>
+                            <p>Maher Al Kaabi</p>
+                            <p>Alserkal Group</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='Agenda_lower__Oy-1W'>
+                        <ul>
+                          <li>Integrating AI and IoT to build digital twins that enhance system monitoring and maintenance</li>
+                        </ul>
+                        <ul>
+                          <li>Transitioning operations from reactive to proactive maintenance using predictive technologies</li>
+                        </ul>
+                        <ul>
+                          <li>Enabling real-time optimization to improve overall process performance and system uptime</li>
+                        </ul>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>15:55 - 16:00</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>Q&A SESSION ON DIGITAL TWINS & PROACTIVE MAINTENANCE STRATEGIES</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>16:00 - 16:30</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>RESERVED PRESENTATION</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#181818" }}>
+                    <h6 style={{ color: "#ffffff" }}>16:30 - 17:30</h6>
+                    <h6 style={{ color: "#ffffff" }}>NETWORKING DRINKS RECEPTION</h6>
+                  </div>
+                </div>
+              </div>
+              <div className='Agenda_container__6yJM7'>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "var(--primary-color)", flexDirection: lessThen940 ? "row" : "none" }}>
+                    <h6 style={{ color: "#fff", whiteSpace: lessThen1350 ? "nowrap" : "", width: lessThen940 ? "max-content" : "", marginBottom: lessThen940 ? "0px" : "", marginRight: lessThen940 ? "5px" : "", fontSize: lessThen940 ? "17px" : "" }}>Day 2 :</h6>
+                    <h6 style={{ color: "#fff", width: lessThen940 ? "max-content" : "", fontSize: lessThen940 ? "17px" : "" }}>TUESDAY, 28 OCTOBER, 2025	</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#181818" }}>
+                    <h6 style={{ color: "#ffffff" }}>09:00 - 09:30</h6>
+                    <h6 style={{ color: "#ffffff" }}>MORNING REFRESHMENTS</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>09:30 - 09:40</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>OPENING ADDRESS</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>09:40 - 10:05</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>DESALINATION AND RESOURCE RECOVERY</h6>
+                  </div>
+                  <div className='Agenda_speakerContainer__av+wf'>
+                    <div className='Agenda_keyContainer__ZlvJV'>
+                      <p>Brine Valorisation</p>
+                      <p>Water-Energy Nexus</p>
+                      <p>Decarbonisation</p>
+                    </div>
+                    <div className='Agenda_speakerDetailsContainer__mOEC6'>
+                      <div className='Agenda_upper__9vYZH'>
+                        <img src={speaker6} alt='Rashid Alleem' width="100" height="50" style={{ cursor: "pointer" }}></img>
+                        <div className='Agenda_upperInnerV1__VkoVw'>
+                          <img src={speaker6CompanyLogo} alt='Alleem Business Congress' width="100"></img>
+                          <div>
+                            <p>Rashid Alleem</p>
+                            <p>Alleem Business Congress</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='Agenda_lower__Oy-1W'>
+                        <ul>
+                          <li>Highlighting the critical role of desalination in addressing water scarcity and building resilience</li>
+                        </ul>
+                        <ul>
+                          <li>Transforming waste brine streams into valuable minerals and energy through circular economy methods</li>
+                        </ul>
+                        <ul>
+                          <li>Emphasising collaborative approaches to advance sustainable practices in desalination operations</li>
+                        </ul>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>10:05 - 10:10</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>Q&A SESSION ON CIRCULAR ECONOMY STRATEGIES FOR DESALINATION</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>10:10 - 10:35</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>OPTIMISING RO PRE-TREATMENT: ADVANCED FILTRATION STRATEGIES & ROI BENEFITS</h6>
+                  </div>
+                  <div className='Agenda_speakerContainer__av+wf'>
+                    <div className='Agenda_keyContainer__ZlvJV'></div>
+                    <div className='Agenda_speakerDetailsContainer__mOEC6'>
+                      <div className='Agenda_upper__9vYZH'>
+                        <img src={speaker1} alt='Oren Heymans' width="100" height="50" style={{ cursor: "pointer", marginRight: '10px', marginTop: '10px' }}></img>
+                        <img src={speaker2} alt='Oren Heymans' width="100" height="50" style={{ cursor: "pointer", marginRight: '10px', marginTop: '10px' }}></img>
+                        <img src={speaker3} alt='Oren Heymans' width="100" height="50" style={{ cursor: "pointer", marginRight: '10px', marginTop: '10px' }}></img>
+                        <img src={speaker4} alt='Oren Heymans' width="100" height="50" style={{ cursor: "pointer", marginRight: '10px', marginTop: '10px' }}></img>
+                        <img src={speaker5} alt='Oren Heymans' width="100" height="50" style={{ cursor: "pointer", marginRight: '10px', marginTop: '10px' }}></img>
+                      </div>
+                      <div className='Agenda_lower__Oy-1W'>
+                        <ul>
+                          <li>Selecting the correct filters for RO pre-treatment using advanced particle distribution analysis</li>
+                        </ul>
+                        <ul>
+                          <li>Optimising delta P to improve membrane protection while reducing energy and chemical usage</li>
+                        </ul>
+                        <ul>
+                          <li>Demonstrating ROI benefits through enhanced filtration strategies and operational efficiencies</li>
+                        </ul>
+                        <span></span>
+                        <div className="Agenda_panelSpeakerListing__y9DIl">
+                          <span>
+                            <p>
+                              Ahmed Yousry |
+                              <strong>ACWA Power</strong>
+                              <br></br>
+                              Anton Borodastov |
+                              <strong>Membranium</strong>
+                              <br></br>
+                              Lars Späth |
+                              <strong>Passavant-Geiger GmbH</strong>
+                              <br></br>
+                              David Stephenson |
+                              <strong>Independent Consultant</strong>
+                              <br></br>
+                              Maher Al Kaabi |
+                              <strong>Alserkal Group</strong>
+                            </p>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>10:35 - 10:40</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>Q&A SESSION ON ENHANCING FILTRATION EFFICIENCY AND ROI IN DESALINATION </h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>10:40 - 11:10</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>RESERVED PRESENTATION</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#181818" }}>
+                    <h6 style={{ color: "#ffffff", fontWeight: 900 }}>11:10 - 11:30</h6>
+                    <h6 style={{ color: "#ffffff", fontWeight: 900 }}>MORNING COFFEE BREAK IN THE EXHIBIT AREA</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818" }}>11:30 - 11:55</h6>
+                    <h6 style={{ color: "#181818" }}>DIGITAL TRANSFORMATION FOR SUSTAINABLE WATER AND DESALINATION GOVERNANCE</h6>
+                  </div>
+                  <div className='Agenda_speakerContainer__av+wf'>
+                    <div className='Agenda_keyContainer__ZlvJV'>
+                      <p>AI-Driven Systems</p>
+                      <p>Water-Energy Nexus</p>
+                    </div>
+                    <div className='Agenda_speakerDetailsContainer__mOEC6'>
+                      <div className='Agenda_upper__9vYZH'>
+                        <img src={speaker8} alt='Christ Declercq' width="100" height="50" style={{ cursor: "pointer" }}></img>
+                        <div className='Agenda_upperInnerV1__VkoVw'>
+                          <img src={speaker8CompanyLogo} alt='cBrain ' width="100"></img>
+                          <div>
+                            <p>Christ Declercq</p>
+                            <p>cBrain </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='Agenda_lower__Oy-1W'>
+                        <ul>
+                          <li>Facilitating integrated oversight of desalination projects and environmental impacts</li>
+                        </ul>
+                        <ul>
+                          <li>Leveraging AI to optimize decision-making in water-scarce and high-risk operational areas</li>
+                        </ul>
+                        <ul>
+                          <li>Building digital foundations to support resilient and future-proof water governance</li>
+                        </ul>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>11:55 - 12:00</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>Q&A SESSION ON DIGITAL STRATEGIES FOR WATER AND DESALINATION POLICY</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818" }}>12:00 - 12:25</h6>
+                    <h6 style={{ color: "#181818" }}>EVALUATING FINANCIAL STRATEGIES AND PUBLIC-PRIVATE PARTNERSHIP MODELS</h6>
+                  </div>
+                  <div className='Agenda_speakerContainer__av+wf'>
+                    <div className='Agenda_keyContainer__ZlvJV'>
+                      <p>Brine Valorisation</p>
+                      <p>Water-Energy Nexus</p>
+                    </div>
+                    <div className='Agenda_speakerDetailsContainer__mOEC6'>
+                      <div className='Agenda_upper__9vYZH'>
+                        <img src={speaker9} alt='Robert Bryniak ' width="100" height="50" style={{ cursor: "pointer" }}></img>
+                        <div className='Agenda_upperInnerV1__VkoVw'>
+                          <img src={speaker9CompanyLogo} alt='Golden Sands Management (Marketing) Consulting' width="100"></img>
+                          <div>
+                            <p>Robert Bryniak </p>
+                            <p>Golden Sands Management (Marketing) Consulting</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='Agenda_lower__Oy-1W'>
+                        <ul>
+                          <li>Tracing the development of public-private partnership models across the global water sector</li>
+                        </ul>
+                        <ul>
+                          <li>Addressing the importance of brine management as a growing focus for IWP</li>
+                        </ul>
+                        <ul>
+                          <li>Aligning financial strategies with current PPP trends to improve procurement outcomes</li>
+                        </ul>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>12:25 - 12:30</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>Q&A SESSION ON FINANCIAL STRATEGIES & MODERN PPP FRAMEWORKS</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818" }}>12:30 - 12:55</h6>
+                    <h6 style={{ color: "#181818" }}>ADVANTAGES AND PUBLIC-PRIVATE MODELS FOR MULTIPURPOSE AND MULTI CLIENT DESALINATION IN CHILE AND PERÚ</h6>
+                  </div>
+                  <div className='Agenda_speakerContainer__av+wf'>
+                    <div className='Agenda_keyContainer__ZlvJV'>
+                      <p>Water-Energy Nexus</p>
+                      <p>Decarbonisation</p>
+                    </div>
+                    <div className='Agenda_speakerDetailsContainer__mOEC6'>
+                      <div className='Agenda_upper__9vYZH'>
+                        <img src={speaker10} alt='Ignacio Rodriguez ' width="100" height="50" style={{ cursor: "pointer" }}></img>
+                        <div className='Agenda_upperInnerV1__VkoVw'>
+                          <img src={speaker10CompanyLogo} alt='DESALA' width="100"></img>
+                          <div>
+                            <p>Ignacio Rodriguez </p>
+                            <p>DESALA</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='Agenda_lower__Oy-1W'>
+                        <ul>
+                          <li>Describing multipurpose desalination models serving mining, agriculture, and urban water needs</li>
+                        </ul>
+                        <ul>
+                          <li>Analysing economic efficiencies through scale, cost savings, and productivity-based tariffs</li>
+                        </ul>
+                        <ul>
+                          <li>Demonstrating how shared infrastructure supports social licence and public-private water delivery</li>
+                        </ul>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>12:55 - 13:00</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>Q&A SESSION ON MULTI-CLIENT MODELS & WATER INFRASTRUCTURE PARTNERSHIPS</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>13:00 - 13:15</h6>
+                    <h6 style={{ color: "#181818", fontWeight: 900 }}>FEEDBACK & RAFFLE DRAW</h6>
+                  </div>
+                </div>
+                <div>
+                  <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#181818" }}>
+                    <h6 style={{ color: "#ffffff" }}>13:15 - 14:30</h6>
+                    <h6 style={{ color: "#ffffff" }}>NETWORKING LUNCH</h6>
+                  </div>
+                </div>
+              </div>
+
+            </div> */}
             {/* ===================Nolan's Static Code==================== */}
             {/* <div className='AgendaScreen_agendaContainer__F7gzR'>
               <h1>Program 2025</h1>
@@ -1378,603 +1989,536 @@ const Agenda = () => {
             </div> */}
 
             {/* =========== Benny's Day Seperate integrated Agenda code =========== */}
-            <div className="AgendaScreen_agendaContainer__F7gzR">
-              <h2>Program 2026</h2>
-              {agendaList &&
-                (() => {
-                  // Group items by day
-                  const groupedByDay = {};
+            {agendaVersion === 'ReleasedSoon' ?
+              <div className="AgendaScreen_agendaContainer__F7gzR">
+                <h2>Program 2026</h2>
+                <div className="AgendaScreen_comingContainer__IXJNn">
+                  <h3>The agenda will be released soon</h3>
+                  <p>
+                    Interested in speaking at this event? Reach out to
+                    <a href="mailto:sean.collins@abcd.com?subject=Lorem ipsum dolor Sit Amet dolore magna aliqua enim 2026">sean.collins@abcd.com</a>
+                    with the event name in the subject line.
+                  </p>
+                </div>
+              </div>
+              :
+              <div className="AgendaScreen_agendaContainer__F7gzR">
+                {agendaVersion === 'Version-1' || agendaVersion === 'Version-2' ? <h2>Program 2026</h2> : null}
+                {agendaVersion === 'RollingOutSoon' ?
+                  <div className="AgendaScreen_releaseSoon__K1RT9">
+                    <h3>Program 2026: Rolling Out Soon</h3>
+                    <p>Interested in speaking at this event? Reach out to
+                      <a href="mailto:sean.collins@iq-hub.com?subject=BioAg%20Congress%202026"> sean.collins@iq-hub.com </a>
+                      with the event name in the subject line.
+                    </p>
+                  </div>
+                  :
+                  null}
+                {agendaList &&
+                  (() => {
+                    // Group items by day
+                    const groupedByDay = {};
 
-                  agendaList
-                    .sort(
-                      (a, b) => parseInt(a.sortOrder) - parseInt(b.sortOrder),
-                    )
-                    .forEach((item) => {
-                      // Use the item's day property for grouping
-                      const itemDay = item.day || "Day1";
+                    agendaList
+                      .sort(
+                        (a, b) => parseInt(a.sortOrder) - parseInt(b.sortOrder),
+                      )
+                      .forEach((item) => {
+                        // Use the item's day property for grouping
+                        const itemDay = item.day || "Day1";
 
-                      // Initialize day group if it doesn't exist
-                      if (!groupedByDay[itemDay]) {
-                        groupedByDay[itemDay] = [];
-                      }
+                        // Initialize day group if it doesn't exist
+                        if (!groupedByDay[itemDay]) {
+                          groupedByDay[itemDay] = [];
+                        }
 
-                      // Add item to its corresponding day group
-                      groupedByDay[itemDay].push(item);
-                    });
+                        // Add item to its corresponding day group
+                        groupedByDay[itemDay].push(item);
+                      });
 
-                  // Render each day group in separate containers
-                  return Object.entries(groupedByDay).map(([dayKey, items]) => (
-                    <div key={dayKey} className="Agenda_container__6yJM7">
-                      {items.map((item, index) => {
-                        // Handle "Day" status items
-                        if (item.status === "Day") {
-                          return (
-                            <div key={item.id || index}>
-                              <div
-                                className="Agenda_bar__ht+6s"
-                                style={{
-                                  backgroundColor: "var(--primary-color)",
-                                  flexDirection: lessThen940 ? "row" : "none",
-                                }}
-                              >
-                                <h6
+                    // Render each day group in separate containers
+                    return Object.entries(groupedByDay).map(([dayKey, items]) => (
+                      <div key={dayKey} className="Agenda_container__6yJM7">
+                        {agendaVersion === 'RollingOutSoon' ?
+                          <div className="Agenda_prevBar__B5bBn">
+                            <h6>Program 2025</h6>
+                          </div> : null}
+                        {items.map((item, index) => {
+                          // Handle "Day" status items
+                          if (item.status === "Day") {
+                            return (
+                              <div key={item.id || index}>
+                                <div
+                                  className="Agenda_bar__ht+6s"
                                   style={{
-                                    color: "#fff",
-                                    whiteSpace: lessThen1350 ? "nowrap" : "",
-                                    width: lessThen940 ? "max-content" : "",
-                                    marginBottom: lessThen940 ? "0px" : "",
-                                    marginRight: lessThen940 ? "5px" : "",
-                                    fontSize: lessThen940 ? "17px" : "",
+                                    backgroundColor: "var(--primary-color)",
+                                    flexDirection: lessThen940 ? "row" : "none",
                                   }}
                                 >
-                                  {item.day} :
-                                </h6>
-                                <h6
-                                  style={{
-                                    color: "#fff",
-                                    width: lessThen940 ? "max-content" : "",
-                                    fontSize: lessThen940 ? "17px" : "",
-                                  }}
-                                >
-                                  {item?.heading}
-                                </h6>
-                              </div>
-                            </div>
-                          );
-                        }
-
-                        // Handle "Registration" and "Coffe/Launch" status items
-                        else if (
-                          item.status === "Registration" ||
-                          item.status === "Coffe/Launch"
-                        ) {
-                          return (
-                            <div key={item.id || index}>
-                              <div
-                                className="Agenda_bar__ht+6s"
-                                style={{ backgroundColor: "#181818" }}
-                              >
-                                <h6 style={{ color: "#ffffff" }}>
-                                  {item.startTime} - {item.endTime}
-                                </h6>
-                                <h6 style={{ color: "#ffffff" }}>
-                                  {item.heading}
-                                </h6>
-                              </div>
-                            </div>
-                          );
-                        }
-
-                        // Handle "Open/Close" status items
-                        else if (item.status === "Open/Close") {
-                          return (
-                            <div key={item.id || index}>
-                              <div
-                                className="Agenda_bar__ht+6s"
-                                style={{ backgroundColor: "#dcdcdc" }}
-                              >
-                                <h6
-                                  style={{ color: "#181818", fontWeight: 900 }}
-                                >
-                                  {item.startTime} - {item.endTime}
-                                </h6>
-                                <h6
-                                  style={{ color: "#181818", fontWeight: 900 }}
-                                >
-                                  {item.heading}
-                                </h6>
-                              </div>
-                            </div>
-                          );
-                        }
-
-                        // Handle "Session" status items
-                        else if (item.status === "Session") {
-                          const bulletPoints = item.bulletPoints
-                            ? JSON.parse(item.bulletPoints)
-                            : [];
-                          return (
-                            <div key={item.id || index}>
-                              <div
-                                className="Agenda_bar__ht+6s"
-                                style={{ backgroundColor: "#dcdcdc" }}
-                              >
-                                <h6
-                                  style={{ color: "#181818", fontWeight: 900 }}
-                                >
-                                  {item.startTime} - {item.endTime}
-                                </h6>
-                                <h6
-                                  style={{ color: "#181818", fontWeight: 900 }}
-                                >
-                                  {item.heading}
-                                </h6>
-                              </div>
-                              <div className="Agenda_speakerContainer__av+wf">
-                                <div className="Agenda_keyContainer__ZlvJV">
-                                  {/* <img src={clockIcon} alt="clock icon"></img> */}
-                                  <svg
-                                    id="Layer_1"
-                                    data-name="Layer 1"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    style={{ width: "45px", height: "45px" }}
+                                  <h6
+                                    style={{
+                                      color: "#fff",
+                                      whiteSpace: lessThen1350 ? "nowrap" : "",
+                                      width: lessThen940 ? "max-content" : "",
+                                      marginBottom: lessThen940 ? "0px" : "",
+                                      marginRight: lessThen940 ? "5px" : "",
+                                      fontSize: lessThen940 ? "17px" : "",
+                                    }}
                                   >
-                                    <g>
-                                      <path
-                                        d="M22.71,3.66C11.4,3.66,2.24,12.83,2.24,24.13s9.16,20.47,20.47,20.47,20.47-9.16,20.47-20.47S34.01,3.66,22.71,3.66ZM22.68,41.78c-9.74,0-17.68-7.93-17.65-17.65.03-9.73,7.92-17.62,17.63-17.63,9.72-.01,17.66,7.94,17.65,17.66-.02,9.73-7.91,17.61-17.63,17.62Z"
-                                        style={{ fill: "rgb(46, 41, 45)" }}
-                                      ></path>
-                                      <path
-                                        d="M22.71,3.66C11.4,3.66,2.24,12.83,2.24,24.13s9.16,20.47,20.47,20.47,20.47-9.16,20.47-20.47S34.01,3.66,22.71,3.66ZM22.68,41.78c-9.74,0-17.68-7.93-17.65-17.65.03-9.73,7.92-17.62,17.63-17.63,9.72-.01,17.66,7.94,17.65,17.66-.02,9.73-7.91,17.61-17.63,17.62Z"
-                                        style={{ fill: "rgb(46, 41, 45)" }}
-                                      ></path>
-                                      <path
-                                        d="M24.15,18.45c0,1.98,0,3.97,0,5.95,0,.19-.09.44-.22.57-2,2.02-4.02,4.03-6.03,6.04-.42.42-.92.61-1.51.43-.55-.17-.89-.54-1.02-1.1-.13-.56.07-1.03.47-1.42,1.67-1.67,3.34-3.35,5.02-5.01.25-.24.35-.48.35-.84-.01-3.5,0-7,0-10.5,0-.97.58-1.62,1.44-1.64.87-.02,1.51.63,1.51,1.57,0,1.98,0,3.97,0,5.95Z"
-                                        style={{ fill: "rgb(46, 41, 45)" }}
-                                      ></path>
-                                    </g>
-                                    <path
-                                      d="M15.39,3.22c-7.17,2.86-9.71,5.14-13.16,11.77C.27,12.6-.49,9.94.31,6.97,1.26,3.49,3.57,1.28,7.11.54c3.2-.67,5.94.34,8.28,2.68Z"
-                                      style={{ fill: "rgb(46, 41, 45)" }}
-                                    ></path>
-                                    <path
-                                      d="M42.72,14.52c-2.64-5.77-6.92-9.62-12.95-11.59,2.3-2.4,5.05-3.4,8.26-2.72,3.49.74,5.77,2.93,6.68,6.38.78,2.94,0,5.57-1.98,7.93Z"
-                                      style={{ fill: "rgb(46, 41, 45)" }}
-                                    ></path>
-                                  </svg>
-                                </div>
-                                <div className="Agenda_speakerDetailsContainer__mOEC6">
-                                  <div
-                                    className="Agenda_lower__Oy-1W"
-                                    style={{ marginTop: "0px" }}
+                                    {item.day} :
+                                  </h6>
+                                  <h6
+                                    style={{
+                                      color: "#fff",
+                                      width: lessThen940 ? "max-content" : "",
+                                      fontSize: lessThen940 ? "17px" : "",
+                                    }}
                                   >
-                                    <h5></h5>
-                                    {bulletPoints.map(
-                                      (bullet, bulletIndex) =>
-                                        bullet.value && (
-                                          <ul key={bulletIndex}>
-                                            <li>{bullet.value}</li>
-                                          </ul>
-                                        ),
-                                    )}
-                                    <span></span>
-                                  </div>
+                                    {item?.heading}
+                                  </h6>
                                 </div>
                               </div>
-                            </div>
-                          );
-                        }
+                            );
+                          }
 
-                        // Handle "Speaker" status items
-                        // else if (item.status === "Speaker") {
-                        //   const selectedSpeaker =
-                        //     item.selectedSpeakers &&
-                        //       item.selectedSpeakers !== "null"
-                        //       ? JSON.parse(item.selectedSpeakers)
-                        //       : null;
-                        //   const industryTrends =
-                        //     item.industryTrends &&
-                        //       item.industryTrends !== "null"
-                        //       ? JSON.parse(item.industryTrends)
-                        //       : [];
-                        //   const bulletPoints = item.bulletPoints
-                        //     ? JSON.parse(item.bulletPoints)
-                        //     : [];
+                          // Handle "Registration" and "Coffe/Launch" status items
+                          else if (
+                            item.status === "Registration" ||
+                            item.status === "Coffe/Launch"
+                          ) {
+                            return (
+                              <div key={item.id || index}>
+                                <div
+                                  className="Agenda_bar__ht+6s"
+                                  style={{ backgroundColor: "#181818" }}
+                                >
+                                  <h6 style={{ color: "#ffffff" }}>
+                                    {item.startTime} - {item.endTime}
+                                  </h6>
+                                  <h6 style={{ color: "#ffffff" }}>
+                                    {item.heading}
+                                  </h6>
+                                </div>
+                              </div>
+                            );
+                          }
 
-                        //   // Check if we have two speakers
-                        //   const isTwoSpeakers =
-                        //     item?.speakerFormat === "Two Speakers";
+                          // Handle "Open/Close" status items
+                          else if (item.status === "Open/Close") {
+                            return (
+                              <div key={item.id || index}>
+                                <div
+                                  className="Agenda_bar__ht+6s"
+                                  style={{ backgroundColor: "#dcdcdc" }}
+                                >
+                                  <h6
+                                    style={{ color: "#181818", fontWeight: 900 }}
+                                  >
+                                    {item.startTime} - {item.endTime}
+                                  </h6>
+                                  <h6
+                                    style={{ color: "#181818", fontWeight: 900 }}
+                                  >
+                                    {item.heading}
+                                  </h6>
+                                </div>
+                              </div>
+                            );
+                          }
 
-                        //   // Check if it's panel speaker format
-                        //   const isPanelSpeaker =
-                        //     item?.speakerFormat === "Panel Speaker";
-
-                        //   const speaker1Bullets =
-                        //     isTwoSpeakers && item.speaker1Bullets
-                        //       ? JSON.parse(item.speaker1Bullets)
-                        //       : [];
-                        //   const speaker2Bullets =
-                        //     isTwoSpeakers && item.speaker2Bullets
-                        //       ? JSON.parse(item.speaker2Bullets)
-                        //       : [];
-
-                        //   // Parse panel speaker images
-                        //   const panelSpeakerImages =
-                        //     isPanelSpeaker &&
-                        //       item.panelSpeakerImages &&
-                        //       item.panelSpeakerImages !== "null"
-                        //       ? JSON.parse(item.panelSpeakerImages)
-                        //       : {};
-
-                        //   return (
-                        //     <div key={item.id || index}>
-                        //       {isPanelSpeaker ? (
-                        //         <>
-                        //           <div className="Agenda_speakerContainer__av+wf">
-                        //             <div className="Agenda_keyContainer__ZlvJV">
-                        //               {industryTrends.map(
-                        //                 (trend, trendIndex) => (
-                        //                   <p key={trendIndex}>{trend.label}</p>
-                        //                 )
-                        //               )}
-                        //             </div>
-                        //             <div className="Agenda_speakerDetailsContainer__mOEC6">
-                        //               <div className="Agenda_upper__9vYZH">
-                        //                 {selectedSpeaker &&
-                        //                   selectedSpeaker.map(
-                        //                     (speaker, speakerIndex) => (
-                        //                       <img
-                        //                         key={speakerIndex}
-                        //                         src={
-                        //                           panelSpeakerImages[
-                        //                           speaker.value
-                        //                           ]
-                        //                         }
-                        //                         alt={speaker.label}
-                        //                         width="100"
-                        //                         height="50"
-                        //                         style={{
-                        //                           cursor: "pointer",
-                        //                           marginRight: "10px",
-                        //                           marginTop: "10px",
-                        //                         }}
-                        //                       />
-                        //                     )
-                        //                   )}
-                        //               </div>
-                        //               <div className="Agenda_lower__Oy-1W">
-                        //                 {bulletPoints.map(
-                        //                   (bullet, bulletIndex) =>
-                        //                     bullet.value && (
-                        //                       <ul key={bulletIndex}>
-                        //                         <li>{bullet.value}</li>
-                        //                       </ul>
-                        //                     )
-                        //                 )}
-                        //                 <span></span>
-                        //                 <div className="Agenda_panelSpeakerListing__y9DIl">
-                        //                   <span>
-                        //                     <p>
-                        //                       {selectedSpeaker &&
-                        //                         selectedSpeaker.map(
-                        //                           (speaker, speakerIndex) => (
-                        //                             <span key={speakerIndex}>
-                        //                               {speaker.label} |
-                        //                               <strong>
-                        //                                 {" "}
-                        //                                 {speaker.companyName}
-                        //                               </strong>
-                        //                               {speakerIndex <
-                        //                                 selectedSpeaker.length -
-                        //                                 1 && <br />}
-                        //                             </span>
-                        //                           )
-                        //                         )}
-                        //                     </p>
-                        //                   </span>
-                        //                 </div>
-                        //               </div>
-                        //             </div>
-                        //           </div>
-                        //         </>
-                        //       ) : isTwoSpeakers ? (
-                        //         <>
-                        //           <div className="Agenda_speakerContainer__av+wf">
-                        //             <div className="Agenda_keyContainer__ZlvJV">
-                        //               {industryTrends.map(
-                        //                 (trend, trendIndex) => (
-                        //                   <p key={trendIndex}>{trend.label}</p>
-                        //                 )
-                        //               )}
-                        //             </div>
-                        //             <div className="Agenda_speakerDetailsContainer__mOEC6">
-                        //               <div className="Agenda_upper__9vYZH">
-                        //                 <img
-                        //                   src={item.Speaker1AgendaImg}
-                        //                   alt={selectedSpeaker[0]?.label}
-                        //                   width="100"
-                        //                   height="50"
-                        //                   style={{ cursor: "pointer" }}
-                        //                 />
-                        //                 <div className="Agenda_upperInnerV1__VkoVw">
-                        //                   {item.Speaker1CompanyImg && (
-                        //                     <img
-                        //                       src={item.Speaker1CompanyImg}
-                        //                       alt={
-                        //                         selectedSpeaker[0]?.companyName
-                        //                       }
-                        //                       width="100"
-                        //                     />
-                        //                   )}
-                        //                   <div>
-                        //                     <p>{selectedSpeaker[0]?.label}</p>
-                        //                     <p>
-                        //                       {selectedSpeaker[0]?.companyName}
-                        //                     </p>
-                        //                   </div>
-                        //                 </div>
-                        //               </div>
-                        //               <div className="Agenda_lower__Oy-1W">
-                        //                 {speaker1Bullets.map(
-                        //                   (bullet, bulletIndex) =>
-                        //                     bullet.value && (
-                        //                       <ul key={bulletIndex}>
-                        //                         <li>{bullet.value}</li>
-                        //                       </ul>
-                        //                     )
-                        //                 )}
-                        //                 <span></span>
-                        //               </div>
-                        //             </div>
-                        //           </div>
-
-                        //           {/* Second Speaker */}
-                        //           <div className="Agenda_speakerContainer__av+wf">
-                        //             <div className="Agenda_keyContainer__ZlvJV">
-                        //               {industryTrends.map(
-                        //                 (trend, trendIndex) => (
-                        //                   <p key={trendIndex}>{trend.label}</p>
-                        //                 )
-                        //               )}
-                        //             </div>
-                        //             <div className="Agenda_speakerDetailsContainer__mOEC6">
-                        //               <div className="Agenda_upper__9vYZH">
-                        //                 <img
-                        //                   src={item.Speaker2AgendaImg}
-                        //                   alt={selectedSpeaker[1]?.label}
-                        //                   width="100"
-                        //                   height="50"
-                        //                   style={{ cursor: "pointer" }}
-                        //                 />
-                        //                 <div className="Agenda_upperInnerV1__VkoVw">
-                        //                   {item.Speaker2CompanyImg && (
-                        //                     <img
-                        //                       src={item.Speaker2CompanyImg}
-                        //                       alt={
-                        //                         selectedSpeaker[1]?.companyName
-                        //                       }
-                        //                       width="100"
-                        //                     />
-                        //                   )}
-                        //                   <div>
-                        //                     <p>{selectedSpeaker[1]?.label}</p>
-                        //                     <p>
-                        //                       {selectedSpeaker[1]?.companyName}
-                        //                     </p>
-                        //                   </div>
-                        //                 </div>
-                        //               </div>
-                        //               <div className="Agenda_lower__Oy-1W">
-                        //                 {speaker2Bullets.map(
-                        //                   (bullet, bulletIndex) =>
-                        //                     bullet.value && (
-                        //                       <ul key={bulletIndex}>
-                        //                         <li>{bullet.value}</li>
-                        //                       </ul>
-                        //                     )
-                        //                 )}
-                        //                 <span></span>
-                        //               </div>
-                        //             </div>
-                        //           </div>
-                        //         </>
-                        //       ) : (
-                        //         <>
-                        //           <div className="Agenda_speakerContainer__av+wf">
-                        //             <div className="Agenda_keyContainer__ZlvJV">
-                        //               {industryTrends.map(
-                        //                 (trend, trendIndex) => (
-                        //                   <p key={trendIndex}>{trend.label}</p>
-                        //                 )
-                        //               )}
-                        //             </div>
-                        //             <div className="Agenda_speakerDetailsContainer__mOEC6">
-                        //               {selectedSpeaker && (
-                        //                 <div className="Agenda_upper__9vYZH">
-                        //                   <img
-                        //                     src={item.singleSpeakerAgendaImg}
-                        //                     alt={selectedSpeaker.label}
-                        //                     width="100"
-                        //                     height="50"
-                        //                     style={{ cursor: "pointer" }}
-                        //                   />
-                        //                   <div className="Agenda_upperInnerV1__VkoVw">
-                        //                     {item.singleSpeakerCompanyImg && (
-                        //                       <img
-                        //                         src={
-                        //                           item.singleSpeakerCompanyImg
-                        //                         }
-                        //                         alt={
-                        //                           selectedSpeaker.companyName
-                        //                         }
-                        //                         width="100"
-                        //                       />
-                        //                     )}
-                        //                     <div>
-                        //                       <p>{selectedSpeaker.label}</p>
-                        //                       <p>
-                        //                         {selectedSpeaker.companyName}
-                        //                       </p>
-                        //                     </div>
-                        //                   </div>
-                        //                 </div>
-                        //               )}
-                        //               <div className="Agenda_lower__Oy-1W">
-                        //                 {bulletPoints.map(
-                        //                   (bullet, bulletIndex) =>
-                        //                     bullet.value && (
-                        //                       <ul key={bulletIndex}>
-                        //                         <li>{bullet.value}</li>
-                        //                       </ul>
-                        //                     )
-                        //                 )}
-                        //                 <span></span>
-                        //               </div>
-                        //             </div>
-                        //           </div>
-                        //         </>
-                        //       )}
-                        //     </div>
-                        //   );
-                        // }
-                        else if (item.status === "Speaker") {
-                          const industryTrends =
-                            item.industryTrends &&
-                            item.industryTrends !== "null"
-                              ? JSON.parse(item.industryTrends)
+                          // Handle "Session" status items
+                          else if (item.status === "Session") {
+                            const bulletPoints = item.bulletPoints
+                              ? JSON.parse(item.bulletPoints)
                               : [];
-
-                          const bulletPoints = item.bulletPoints
-                            ? JSON.parse(item.bulletPoints)
-                            : [];
-
-                          const isTwoSpeakers =
-                            item?.speakerFormat === "Two Speakers";
-                          const isPanelSpeaker =
-                            item?.speakerFormat === "Panel Speaker";
-
-                          // ── Single Speaker ──
-                          const selectedSpeaker =
-                            item.selectedSpeakers &&
-                            item.selectedSpeakers !== "null"
-                              ? JSON.parse(item.selectedSpeakers)
-                              : null;
-
-                          // ── Two Speakers: split bulletPoints in half ──
-                          const midPoint = Math.ceil(bulletPoints.length / 2);
-                          const speaker1BulletsSplit = isTwoSpeakers
-                            ? bulletPoints.slice(0, midPoint)
-                            : [];
-                          const speaker2BulletsSplit = isTwoSpeakers
-                            ? bulletPoints.slice(midPoint)
-                            : [];
-
-                          // ── Panel Speakers: use new panelSpeakers array ──
-                          const panelSpeakers =
-                            isPanelSpeaker &&
-                            item.panelSpeakers &&
-                            item.panelSpeakers !== "null"
-                              ? JSON.parse(item.panelSpeakers)
-                              : [];
-
-                          return (
-                            <div key={item.id || index}>
-                              {isPanelSpeaker ? (
-                                <>
-                                  <div>
-                                    <div
-                                      className="Agenda_bar__ht+6s"
-                                      style={{ backgroundColor: "#dcdcdc" }}
+                            return (
+                              <div key={item.id || index}>
+                                <div
+                                  className="Agenda_bar__ht+6s"
+                                  style={{ backgroundColor: "#dcdcdc" }}
+                                >
+                                  <h6
+                                    style={{ color: "#181818", fontWeight: 900 }}
+                                  >
+                                    {item.startTime} - {item.endTime}
+                                  </h6>
+                                  <h6
+                                    style={{ color: "#181818", fontWeight: 900 }}
+                                  >
+                                    {item.heading}
+                                  </h6>
+                                </div>
+                                <div className="Agenda_speakerContainer__av+wf">
+                                  <div className="Agenda_keyContainer__ZlvJV">
+                                    {/* <img src={clockIcon} alt="clock icon"></img> */}
+                                    <svg
+                                      id="Layer_1"
+                                      data-name="Layer 1"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      style={{ width: "45px", height: "45px" }}
                                     >
-                                      <h6
-                                        style={{
-                                          color: "#181818",
-                                          fontWeight: 900,
-                                        }}
-                                      >
-                                        {item.startTime} - {item.endTime}
-                                      </h6>
-                                      <h6
-                                        style={{
-                                          color: "#181818",
-                                          fontWeight: 900,
-                                        }}
-                                      >
-                                        {item.heading}
-                                      </h6>
-                                    </div>
-                                    <div className="Agenda_speakerContainer__av+wf">
-                                      <div className="Agenda_keyContainer__ZlvJV">
-                                        {industryTrends.map(
-                                          (trend, trendIndex) => (
-                                            <p key={trendIndex}>
-                                              {trend.label}
-                                            </p>
+                                      <g>
+                                        <path
+                                          d="M22.71,3.66C11.4,3.66,2.24,12.83,2.24,24.13s9.16,20.47,20.47,20.47,20.47-9.16,20.47-20.47S34.01,3.66,22.71,3.66ZM22.68,41.78c-9.74,0-17.68-7.93-17.65-17.65.03-9.73,7.92-17.62,17.63-17.63,9.72-.01,17.66,7.94,17.65,17.66-.02,9.73-7.91,17.61-17.63,17.62Z"
+                                          style={{ fill: "rgb(46, 41, 45)" }}
+                                        ></path>
+                                        <path
+                                          d="M22.71,3.66C11.4,3.66,2.24,12.83,2.24,24.13s9.16,20.47,20.47,20.47,20.47-9.16,20.47-20.47S34.01,3.66,22.71,3.66ZM22.68,41.78c-9.74,0-17.68-7.93-17.65-17.65.03-9.73,7.92-17.62,17.63-17.63,9.72-.01,17.66,7.94,17.65,17.66-.02,9.73-7.91,17.61-17.63,17.62Z"
+                                          style={{ fill: "rgb(46, 41, 45)" }}
+                                        ></path>
+                                        <path
+                                          d="M24.15,18.45c0,1.98,0,3.97,0,5.95,0,.19-.09.44-.22.57-2,2.02-4.02,4.03-6.03,6.04-.42.42-.92.61-1.51.43-.55-.17-.89-.54-1.02-1.1-.13-.56.07-1.03.47-1.42,1.67-1.67,3.34-3.35,5.02-5.01.25-.24.35-.48.35-.84-.01-3.5,0-7,0-10.5,0-.97.58-1.62,1.44-1.64.87-.02,1.51.63,1.51,1.57,0,1.98,0,3.97,0,5.95Z"
+                                          style={{ fill: "rgb(46, 41, 45)" }}
+                                        ></path>
+                                      </g>
+                                      <path
+                                        d="M15.39,3.22c-7.17,2.86-9.71,5.14-13.16,11.77C.27,12.6-.49,9.94.31,6.97,1.26,3.49,3.57,1.28,7.11.54c3.2-.67,5.94.34,8.28,2.68Z"
+                                        style={{ fill: "rgb(46, 41, 45)" }}
+                                      ></path>
+                                      <path
+                                        d="M42.72,14.52c-2.64-5.77-6.92-9.62-12.95-11.59,2.3-2.4,5.05-3.4,8.26-2.72,3.49.74,5.77,2.93,6.68,6.38.78,2.94,0,5.57-1.98,7.93Z"
+                                        style={{ fill: "rgb(46, 41, 45)" }}
+                                      ></path>
+                                    </svg>
+                                  </div>
+                                  <div className="Agenda_speakerDetailsContainer__mOEC6">
+                                    <div
+                                      className="Agenda_lower__Oy-1W"
+                                      style={{ marginTop: "0px" }}
+                                    >
+                                      <h5></h5>
+                                      {bulletPoints.map(
+                                        (bullet, bulletIndex) =>
+                                          bullet.value && (
+                                            <ul key={bulletIndex}>
+                                              <li>{bullet.value}</li>
+                                            </ul>
                                           ),
-                                        )}
-                                      </div>
-                                      <div className="Agenda_speakerDetailsContainer__mOEC6">
-                                        {/* Panel speaker images row */}
-                                        <div className="Agenda_upper__9vYZH">
-                                          {panelSpeakers.map(
-                                            (speaker, speakerIndex) =>
-                                              speaker.agendaImage ? (
-                                                <img
-                                                  key={speakerIndex}
-                                                  src={speaker.agendaImage}
-                                                  alt={speaker.name}
-                                                  width="100"
-                                                  height="50"
-                                                  style={{
-                                                    cursor: "pointer",
-                                                    marginRight: "10px",
-                                                    marginTop: "10px",
-                                                  }}
-                                                />
-                                              ) : null,
-                                          )}
-                                        </div>
-                                        <div className="Agenda_lower__Oy-1W">
-                                          {/* Common bullet points */}
-                                          {bulletPoints.map(
-                                            (bullet, bulletIndex) =>
-                                              bullet.value && (
-                                                <ul key={bulletIndex}>
-                                                  <li>{bullet.value}</li>
-                                                </ul>
-                                              ),
-                                          )}
-                                          <span></span>
-                                          {/* Panel speaker name + company listing */}
-                                          <div className="Agenda_panelSpeakerListing__y9DIl">
-                                            <span>
-                                              <p>
-                                                {panelSpeakers.map(
-                                                  (speaker, speakerIndex) => (
-                                                    <span key={speakerIndex}>
-                                                      {speaker.name} |
-                                                      <strong>
-                                                        {" "}
-                                                        {speaker.companyName}
-                                                      </strong>
-                                                      {speakerIndex <
-                                                        panelSpeakers.length -
-                                                          1 && <br />}
-                                                    </span>
-                                                  ),
-                                                )}
-                                              </p>
-                                            </span>
-                                          </div>
-                                        </div>
-                                      </div>
+                                      )}
+                                      <span></span>
                                     </div>
                                   </div>
-                                </>
-                              ) : isTwoSpeakers ? (
-                                <>
-                                  {/* ── Speaker 1 ── */}
-                                  {agendaVersion === "Version-1" ? (
+                                </div>
+                              </div>
+                            );
+                          }
+
+                          // Handle "Speaker" status items
+                          // else if (item.status === "Speaker") {
+                          //   const selectedSpeaker =
+                          //     item.selectedSpeakers &&
+                          //       item.selectedSpeakers !== "null"
+                          //       ? JSON.parse(item.selectedSpeakers)
+                          //       : null;
+                          //   const industryTrends =
+                          //     item.industryTrends &&
+                          //       item.industryTrends !== "null"
+                          //       ? JSON.parse(item.industryTrends)
+                          //       : [];
+                          //   const bulletPoints = item.bulletPoints
+                          //     ? JSON.parse(item.bulletPoints)
+                          //     : [];
+
+                          //   // Check if we have two speakers
+                          //   const isTwoSpeakers =
+                          //     item?.speakerFormat === "Two Speakers";
+
+                          //   // Check if it's panel speaker format
+                          //   const isPanelSpeaker =
+                          //     item?.speakerFormat === "Panel Speaker";
+
+                          //   const speaker1Bullets =
+                          //     isTwoSpeakers && item.speaker1Bullets
+                          //       ? JSON.parse(item.speaker1Bullets)
+                          //       : [];
+                          //   const speaker2Bullets =
+                          //     isTwoSpeakers && item.speaker2Bullets
+                          //       ? JSON.parse(item.speaker2Bullets)
+                          //       : [];
+
+                          //   // Parse panel speaker images
+                          //   const panelSpeakerImages =
+                          //     isPanelSpeaker &&
+                          //       item.panelSpeakerImages &&
+                          //       item.panelSpeakerImages !== "null"
+                          //       ? JSON.parse(item.panelSpeakerImages)
+                          //       : {};
+
+                          //   return (
+                          //     <div key={item.id || index}>
+                          //       {isPanelSpeaker ? (
+                          //         <>
+                          //           <div className="Agenda_speakerContainer__av+wf">
+                          //             <div className="Agenda_keyContainer__ZlvJV">
+                          //               {industryTrends.map(
+                          //                 (trend, trendIndex) => (
+                          //                   <p key={trendIndex}>{trend.label}</p>
+                          //                 )
+                          //               )}
+                          //             </div>
+                          //             <div className="Agenda_speakerDetailsContainer__mOEC6">
+                          //               <div className="Agenda_upper__9vYZH">
+                          //                 {selectedSpeaker &&
+                          //                   selectedSpeaker.map(
+                          //                     (speaker, speakerIndex) => (
+                          //                       <img
+                          //                         key={speakerIndex}
+                          //                         src={
+                          //                           panelSpeakerImages[
+                          //                           speaker.value
+                          //                           ]
+                          //                         }
+                          //                         alt={speaker.label}
+                          //                         width="100"
+                          //                         height="50"
+                          //                         style={{
+                          //                           cursor: "pointer",
+                          //                           marginRight: "10px",
+                          //                           marginTop: "10px",
+                          //                         }}
+                          //                       />
+                          //                     )
+                          //                   )}
+                          //               </div>
+                          //               <div className="Agenda_lower__Oy-1W">
+                          //                 {bulletPoints.map(
+                          //                   (bullet, bulletIndex) =>
+                          //                     bullet.value && (
+                          //                       <ul key={bulletIndex}>
+                          //                         <li>{bullet.value}</li>
+                          //                       </ul>
+                          //                     )
+                          //                 )}
+                          //                 <span></span>
+                          //                 <div className="Agenda_panelSpeakerListing__y9DIl">
+                          //                   <span>
+                          //                     <p>
+                          //                       {selectedSpeaker &&
+                          //                         selectedSpeaker.map(
+                          //                           (speaker, speakerIndex) => (
+                          //                             <span key={speakerIndex}>
+                          //                               {speaker.label} |
+                          //                               <strong>
+                          //                                 {" "}
+                          //                                 {speaker.companyName}
+                          //                               </strong>
+                          //                               {speakerIndex <
+                          //                                 selectedSpeaker.length -
+                          //                                 1 && <br />}
+                          //                             </span>
+                          //                           )
+                          //                         )}
+                          //                     </p>
+                          //                   </span>
+                          //                 </div>
+                          //               </div>
+                          //             </div>
+                          //           </div>
+                          //         </>
+                          //       ) : isTwoSpeakers ? (
+                          //         <>
+                          //           <div className="Agenda_speakerContainer__av+wf">
+                          //             <div className="Agenda_keyContainer__ZlvJV">
+                          //               {industryTrends.map(
+                          //                 (trend, trendIndex) => (
+                          //                   <p key={trendIndex}>{trend.label}</p>
+                          //                 )
+                          //               )}
+                          //             </div>
+                          //             <div className="Agenda_speakerDetailsContainer__mOEC6">
+                          //               <div className="Agenda_upper__9vYZH">
+                          //                 <img
+                          //                   src={item.Speaker1AgendaImg}
+                          //                   alt={selectedSpeaker[0]?.label}
+                          //                   width="100"
+                          //                   height="50"
+                          //                   style={{ cursor: "pointer" }}
+                          //                 />
+                          //                 <div className="Agenda_upperInnerV1__VkoVw">
+                          //                   {item.Speaker1CompanyImg && (
+                          //                     <img
+                          //                       src={item.Speaker1CompanyImg}
+                          //                       alt={
+                          //                         selectedSpeaker[0]?.companyName
+                          //                       }
+                          //                       width="100"
+                          //                     />
+                          //                   )}
+                          //                   <div>
+                          //                     <p>{selectedSpeaker[0]?.label}</p>
+                          //                     <p>
+                          //                       {selectedSpeaker[0]?.companyName}
+                          //                     </p>
+                          //                   </div>
+                          //                 </div>
+                          //               </div>
+                          //               <div className="Agenda_lower__Oy-1W">
+                          //                 {speaker1Bullets.map(
+                          //                   (bullet, bulletIndex) =>
+                          //                     bullet.value && (
+                          //                       <ul key={bulletIndex}>
+                          //                         <li>{bullet.value}</li>
+                          //                       </ul>
+                          //                     )
+                          //                 )}
+                          //                 <span></span>
+                          //               </div>
+                          //             </div>
+                          //           </div>
+
+                          //           {/* Second Speaker */}
+                          //           <div className="Agenda_speakerContainer__av+wf">
+                          //             <div className="Agenda_keyContainer__ZlvJV">
+                          //               {industryTrends.map(
+                          //                 (trend, trendIndex) => (
+                          //                   <p key={trendIndex}>{trend.label}</p>
+                          //                 )
+                          //               )}
+                          //             </div>
+                          //             <div className="Agenda_speakerDetailsContainer__mOEC6">
+                          //               <div className="Agenda_upper__9vYZH">
+                          //                 <img
+                          //                   src={item.Speaker2AgendaImg}
+                          //                   alt={selectedSpeaker[1]?.label}
+                          //                   width="100"
+                          //                   height="50"
+                          //                   style={{ cursor: "pointer" }}
+                          //                 />
+                          //                 <div className="Agenda_upperInnerV1__VkoVw">
+                          //                   {item.Speaker2CompanyImg && (
+                          //                     <img
+                          //                       src={item.Speaker2CompanyImg}
+                          //                       alt={
+                          //                         selectedSpeaker[1]?.companyName
+                          //                       }
+                          //                       width="100"
+                          //                     />
+                          //                   )}
+                          //                   <div>
+                          //                     <p>{selectedSpeaker[1]?.label}</p>
+                          //                     <p>
+                          //                       {selectedSpeaker[1]?.companyName}
+                          //                     </p>
+                          //                   </div>
+                          //                 </div>
+                          //               </div>
+                          //               <div className="Agenda_lower__Oy-1W">
+                          //                 {speaker2Bullets.map(
+                          //                   (bullet, bulletIndex) =>
+                          //                     bullet.value && (
+                          //                       <ul key={bulletIndex}>
+                          //                         <li>{bullet.value}</li>
+                          //                       </ul>
+                          //                     )
+                          //                 )}
+                          //                 <span></span>
+                          //               </div>
+                          //             </div>
+                          //           </div>
+                          //         </>
+                          //       ) : (
+                          //         <>
+                          //           <div className="Agenda_speakerContainer__av+wf">
+                          //             <div className="Agenda_keyContainer__ZlvJV">
+                          //               {industryTrends.map(
+                          //                 (trend, trendIndex) => (
+                          //                   <p key={trendIndex}>{trend.label}</p>
+                          //                 )
+                          //               )}
+                          //             </div>
+                          //             <div className="Agenda_speakerDetailsContainer__mOEC6">
+                          //               {selectedSpeaker && (
+                          //                 <div className="Agenda_upper__9vYZH">
+                          //                   <img
+                          //                     src={item.singleSpeakerAgendaImg}
+                          //                     alt={selectedSpeaker.label}
+                          //                     width="100"
+                          //                     height="50"
+                          //                     style={{ cursor: "pointer" }}
+                          //                   />
+                          //                   <div className="Agenda_upperInnerV1__VkoVw">
+                          //                     {item.singleSpeakerCompanyImg && (
+                          //                       <img
+                          //                         src={
+                          //                           item.singleSpeakerCompanyImg
+                          //                         }
+                          //                         alt={
+                          //                           selectedSpeaker.companyName
+                          //                         }
+                          //                         width="100"
+                          //                       />
+                          //                     )}
+                          //                     <div>
+                          //                       <p>{selectedSpeaker.label}</p>
+                          //                       <p>
+                          //                         {selectedSpeaker.companyName}
+                          //                       </p>
+                          //                     </div>
+                          //                   </div>
+                          //                 </div>
+                          //               )}
+                          //               <div className="Agenda_lower__Oy-1W">
+                          //                 {bulletPoints.map(
+                          //                   (bullet, bulletIndex) =>
+                          //                     bullet.value && (
+                          //                       <ul key={bulletIndex}>
+                          //                         <li>{bullet.value}</li>
+                          //                       </ul>
+                          //                     )
+                          //                 )}
+                          //                 <span></span>
+                          //               </div>
+                          //             </div>
+                          //           </div>
+                          //         </>
+                          //       )}
+                          //     </div>
+                          //   );
+                          // }
+                          else if (item.status === "Speaker") {
+                            const industryTrends =
+                              item.industryTrends &&
+                                item.industryTrends !== "null"
+                                ? JSON.parse(item.industryTrends)
+                                : [];
+
+                            const bulletPoints = item.bulletPoints
+                              ? JSON.parse(item.bulletPoints)
+                              : [];
+
+                            const isTwoSpeakers =
+                              item?.speakerFormat === "Two Speakers";
+                            const isPanelSpeaker =
+                              item?.speakerFormat === "Panel Speaker";
+
+                            // ── Single Speaker ──
+                            const selectedSpeaker =
+                              item.selectedSpeakers &&
+                                item.selectedSpeakers !== "null"
+                                ? JSON.parse(item.selectedSpeakers)
+                                : null;
+
+                            // ── Two Speakers: split bulletPoints in half ──
+                            const midPoint = Math.ceil(bulletPoints.length / 2);
+                            const speaker1BulletsSplit = isTwoSpeakers
+                              ? bulletPoints.slice(0, midPoint)
+                              : [];
+                            const speaker2BulletsSplit = isTwoSpeakers
+                              ? bulletPoints.slice(midPoint)
+                              : [];
+
+                            // ── Panel Speakers: use new panelSpeakers array ──
+                            const panelSpeakers =
+                              isPanelSpeaker &&
+                                item.panelSpeakers &&
+                                item.panelSpeakers !== "null"
+                                ? JSON.parse(item.panelSpeakers)
+                                : [];
+
+                            return (
+                              <div key={item.id || index}>
+                                {isPanelSpeaker ? (
+                                  <>
                                     <div>
                                       <div
                                         className="Agenda_bar__ht+6s"
@@ -2008,27 +2552,29 @@ const Agenda = () => {
                                           )}
                                         </div>
                                         <div className="Agenda_speakerDetailsContainer__mOEC6">
+                                          {/* Panel speaker images row */}
                                           <div className="Agenda_upper__9vYZH">
-                                            <div className="Agenda_upperInnerV2__SAsL1">
-                                              <img
-                                                src={
-                                                  !item.Speaker1CompanyImg
-                                                    ? companyDummy
-                                                    : item.Speaker1CompanyImg
-                                                }
-                                                alt={item.speaker1CompanyName}
-                                                width="100"
-                                              ></img>
-                                              <div>
-                                                <p>{item.speaker1Name}</p>
-                                                <p>
-                                                  {item.speaker1CompanyName}
-                                                </p>
-                                              </div>
-                                            </div>
+                                            {panelSpeakers.map(
+                                              (speaker, speakerIndex) =>
+                                                speaker.agendaImage ? (
+                                                  <img
+                                                    key={speakerIndex}
+                                                    src={speaker.agendaImage}
+                                                    alt={speaker.name}
+                                                    width="100"
+                                                    height="50"
+                                                    style={{
+                                                      cursor: "pointer",
+                                                      marginRight: "10px",
+                                                      marginTop: "10px",
+                                                    }}
+                                                  />
+                                                ) : null,
+                                            )}
                                           </div>
                                           <div className="Agenda_lower__Oy-1W">
-                                            {speaker1BulletsSplit.map(
+                                            {/* Common bullet points */}
+                                            {bulletPoints.map(
                                               (bullet, bulletIndex) =>
                                                 bullet.value && (
                                                   <ul key={bulletIndex}>
@@ -2037,33 +2583,238 @@ const Agenda = () => {
                                                 ),
                                             )}
                                             <span></span>
+                                            {/* Panel speaker name + company listing */}
+                                            <div className="Agenda_panelSpeakerListing__y9DIl">
+                                              <span>
+                                                <p>
+                                                  {panelSpeakers.map(
+                                                    (speaker, speakerIndex) => (
+                                                      <span key={speakerIndex}>
+                                                        {speaker.name} |
+                                                        <strong>
+                                                          {" "}
+                                                          {speaker.companyName}
+                                                        </strong>
+                                                        {speakerIndex <
+                                                          panelSpeakers.length -
+                                                          1 && <br />}
+                                                      </span>
+                                                    ),
+                                                  )}
+                                                </p>
+                                              </span>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
-                                  ) : (
-                                    <div>
-                                      <div
-                                        className="Agenda_bar__ht+6s"
-                                        style={{ backgroundColor: "#dcdcdc" }}
-                                      >
-                                        <h6
-                                          style={{
-                                            color: "#181818",
-                                            fontWeight: 900,
-                                          }}
+                                  </>
+                                ) : isTwoSpeakers ? (
+                                  <>
+                                    {/* ── Speaker 1 ── */}
+                                    {agendaVersion === 'RollingOutSoon' || agendaVersion === "Version-1" ? (
+                                      <div>
+                                        <div
+                                          className="Agenda_bar__ht+6s"
+                                          style={{ backgroundColor: "#dcdcdc" }}
                                         >
-                                          {item.startTime} - {item.endTime}
-                                        </h6>
-                                        <h6
-                                          style={{
-                                            color: "#181818",
-                                            fontWeight: 900,
-                                          }}
-                                        >
-                                          {item.heading}
-                                        </h6>
+                                          <h6
+                                            style={{
+                                              color: "#181818",
+                                              fontWeight: 900,
+                                            }}
+                                          >
+                                            {item.startTime} - {item.endTime}
+                                          </h6>
+                                          <h6
+                                            style={{
+                                              color: "#181818",
+                                              fontWeight: 900,
+                                            }}
+                                          >
+                                            {item.heading}
+                                          </h6>
+                                        </div>
+                                        <div className="Agenda_speakerContainer__av+wf">
+                                          <div className="Agenda_keyContainer__ZlvJV">
+                                            {industryTrends.map(
+                                              (trend, trendIndex) => (
+                                                <p key={trendIndex}>
+                                                  {trend.label}
+                                                </p>
+                                              ),
+                                            )}
+                                          </div>
+                                          <div className="Agenda_speakerDetailsContainer__mOEC6">
+                                            <div className="Agenda_upper__9vYZH">
+                                              <div className="Agenda_upperInnerV2__SAsL1">
+                                                <img
+                                                  src={
+                                                    !item.Speaker1CompanyImg
+                                                      ? companyDummy
+                                                      : item.Speaker1CompanyImg
+                                                  }
+                                                  alt={item.speaker1CompanyName}
+                                                  width="100"
+                                                ></img>
+                                                <div>
+                                                  <p>{item.speaker1Name}</p>
+                                                  <p>
+                                                    {item.speaker1CompanyName}
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div className="Agenda_lower__Oy-1W">
+                                              {speaker1BulletsSplit.map(
+                                                (bullet, bulletIndex) =>
+                                                  bullet.value && (
+                                                    <ul key={bulletIndex}>
+                                                      <li>{bullet.value}</li>
+                                                    </ul>
+                                                  ),
+                                              )}
+                                              <span></span>
+                                            </div>
+                                          </div>
+                                        </div>
                                       </div>
+                                    ) : (
+                                      <div>
+                                        <div
+                                          className="Agenda_bar__ht+6s"
+                                          style={{ backgroundColor: "#dcdcdc" }}
+                                        >
+                                          <h6
+                                            style={{
+                                              color: "#181818",
+                                              fontWeight: 900,
+                                            }}
+                                          >
+                                            {item.startTime} - {item.endTime}
+                                          </h6>
+                                          <h6
+                                            style={{
+                                              color: "#181818",
+                                              fontWeight: 900,
+                                            }}
+                                          >
+                                            {item.heading}
+                                          </h6>
+                                        </div>
+                                        <div className="Agenda_speakerContainer__av+wf">
+                                          <div className="Agenda_keyContainer__ZlvJV">
+                                            {industryTrends.map(
+                                              (trend, trendIndex) => (
+                                                <p key={trendIndex}>
+                                                  {trend.label}
+                                                </p>
+                                              ),
+                                            )}
+                                          </div>
+                                          <div className="Agenda_speakerDetailsContainer__mOEC6">
+                                            <div className="Agenda_upper__9vYZH">
+                                              {/* {item.Speaker1AgendaImg && ( */}
+                                              <img
+                                                src={
+                                                  !item.Speaker1AgendaImg
+                                                    ? speakerDummy
+                                                    : item.Speaker1AgendaImg
+                                                }
+                                                alt={item.speaker1Name}
+                                                width="100"
+                                                height="50"
+                                                style={{ cursor: "pointer" }}
+                                              />
+                                              {/* )} */}
+                                              <div className="Agenda_upperInnerV1__VkoVw">
+                                                {/* {item.Speaker1CompanyImg && ( */}
+                                                <img
+                                                  src={
+                                                    !item.Speaker1CompanyImg
+                                                      ? companyDummy
+                                                      : item.Speaker1CompanyImg
+                                                  }
+                                                  alt={item.speaker1CompanyName}
+                                                  width="100"
+                                                />
+                                                {/* )} */}
+                                                <div>
+                                                  <p>{item.speaker1Name}</p>
+                                                  <p>
+                                                    {item.speaker1CompanyName}
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div className="Agenda_lower__Oy-1W">
+                                              {speaker1BulletsSplit.map(
+                                                (bullet, bulletIndex) =>
+                                                  bullet.value && (
+                                                    <ul key={bulletIndex}>
+                                                      <li>{bullet.value}</li>
+                                                    </ul>
+                                                  ),
+                                              )}
+                                              <span></span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    )}
+
+                                    {/* ── Speaker 2 ── */}
+                                    {agendaVersion === 'RollingOutSoon' || agendaVersion === "Version-1" ? (
+                                      <div>
+                                        {/* <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
+                                          <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.startTime} - {item.endTime}</h6>
+                                          <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.heading}</h6>
+                                        </div> */}
+                                        <div className="Agenda_speakerContainer__av+wf">
+                                          <div className="Agenda_keyContainer__ZlvJV">
+                                            {industryTrends.map(
+                                              (trend, trendIndex) => (
+                                                <p key={trendIndex}>
+                                                  {trend.label}
+                                                </p>
+                                              ),
+                                            )}
+                                          </div>
+                                          <div className="Agenda_speakerDetailsContainer__mOEC6">
+                                            <div className="Agenda_upper__9vYZH">
+                                              <div className="Agenda_upperInnerV2__SAsL1">
+                                                <img
+                                                  src={
+                                                    !item.Speaker2CompanyImg
+                                                      ? companyDummy
+                                                      : item.Speaker2CompanyImg
+                                                  }
+                                                  alt={item.speaker2CompanyName}
+                                                  width="100"
+                                                ></img>
+                                                <div>
+                                                  <p>{item.speaker2Name}</p>
+                                                  <p>
+                                                    {item.speaker2CompanyName}
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div className="Agenda_lower__Oy-1W">
+                                              {speaker2BulletsSplit.map(
+                                                (bullet, bulletIndex) =>
+                                                  bullet.value && (
+                                                    <ul key={bulletIndex}>
+                                                      <li>{bullet.value}</li>
+                                                    </ul>
+                                                  ),
+                                              )}
+                                              <span></span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    ) : (
                                       <div className="Agenda_speakerContainer__av+wf">
                                         <div className="Agenda_keyContainer__ZlvJV">
                                           {industryTrends.map(
@@ -2076,75 +2827,21 @@ const Agenda = () => {
                                         </div>
                                         <div className="Agenda_speakerDetailsContainer__mOEC6">
                                           <div className="Agenda_upper__9vYZH">
-                                            {/* {item.Speaker1AgendaImg && ( */}
+                                            {/* {item.Speaker2AgendaImg && ( */}
                                             <img
                                               src={
-                                                !item.Speaker1AgendaImg
+                                                !item.Speaker2AgendaImg
                                                   ? speakerDummy
-                                                  : item.Speaker1AgendaImg
+                                                  : item.Speaker2AgendaImg
                                               }
-                                              alt={item.speaker1Name}
+                                              alt={item.speaker2Name}
                                               width="100"
                                               height="50"
                                               style={{ cursor: "pointer" }}
                                             />
                                             {/* )} */}
                                             <div className="Agenda_upperInnerV1__VkoVw">
-                                              {/* {item.Speaker1CompanyImg && ( */}
-                                              <img
-                                                src={
-                                                  !item.Speaker1CompanyImg
-                                                    ? companyDummy
-                                                    : item.Speaker1CompanyImg
-                                                }
-                                                alt={item.speaker1CompanyName}
-                                                width="100"
-                                              />
-                                              {/* )} */}
-                                              <div>
-                                                <p>{item.speaker1Name}</p>
-                                                <p>
-                                                  {item.speaker1CompanyName}
-                                                </p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div className="Agenda_lower__Oy-1W">
-                                            {speaker1BulletsSplit.map(
-                                              (bullet, bulletIndex) =>
-                                                bullet.value && (
-                                                  <ul key={bulletIndex}>
-                                                    <li>{bullet.value}</li>
-                                                  </ul>
-                                                ),
-                                            )}
-                                            <span></span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  )}
-
-                                  {/* ── Speaker 2 ── */}
-                                  {agendaVersion === "Version-1" ? (
-                                    <div>
-                                      {/* <div className='Agenda_bar__ht+6s' style={{ backgroundColor: "#dcdcdc" }}>
-                                          <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.startTime} - {item.endTime}</h6>
-                                          <h6 style={{ color: "#181818", fontWeight: 900 }}>{item.heading}</h6>
-                                        </div> */}
-                                      <div className="Agenda_speakerContainer__av+wf">
-                                        <div className="Agenda_keyContainer__ZlvJV">
-                                          {industryTrends.map(
-                                            (trend, trendIndex) => (
-                                              <p key={trendIndex}>
-                                                {trend.label}
-                                              </p>
-                                            ),
-                                          )}
-                                        </div>
-                                        <div className="Agenda_speakerDetailsContainer__mOEC6">
-                                          <div className="Agenda_upper__9vYZH">
-                                            <div className="Agenda_upperInnerV2__SAsL1">
+                                              {/* {item.Speaker2CompanyImg && ( */}
                                               <img
                                                 src={
                                                   !item.Speaker2CompanyImg
@@ -2153,12 +2850,11 @@ const Agenda = () => {
                                                 }
                                                 alt={item.speaker2CompanyName}
                                                 width="100"
-                                              ></img>
+                                              />
+                                              {/* )} */}
                                               <div>
                                                 <p>{item.speaker2Name}</p>
-                                                <p>
-                                                  {item.speaker2CompanyName}
-                                                </p>
+                                                <p>{item.speaker2CompanyName}</p>
                                               </div>
                                             </div>
                                           </div>
@@ -2175,237 +2871,182 @@ const Agenda = () => {
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  ) : (
-                                    <div className="Agenda_speakerContainer__av+wf">
-                                      <div className="Agenda_keyContainer__ZlvJV">
-                                        {industryTrends.map(
-                                          (trend, trendIndex) => (
-                                            <p key={trendIndex}>
-                                              {trend.label}
-                                            </p>
-                                          ),
-                                        )}
-                                      </div>
-                                      <div className="Agenda_speakerDetailsContainer__mOEC6">
-                                        <div className="Agenda_upper__9vYZH">
-                                          {/* {item.Speaker2AgendaImg && ( */}
-                                          <img
-                                            src={
-                                              !item.Speaker2AgendaImg
-                                                ? speakerDummy
-                                                : item.Speaker2AgendaImg
-                                            }
-                                            alt={item.speaker2Name}
-                                            width="100"
-                                            height="50"
-                                            style={{ cursor: "pointer" }}
-                                          />
-                                          {/* )} */}
-                                          <div className="Agenda_upperInnerV1__VkoVw">
-                                            {/* {item.Speaker2CompanyImg && ( */}
-                                            <img
-                                              src={
-                                                !item.Speaker2CompanyImg
-                                                  ? companyDummy
-                                                  : item.Speaker2CompanyImg
-                                              }
-                                              alt={item.speaker2CompanyName}
-                                              width="100"
-                                            />
-                                            {/* )} */}
-                                            <div>
-                                              <p>{item.speaker2Name}</p>
-                                              <p>{item.speaker2CompanyName}</p>
-                                            </div>
-                                          </div>
+                                    )}
+                                  </>
+                                ) : (
+                                  // ── Single Speaker ──
+                                  <>
+                                    {agendaVersion === 'RollingOutSoon' || agendaVersion === "Version-1" ? (
+                                      <div>
+                                        <div
+                                          className="Agenda_bar__ht+6s"
+                                          style={{ backgroundColor: "#dcdcdc" }}
+                                        >
+                                          <h6
+                                            style={{
+                                              color: "#181818",
+                                              fontWeight: 900,
+                                            }}
+                                          >
+                                            {item.startTime} - {item.endTime}
+                                          </h6>
+                                          <h6
+                                            style={{
+                                              color: "#181818",
+                                              fontWeight: 900,
+                                            }}
+                                          >
+                                            {item.heading}
+                                          </h6>
                                         </div>
-                                        <div className="Agenda_lower__Oy-1W">
-                                          {speaker2BulletsSplit.map(
-                                            (bullet, bulletIndex) =>
-                                              bullet.value && (
-                                                <ul key={bulletIndex}>
-                                                  <li>{bullet.value}</li>
-                                                </ul>
+                                        <div className="Agenda_speakerContainer__av+wf">
+                                          <div className="Agenda_keyContainer__ZlvJV">
+                                            {industryTrends.map(
+                                              (trend, trendIndex) => (
+                                                <p key={trendIndex}>
+                                                  {trend.label}
+                                                </p>
                                               ),
-                                          )}
-                                          <span></span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  )}
-                                </>
-                              ) : (
-                                // ── Single Speaker ──
-                                <>
-                                  {agendaVersion === "Version-1" ? (
-                                    <div>
-                                      <div
-                                        className="Agenda_bar__ht+6s"
-                                        style={{ backgroundColor: "#dcdcdc" }}
-                                      >
-                                        <h6
-                                          style={{
-                                            color: "#181818",
-                                            fontWeight: 900,
-                                          }}
-                                        >
-                                          {item.startTime} - {item.endTime}
-                                        </h6>
-                                        <h6
-                                          style={{
-                                            color: "#181818",
-                                            fontWeight: 900,
-                                          }}
-                                        >
-                                          {item.heading}
-                                        </h6>
-                                      </div>
-                                      <div className="Agenda_speakerContainer__av+wf">
-                                        <div className="Agenda_keyContainer__ZlvJV">
-                                          {industryTrends.map(
-                                            (trend, trendIndex) => (
-                                              <p key={trendIndex}>
-                                                {trend.label}
-                                              </p>
-                                            ),
-                                          )}
-                                        </div>
-                                        <div className="Agenda_speakerDetailsContainer__mOEC6">
-                                          <div className="Agenda_upper__9vYZH">
-                                            <div className="Agenda_upperInnerV2__SAsL1">
-                                              <img
-                                                src={
-                                                  !item.singleSpeakerCompanyImg
-                                                    ? companyDummy
-                                                    : item.singleSpeakerCompanyImg
-                                                }
-                                                alt={
-                                                  item.singleSpeakerCompanyName
-                                                }
-                                                width="100"
-                                              ></img>
-                                              <div>
-                                                <p>{item.singleSpeakerName}</p>
-                                                <p>
-                                                  {
+                                            )}
+                                          </div>
+                                          <div className="Agenda_speakerDetailsContainer__mOEC6">
+                                            <div className="Agenda_upper__9vYZH">
+                                              <div className="Agenda_upperInnerV2__SAsL1">
+                                                <img
+                                                  src={
+                                                    !item.singleSpeakerCompanyImg
+                                                      ? companyDummy
+                                                      : item.singleSpeakerCompanyImg
+                                                  }
+                                                  alt={
                                                     item.singleSpeakerCompanyName
                                                   }
-                                                </p>
+                                                  width="100"
+                                                ></img>
+                                                <div>
+                                                  <p>{item.singleSpeakerName}</p>
+                                                  <p>
+                                                    {
+                                                      item.singleSpeakerCompanyName
+                                                    }
+                                                  </p>
+                                                </div>
                                               </div>
                                             </div>
+                                            <div className="Agenda_lower__Oy-1W">
+                                              {bulletPoints.map(
+                                                (bullet, bulletIndex) =>
+                                                  bullet.value && (
+                                                    <ul key={bulletIndex}>
+                                                      <li>{bullet.value}</li>
+                                                    </ul>
+                                                  ),
+                                              )}
+                                              <span></span>
+                                            </div>
                                           </div>
-                                          <div className="Agenda_lower__Oy-1W">
-                                            {bulletPoints.map(
-                                              (bullet, bulletIndex) =>
-                                                bullet.value && (
-                                                  <ul key={bulletIndex}>
-                                                    <li>{bullet.value}</li>
-                                                  </ul>
-                                                ),
+                                        </div>
+                                      </div>
+                                    ) : (
+                                      <div>
+                                        <div
+                                          className="Agenda_bar__ht+6s"
+                                          style={{ backgroundColor: "#dcdcdc" }}
+                                        >
+                                          <h6
+                                            style={{
+                                              color: "#181818",
+                                              fontWeight: 900,
+                                            }}
+                                          >
+                                            {item.startTime} - {item.endTime}
+                                          </h6>
+                                          <h6
+                                            style={{
+                                              color: "#181818",
+                                              fontWeight: 900,
+                                            }}
+                                          >
+                                            {item.heading}
+                                          </h6>
+                                        </div>
+                                        <div className="Agenda_speakerContainer__av+wf">
+                                          <div className="Agenda_keyContainer__ZlvJV">
+                                            {industryTrends.map(
+                                              (trend, trendIndex) => (
+                                                <p key={trendIndex}>
+                                                  {trend.label}
+                                                </p>
+                                              ),
                                             )}
-                                            <span></span>
                                           </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  ) : (
-                                    <div>
-                                      <div
-                                        className="Agenda_bar__ht+6s"
-                                        style={{ backgroundColor: "#dcdcdc" }}
-                                      >
-                                        <h6
-                                          style={{
-                                            color: "#181818",
-                                            fontWeight: 900,
-                                          }}
-                                        >
-                                          {item.startTime} - {item.endTime}
-                                        </h6>
-                                        <h6
-                                          style={{
-                                            color: "#181818",
-                                            fontWeight: 900,
-                                          }}
-                                        >
-                                          {item.heading}
-                                        </h6>
-                                      </div>
-                                      <div className="Agenda_speakerContainer__av+wf">
-                                        <div className="Agenda_keyContainer__ZlvJV">
-                                          {industryTrends.map(
-                                            (trend, trendIndex) => (
-                                              <p key={trendIndex}>
-                                                {trend.label}
-                                              </p>
-                                            ),
-                                          )}
-                                        </div>
-                                        <div className="Agenda_speakerDetailsContainer__mOEC6">
-                                          <div className="Agenda_upper__9vYZH">
-                                            {/* {item.singleSpeakerAgendaImg && ( */}
-                                            <img
-                                              src={
-                                                !item.singleSpeakerAgendaImg
-                                                  ? speakerDummy
-                                                  : item.singleSpeakerAgendaImg
-                                              }
-                                              alt={item.singleSpeakerName}
-                                              width="100"
-                                              height="50"
-                                              style={{ cursor: "pointer" }}
-                                            />
-                                            {/* )} */}
-                                            <div className="Agenda_upperInnerV1__VkoVw">
-                                              {/* {item.singleSpeakerCompanyImg && ( */}
+                                          <div className="Agenda_speakerDetailsContainer__mOEC6">
+                                            <div className="Agenda_upper__9vYZH">
+                                              {/* {item.singleSpeakerAgendaImg && ( */}
                                               <img
                                                 src={
-                                                  !item.singleSpeakerCompanyImg
-                                                    ? companyDummy
-                                                    : item.singleSpeakerCompanyImg
+                                                  !item.singleSpeakerAgendaImg
+                                                    ? speakerDummy
+                                                    : item.singleSpeakerAgendaImg
                                                 }
-                                                alt={
-                                                  item.singleSpeakerCompanyName
-                                                }
+                                                alt={item.singleSpeakerName}
                                                 width="100"
+                                                height="50"
+                                                style={{ cursor: "pointer" }}
                                               />
                                               {/* )} */}
-                                              <div>
-                                                <p>{item.singleSpeakerName}</p>
-                                                <p>
-                                                  {
+                                              <div className="Agenda_upperInnerV1__VkoVw">
+                                                {/* {item.singleSpeakerCompanyImg && ( */}
+                                                <img
+                                                  src={
+                                                    !item.singleSpeakerCompanyImg
+                                                      ? companyDummy
+                                                      : item.singleSpeakerCompanyImg
+                                                  }
+                                                  alt={
                                                     item.singleSpeakerCompanyName
                                                   }
-                                                </p>
+                                                  width="100"
+                                                />
+                                                {/* )} */}
+                                                <div>
+                                                  <p>{item.singleSpeakerName}</p>
+                                                  <p>
+                                                    {
+                                                      item.singleSpeakerCompanyName
+                                                    }
+                                                  </p>
+                                                </div>
                                               </div>
                                             </div>
-                                          </div>
-                                          <div className="Agenda_lower__Oy-1W">
-                                            {bulletPoints.map(
-                                              (bullet, bulletIndex) =>
-                                                bullet.value && (
-                                                  <ul key={bulletIndex}>
-                                                    <li>{bullet.value}</li>
-                                                  </ul>
-                                                ),
-                                            )}
-                                            <span></span>
+                                            <div className="Agenda_lower__Oy-1W">
+                                              {bulletPoints.map(
+                                                (bullet, bulletIndex) =>
+                                                  bullet.value && (
+                                                    <ul key={bulletIndex}>
+                                                      <li>{bullet.value}</li>
+                                                    </ul>
+                                                  ),
+                                              )}
+                                              <span></span>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  )}
-                                </>
-                              )}
-                            </div>
-                          );
-                        }
-                      })}
-                    </div>
-                  ));
-                })()}
-            </div>
+                                    )}
+                                  </>
+                                )}
+                              </div>
+                            );
+                          }
+                        })}
+                      </div>
+                    ));
+                  })()}
+              </div>
+            }
+
+
 
             <div
               className="Form_container__jwPCR"
