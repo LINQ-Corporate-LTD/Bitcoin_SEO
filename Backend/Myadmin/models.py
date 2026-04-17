@@ -1,5 +1,5 @@
 from django.db import models
-from tkinter import CASCADE
+from django.db.models import CASCADE
 from django.db.models.deletion import CASCADE
 from django.contrib.auth.hashers import make_password
 # Create your models here.

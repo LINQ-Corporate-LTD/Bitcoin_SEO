@@ -33,10 +33,12 @@ const lockIcon =
   "https://www.desalination-resource-recovery.com/images/icons/lock.png";
 
 const countries = getNames();
-const metaSeoTitle = "Sponsor Booking | Bitcoin Innovation & Market Evolution 2026";
-const metaSeoDesc = "Book your sponsorship package for Bitcoin Innovation & Market Evolution 2026.";
-const metaCanonicalUrl = "https://www.bitcoin-innovation-market-evolution.online/sponsor-booking";
-
+const metaSeoTitle =
+  "Sponsor Booking | Bitcoin Innovation & Market Evolution 2026";
+const metaSeoDesc =
+  "Book your sponsorship package for Bitcoin Innovation & Market Evolution 2026.";
+const metaCanonicalUrl =
+  "https://www.bitcoin-innovation-market-evolution.online/sponsor-booking";
 
 const AddSponsorDelegateForm = () => {
   const location = useLocation();
@@ -52,6 +54,8 @@ const AddSponsorDelegateForm = () => {
     eventGeneralSettings,
     themeSettings,
   } = useApiData();
+  console.log("eventDetails: ", eventDetails);
+  console.log("eventGeneralSettings: ", eventGeneralSettings);
 
   // â”€â”€â”€ Step 1 state â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const [delegateCount, setDelegateCount] = useState(1);
@@ -109,7 +113,7 @@ const AddSponsorDelegateForm = () => {
   const [discountData, setDiscountData] = useState("");
   const [activeDelPackageData, setActiveDelPackageData] = useState([]);
   const [windowWidth, setWindowWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 1200
+    typeof window !== "undefined" ? window.innerWidth : 1200,
   );
 
   const portalId = "4000965";
@@ -133,8 +137,8 @@ const AddSponsorDelegateForm = () => {
   const handleDelegateChange = (delegateId, field, value) => {
     setDelegates((prev) =>
       prev.map((delegate) =>
-        delegate.id === delegateId ? { ...delegate, [field]: value } : delegate
-      )
+        delegate.id === delegateId ? { ...delegate, [field]: value } : delegate,
+      ),
     );
     if (submitAttempted) {
       const errorKey = `delegate_${delegateId}_${field}`;
@@ -160,7 +164,7 @@ const AddSponsorDelegateForm = () => {
 
   const removeDelegate = (delegateId) => {
     setDelegates((prev) =>
-      prev.filter((delegate) => delegate.id !== delegateId)
+      prev.filter((delegate) => delegate.id !== delegateId),
     );
   };
 
@@ -225,6 +229,9 @@ const AddSponsorDelegateForm = () => {
     return emailRegex.test(email);
   };
 
+  const dispositionKey = eventDetails?.hubspotDisposition; // e.g. "disposition_wdrm_2025"
+  const emailStatusKey = eventDetails?.hubspotEmailStatus;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitAttempted(true);
@@ -240,12 +247,12 @@ const AddSponsorDelegateForm = () => {
       let invoiceNumber;
       try {
         const invoiceRes = await fetch(
-          "https://harsh7541.pythonanywhere.com/admin1/generate-invoice-no"
+          "https://harsh7541.pythonanywhere.com/admin1/generate-invoice-no",
         );
         const invoiceData = await invoiceRes.json();
         invoiceNumber = invoiceData.invoiceNo;
       } catch (error) {
-        console.error("âŒ Failed to generate invoice number:", error);
+        console.error("Failed to generate invoice number:", error);
         alert("Could not generate invoice number. Please try again.");
         return;
       }
@@ -272,8 +279,8 @@ const AddSponsorDelegateForm = () => {
               { name: "jobtitle", value: delegate.position },
               { name: "email", value: delegate.email },
               { name: "invoice_number", value: invoiceNumber },
-              { name: "disposition_wdrm_2025", value: disposition },
-              { name: "email_status_wdrm_2025", value: emailStatus },
+              { name: dispositionKey, value: disposition },
+              { name: emailStatusKey, value: emailStatus },
             ],
             context: {
               pageUri: window.location.href,
@@ -287,12 +294,12 @@ const AddSponsorDelegateForm = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
-              }
+              },
             );
             const result = await response.json();
             console.log(
               `âœ… Submitted ${delegate.firstName} ${delegate.lastName}:`,
-              result
+              result,
             );
           } catch (error) {
             console.error(`âŒ Error submitting ${delegate.firstName}:`, error);
@@ -342,7 +349,7 @@ const AddSponsorDelegateForm = () => {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(emailPayload),
-            }
+            },
           );
           const emailResult = await emailResponse.json();
           if (emailResult.status === "success") {
@@ -360,11 +367,11 @@ const AddSponsorDelegateForm = () => {
           submitCompanyDelegatesToHubSpot(formData),
           sendBookingEmail(),
         ]);
-        console.log('selectedPackage', selectedPackage);
-        console.log('companyData', companyData);
-        console.log('delegates', delegates);
-        console.log('termsAgreement', termsAgreement);
-        console.log('invoiceNumber', invoiceNumber);
+        console.log("selectedPackage", selectedPackage);
+        console.log("companyData", companyData);
+        console.log("delegates", delegates);
+        console.log("termsAgreement", termsAgreement);
+        console.log("invoiceNumber", invoiceNumber);
 
         // â”€â”€ Instead of navigating, store the data and show Step 2 inline â”€â”€
         setStep2Data({
@@ -440,7 +447,9 @@ const AddSponsorDelegateForm = () => {
       return;
     }
     if (!delegates || delegates.length === 0) {
-      toast.error("No delegates found. Please go back and add delegate information.");
+      toast.error(
+        "No delegates found. Please go back and add delegate information.",
+      );
       return;
     }
 
@@ -499,17 +508,23 @@ const AddSponsorDelegateForm = () => {
       };
       console.log("📧 Sending Step 2 email with payload:", emailPayload);
       try {
-        const emailResponse = await fetch("https://harsh7541.pythonanywhere.com/admin1/sendmail", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(emailPayload),
-        });
+        const emailResponse = await fetch(
+          "https://harsh7541.pythonanywhere.com/admin1/sendmail",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(emailPayload),
+          },
+        );
         if (emailResponse.ok) {
           const emailResult = await emailResponse.json();
           console.log("✅ Step 2 Email result:", emailResult);
         } else {
           const errorText = await emailResponse.text();
-          console.error(`❌ Email Step 2 failed with status ${emailResponse.status}:`, errorText);
+          console.error(
+            `❌ Email Step 2 failed with status ${emailResponse.status}:`,
+            errorText,
+          );
         }
       } catch (error) {
         console.error("❌ Error sending Step 2 email:", error);
@@ -628,18 +643,27 @@ const AddSponsorDelegateForm = () => {
       };
       console.log("📧 Sending Step 3 email with payload:", emailPayload);
       try {
-        const emailResponse = await fetch("https://harsh7541.pythonanywhere.com/admin1/sendmail", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(emailPayload),
-        });
+        const emailResponse = await fetch(
+          "https://harsh7541.pythonanywhere.com/admin1/sendmail",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(emailPayload),
+          },
+        );
         if (emailResponse.ok) {
           const emailResult = await emailResponse.json();
           return { success: emailResult.status === "success" };
         } else {
           const errorText = await emailResponse.text();
-          console.error(`❌ Email Step 3 failed with status ${emailResponse.status}:`, errorText);
-          return { success: false, error: `Server error ${emailResponse.status}` };
+          console.error(
+            `❌ Email Step 3 failed with status ${emailResponse.status}:`,
+            errorText,
+          );
+          return {
+            success: false,
+            error: `Server error ${emailResponse.status}`,
+          };
         }
       } catch (error) {
         console.error("❌ Error sending Step 3 email:", error);
@@ -665,7 +689,10 @@ const AddSponsorDelegateForm = () => {
         finalData.append("couponCode", discountCode);
       }
       finalData.append("totalPassAmount", prices.initialPrice);
-      finalData.append("additionalDelegateAmoount", prices.additionalDelegatePrice);
+      finalData.append(
+        "additionalDelegateAmoount",
+        prices.additionalDelegatePrice,
+      );
       finalData.append("discountAmount", prices.discountAmount);
       finalData.append("addOnsAmount", prices.addOnsTotal);
       finalData.append("taxableCharge", prices.taxAmount);
@@ -674,7 +701,7 @@ const AddSponsorDelegateForm = () => {
 
       fetch("https://harsh7541.pythonanywhere.com/admin1/addnewsponsor", {
         method: "POST",
-        body: finalData
+        body: finalData,
       })
         .then((response) => response.json())
         .then(async (data) => {
@@ -730,13 +757,17 @@ const AddSponsorDelegateForm = () => {
 
           const marketingLiteratureAddOns = allAddOns.filter(
             (addon) =>
-              addon.addOnTypeDetails.addOnTypeName === "Pre-event Marketing Add-ons" ||
-              addon.addOnTypeDetails.addOnTypeName === "Literature Distribution Add-ons"
+              addon.addOnTypeDetails.addOnTypeName ===
+                "Pre-event Marketing Add-ons" ||
+              addon.addOnTypeDetails.addOnTypeName ===
+                "Literature Distribution Add-ons",
           );
           const sessionOnSiteAddOns = allAddOns.filter(
             (addon) =>
-              addon.addOnTypeDetails.addOnTypeName === "Session Branding Add-ons" ||
-              addon.addOnTypeDetails.addOnTypeName === "On Site Branding Add-ons"
+              addon.addOnTypeDetails.addOnTypeName ===
+                "Session Branding Add-ons" ||
+              addon.addOnTypeDetails.addOnTypeName ===
+                "On Site Branding Add-ons",
           );
           setMarketingAndLiterature(groupByType(marketingLiteratureAddOns));
           setSessionAndOnSite(groupByType(sessionOnSiteAddOns));
@@ -745,7 +776,9 @@ const AddSponsorDelegateForm = () => {
   };
 
   const callGetActiveDelPackageApi = () => {
-    fetch(`https://harsh7541.pythonanywhere.com/admin1/getactivedelegatepackage`)
+    fetch(
+      `https://harsh7541.pythonanywhere.com/admin1/getactivedelegatepackage`,
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data && data.status) {
@@ -771,15 +804,21 @@ const AddSponsorDelegateForm = () => {
     }
     let formData = new FormData();
     formData.append("couponCode", code);
-    fetch(`https://harsh7541.pythonanywhere.com/admin1/sponsoroffercouponbycode`, {
-      method: "POST",
-      body: formData
-    })
+    fetch(
+      `https://harsh7541.pythonanywhere.com/admin1/sponsoroffercouponbycode`,
+      {
+        method: "POST",
+        body: formData,
+      },
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data && data.status) {
           const returnedCoupon = data["offerCoupons"]?.[0];
-          if (returnedCoupon?.couponCode?.toUpperCase().trim() === code.toUpperCase().trim()) {
+          if (
+            returnedCoupon?.couponCode?.toUpperCase().trim() ===
+            code.toUpperCase().trim()
+          ) {
             setDiscountData(data["offerCoupons"]);
             setDiscountPercent(returnedCoupon?.discountAmount);
           } else {
@@ -798,25 +837,45 @@ const AddSponsorDelegateForm = () => {
 
   const calculatePrices = () => {
     const packagePrice = parseFloat(selectedPackage?.sponsorPackagePrice || 0);
-    const additionalDelegatePrice = additionalDelegates * parseFloat(activeDelPackageData[0]?.deligatePackagePrice || 0);
-    const taxPercent = parseFloat(eventGeneralSettings?.purchaseTaxPercantage || eventGeneralSettings?.purchaseTaxPercent || 0);
+    const additionalDelegatePrice =
+      additionalDelegates *
+      parseFloat(activeDelPackageData[0]?.deligatePackagePrice || 0);
+    const taxPercent = parseFloat(
+      eventGeneralSettings?.purchaseTaxPercantage ||
+        eventGeneralSettings?.purchaseTaxPercent ||
+        0,
+    );
     const sponsorPackagePrice = packagePrice;
-    const discountAmount = additionalDelegates > 0 ? (additionalDelegatePrice * discountPercent) / 100 : 0;
-    const additionalDelegatePriceAfterDiscount = additionalDelegatePrice - discountAmount;
-    const addOnsTotal = selectedAddOns.reduce((sum, addOn) => sum + parseFloat(addOn.sponsorAddOnPrice || 0), 0);
+    const discountAmount =
+      additionalDelegates > 0
+        ? (additionalDelegatePrice * discountPercent) / 100
+        : 0;
+    const additionalDelegatePriceAfterDiscount =
+      additionalDelegatePrice - discountAmount;
+    const addOnsTotal = selectedAddOns.reduce(
+      (sum, addOn) => sum + parseFloat(addOn.sponsorAddOnPrice || 0),
+      0,
+    );
     const taxOnSponsorPackage = (sponsorPackagePrice * taxPercent) / 100;
-    const taxOnAdditionalDelegates = (additionalDelegatePriceAfterDiscount * taxPercent) / 100;
+    const taxOnAdditionalDelegates =
+      (additionalDelegatePriceAfterDiscount * taxPercent) / 100;
     const taxOnAddOns = (addOnsTotal * taxPercent) / 100;
-    const taxAmount = taxOnSponsorPackage + taxOnAdditionalDelegates + taxOnAddOns;
+    const taxAmount =
+      taxOnSponsorPackage + taxOnAdditionalDelegates + taxOnAddOns;
     const initialPrice = sponsorPackagePrice + additionalDelegatePrice;
-    const finalTotal = sponsorPackagePrice + additionalDelegatePriceAfterDiscount + addOnsTotal + taxAmount;
+    const finalTotal =
+      sponsorPackagePrice +
+      additionalDelegatePriceAfterDiscount +
+      addOnsTotal +
+      taxAmount;
 
     return {
       initialPrice: initialPrice.toFixed(2),
       sponsorPackagePrice: sponsorPackagePrice.toFixed(2),
       additionalDelegatePrice: additionalDelegatePrice.toFixed(2),
       discountAmount: discountAmount.toFixed(2),
-      additionalDelegatePriceAfterDiscount: additionalDelegatePriceAfterDiscount.toFixed(2),
+      additionalDelegatePriceAfterDiscount:
+        additionalDelegatePriceAfterDiscount.toFixed(2),
       addOnsTotal: addOnsTotal.toFixed(2),
       taxAmount: taxAmount.toFixed(2),
       finalTotal: finalTotal.toFixed(2),
@@ -904,7 +963,9 @@ const AddSponsorDelegateForm = () => {
           <div>
             <p>
               Taxes and Service Charges (
-              {eventGeneralSettings?.purchaseTaxPercantage || eventGeneralSettings?.purchaseTaxPercent}%)
+              {eventGeneralSettings?.purchaseTaxPercantage ||
+                eventGeneralSettings?.purchaseTaxPercent}
+              %)
             </p>
             <p>
               {eventGeneralSettings?.currencySymbol || ""} {prices.taxAmount}
@@ -1075,7 +1136,7 @@ const AddSponsorDelegateForm = () => {
                                     onChange={(e) =>
                                       handleAddOnChange(
                                         subItem,
-                                        e.target.checked
+                                        e.target.checked,
                                       )
                                     }
                                     id={`addon-${subItem.id}`}
@@ -1114,7 +1175,7 @@ const AddSponsorDelegateForm = () => {
                                     onChange={(e) =>
                                       handleAddOnChange(
                                         subItem,
-                                        e.target.checked
+                                        e.target.checked,
                                       )
                                     }
                                     id={`addon-${subItem.id}`}
@@ -1177,9 +1238,11 @@ const AddSponsorDelegateForm = () => {
                               ""
                             }
                             companyName={companyDetails?.companyName || ""}
-                            orderDescription={`Payment for Sponsor- ${companyDetails?.companyName
-                              } - Type: ${selectedPackage?.sponsorPackageType
-                              } - Event: ${eventDetails?.eventName || ""}`}
+                            orderDescription={`Payment for Sponsor- ${
+                              companyDetails?.companyName
+                            } - Type: ${
+                              selectedPackage?.sponsorPackageType
+                            } - Event: ${eventDetails?.eventName || ""}`}
                             onPaymentSuccess={handlePaymentSuccess}
                             onPaymentError={handlePaymentError}
                           />

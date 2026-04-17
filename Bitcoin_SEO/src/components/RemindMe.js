@@ -12,6 +12,7 @@ import { MuiTelInput } from "mui-tel-input";
 import Button from "@mui/material/Button";
 import { FormControl, FormHelperText } from "@mui/material";
 import { Helmet } from "react-helmet-async";
+import { useApiData } from "../common/ApiContext";
 const logo =
   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
 const plusIcon =
@@ -36,6 +37,13 @@ const RemindMeLater = () => {
     email: "",
     mobile: "",
   });
+  const {
+      homeVideoSettings,
+      eventDetails,
+      eventGeneralSettings,
+      themeSettings,
+    } = useApiData();
+    console.log('eventDetails: ', eventDetails);
 
   // Initialize delegates based on selectedQty
   const initializeDelegates = () => {
@@ -323,6 +331,9 @@ const RemindMeLater = () => {
     return isValid;
   };
 
+  const dispositionKey = eventDetails?.hubspotDisposition; // e.g. "disposition_wdrm_2025"
+  const emailStatusKey = eventDetails?.hubspotEmailStatus;
+
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -361,8 +372,8 @@ const RemindMeLater = () => {
               { name: "jobtitle", value: delegate.position },
               { name: "email", value: delegate.email },
               { name: "invoice_number", value: invoiceNumber },
-              { name: "disposition_wdrm_2025", value: disposition },
-              { name: "email_status_wdrm_2025", value: emailStatus },
+              { name: dispositionKey, value: disposition },
+              { name: emailStatusKey, value: emailStatus },
             ],
             context: {
               pageUri: window.location.href,
