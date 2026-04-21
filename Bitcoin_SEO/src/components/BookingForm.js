@@ -6,17 +6,20 @@ import { useApiData } from "../../src/common/ApiContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSSRData } from "../common/useSSRData";
-const logo =
-  "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
+import toggle from '../assets/webCommonImages/toggle.png'
+import cardLabel from '../assets/webCommonImages/card-labels.png'
+import lockIcon from '../assets/webCommonImages/lock.png'
+// const logo =
+//   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
 
-const ticket =
-  "https://www.desalination-resource-recovery.com/images/ticket.svg";
-const toggle =
-  "https://www.desalination-resource-recovery.com/images/icons/toggle.png";
-const cardLabel =
-  "https://www.desalination-resource-recovery.com/images/logos/card-labels.png";
-const lockIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/lock.png";
+// const ticket =
+//   "https://www.desalination-resource-recovery.com/images/ticket.svg";
+// const toggle =
+//   "https://www.desalination-resource-recovery.com/images/icons/toggle.png";
+// const cardLabel =
+//   "https://www.desalination-resource-recovery.com/images/logos/card-labels.png";
+// const lockIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/lock.png";
 
 const BookingForm = () => {
   const navigate = useNavigate();
@@ -48,6 +51,7 @@ const BookingForm = () => {
     eventDetails,
     eventGeneralSettings,
     themeSettings,
+    navLogos
   } = useApiData();
 
   useEffect(() => {
@@ -936,7 +940,7 @@ const BookingForm = () => {
             className="PageForm_headerInner__sdlhn"
             style={{ maxWidth: "1070px" }}
           >
-            <img onClick={() => navigate("/")} src={logo} alt="site logo"></img>
+            <img onClick={() => navigate("/")} src={navLogos?.whiteLogo} alt="site logo"></img>
           </div>
         </div>
         <div className="BookingFormV2_container__XPZAc">
@@ -1083,7 +1087,7 @@ const BookingForm = () => {
                             <script xmlns=""></script>
                           </svg>
                           <div className="BookingFormV2_ticketLogo__wN5Ja">
-                            <img src={logo} alt="logo img"></img>
+                            <img src={navLogos?.whiteLogo} alt="logo img"></img>
                           </div>
                         </div>
                       </div>
@@ -1250,7 +1254,7 @@ const BookingForm = () => {
                           <script xmlns=""></script>
                         </svg>
                         <div className="BookingFormV2_ticketLogo__wN5Ja">
-                          <img src={logo} alt="logo img"></img>
+                          <img src={navLogos?.whiteLogo} alt="logo img"></img>
                         </div>
                       </div>
                     </div>

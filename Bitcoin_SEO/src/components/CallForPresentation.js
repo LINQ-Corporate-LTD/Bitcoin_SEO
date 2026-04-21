@@ -18,6 +18,13 @@ import Popup from "reactjs-popup";
 import "../assets/css/popUp.css";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
+import callingSpeakerBg from "../assets/webImages/calling-all-speakers.webp";
+import beAPartOfOurBg from "../assets/webImages/be-a-part-of-our-multi-disciplined-agenda.webp";
+import iconNetwork from "../assets/webCommonImages/icon-network.png";
+import iconLearn from "../assets/webCommonImages/icon-learn.png";
+import iconLeadGeneration from "../assets/webCommonImages/icon-lead-generation.png";
+import iconAmplify from "../assets/webCommonImages/icon-amplify.png";
+
 const CallForPresentation = () => {
   const [speakerPageData, setSpeakerPageData] = useState([]);
   const [paraOne, setParaOne] = useState("");
@@ -42,28 +49,28 @@ const CallForPresentation = () => {
   const features = [
     {
       iconUrl:
-        "https://www.desalination-resource-recovery.com/images/icons/icon-network.png",
+        `${iconNetwork}`,
       title: "NETWORK",
       description:
         "Connect with industry peers and experts to build valuable relationships. An opportunity to build your professional network in an environment fostering growth and collaboration.",
     },
     {
       iconUrl:
-        "https://www.desalination-resource-recovery.com/images/icons/icon-learn.png",
+        `${iconLearn}`,
       title: "LEARN",
       description:
         "Engage with leading tech and business leaders in the current landscape. Join industry thought leaders tackling major challenges, and dive into deeper discussions on cutting-edge topics.",
     },
     {
       iconUrl:
-        "https://www.desalination-resource-recovery.com/images/icons/icon-lead-generation.png",
+        `${iconLeadGeneration}`,
       title: "LEAD GENERATION",
       description:
         "Discover and connect with key industry players relevant to your business. Generate significant leads and broaden your corporate reach, enhancing your presence in the global market.",
     },
     {
       iconUrl:
-        "https://www.desalination-resource-recovery.com/images/icons/icon-amplify.png",
+        `${iconAmplify}`,
       title: "AMPLIFY",
       description:
         "Join an exclusive gathering that draws journalists from top media outlets like Bloomberg, Financial Times, Forbes, and CNN Business. Elevate your message to a global audience.",
@@ -552,7 +559,7 @@ const CallForPresentation = () => {
               className="Speakers_imageContainer__Lv+er"
               style={{
                 backgroundImage:
-                  "url(https://www.frac-sand-conference.com/static/media/speakers1.8c179830acd9a6a00019.png)",
+                  `url(${callingSpeakerBg})`,
               }}
             ></div>
             <div className="Speakers_textContainer__UsgLs">
@@ -697,7 +704,7 @@ const CallForPresentation = () => {
               className="Speakers_imageContainer__Lv+er"
               style={{
                 backgroundImage:
-                  "url(https://www.frac-sand-conference.com/static/media/speakers2.33e7cbc8fa54cd4e2ad5.png)",
+                  `url(${beAPartOfOurBg})`,
               }}
             ></div>
           </div>

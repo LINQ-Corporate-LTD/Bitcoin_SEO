@@ -6,11 +6,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../src/assets/css/logoslider.css";
 import { useSSRData } from "../common/useSSRData";
+import leftArrowIcon from '../assets/webCommonImages/icon-arrow-left.png'
+import rightArrowIcon from '../assets/webCommonImages/icon-arrow-right.png'
 
-const leftArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
-const rightArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
+// const leftArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
+// const rightArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
 
 const LogoCarousel = () => {
   const sliderRef = useRef(null);

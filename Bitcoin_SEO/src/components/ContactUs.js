@@ -7,10 +7,12 @@ import "react-toastify/dist/ReactToastify.css";
 import "../assets/css/contactUs.css";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
-const emailImage =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-email.png";
-const emailIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/msg.png";
+import emailImage from "../assets/webCommonImages/icon-email.png";
+import emailIcon from "../assets/webCommonImages/msg.png";
+// const emailImage =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-email.png";
+// const emailIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/msg.png";
 
 const ContactUs = () => {
   const [windowWidth, setWindowWidth] = useState(

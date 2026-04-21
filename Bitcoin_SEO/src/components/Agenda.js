@@ -675,48 +675,48 @@ const Agenda = () => {
   const lessThen1350 = windowWidth < 1350;
   const lessThen940 = windowWidth < 940;
 
-  const clockIcon =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1746442801380.png";
-  const speaker1 =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1748499580588.png";
-  const speaker1CompanyLogo =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1746442350501.png";
-  const speaker2 =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1748499916005.png";
-  const speaker2CompanyLogo =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1746442464285.png";
-  const speaker3 =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1748500011294.png";
-  const speaker3CompanyLogo =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1746442550914.png";
-  const speaker4 =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1748951889925.png";
-  const speaker4CompanyLogo =
-    "https://www.desalination-resource-recovery.com/images/placeholder-logo.png";
-  const speaker5 =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1748499064015.png";
-  const speaker5CompanyLogo =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1746442699143.png";
-  const speaker6 =
-    "https://www.desalination-resource-recovery.com/images/dummy.jpg";
-  const speaker6CompanyLogo =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1752133797739.png";
-  const speaker7 =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1748499707602.png";
-  const speaker7CompanyLogo =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1747994806707.png";
-  const speaker8 =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1747995229597.jpg";
-  const speaker8CompanyLogo =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1747995229597.png";
-  const speaker9 =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1748500061130.png";
-  const speaker9CompanyLogo =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1747382099530.png";
-  const speaker10 =
-    "https://www.desalination-resource-recovery.com/api/images/agenda/1748499972064.png";
-  const speaker10CompanyLogo =
-    "	https://www.desalination-resource-recovery.com/api/images/agenda/1746443107646.png";
+  // const clockIcon =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1746442801380.png";
+  // const speaker1 =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1748499580588.png";
+  // const speaker1CompanyLogo =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1746442350501.png";
+  // const speaker2 =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1748499916005.png";
+  // const speaker2CompanyLogo =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1746442464285.png";
+  // const speaker3 =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1748500011294.png";
+  // const speaker3CompanyLogo =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1746442550914.png";
+  // const speaker4 =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1748951889925.png";
+  // const speaker4CompanyLogo =
+  //   "https://www.desalination-resource-recovery.com/images/placeholder-logo.png";
+  // const speaker5 =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1748499064015.png";
+  // const speaker5CompanyLogo =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1746442699143.png";
+  // const speaker6 =
+  //   "https://www.desalination-resource-recovery.com/images/dummy.jpg";
+  // const speaker6CompanyLogo =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1752133797739.png";
+  // const speaker7 =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1748499707602.png";
+  // const speaker7CompanyLogo =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1747994806707.png";
+  // const speaker8 =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1747995229597.jpg";
+  // const speaker8CompanyLogo =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1747995229597.png";
+  // const speaker9 =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1748500061130.png";
+  // const speaker9CompanyLogo =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1747382099530.png";
+  // const speaker10 =
+  //   "https://www.desalination-resource-recovery.com/api/images/agenda/1748499972064.png";
+  // const speaker10CompanyLogo =
+  //   "	https://www.desalination-resource-recovery.com/api/images/agenda/1746443107646.png";
 
   useEffect(() => {
     const savedEmail = Cookies.get("agendaEmailVerify");

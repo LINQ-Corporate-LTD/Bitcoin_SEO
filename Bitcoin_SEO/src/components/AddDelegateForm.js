@@ -13,12 +13,14 @@ import Button from "@mui/material/Button";
 import { FormControl, FormHelperText } from "@mui/material";
 import { useApiData } from "../../src/common/ApiContext";
 import { useSSRData } from "../common/useSSRData";
-const logo =
-  "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
-const plusIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/plus.png";
-const closeBtn =
-  "https://www.desalination-resource-recovery.com/images/icons/del-cross.png";
+import plusIcon from '../assets/webCommonImages/plus.png'
+import closeBtn from '../assets/webCommonImages/del-cross.png'
+// const logo =
+//   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
+// const plusIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/plus.png";
+// const closeBtn =
+//   "https://www.desalination-resource-recovery.com/images/icons/del-cross.png";
 const countries = getNames();
 
 const CompanyRegistrationForm = () => {
@@ -36,6 +38,7 @@ const CompanyRegistrationForm = () => {
     eventDetails,
     eventGeneralSettings,
     themeSettings,
+    navLogos
   } = useApiData();
   const createDelegate = (id) => ({
     id,
@@ -714,7 +717,7 @@ const CompanyRegistrationForm = () => {
             className="PageForm_headerInner__sdlhn"
             style={{ maxWidth: "1070px" }}
           >
-            <img onClick={() => navigate("/")} src={logo} alt="site logo"></img>
+            <img onClick={() => navigate("/")} src={navLogos?.whiteLogo} alt="site logo"></img>
           </div>
         </div>
         <div className="BookingFormV2_container__XPZAc">

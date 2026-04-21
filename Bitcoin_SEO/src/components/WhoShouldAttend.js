@@ -12,10 +12,19 @@ import Slider from "react-slick";
 import Popup from "reactjs-popup";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
-const arrowUpIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/accordion-arrow-up.png";
-const arrowDownIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/arrow-down-black.png";
+// const arrowUpIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/accordion-arrow-up.png";
+// const arrowDownIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/arrow-down-black.png";
+import benefitsBg from "../assets/webImages/benefits-who-should-attend.webp";
+import ketTakewaysBg from "../assets/webImages/keytakeaways-who-should-attend.webp";
+import arrowUpIcon from "../assets/webCommonImages/accordion-arrow-up.png";
+import arrowDownIcon from "../assets/webCommonImages/arrow-down-black.png";
+
+// const arrowUpIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/accordion-arrow-up.png";
+// const arrowDownIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/arrow-down-black.png";
 
 const WhoShouldAttend = () => {
   const navigate = useNavigate();
@@ -336,7 +345,7 @@ const WhoShouldAttend = () => {
                   className="BenefitScreen_imageContainer__dQ2Lk"
                   style={{
                     backgroundImage:
-                      "url(	https://www.frac-sand-conference.com/static/media/benefits1.f71bdc353409b0e5b816.png)",
+                      `url(${benefitsBg})`,
                   }}
                 ></div>
                 <div className="BenefitScreen_textContainer__-wzXh">
@@ -451,7 +460,7 @@ const WhoShouldAttend = () => {
                   className="BenefitScreen_imageContainer__dQ2Lk"
                   style={{
                     backgroundImage:
-                      "url(	https://www.frac-sand-conference.com/static/media/benefits2.10516737e5b8b580662d.png)",
+                      `url(${ketTakewaysBg})`,
                   }}
                 ></div>
               </div>

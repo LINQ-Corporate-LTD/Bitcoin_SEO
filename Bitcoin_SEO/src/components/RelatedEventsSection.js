@@ -4,15 +4,19 @@ import "../../src/assets/css/relatedevent.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Slider from "react-slick";
+import leftArrowIcon from '../assets/webCommonImages/icon-arrow-left.png'
+import rightArrowIcon from '../assets/webCommonImages/icon-arrow-right.png'
+import calenderIcon from '../assets/webCommonImages/icon-calendar.png'
+import locationIcon from '../assets/webCommonImages/icon-location.png'
 
-const leftArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
-const rightArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
-const calenderIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-calendar.png";
-const locationIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-location.png";
+// const leftArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
+// const rightArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
+// const calenderIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-calendar.png";
+// const locationIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-location.png";
 
 const RelatedEventsSection = () => {
   const [relatedEventList, setRelatedEventList] = useState([]);
@@ -141,24 +145,22 @@ const RelatedEventsSection = () => {
                         src={event?.eventImage}
                         alt={event?.eventImage}
                         loading="lazy"
-                        className={`${
-                          hoveredIndex === index
-                            ? "EventCard_hidden__YqegG"
-                            : ""
-                        }`}
+                        className={`${hoveredIndex === index
+                          ? "EventCard_hidden__YqegG"
+                          : ""
+                          }`}
                       />
                     )}
                     <img
                       src={event?.eventHoverImage}
                       alt={event?.eventName}
                       loading="lazy"
-                      className={`${
-                        hoveredIndex === index &&
+                      className={`${hoveredIndex === index &&
                         event?.eventImage &&
                         event?.eventImage !== ""
-                          ? "EventCard_visible__BLL1D"
-                          : ""
-                      }`}
+                        ? "EventCard_visible__BLL1D"
+                        : ""
+                        }`}
                     />
                     <h3>
                       <span>{event?.eventName}</span>

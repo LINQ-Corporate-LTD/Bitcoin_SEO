@@ -1,10 +1,4 @@
-// src/common/ApiContext.js
-// SSR-aware context provider.
-// - During SERVER render: provides data directly from initialData (no hooks).
-// - During CLIENT render: uses initialData from window.__INITIAL_DATA__ directly.
-//   NEVER re-fetches homepagedata on the client if SSR data is already present.
-import React, { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, useContext} from "react";
 
 // Create the context
 export const ApiDataContext = createContext();
@@ -27,8 +21,6 @@ function buildValue(data) {
     eventDetails: home?.homeVideoSctionEventDetails?.[0],
     eventGeneralSettings: home?.eventGeneralSettings?.[0],
     themeSettings: home?.themeSetting?.[0],
-    // data.navLogos is now a single object (fetchNavLogos returns [0] already)
-    // home.navLogos is an array (from homepagedata), so we use [0] there
     navLogos: data?.navLogos || home?.navLogos?.[0] || null,
     pageSeoSettings: home?.pageSeoSettings || [],
     refetch: () => { },

@@ -21,12 +21,13 @@ import Slider from "react-slick";
 import { useApiData } from "../common/ApiContext";
 import { useSSRData } from "../common/useSSRData";
 import { usePageSeo } from "../common/usePageSeo";
-console.log('usePageSeo: ', usePageSeo);
+import leftArrowIcon from '../assets/webCommonImages/icon-arrow-left.png'
+import rightArrowIcon from '../assets/webCommonImages/icon-arrow-right.png'
 
-const leftArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
-const rightArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
+// const leftArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
+// const rightArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
 
 function chunkArray(array, size) {
   return Array.from({ length: Math.ceil(array.length / size) }, (_, i) =>

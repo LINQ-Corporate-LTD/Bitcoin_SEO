@@ -14,14 +14,19 @@ import "react-toastify/dist/ReactToastify.css";
 import TestimonialCarousel from "./TestimonialCarousel";
 import { useSSRData } from "../common/useSSRData";
 import { usePageSeo } from "../common/usePageSeo";
-const leftArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
-const rightArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
-const emailIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/msg.png";
-const phoneIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/phone-call.png";
+import leftArrowIcon from '../assets/webCommonImages/icon-arrow-left.png'
+import rightArrowIcon from '../assets/webCommonImages/icon-arrow-right.png'
+import emailIcon from '../assets/webCommonImages/msg.png'
+import phoneIcon from '../assets/webCommonImages/phone-call.png'
+
+// const leftArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
+// const rightArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
+// const emailIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/msg.png";
+// const phoneIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/phone-call.png";
 
 const Sponsors = () => {
   const sliderRef = useRef(null);

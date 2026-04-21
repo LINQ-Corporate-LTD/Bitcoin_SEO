@@ -2,9 +2,10 @@ import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../src/assets/css/video.css";
 import { useApiData } from "../../src/common/ApiContext";
+import arrowIcon from '../assets/webCommonImages/up-arrow-white.png'
 
-const arrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/up-arrow.png";
+// const arrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/up-arrow.png";
 
 const VideoSection = () => {
   const navigate = useNavigate();

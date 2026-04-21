@@ -7,15 +7,20 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
-const mediaImage1 =
-  "	https://www.frac-sand-conference.com/static/media/media.ba0e44e0a54f375e3e8f.png";
-const mediaImage2 =
-  "https://www.frac-sand-conference.com/static/media/media-res.4ba0b7b4e8eee792e1b4.png";
+import mediaImage1 from "../assets/webImages/media1.webp";
+import mediaImage2 from "../assets/webImages/media-res2.webp";
+import emailIcon from "../assets/webCommonImages/msg.png";
+import phoneIcon from "../assets/webCommonImages/phone-call.png";
 
-const emailIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/msg.png";
-const phoneIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/phone-call.png";
+// const mediaImage1 =
+//   "	https://www.frac-sand-conference.com/static/media/media.ba0e44e0a54f375e3e8f.png";
+// const mediaImage2 =
+//   "https://www.frac-sand-conference.com/static/media/media-res.4ba0b7b4e8eee792e1b4.png";
+
+// const emailIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/msg.png";
+// const phoneIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/phone-call.png";
 
 const MediaPartners = () => {
   const [mediaPageHelpersList, setMediaPageHelpersList] = useState([]);

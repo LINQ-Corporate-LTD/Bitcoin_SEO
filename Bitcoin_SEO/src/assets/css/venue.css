@@ -309,7 +309,7 @@ body {
 
 .venue-contact {
   position: relative;
-  background-image: url("https://www.frac-sand-conference.com/static/media/venue-image.ad9c328038bb8cdfb219.png");
+  background-image: url("../webImages/venue-contact-the-venue.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -659,7 +659,7 @@ body {
 
 .Venue_container__Lol8U .Venue_contact__jdZNn {
   align-items: center;
-  background-image: url("https://www.frac-sand-conference.com/static/media/venue-map.80be872b7b97e3143370.png");
+  background-image: url("../webImages/venue-contact-the-venue.webp");
   background-position: 50% center;
   background-size: cover;
   display: flex;

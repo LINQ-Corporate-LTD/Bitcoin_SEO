@@ -10,16 +10,22 @@ import "react-toastify/dist/ReactToastify.css";
 import Error404 from "./Error404";
 import { Helmet } from "react-helmet-async";
 import { useSSRData } from "../common/useSSRData";
-const newsImg =
-  "https://www.desalination-resource-recovery.com/api/images/news/1749734842198.jpg";
-const linkedInLogo =
-  "https://www.desalination-resource-recovery.com/images/icons/share-linkedIn.png";
-const whatsappLogo =
-  "https://www.desalination-resource-recovery.com/images/icons/share-whatsapp.png";
-const emailLogo =
-  "https://www.desalination-resource-recovery.com/images/icons/share-email.png";
-const copyLogo =
-  "https://www.desalination-resource-recovery.com/images/icons/share-copy.png";
+import linkedInLogo from '../assets/webCommonImages/share-linkedIn.png'
+import whatsappLogo from '../assets/webCommonImages/share-whatsapp.png'
+import emailLogo from '../assets/webCommonImages/share-email.png'
+import copyLogo from '../assets/webCommonImages/share-copy.png'
+
+
+// const newsImg =
+//   "https://www.desalination-resource-recovery.com/api/images/news/1749734842198.jpg";
+// const linkedInLogo =
+//   "https://www.desalination-resource-recovery.com/images/icons/share-linkedIn.png";
+// const whatsappLogo =
+//   "https://www.desalination-resource-recovery.com/images/icons/share-whatsapp.png";
+// const emailLogo =
+//   "https://www.desalination-resource-recovery.com/images/icons/share-email.png";
+// const copyLogo =
+//   "https://www.desalination-resource-recovery.com/images/icons/share-copy.png";
 
 const toSlug = (str = "") => {
   return str
@@ -49,10 +55,10 @@ const NewsDescription = () => {
   const [isNotFound, setIsNotFound] = useState(false);
   const [loading, setLoading] = useState(!ssrNewsDetail || ssrNewsDetail.length === 0);
   const [validSlug, setValidSlug] = useState(true); // Default to true to avoid flash of 404
-  
+
   // ✅ Calculate matched item synchronously for SSR and initial render
   const matchedFromSlug = newsList.find((n) => toSlug(n.newsTitle) === slug);
-  
+
   const [currentTrendId, setCurrentTrendId] = useState(
     location.state?.id || matchedFromSlug?.id || null
   );
@@ -276,7 +282,7 @@ Read the full article: ${currentUrl}`);
   const seoTitle = activeNews?.newsMetaTitle?.trim();
   const seoDesc = activeNews?.newsMetaDescription?.trim();
   const seoImage = activeNews?.newsImage;
-  
+
   const canonicalUrl = slug
     ? `https://www.bitcoin-innovation-market-evolution.online/newsdescription/${slug}`
     : "https://www.bitcoin-innovation-market-evolution.online/news";

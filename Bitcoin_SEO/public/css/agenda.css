@@ -476,7 +476,7 @@ body {
 
 .left-section {
   flex: 1;
-  background-image: url('https://www.desalination-resource-recovery.com/static/media/benefits1.f71bdc353409b0e5b816.png');
+  /* background-image: url('https://www.desalination-resource-recovery.com/static/media/benefits1.f71bdc353409b0e5b816.png'); */
   position: relative;
 }
 

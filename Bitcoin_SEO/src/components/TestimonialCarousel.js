@@ -9,16 +9,25 @@ import '../assets/css/TestimonialCarousel.css'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import testimonialImg1 from '../assets/webImages/testimonial-top-1.webp'
+import testimonialImg2 from '../assets/webImages/testimonial-top-2.webp'
+import testimonialImg3 from '../assets/webImages/testimonial-center-left-1.webp'
+import testimonialImg4 from '../assets/webImages/testimonial-center-left-2.webp'
+import testimonialImg5 from '../assets/webImages/testimonial-center-right-1.webp'
+import testimonialImg6 from '../assets/webImages/testimonial-center-right-2.webp'
+import testimonialImg7 from '../assets/webImages/testimonial-bottom-1.webp'
+import testimonialImg8 from '../assets/webImages/testimonial-bottom-2.webp'
+import quotationIcon from '../assets/webCommonImages/icon-quotation.png'
 
-const testimonialImg1 = "https://www.desalination-resource-recovery.com/static/media/top%201.ddc129db141f72b2086a.webp"
-const testimonialImg2 = "https://www.desalination-resource-recovery.com/static/media/top%202.3c8b10699a330d7a8730.webp"
-const testimonialImg3 = "https://www.desalination-resource-recovery.com/static/media/left%201.8afe8718c2500c380549.webp"
-const testimonialImg4 = "https://www.desalination-resource-recovery.com/static/media/left%202.3622f016046c8ff0d1c9.webp"
-const testimonialImg5 = "https://www.desalination-resource-recovery.com/static/media/right%201.165e3883648ae7b74b04.webp"
-const testimonialImg6 = "https://www.desalination-resource-recovery.com/static/media/right%202.68a2aee52bdcc0ff756d.webp"
-const testimonialImg7 = "https://www.desalination-resource-recovery.com/static/media/bottom%201.9c16202608d4bb1e7e5e.webp"
-const testimonialImg8 = "https://www.desalination-resource-recovery.com/static/media/bottom%202.7b5edc035d7d1802b922.webp"
-const quotationIcon = "https://www.desalination-resource-recovery.com/images/icons/icon-quotation.png"
+// const testimonialImg1 = "https://www.desalination-resource-recovery.com/static/media/top%201.ddc129db141f72b2086a.webp"
+// const testimonialImg2 = "https://www.desalination-resource-recovery.com/static/media/top%202.3c8b10699a330d7a8730.webp"
+// const testimonialImg3 = "https://www.desalination-resource-recovery.com/static/media/left%201.8afe8718c2500c380549.webp"
+// const testimonialImg4 = "https://www.desalination-resource-recovery.com/static/media/left%202.3622f016046c8ff0d1c9.webp"
+// const testimonialImg5 = "https://www.desalination-resource-recovery.com/static/media/right%201.165e3883648ae7b74b04.webp"
+// const testimonialImg6 = "https://www.desalination-resource-recovery.com/static/media/right%202.68a2aee52bdcc0ff756d.webp"
+// const testimonialImg7 = "https://www.desalination-resource-recovery.com/static/media/bottom%201.9c16202608d4bb1e7e5e.webp"
+// const testimonialImg8 = "https://www.desalination-resource-recovery.com/static/media/bottom%202.7b5edc035d7d1802b922.webp"
+// const quotationIcon = "https://www.desalination-resource-recovery.com/images/icons/icon-quotation.png"
 
 export default function TestimonialCarousel() {
   // const testimonialImage = [

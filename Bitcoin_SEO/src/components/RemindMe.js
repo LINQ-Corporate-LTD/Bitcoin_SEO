@@ -14,12 +14,12 @@ import { FormControl, FormHelperText } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { useApiData } from "../common/ApiContext";
 import { usePageSeo } from "../common/usePageSeo";
-const logo =
-  "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
-const plusIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/plus.png";
-const closeBtn =
-  "https://www.desalination-resource-recovery.com/images/icons/del-cross.png";
+// const logo =
+//   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
+// const plusIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/plus.png";
+// const closeBtn =
+//   "https://www.desalination-resource-recovery.com/images/icons/del-cross.png";
 const countries = getNames();
 
 const RemindMeLater = () => {
@@ -39,12 +39,13 @@ const RemindMeLater = () => {
     mobile: "",
   });
   const {
-      homeVideoSettings,
-      eventDetails,
-      eventGeneralSettings,
-      themeSettings,
-    } = useApiData();
-    console.log('eventDetails: ', eventDetails);
+    homeVideoSettings,
+    eventDetails,
+    eventGeneralSettings,
+    themeSettings,
+    navLogos
+  } = useApiData();
+  console.log('eventDetails: ', eventDetails);
 
   // Initialize delegates based on selectedQty
   const initializeDelegates = () => {
@@ -486,7 +487,7 @@ const RemindMeLater = () => {
             className="PageForm_headerInner__sdlhn"
             style={{ maxWidth: "1070px" }}
           >
-            <img onClick={() => navigate("/")} src={logo} alt="site logo"></img>
+            <img onClick={() => navigate("/")} src={navLogos?.whiteLogo} alt="site logo"></img>
           </div>
         </div>
         <div className="RemindMeLater_container__vWyw0">

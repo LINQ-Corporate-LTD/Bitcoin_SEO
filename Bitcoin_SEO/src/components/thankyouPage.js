@@ -5,9 +5,10 @@ import Navbar from "./Navbar";
 import Footer from "../Footer";
 import '../../src/assets/css/thankYouPage.css'
 import checkIcon from '../assets/images/checked.png'
+import leftArrowIcon from '../assets/webCommonImages/icon-arrow-left.png'
 
-const leftArrowIcon =
-    "https://www.frac-sand-conference.com/images/icons/icon-arrow-left.png";
+// const leftArrowIcon =
+//     "https://www.frac-sand-conference.com/images/icons/icon-arrow-left.png";
 
 const ThankYouPage = () => {
     const location = useLocation();

@@ -7,11 +7,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../assets/css/FeaturedSpeaker.css";
 import { useSSRData } from "../common/useSSRData";
+import leftArrowIcon from '../assets/webCommonImages/icon-arrow-left.png'
+import rightArrowIcon from '../assets/webCommonImages/icon-arrow-right.png'
 
-const leftArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
-const rightArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
+// const leftArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
+// const rightArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
 
 const FeaturedSpeaker = ({ title }) => {
   const navigate = useNavigate();

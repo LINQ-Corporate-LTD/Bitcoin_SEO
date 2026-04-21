@@ -4,10 +4,13 @@ import "./assets/css/footer.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSSRData } from "./common/useSSRData";
-const emailImage =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-mail.png";
-const linkedInIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-linkedin.png";
+import { useApiData } from "../src/common/ApiContext";
+import emailImage from '../src/assets/webCommonImages/icon-mail.png'
+import linkedInIcon from '../src/assets/webCommonImages/icon-linkedin.png'
+// const emailImage =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-mail.png";
+// const linkedInIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-linkedin.png";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -24,6 +27,7 @@ const Footer = () => {
   const speakers = useSSRData("speakers") || [];
   const trends = useSSRData("trends") || [];
   const [footerNavOptions, setFooterNavOptions] = useState([]);
+  const { eventDetails, eventGeneralSettings, navLogos } = useApiData();
 
   const toSlug = (str) => {
     if (!str) return ""; // 🚨 Prevent 'null' stringification
@@ -156,165 +160,165 @@ const Footer = () => {
   // Responsive breakpoints
   const isMobile = windowWidth < 768;
   const isTablet = windowWidth >= 768 && windowWidth < 1024;
-  const isDesktop = windowWidth >= 1024;
+  // const isDesktop = windowWidth >= 1024;
 
   // Dynamic styles
-  const footerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "black",
-    margin: "0 auto",
-    paddingTop: isMobile ? "40px" : isTablet ? "60px" : "100px",
-    paddingLeft: isMobile ? "20px" : "0",
-    paddingRight: isMobile ? "20px" : "0",
-  };
+  // const footerStyle = {
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   backgroundColor: "black",
+  //   margin: "0 auto",
+  //   paddingTop: isMobile ? "40px" : isTablet ? "60px" : "100px",
+  //   paddingLeft: isMobile ? "20px" : "0",
+  //   paddingRight: isMobile ? "20px" : "0",
+  // };
 
-  const containerStyle = {
-    width: "100%",
-    maxWidth: isMobile ? "100%" : isTablet ? "1200px" : "1400px",
-  };
+  // const containerStyle = {
+  //   width: "100%",
+  //   maxWidth: isMobile ? "100%" : isTablet ? "1200px" : "1400px",
+  // };
 
-  const topSectionStyle = {
-    display: "flex",
-    flexDirection: isMobile ? "column" : "row",
-    justifyContent: "flex-start",
-    marginBottom: isMobile ? "30px" : "50px",
-    overflow: "visible",
-  };
+  // const topSectionStyle = {
+  //   display: "flex",
+  //   flexDirection: isMobile ? "column" : "row",
+  //   justifyContent: "flex-start",
+  //   marginBottom: isMobile ? "30px" : "50px",
+  //   overflow: "visible",
+  // };
 
-  const logoContainerStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: isMobile ? "center" : "flex-start",
-    maxHeight: "68px",
-    overflow: "visible",
-    position: "relative",
-    width: isMobile ? "100%" : "24%",
-    marginBottom: isMobile ? "30px" : "0",
-  };
+  // const logoContainerStyle = {
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: isMobile ? "center" : "flex-start",
+  //   maxHeight: "68px",
+  //   overflow: "visible",
+  //   position: "relative",
+  //   width: isMobile ? "100%" : "24%",
+  //   marginBottom: isMobile ? "30px" : "0",
+  // };
 
-  const logoStyle = {
-    cursor: "pointer",
-    height: "auto",
-    maxWidth: isMobile ? "120px" : "150px",
-    minWidth: isMobile ? "80px" : "100px",
-    objectFit: "contain",
-    width: "100%",
-  };
+  // const logoStyle = {
+  //   cursor: "pointer",
+  //   height: "auto",
+  //   maxWidth: isMobile ? "120px" : "150px",
+  //   minWidth: isMobile ? "80px" : "100px",
+  //   objectFit: "contain",
+  //   width: "100%",
+  // };
 
-  const navContainerStyle = {
-    display: "flex",
-    flexDirection: isMobile ? "column" : "row",
-    justifyContent: "space-between",
-    maxHeight: isMobile ? "auto" : "68px",
-    width: isMobile ? "100%" : "71%",
-    gap: isMobile ? "20px" : "0",
-  };
+  // const navContainerStyle = {
+  //   display: "flex",
+  //   flexDirection: isMobile ? "column" : "row",
+  //   justifyContent: "space-between",
+  //   maxHeight: isMobile ? "auto" : "68px",
+  //   width: isMobile ? "100%" : "71%",
+  //   gap: isMobile ? "20px" : "0",
+  // };
 
-  const navColumnStyle = {
-    display: "flex",
-    flexDirection: "column",
-    width: isMobile ? "100%" : "auto",
-  };
+  // const navColumnStyle = {
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   width: isMobile ? "100%" : "auto",
+  // };
 
-  const navLinkStyle = {
-    color: "white",
-    fontSize: isMobile ? "13px" : "14px",
-    fontWeight: "bold",
-    lineHeight: isMobile ? "30px" : "35px",
-    textDecoration: "none",
-    textTransform: "uppercase",
-  };
+  // const navLinkStyle = {
+  //   color: "white",
+  //   fontSize: isMobile ? "13px" : "14px",
+  //   fontWeight: "bold",
+  //   lineHeight: isMobile ? "30px" : "35px",
+  //   textDecoration: "none",
+  //   textTransform: "uppercase",
+  // };
 
-  const dividerStyle = {
-    borderBottom: "1px solid #5e5e5e",
-    margin: "0",
-    padding: "0",
-    width: "100%",
-  };
+  // const dividerStyle = {
+  //   borderBottom: "1px solid #5e5e5e",
+  //   margin: "0",
+  //   padding: "0",
+  //   width: "100%",
+  // };
 
-  const middleSectionStyle = {
-    display: "flex",
-    flexDirection: isMobile ? "column" : "row",
-    justifyContent: "flex-start",
-    paddingTop: isMobile ? "30px" : "52px",
-    paddingBottom: isMobile ? "40px" : "60px",
-  };
+  // const middleSectionStyle = {
+  //   display: "flex",
+  //   flexDirection: isMobile ? "column" : "row",
+  //   justifyContent: "flex-start",
+  //   paddingTop: isMobile ? "30px" : "52px",
+  //   paddingBottom: isMobile ? "40px" : "60px",
+  // };
 
-  const socialContainerStyle = {
-    display: "flex",
-    alignItems: "flex-start",
-    justifyContent: isMobile ? "center" : "flex-start",
-    paddingLeft: isMobile ? "0" : "5px",
-    width: isMobile ? "100%" : "24%",
-    marginBottom: isMobile ? "30px" : "0",
-  };
+  // const socialContainerStyle = {
+  //   display: "flex",
+  //   alignItems: "flex-start",
+  //   justifyContent: isMobile ? "center" : "flex-start",
+  //   paddingLeft: isMobile ? "0" : "5px",
+  //   width: isMobile ? "100%" : "24%",
+  //   marginBottom: isMobile ? "30px" : "0",
+  // };
 
-  const socialIconStyle = {
-    height: "30px",
-    width: "30px",
-    marginRight: "16px",
-  };
+  // const socialIconStyle = {
+  //   height: "30px",
+  //   width: "30px",
+  //   marginRight: "16px",
+  // };
 
-  const contentContainerStyle = {
-    display: "flex",
-    flexDirection: isMobile ? "column" : "row",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    width: isMobile ? "100%" : "71%",
-    gap: isMobile ? "30px" : "0",
-  };
+  // const contentContainerStyle = {
+  //   display: "flex",
+  //   flexDirection: isMobile ? "column" : "row",
+  //   alignItems: "flex-start",
+  //   justifyContent: "space-between",
+  //   width: isMobile ? "100%" : "71%",
+  //   gap: isMobile ? "30px" : "0",
+  // };
 
-  const contentColumnStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-    width: isMobile ? "100%" : "auto",
-  };
+  // const contentColumnStyle = {
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   alignItems: "flex-start",
+  //   justifyContent: "flex-start",
+  //   width: isMobile ? "100%" : "auto",
+  // };
 
-  const sectionHeadingStyle = {
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "800",
-    marginBottom: "25px",
-    whiteSpace: isMobile ? "normal" : "nowrap",
-  };
+  // const sectionHeadingStyle = {
+  //   color: "white",
+  //   fontSize: "16px",
+  //   fontWeight: "800",
+  //   marginBottom: "25px",
+  //   whiteSpace: isMobile ? "normal" : "nowrap",
+  // };
 
-  const contentLinkStyle = {
-    color: "white",
-    fontSize: isMobile ? "13px" : "14px",
-    fontWeight: "500",
-    lineHeight: isMobile ? "35px" : "40px",
-    margin: "0",
-    textDecoration: "none",
-    textTransform: "uppercase",
-    pointerEvents: "auto",
-  };
+  // const contentLinkStyle = {
+  //   color: "white",
+  //   fontSize: isMobile ? "13px" : "14px",
+  //   fontWeight: "500",
+  //   lineHeight: isMobile ? "35px" : "40px",
+  //   margin: "0",
+  //   textDecoration: "none",
+  //   textTransform: "uppercase",
+  //   pointerEvents: "auto",
+  // };
 
-  const bottomSectionStyle = {
-    display: "flex",
-    flexDirection: isMobile ? "column" : "row",
-    alignItems: isMobile ? "flex-start" : "center",
-    justifyContent: "space-between",
-    margin: "25px 0",
-    gap: isMobile ? "15px" : "0",
-  };
+  // const bottomSectionStyle = {
+  //   display: "flex",
+  //   flexDirection: isMobile ? "column" : "row",
+  //   alignItems: isMobile ? "flex-start" : "center",
+  //   justifyContent: "space-between",
+  //   margin: "25px 0",
+  //   gap: isMobile ? "15px" : "0",
+  // };
 
-  const bottomTextStyle = {
-    color: "white",
-    fontSize: isMobile ? "12px" : "14px",
-    margin: "0",
-    padding: "0",
-    marginBottom: isMobile ? "0" : "18px",
-  };
+  // const bottomTextStyle = {
+  //   color: "white",
+  //   fontSize: isMobile ? "12px" : "14px",
+  //   margin: "0",
+  //   padding: "0",
+  //   marginBottom: isMobile ? "0" : "18px",
+  // };
 
-  const bottomLinkStyle = {
-    color: "white",
-    textDecoration: "none",
-  };
+  // const bottomLinkStyle = {
+  //   color: "white",
+  //   textDecoration: "none",
+  // };
 
   const lessThen1023 = windowWidth <= 1023;
 
@@ -326,7 +330,7 @@ const Footer = () => {
             <div className="lazyload-wrapper ">
               <a href="/" style={{ textDecoration: "none", color: "inherit" }}>
                 <img
-                  src="https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png"
+                  src={navLogos?.whiteLogo}
                   alt="Bitcoin Innovation & Market EvolutionLogo"
                   height={64}
                 ></img>

@@ -30,23 +30,30 @@ import TestimonialCarousel from "./TestimonialCarousel";
 import { Helmet } from "react-helmet-async";
 import { useApiData } from "../common/ApiContext";
 import { usePageSeo } from "../common/usePageSeo";
+import leftArrowIcon from '../assets/webCommonImages/icon-arrow-left.png'
+import rightArrowIcon from '../assets/webCommonImages/icon-arrow-right.png'
+import emailIcon from '../assets/webCommonImages/msg.png'
+import phoneIcon from '../assets/webCommonImages/phone-call.png'
+import tickImg from '../assets/webCommonImages/tick.png'
+import arrowUp from '../assets/webCommonImages/accordion-arrow-up-white.png'
+import arrowDown from '../assets/webCommonImages/accordion-arrow-down-white.png'
 
-const leftArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
-const rightArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
+// const leftArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
+// const rightArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
 
-const emailIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/msg.png";
-const phoneIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/phone-call.png";
-const tickImg =
-  "https://www.desalination-resource-recovery.com/images/icons/tick.png";
+// const emailIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/msg.png";
+// const phoneIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/phone-call.png";
+// const tickImg =
+//   "https://www.desalination-resource-recovery.com/images/icons/tick.png";
 
-const arrowUp =
-  "https://www.desalination-resource-recovery.com/images/icons/accordion-arrow-up.png";
-const arrowDown =
-  "https://www.desalination-resource-recovery.com/images/icons/accordion-arrow-down.png";
+// const arrowUp =
+//   "https://www.desalination-resource-recovery.com/images/icons/accordion-arrow-up.png";
+// const arrowDown =
+//   "https://www.desalination-resource-recovery.com/images/icons/accordion-arrow-down.png";
 
 const logos = [
   partner1,

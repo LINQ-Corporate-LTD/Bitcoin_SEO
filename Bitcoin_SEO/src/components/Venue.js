@@ -12,14 +12,19 @@ import "yet-another-react-lightbox/styles.css";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import { useSSRData } from "../common/useSSRData";
 import { usePageSeo } from "../common/usePageSeo";
-const bgImage =
-  "https://www.frac-sand-conference.com/static/media/venue-image.ad9c328038bb8cdfb219.png";
-const locationIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/pin.png";
-const phoneIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-phone.png";
-const webIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-web.png";
+import bgImage from "../assets/webImages/venue-main-image.webp";
+import locationIcon from "../assets/webCommonImages/location-pin.png";
+import phoneIcon from "../assets/webCommonImages/icon-phone.png";
+import webIcon from "../assets/webCommonImages/icon-web.png";
+
+// const bgImage =
+//   "https://www.frac-sand-conference.com/static/media/venue-image.ad9c328038bb8cdfb219.png";
+// const locationIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/pin.png";
+// const phoneIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-phone.png";
+// const webIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-web.png";
 
 const Venue = () => {
   // ✅ SSR data — no client-side API calls
@@ -112,9 +117,9 @@ const Venue = () => {
 
   const pageSeo = usePageSeo("venue");
   console.log('pageSeo,venue: ', pageSeo);
-    const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Venue`;
-    const seoDesc = pageSeo.pageMetaDescription || "View the event venue information for Bitcoin Innovation & Market Evolution 2026 including location and directions.";
-    const seoImage = pageSeo.pageOgImage || null;
+  const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Venue`;
+  const seoDesc = pageSeo.pageMetaDescription || "View the event venue information for Bitcoin Innovation & Market Evolution 2026 including location and directions.";
+  const seoImage = pageSeo.pageOgImage || null;
 
   return (
     <>

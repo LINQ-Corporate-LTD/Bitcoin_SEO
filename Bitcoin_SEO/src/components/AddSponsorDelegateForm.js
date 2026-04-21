@@ -18,19 +18,24 @@ import { useApiData } from "../common/ApiContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
+import plusIcon from '../assets/webCommonImages/plus.png'
+import closeBtn from '../assets/webCommonImages/del-cross.png'
+import toggle from '../assets/webCommonImages/toggle.png'
+import cardLabel from '../assets/webCommonImages/card-labels.png'
+import lockIcon from '../assets/webCommonImages/lock.png'
 
-const logo =
-  "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
-const plusIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/plus.png";
-const closeBtn =
-  "https://www.desalination-resource-recovery.com/images/icons/del-cross.png";
-const toggle =
-  "https://www.desalination-resource-recovery.com/images/icons/toggle.png";
-const cardLabel =
-  "https://www.desalination-resource-recovery.com/images/logos/card-labels.png";
-const lockIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/lock.png";
+// const logo =
+//   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
+// const plusIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/plus.png";
+// const closeBtn =
+//   "https://www.desalination-resource-recovery.com/images/icons/del-cross.png";
+// const toggle =
+//   "https://www.desalination-resource-recovery.com/images/icons/toggle.png";
+// const cardLabel =
+//   "https://www.desalination-resource-recovery.com/images/logos/card-labels.png";
+// const lockIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/lock.png";
 
 const countries = getNames();
 const metaSeoTitle =
@@ -53,6 +58,7 @@ const AddSponsorDelegateForm = () => {
     eventDetails,
     eventGeneralSettings,
     themeSettings,
+    navLogos
   } = useApiData();
   console.log("eventDetails: ", eventDetails);
   console.log("eventGeneralSettings: ", eventGeneralSettings);
@@ -758,16 +764,16 @@ const AddSponsorDelegateForm = () => {
           const marketingLiteratureAddOns = allAddOns.filter(
             (addon) =>
               addon.addOnTypeDetails.addOnTypeName ===
-                "Pre-event Marketing Add-ons" ||
+              "Pre-event Marketing Add-ons" ||
               addon.addOnTypeDetails.addOnTypeName ===
-                "Literature Distribution Add-ons",
+              "Literature Distribution Add-ons",
           );
           const sessionOnSiteAddOns = allAddOns.filter(
             (addon) =>
               addon.addOnTypeDetails.addOnTypeName ===
-                "Session Branding Add-ons" ||
+              "Session Branding Add-ons" ||
               addon.addOnTypeDetails.addOnTypeName ===
-                "On Site Branding Add-ons",
+              "On Site Branding Add-ons",
           );
           setMarketingAndLiterature(groupByType(marketingLiteratureAddOns));
           setSessionAndOnSite(groupByType(sessionOnSiteAddOns));
@@ -842,8 +848,8 @@ const AddSponsorDelegateForm = () => {
       parseFloat(activeDelPackageData[0]?.deligatePackagePrice || 0);
     const taxPercent = parseFloat(
       eventGeneralSettings?.purchaseTaxPercantage ||
-        eventGeneralSettings?.purchaseTaxPercent ||
-        0,
+      eventGeneralSettings?.purchaseTaxPercent ||
+      0,
     );
     const sponsorPackagePrice = packagePrice;
     const discountAmount =
@@ -1097,7 +1103,7 @@ const AddSponsorDelegateForm = () => {
           <meta name="debug-ssr" content="AddSponsorDelegateForm Step 2" />
           <meta property="og:title" content={metaSeoTitle} />
           <meta property="og:description" content={metaSeoDesc} />
-          <meta property="og:image" content={logo} />
+          <meta property="og:image" content={navLogos?.whiteLogo} />
           <link rel="canonical" href={metaCanonicalUrl} />
           <meta name="description" content={metaSeoDesc} />
         </Helmet>
@@ -1110,7 +1116,7 @@ const AddSponsorDelegateForm = () => {
               >
                 <img
                   onClick={() => navigate("/")}
-                  src={logo}
+                  src={navLogos?.whiteLogo}
                   alt="Site logo"
                 ></img>
               </div>
@@ -1206,7 +1212,7 @@ const AddSponsorDelegateForm = () => {
                             <div>
                               <TicketSVG />
                               <div className="SponsorFormV2_ticketLogo__Nm2y4">
-                                <img src={logo} alt="logo img"></img>
+                                <img src={navLogos?.whiteLogo} alt="logo img"></img>
                               </div>
                             </div>
                           </div>
@@ -1238,11 +1244,9 @@ const AddSponsorDelegateForm = () => {
                               ""
                             }
                             companyName={companyDetails?.companyName || ""}
-                            orderDescription={`Payment for Sponsor- ${
-                              companyDetails?.companyName
-                            } - Type: ${
-                              selectedPackage?.sponsorPackageType
-                            } - Event: ${eventDetails?.eventName || ""}`}
+                            orderDescription={`Payment for Sponsor- ${companyDetails?.companyName
+                              } - Type: ${selectedPackage?.sponsorPackageType
+                              } - Event: ${eventDetails?.eventName || ""}`}
                             onPaymentSuccess={handlePaymentSuccess}
                             onPaymentError={handlePaymentError}
                           />
@@ -1278,7 +1282,7 @@ const AddSponsorDelegateForm = () => {
                           <div>
                             <TicketSVG />
                             <div className="SponsorFormV2_ticketLogo__Nm2y4">
-                              <img src={logo} alt="logo img"></img>
+                              <img src={navLogos?.whiteLogo} alt="logo img"></img>
                             </div>
                           </div>
                         </div>
@@ -1319,7 +1323,7 @@ const AddSponsorDelegateForm = () => {
         <meta name="debug-ssr" content="AddSponsorDelegateForm Step 1" />
         <meta property="og:title" content={metaSeoTitle} />
         <meta property="og:description" content={metaSeoDesc} />
-        <meta property="og:image" content={logo} />
+        <meta property="og:image" content={navLogos?.whiteLogo} />
         <link rel="canonical" href={metaCanonicalUrl} />
         <meta name="description" content={metaSeoDesc} />
       </Helmet>
@@ -1330,7 +1334,7 @@ const AddSponsorDelegateForm = () => {
               className="PageForm_headerInner__sdlhn"
               style={{ maxWidth: "1070px" }}
             >
-              <img onClick={() => navigate("/")} src={logo} alt="site logo"></img>
+              <img onClick={() => navigate("/")} src={navLogos?.whiteLogo} alt="site logo"></img>
             </div>
           </div>
           <div className="SponsorFormV2_container__d5aHK">

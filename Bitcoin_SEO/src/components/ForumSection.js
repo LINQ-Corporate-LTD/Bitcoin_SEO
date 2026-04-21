@@ -1,9 +1,11 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../assets/css/ForumSection.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const bgIg =
-  "https://www.desalination-resource-recovery.com/api/images/1742798974985.png";
+import homePageIqHubVideo from "../assets/webVideos/iq-hub-video.mp4";
+import homePageIqHubVideoPoster from "../assets/webImages/home-video-poster.jpg";
+// const bgIg =
+//   "https://www.desalination-resource-recovery.com/api/images/1742798974985.png";
 
 const ForumSection = () => {
   const [taglineData, setTaglineData] = useState([]);
@@ -66,7 +68,14 @@ const ForumSection = () => {
           </span>
         </div>
         <div className="ForumSction_forumRight__f3wIx">
-          <div className="lazyload-wrapper">
+          <div className="lazyload-wrapper ">
+            {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <rect width="512" height="512" rx="64" fill="#000"></rect>
+              <polygon points="200,150 380,256 200,362" fill="#ffffff"></polygon>
+            </svg>
+            <video width={'100%'} height={'100%'} poster={homePageIqHubVideoPoster} playsinline>
+              <source src={homePageIqHubVideo} type="video/mp4" />
+            </video> */}
             <iframe
               src="https://harsh7541.pythonanywhere.com/media/mediaPixVerse_V5.5_Image_Text_360P_give_me_video_fo.mp4"
               frameborder="0"

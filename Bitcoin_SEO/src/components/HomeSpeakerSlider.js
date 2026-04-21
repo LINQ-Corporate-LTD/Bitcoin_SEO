@@ -7,13 +7,16 @@ import "slick-carousel/slick/slick-theme.css";
 import "../../src/assets/css/homeSpeakerSlider.css";
 import { useNavigate } from "react-router-dom";
 import { useSSRData } from "../common/useSSRData";
+import plusIcon from '../assets/webCommonImages/plus-white.png'
+import closeIcon from '../assets/webCommonImages/close-slider.png'
+import arrowRed from '../assets/webCommonImages/arrow-red.png'
 
-const plusIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/plus-white.png";
-const closeIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/close-slider.png";
-const arrowRed =
-  "https://www.desalination-resource-recovery.com/images/icons/arrow-red.png";
+// const plusIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/plus-white.png";
+// const closeIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/close-slider.png";
+// const arrowRed =
+//   "https://www.desalination-resource-recovery.com/images/icons/arrow-red.png";
 
 const HomeSpeakerSlider = () => {
   const navigate = useNavigate();

@@ -9,10 +9,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
-const leftArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
-const rightArrowIcon =
-  "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
+import leftArrowIcon from '../assets/webCommonImages/icon-arrow-left.png'
+import rightArrowIcon from '../assets/webCommonImages/icon-arrow-right.png'
+
+// const leftArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
+// const rightArrowIcon =
+//   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-right.png";
 
 const News = () => {
   const navigate = useNavigate();
