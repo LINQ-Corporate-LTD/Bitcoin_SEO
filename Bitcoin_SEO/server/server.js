@@ -41,7 +41,6 @@
 // // Registers: GET /sitemap.xml, GET /sitemap-index.xml, GET /robots.txt
 // mountSitemapRoute(app);
 
-
 // /* -------------------- THEME CSS HELPER -------------------- */
 // function buildThemeStyle(theme) {
 //   if (!theme) return "";
@@ -197,7 +196,7 @@ app.use(compression());
 app.use((req, res, next) => {
   res.setHeader(
     "Strict-Transport-Security",
-    "max-age=31536000; includeSubDomains; preload"
+    "max-age=31536000; includeSubDomains; preload",
   );
   next();
 });
@@ -206,14 +205,14 @@ app.use(
   express.static(path.resolve(__dirname, "../build"), {
     maxAge: "1y",
     index: false,
-  })
+  }),
 );
 
 app.use(
   express.static(path.resolve(__dirname, "../public"), {
     maxAge: "1y",
     index: false,
-  })
+  }),
 );
 
 /* -------------------- SITEMAP + ROBOTS -------------------- */
@@ -224,10 +223,12 @@ function buildThemeStyle(theme) {
   if (!theme) return "";
   const vars = [];
   if (theme.primaryColor) vars.push(`--primary-color: ${theme.primaryColor}`);
-  if (theme.secondaryColor) vars.push(`--secondary-color: ${theme.secondaryColor}`);
+  if (theme.secondaryColor)
+    vars.push(`--secondary-color: ${theme.secondaryColor}`);
   if (theme.darkColor) vars.push(`--dark-color: ${theme.darkColor}`);
   if (theme.lightColor) vars.push(`--light-color: ${theme.lightColor}`);
-  if (theme.gradientColor) vars.push(`--linearGradient-color: ${theme.gradientColor}`);
+  if (theme.gradientColor)
+    vars.push(`--linearGradient-color: ${theme.gradientColor}`);
   if (!vars.length) return "";
   return `<style id="ssr-theme">:root { ${vars.join("; ")}; }</style>`;
 }
@@ -265,9 +266,9 @@ app.get("*", async (req, res) => {
           React.createElement(
             StaticRouter,
             { location: req.url, context: routerContext },
-            React.createElement(App, { ssrData: initialData })
-          )
-        )
+            React.createElement(App, { ssrData: initialData }),
+          ),
+        ),
       );
       console.log(`✅ React rendered (${appString.length} chars)`);
     } catch (renderError) {
@@ -296,8 +297,10 @@ app.get("*", async (req, res) => {
         const titleTag = helmet.title.toString();
         // 🚨 CRITICAL: react-helmet-async emits '<title data-rh="true"></title>' if title is empty.
         // We MUST filter this out to prevent SEO tools from seeing an empty tag as "Missing title".
-        const isTitleEmpty = titleTag === '<title data-rh="true"></title>' || titleTag === '<title data-rh="true"> </title>';
-        
+        const isTitleEmpty =
+          titleTag === '<title data-rh="true"></title>' ||
+          titleTag === '<title data-rh="true"> </title>';
+
         helmetHeadTags = [
           isTitleEmpty ? "" : titleTag,
           helmet.meta.toString(),
@@ -315,7 +318,10 @@ app.get("*", async (req, res) => {
         .replace(/<title>[^<]*<\/title>/i, "")
         // Also strip any static og:/description meta tags from index.html
         // that would conflict with Helmet-injected ones
-        .replace(/<meta\s+(?:property="og:[^"]*"|name="description")[^>]*>/gi, "")
+        .replace(
+          /<meta\s+(?:property="og:[^"]*"|name="description")[^>]*>/gi,
+          "",
+        )
         // Add lang attribute
         .replace("<html", "<html lang='en'")
         // Inject Helmet tags + theme just before </head>
@@ -330,22 +336,27 @@ app.get("*", async (req, res) => {
                HelmetTitle: ${helmet?.title?.toString().length || 0}
           -->
           ${themeStyle}
-        </head>`
+          <!-- Google tag (gtag.js) -->
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-66QV0BWYCN"></script>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-66QV0BWYCN');
+          </script>
+        </head>`,
         )
         // Inject rendered React app
-        .replace(
-          '<div id="root"></div>',
-          `<div id="root">${appString}</div>`
-        )
+        .replace('<div id="root"></div>', `<div id="root">${appString}</div>`)
         // Inject SSR data
         .replace(
           "</body>",
           `<script>
             window.__INITIAL_DATA__ = ${JSON.stringify(initialData).replace(
-            /</g,
-            "\\u003c"
-          )};
-          </script></body>`
+              /</g,
+              "\\u003c",
+            )};
+          </script></body>`,
         );
 
       console.log("✅ HTML sent to client\n");

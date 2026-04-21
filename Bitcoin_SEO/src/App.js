@@ -3,7 +3,7 @@
 // No client-side API calls here — all data flows through window.__INITIAL_DATA__.
 import React, { useEffect } from "react";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import ContactUs from "./components/ContactUs";
 import ScrollToTop from "./ScrollToTop";
@@ -40,6 +40,7 @@ import SlideShare from "./components/slideShare";
 import PayOnline from "./components/payOnline";
 
 function App({ ssrData }) {
+  const location = useLocation();
   // ✅ During SSR: use the prop injected by server.js before renderToString.
   // ✅ During CSR:  use window.__INITIAL_DATA__ set by the inline <script> in the HTML.
   const initialData =
@@ -63,8 +64,18 @@ function App({ ssrData }) {
     link.href = url + "?v=" + new Date().getTime(); // prevent caching
   };
 
+  // ✅ Track page views on every route change
   useEffect(() => {
-    const faviconUrl = initialData?.home?.homeVideoSctionEventDetails?.[0]?.favicon;
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("config", "G-66QV0BWYCN", {
+        page_path: location.pathname + location.search,
+      });
+    }
+  }, [location]);
+
+  useEffect(() => {
+    const faviconUrl =
+      initialData?.home?.homeVideoSctionEventDetails?.[0]?.favicon;
     if (faviconUrl) {
       setFavicon(faviconUrl);
     }
@@ -115,10 +126,7 @@ function App({ ssrData }) {
               element={<TrendDescriptionPage />}
             />
             <Route path="sponsor-packages" element={<ExhibitorPackages />} />
-            <Route
-              path="newsdescription/:slug"
-              element={<NewsDescription />}
-            />
+            <Route path="newsdescription/:slug" element={<NewsDescription />} />
             <Route path="speakerprofile/:slug" element={<SpeakerProfile />} />
             <Route path="attandees" element={<Attandees />} />
             <Route path="adddelegate" element={<AddDelegateForm />} />
@@ -131,7 +139,10 @@ function App({ ssrData }) {
             <Route path="remind-me-later" element={<RemindMeLater />} />
             {/* <Route path="sponsor-booking" element={<SponsorBookingForm />} /> */}
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="terms-and-conditions" element={<TermsAndConditions />} />
+            <Route
+              path="terms-and-conditions"
+              element={<TermsAndConditions />}
+            />
             <Route path="thank-you" element={<ThankYouPage />} />
             <Route path="securelogin" element={<SlideShare />} />
             <Route path="pay-online" element={<PayOnline />} />
