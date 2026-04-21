@@ -29,6 +29,7 @@ import "react-toastify/dist/ReactToastify.css";
 import TestimonialCarousel from "./TestimonialCarousel";
 import { Helmet } from "react-helmet-async";
 import { useApiData } from "../common/ApiContext";
+import { usePageSeo } from "../common/usePageSeo";
 
 const leftArrowIcon =
   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
@@ -534,8 +535,10 @@ const ExhibitorPackages = () => {
     );
   };
 
-  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Sponsor Plans`;
-  const seoDesc = "Explore sponsorship, booths and branding add-ons to boost visibility with decision-makers at Bitcoin Innovation & Market Evolution 2026.";
+  const pageSeo = usePageSeo("sponsor-packages");
+  const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Sponsor Plans`;
+  const seoDesc = pageSeo.pageMetaDescription || "Explore sponsorship, booths and branding add-ons to boost visibility with decision-makers at Bitcoin Innovation & Market Evolution 2026.";
+  const seoImage = pageSeo.pageOgImage || null;
 
   return (
     <>
@@ -545,9 +548,11 @@ const ExhibitorPackages = () => {
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDesc} />
         <meta property="og:type" content="website" />
+        {seoImage && <meta property="og:image" content={seoImage} />}
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDesc} />
+        {seoImage && <meta name="twitter:image" content={seoImage} />}
         <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/sponsor-packages" />
       </Helmet>
       <Navbar forceScrolled />

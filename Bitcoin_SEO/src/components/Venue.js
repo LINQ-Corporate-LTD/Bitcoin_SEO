@@ -11,7 +11,7 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import { useSSRData } from "../common/useSSRData";
-
+import { usePageSeo } from "../common/usePageSeo";
 const bgImage =
   "https://www.frac-sand-conference.com/static/media/venue-image.ad9c328038bb8cdfb219.png";
 const locationIcon =
@@ -110,8 +110,11 @@ const Venue = () => {
     }
   };
 
-  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Venue`;
-  const seoDesc = "View the event venue information for Bitcoin Innovation & Market Evolution 2026 including location and directions.";
+  const pageSeo = usePageSeo("venue");
+  console.log('pageSeo,venue: ', pageSeo);
+    const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Venue`;
+    const seoDesc = pageSeo.pageMetaDescription || "View the event venue information for Bitcoin Innovation & Market Evolution 2026 including location and directions.";
+    const seoImage = pageSeo.pageOgImage || null;
 
   return (
     <>

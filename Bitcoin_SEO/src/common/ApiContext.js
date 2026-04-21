@@ -30,6 +30,7 @@ function buildValue(data) {
     // data.navLogos is now a single object (fetchNavLogos returns [0] already)
     // home.navLogos is an array (from homepagedata), so we use [0] there
     navLogos: data?.navLogos || home?.navLogos?.[0] || null,
+    pageSeoSettings: home?.pageSeoSettings || [],
     refetch: () => { },
   };
 }

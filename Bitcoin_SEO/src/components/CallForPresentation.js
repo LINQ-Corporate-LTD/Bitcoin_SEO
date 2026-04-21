@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Popup from "reactjs-popup";
 import "../assets/css/popUp.css";
 import { Helmet } from "react-helmet-async";
+import { usePageSeo } from "../common/usePageSeo";
 const CallForPresentation = () => {
   const [speakerPageData, setSpeakerPageData] = useState([]);
   const [paraOne, setParaOne] = useState("");
@@ -506,9 +507,11 @@ const CallForPresentation = () => {
     }
   };
 
-  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Submit Talk`;
-  const seoDesc =
+  const pageSeo = usePageSeo("speakers");
+  const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Submit Talk`;
+  const seoDesc = pageSeo.pageMetaDescription ||
     "Submit your speaker proposal for Bitcoin Innovation & Market Evolution 2026 and contribute insights on adoption, regulation, scalability, mining and markets.";
+  const seoImage = pageSeo.pageOgImage || null;
 
   return (
     <>
@@ -517,11 +520,12 @@ const CallForPresentation = () => {
         <meta name="description" content={seoDesc} />
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDesc} />
-        {/* <meta property="og:image" content={bgImage} /> */}
         <meta property="og:type" content="website" />
+        {seoImage && <meta property="og:image" content={seoImage} />}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDesc} />
+        {seoImage && <meta name="twitter:image" content={seoImage} />}
         <link
           rel="canonical"
           href="https://www.bitcoin-innovation-market-evolution.online/speakers"

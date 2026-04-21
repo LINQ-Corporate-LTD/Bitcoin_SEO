@@ -701,9 +701,9 @@ const SlideShare = () => {
 
     // ─── SEO ─────────────────────────────────────────────────────────────────────
 
-    const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Sponsorship`;
-    const seoDesc =
-        "Exhibit or sponsor at Bitcoin Innovation & Market Evolution 2026 and connect with miners, exchanges, fintechs, regulators and blockchain leaders.";
+    // const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Sponsorship`;
+    // const seoDesc =
+    //     "Exhibit or sponsor at Bitcoin Innovation & Market Evolution 2026 and connect with miners, exchanges, fintechs, regulators and blockchain leaders.";
 
     // ─── render ──────────────────────────────────────────────────────────────────
 

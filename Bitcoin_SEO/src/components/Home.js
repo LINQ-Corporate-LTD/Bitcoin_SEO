@@ -20,6 +20,8 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useApiData } from "../common/ApiContext";
 import { useSSRData } from "../common/useSSRData";
+import { usePageSeo } from "../common/usePageSeo";
+console.log('usePageSeo: ', usePageSeo);
 
 const leftArrowIcon =
   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
@@ -97,8 +99,11 @@ const Home = () => {
     return () => window.removeEventListener("resize", updateSettings);
   }, [ssrSponsorList]);
 
-  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Register Now`;
-  const seoDesc = "Join Bitcoin Innovation & Market Evolution 2026 to explore institutional adoption, mining, Layer-2 scalability, regulation and AI in Bitcoin markets.";
+  const pageSeo = usePageSeo("home");
+  console.log('pageSeo,home: ', pageSeo);
+  const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Register Now`;
+  const seoDesc = pageSeo.pageMetaDescription || "Join Bitcoin Innovation & Market Evolution 2026 to explore institutional adoption, mining, Layer-2 scalability, regulation and AI in Bitcoin markets.";
+  const seoImage = pageSeo.pageOgImage || null;
 
 
   return (
@@ -109,8 +114,10 @@ const Home = () => {
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDesc} />
         <meta property="og:type" content="website" />
+        {seoImage && <meta property="og:image" content={seoImage} />}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
+        {seoImage && <meta name="twitter:image" content={seoImage} />}
         <link rel="canonical" href="/" />
       </Helmet>
       <Navbar />

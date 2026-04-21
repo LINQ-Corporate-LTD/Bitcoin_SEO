@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../assets/css/SponsorBookingPay.css";
 import SimpleStripeForm from "./PaymentForm";
 import { useApiData } from "../../src/common/ApiContext";
+import { usePageSeo } from "../common/usePageSeo";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSSRData } from "../common/useSSRData";
@@ -62,8 +63,10 @@ const SponsorBookingForm = () => {
     themeSettings,
   } = useApiData();
 
-  const seoTitle = "Sponsor Booking | Bitcoin Innovation & Market Evolution 2026";
-  const seoDesc = "Book your sponsorship package for Bitcoin Innovation & Market Evolution 2026. Secure your presence at the premier Bitcoin event.";
+  const pageSeo = usePageSeo("sponsor-booking");
+  const seoTitle = pageSeo.pageMetaTitle || "Sponsor Booking | Bitcoin Innovation & Market Evolution 2026";
+  const seoDesc = pageSeo.pageMetaDescription || "Book your sponsorship package for Bitcoin Innovation & Market Evolution 2026. Secure your presence at the premier Bitcoin event.";
+  const seoImage = pageSeo.pageOgImage || null;
   const canonicalUrl = "https://www.bitcoin-innovation-market-evolution.online/sponsor-booking";
 
   const numDelegates = delegates?.length;
@@ -979,9 +982,11 @@ const SponsorBookingForm = () => {
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDesc} />
         <meta property="og:type" content="website" />
+        {seoImage && <meta property="og:image" content={seoImage} />}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDesc} />
+        {seoImage && <meta name="twitter:image" content={seoImage} />}
         <link rel="canonical" href={canonicalUrl} />
       </Helmet>
       <div id="root">

@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "../Footer";
 import "../assets/css/privacyPolicy.css";
 import { Helmet } from "react-helmet-async";
+import { usePageSeo } from "../common/usePageSeo";
 const PrivacyPolicy = () => {
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200
@@ -17,8 +18,10 @@ const PrivacyPolicy = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Privacy Policy`;
-  const seoDesc = "Understand data collection, retention, cookies, third-party sharing and rights under the Privacy Policy of Bitcoin Innovation & Market Evolution 2026.";
+  const pageSeo = usePageSeo("privacy-policy");
+  const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Privacy Policy`;
+  const seoDesc = pageSeo.pageMetaDescription || "Understand data collection, retention, cookies, third-party sharing and rights under the Privacy Policy of Bitcoin Innovation & Market Evolution 2026.";
+  const seoImage = pageSeo.pageOgImage || null;
 
   return (
     <>
@@ -28,9 +31,11 @@ const PrivacyPolicy = () => {
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDesc} />
         <meta property="og:type" content="website" />
+        {seoImage && <meta property="og:image" content={seoImage} />}
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDesc} />
+        {seoImage && <meta name="twitter:image" content={seoImage} />}
         <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/privacy-policy" />
       </Helmet>
       <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>

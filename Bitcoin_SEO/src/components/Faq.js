@@ -6,6 +6,7 @@ import "../assets/css/faq.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
+import { usePageSeo } from "../common/usePageSeo";
 const Faq = () => {
   const [faqList, setFaqList] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
@@ -82,8 +83,10 @@ const Faq = () => {
     return cleaned;
   };
 
-  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | FAQ`;
-  const seoDesc = "Bitcoin Innovation & Market Evolution 2026 FAQ guide covers registration, payments, venue access, visas, transport and support.";
+  const pageSeo = usePageSeo("faq");
+  const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | FAQ`;
+  const seoDesc = pageSeo.pageMetaDescription || "Bitcoin Innovation & Market Evolution 2026 FAQ guide covers registration, payments, venue access, visas, transport and support.";
+  const seoImage = pageSeo.pageOgImage || null;
 
   return (
     <>
@@ -93,9 +96,11 @@ const Faq = () => {
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDesc} />
         <meta property="og:type" content="website" />
+        {seoImage && <meta property="og:image" content={seoImage} />}
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDesc} />
+        {seoImage && <meta name="twitter:image" content={seoImage} />}
         <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/faq" />
       </Helmet>
       <Navbar forceScrolled />

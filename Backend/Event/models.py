@@ -576,3 +576,14 @@ class blockedEmailDomains(models.Model):
     created_by = models.CharField(null=False,max_length=50,default='No')
     updated_by = models.CharField(null=False,max_length=50,default='No')
     isDelete = models.CharField(default="No",max_length=10)
+
+class pageSeoSettings(models.Model):
+    pageName = models.CharField(default="", max_length=100, null=True, blank=True)
+    pageMetaTitle = models.CharField(default="", max_length=200, null=True, blank=True)
+    pageMetaDescription = models.TextField(null=True, blank=True)
+    pageOgImage = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.CharField(null=False, max_length=50, default='No')
+    updated_by = models.CharField(null=False, max_length=50, default='No')
+    isDelete = models.CharField(default="No", max_length=10)

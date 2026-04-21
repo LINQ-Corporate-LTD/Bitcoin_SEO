@@ -6,6 +6,7 @@ import SubscribeForm from "./SubscribeForm";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
+import { usePageSeo } from "../common/usePageSeo";
 const mediaImage1 =
   "	https://www.frac-sand-conference.com/static/media/media.ba0e44e0a54f375e3e8f.png";
 const mediaImage2 =
@@ -63,8 +64,10 @@ const MediaPartners = () => {
       });
   };
 
-  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Media Partners`;
-  const seoDesc = "Apply for media partnership and press access, plus brand exposure and industry reach through Bitcoin Innovation & Market Evolution 2026.";
+  const pageSeo = usePageSeo("media-partners");
+  const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Media Partners`;
+  const seoDesc = pageSeo.pageMetaDescription || "Apply for media partnership and press access, plus brand exposure and industry reach through Bitcoin Innovation & Market Evolution 2026.";
+  const seoImage = pageSeo.pageOgImage || null;
 
   return (
     <>
@@ -74,9 +77,11 @@ const MediaPartners = () => {
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDesc} />
         <meta property="og:type" content="website" />
+        {seoImage && <meta property="og:image" content={seoImage} />}
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDesc} />
+        {seoImage && <meta name="twitter:image" content={seoImage} />}
         <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/media-partners" />
       </Helmet>
       <Navbar forceScrolled />

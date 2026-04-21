@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TestimonialCarousel from "./TestimonialCarousel";
 import { useSSRData } from "../common/useSSRData";
-
+import { usePageSeo } from "../common/usePageSeo";
 const leftArrowIcon =
   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
 const rightArrowIcon =
@@ -336,8 +336,14 @@ const Sponsors = () => {
 
   const sponsorLogoBlack = "https://www.direct-lithium-extraction-show.com/api/images/sponsor/1757675931045-678212680.png"
 
-  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Sponsorship`;
-  const seoDesc = "Exhibit or sponsor at Bitcoin Innovation & Market Evolution 2026 and connect with miners, exchanges, fintechs, regulators and blockchain leaders.";
+  const pageSeo = usePageSeo("sponsors");
+  console.log('pageSeo sponsors: ', pageSeo);
+  const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Sponsorship`;
+  const seoDesc = pageSeo.pageMetaDescription || "Exhibit or sponsor at Bitcoin Innovation & Market Evolution 2026 and connect with miners, exchanges, fintechs, regulators and blockchain leaders.";
+  const seoImage = pageSeo.pageOgImage || null;
+
+  // const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Sponsorship`;
+  // const seoDesc = "Exhibit or sponsor at Bitcoin Innovation & Market Evolution 2026 and connect with miners, exchanges, fintechs, regulators and blockchain leaders.";
   return (
     <div id="root">
       <>

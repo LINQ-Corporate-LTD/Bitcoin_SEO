@@ -661,6 +661,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useApiData } from "../../src/common/ApiContext";
 import icon from "../../src/assets/images/group-icon.png";
 import { useSSRData } from "../common/useSSRData";
+import { usePageSeo } from "../common/usePageSeo";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -887,8 +888,10 @@ const Register = () => {
     );
   };
 
-  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Book Delegate`;
-  const seoDesc = "Book your pass for Bitcoin Innovation & Market Evolution 2026. Choose delegate packages, access networking and materials.";
+  const pageSeo = usePageSeo("booking");
+  const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Book Delegate`;
+  const seoDesc = pageSeo.pageMetaDescription || "Book your pass for Bitcoin Innovation & Market Evolution 2026. Choose delegate packages, access networking and materials.";
+  const seoImage = pageSeo.pageOgImage || null;
 
   return (
     <>
@@ -898,9 +901,11 @@ const Register = () => {
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDesc} />
         <meta property="og:type" content="website" />
+        {seoImage && <meta property="og:image" content={seoImage} />}
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDesc} />
+        {seoImage && <meta name="twitter:image" content={seoImage} />}
         <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/booking" />
       </Helmet>
       <Navbar forceScrolled />

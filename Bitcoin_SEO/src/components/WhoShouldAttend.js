@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Slider from "react-slick";
 import Popup from "reactjs-popup";
 import { Helmet } from "react-helmet-async";
-
+import { usePageSeo } from "../common/usePageSeo";
 const arrowUpIcon =
   "https://www.desalination-resource-recovery.com/images/icons/accordion-arrow-up.png";
 const arrowDownIcon =
@@ -292,21 +292,26 @@ const WhoShouldAttend = () => {
     pauseOnHover: true,
     arrows: false,
   };
-  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Who Attends`;
-  const seoDesc = "Discover who should attend Bitcoin Innovation & Market Evolution 2026 and the key benefits for exchanges, institutions, miners, fintechs and regulators.";
+  // const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Who Attends`;
+  // const seoDesc = "Discover who should attend Bitcoin Innovation & Market Evolution 2026 and the key benefits for exchanges, institutions, miners, fintechs and regulators.";
+
+  const pageSeo = usePageSeo("who-should-attend");
+  const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Who Attends`;
+  const seoDescription = pageSeo.pageMetaDescription || `Discover who should attend Bitcoin Innovation & Market Evolution 2026 and the key benefits for exchanges, institutions, miners, fintechs and regulators.`;
+  const seoImage = pageSeo.pageOgImage || null;
 
   return (
     <>
       <Helmet>
         <title>{seoTitle}</title>
-        <meta name="description" content={seoDesc} />
+        <meta name="description" content={seoDescription} />
         <meta property="og:title" content={seoTitle} />
-        <meta property="og:description" content={seoDesc} />
+        <meta property="og:description" content={seoDescription} />
         {/* <meta property="og:image" content={bgImage} /> */}
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
-        <meta name="twitter:description" content={seoDesc} />
+        <meta name="twitter:description" content={seoDescription} />
         <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/who-should-attend" />
       </Helmet>
       <Navbar forceScrolled />

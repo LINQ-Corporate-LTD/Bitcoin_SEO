@@ -310,7 +310,7 @@ import AgendaSubscribers from "../pages/AgendaSubscribers";
 import CalenderSubscribers from "../pages/CalenderSubscribers";
 import SponsorOfferCoupons from "../pages/OfferCoupons/SponsorOfferCoupons";
 import EventProjects from "../pages/SlideShareAttandees/EventProject";
-
+import PageSeoSettings from "../pages/PageSeoSettings/PageSeoSettings";
 
 
 
@@ -594,6 +594,7 @@ const authProtectedRoutes = [
   { path: "/calendersubscribers", component: <CalenderSubscribers /> },
   { path: "/sponsoroffercoupons", component: <SponsorOfferCoupons /> },
   { path: "/eventprojects", component: <EventProjects /> },
+  { path: "/pageseo", component: <PageSeoSettings /> },
 
 
 

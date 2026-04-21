@@ -390,5 +390,9 @@ urlpatterns = [
     path('editeventproject', views.edit_eventProject),
     path('deleteeventproject', views.delete_eventProject),
 
+    path('pageseo', views.pageSeoListFun),
+    path('addpageseo', views.add_pageSeo),
+    path('editpageseo', views.edit_pageSeo),
+    path('deletepageseo', views.delete_pageSeo),
 
 ]

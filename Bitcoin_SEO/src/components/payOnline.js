@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import cardLabel from "../../src/assets/images/card-labels.png";
 import SimpleStripeForm from "./PaymentForm";
 import { Helmet } from "react-helmet-async";
+import { usePageSeo } from "../common/usePageSeo";
 import { useSSRData } from "../common/useSSRData";
 import { useApiData } from "../common/ApiContext";
 
@@ -181,8 +182,10 @@ const PayOnline = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Secure Online Payment`;
-  const seoDescription = `Pay securely for your Bitcoin Innovation & Market Evolution 2026 delegate pass. Fast, reliable, and encrypted transactions for your conference registration.`;
+  const pageSeo = usePageSeo("pay-online");
+  const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Secure Online Payment`;
+  const seoDescription = pageSeo.pageMetaDescription || `Pay securely for your Bitcoin Innovation & Market Evolution 2026 delegate pass. Fast, reliable, and encrypted transactions for your conference registration.`;
+  const seoImage = pageSeo.pageOgImage || null;
 
 
   return (
@@ -193,8 +196,10 @@ const PayOnline = () => {
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
         <meta property="og:type" content="website" />
+        {seoImage && <meta property="og:image" content={seoImage} />}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
+        {seoImage && <meta name="twitter:image" content={seoImage} />}
         <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/pay-online" />
       </Helmet>
       <Navbar forceScrolled />

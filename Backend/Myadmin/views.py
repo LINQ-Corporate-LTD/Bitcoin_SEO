@@ -20,7 +20,7 @@ from Myadmin.serializers import eventAgendaSerializer, eventIndustryTrendsSerial
 from rest_framework.throttling import AnonRateThrottle
 # Create your views here.
 from .models import homePageNavLogoData,homePageNavMainCategories,homePageNavSubCategories,themeColorSettings,homePageVideoSectionInput,videoSectionUserOptions,speakerSection,homePageThirdSection,keyPointsSection,keyPointsSectionPoints,countSection,countSectionTopic,testimonialSection,pastAttandeesSection,sponsorSection, footerFirstSectionOptions, footerSocialMediaOptions,companiesLogoSection,registerPageSettings,whoShouldAttendPageData,speakerPageData,speakerPageSectionThreePoints,sponsorPageData,sponsorPageBulletData,venuePageData,venuePageGallery,newsCategory,generalNewsPoint,latestNews,topNews,subscribers,contactUsData,contactUsPageData,contactUsHelpData,pressMediaPageData,pressMediaPageBoxData,mediaPageHelpers,standOutCrowdRequestData,becomeSpeakerRequestData,quickProposalRequestData,endUserPassRegistrationRequestData,pastAttandeeHomeData,footerOptions,toEmails,agendaSubscriber,calenderSubscriber
-from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees,slideSharesAccessPersons,payOnlineTransectionData,blockedEmailDomains,sponsorOfferCoupon,eventProject
+from Event.models import eventDetails,eventPastAttandees,eventExpertSpeakers,eventSpeakers,eventTestimonials,eventSponsors,eventIndustryTrends,relatedEvents,eventDeligatePackages,deligatePackageInclusionPoints,eventAgenda,eventCoreAttandees,eventParticipatedIndustries,eventFaqs,groupPassRegistrationRequestData,registeredCompanyDetails,registeredDelegates,delegatesAddOns,paymentOptionImage,offerCoupon,delegateTransectionData,eventGeneralSettings,offerCouponHistory,addOnsHistory,sponsorPackageTypes,sponsorPackageAddOnTypes,sponsorPackageAddOns,sponseredCompanyDetails,registeredSponseredDelegates,sponsoredCompanyAddOnsDetails,sponsorCompanyTransectionData,sponsorOfferCouponHistory,eventLeaders,eventSlideShares,eventSlideSharesAttandees,slideSharesAccessPersons,payOnlineTransectionData,blockedEmailDomains,sponsorOfferCoupon,eventProject,pageSeoSettings
 import requests
 import jwt
 from django.conf import settings
@@ -140,12 +140,24 @@ def homePageDataFun(request):
         }
         eventGeneralSettingsOptions.append(x)
 
+    seo_list = pageSeoSettings.objects.filter(isDelete='No').order_by('pageName')
+    pageSeoData = []
+    for seo in seo_list:
+        pageSeoData.append({
+            'id': seo.id,
+            'pageName': seo.pageName,
+            'pageMetaTitle': seo.pageMetaTitle,
+            'pageMetaDescription': seo.pageMetaDescription,
+            'pageOgImage': seo.pageOgImage,
+        })
+
     y = {
         'themeSetting': themeSettingsData,
         'navLogos': dataLogo,
         'homeVideoSctionSettings': dataVideo,
         'homeVideoSctionEventDetails': eventDetialsOptions,
         'eventGeneralSettings': eventGeneralSettingsOptions,
+        'pageSeoSettings': pageSeoData,
     }
     return JsonResponse({'homePageSettings': y, 'status': True})
 
@@ -6355,6 +6367,76 @@ def blockDomainListFun(request):
         }
         blockDomains.append(x) 
     return JsonResponse({'blockDomains': blockDomains, 'status': True})
+
+#---------------------------- Api For Page SEO Settings ----------------------------#
+@permission_classes((AllowAny,))
+@api_view(['GET'])
+def pageSeoListFun(request):
+    seo_list = pageSeoSettings.objects.filter(isDelete='No').order_by('pageName')
+    data = []
+    for seo in seo_list:
+        data.append({
+            'id': seo.id,
+            'pageName': seo.pageName,
+            'pageMetaTitle': seo.pageMetaTitle,
+            'pageMetaDescription': seo.pageMetaDescription,
+            'pageOgImage': seo.pageOgImage,
+            'created_at': seo.created_at,
+            'updated_at': seo.updated_at,
+        })
+    return JsonResponse({'pageSeoSettings': data, 'status': True})
+
+@permission_classes((AllowAny,))
+@api_view(['POST'])
+def add_pageSeo(request):
+    response = request.data
+    pageName = response.get('pageName', '')
+    pageMetaTitle = response.get('pageMetaTitle', '')
+    pageMetaDescription = response.get('pageMetaDescription', '')
+    pageOgImage = response.get('pageOgImage', '')
+    obj = pageSeoSettings(
+        pageName=pageName,
+        pageMetaTitle=pageMetaTitle,
+        pageMetaDescription=pageMetaDescription,
+        pageOgImage=pageOgImage,
+        created_by='Admin',
+        updated_by='Admin',
+    )
+    obj.save()
+    return JsonResponse({'status': True, 'message': 'Page SEO added successfully', 'id': obj.id})
+
+@permission_classes((AllowAny,))
+@api_view(['PATCH'])
+def edit_pageSeo(request):
+    response = request.data
+    seo_id = response.get('id')
+    try:
+        obj = pageSeoSettings.objects.get(id=seo_id, isDelete='No')
+    except pageSeoSettings.DoesNotExist:
+        return JsonResponse({'status': False, 'message': 'Record not found'})
+    if 'pageName' in response:
+        obj.pageName = response['pageName']
+    if 'pageMetaTitle' in response:
+        obj.pageMetaTitle = response['pageMetaTitle']
+    if 'pageMetaDescription' in response:
+        obj.pageMetaDescription = response['pageMetaDescription']
+    if 'pageOgImage' in response:
+        obj.pageOgImage = response['pageOgImage']
+    obj.updated_by = 'Admin'
+    obj.save()
+    return JsonResponse({'status': True, 'message': 'Page SEO updated successfully'})
+
+@permission_classes((AllowAny,))
+@api_view(['DELETE'])
+def delete_pageSeo(request):
+    seo_id = request.data.get('id')
+    try:
+        obj = pageSeoSettings.objects.get(id=seo_id)
+        obj.isDelete = 'Yes'
+        obj.save()
+        return JsonResponse({'status': True, 'message': 'Record deleted successfully'})
+    except pageSeoSettings.DoesNotExist:
+        return JsonResponse({'status': False, 'message': 'Record not found'})
 
 @api_view(['POST'])
 def save_nav_checked_status(request):
