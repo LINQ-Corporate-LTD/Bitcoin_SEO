@@ -26,7 +26,7 @@ const BASE_URL = "https://harsh7541.pythonanywhere.com/admin1";
 const PAGES = [
   { label: "Home",              key: "home" },
   { label: "Speakers",          key: "speakers" },
-  // { label: "Featured Speakers", key: "featured-speakers" },
+  { label: "Featured Speakers", key: "featured-speakers" },
   { label: "Who Should Attend", key: "who-should-attend" },
   { label: "FAQ",               key: "faq" },
   { label: "Media Partners",    key: "media-partners" },

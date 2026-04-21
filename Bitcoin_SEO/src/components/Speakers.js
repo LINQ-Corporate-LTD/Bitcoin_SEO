@@ -166,7 +166,7 @@ const Speakers = () => {
   // const seoTitle = `Bitcoin Innovation & Market Evolution 2026 | Speakers`;
   // const seoDesc = "Meet featured experts shaping adoption, mining, Layer-2, security, and regulation, presented by Bitcoin Innovation & Market Evolution 2026.";
 
-  const pageSeo = usePageSeo("speakers");
+  const pageSeo = usePageSeo("featured-speakers");
   const seoTitle = pageSeo.pageMetaTitle || `Bitcoin Innovation & Market Evolution 2026 | Speakers`;
   const seoDescription = pageSeo.pageMetaDescription || `Meet featured experts shaping adoption, mining, Layer-2, security, and regulation, presented by Bitcoin Innovation & Market Evolution 2026.`;
   const seoImage = pageSeo.pageOgImage || null;
