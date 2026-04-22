@@ -1,0 +1,175 @@
+.PrivacyPolicy_container__9i2D- {
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    padding: 100px 0;
+    width: 100%;
+}
+
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV {
+    max-width: 1240px;
+    width: 100%;
+}
+
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV div,
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV h1,
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV h4,
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV p {
+    color: #181818;
+    font-family: Montserrat, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT {
+    margin-top: 45px;
+}
+
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT p {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT h4 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT ul {
+    list-style-type: none;
+    margin: 30px 0 25px 50px;
+}
+
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT ul li {
+    color: #181818;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 25px;
+    list-style: none;
+    margin: 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT .PrivacyPolicy_firstUL__lliwo li {
+    margin-bottom: 25px;
+}
+
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT ul li:before {
+    background-color: var(--secondary-color);
+    border-radius: 1.5px;
+    content: " ";
+    height: 7px;
+    left: 0;
+    position: absolute;
+    top: 11px;
+    transform: translateY(-50%);
+    width: 7px;
+}
+
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT h5 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT p {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT p a {
+    color: #266dae;
+}
+
+@media only screen and (max-width: 1619px) {
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV {
+        max-width: 1200px;
+    }
+}
+
+@media only screen and (max-width: 1231px) {
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV {
+        max-width: 960px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV {
+        max-width: 720px;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT ul {
+        margin-bottom: 30px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .PrivacyPolicy_container__9i2D- {
+        padding: 60px 0;
+    }
+
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV {
+        max-width: 650px;
+        width: 90%;
+    }
+
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT {
+        margin-top: 35px;
+    }
+
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT h4 {
+        margin-bottom: 20px;
+    }
+
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT ul {
+        margin-left: 20px;
+    }
+
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT h5 {
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT ul {
+        margin-left: 5px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .PrivacyPolicy_container__9i2D- {
+        padding: 40px 0;
+    }
+
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT {
+        margin-top: 15px;
+    }
+
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT p {
+        font-size: 12px;
+    }
+
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT h4 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT ul li {
+        font-size: 12px;
+    }
+
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT h5 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .PrivacyPolicy_container__9i2D- .PrivacyPolicy_innerContainer__F1\+CV .PrivacyPolicy_section__7mnwT p {
+        font-size: 12px;
+    }
+}

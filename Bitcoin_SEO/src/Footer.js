@@ -477,6 +477,8 @@ const Footer = () => {
         <div className="Footer_hr__LZlee"></div>
         <div className="Footer_footerBottom__ZgyOV">
           <p>
+            <a href="/cookie-policy">Cookie Policy</a>
+            <span> | </span>
             <a href="/privacy-policy">Privacy Policy</a>
             <span> | </span>
             ABCD Company

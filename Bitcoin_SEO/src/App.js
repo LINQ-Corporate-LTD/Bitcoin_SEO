@@ -31,6 +31,7 @@ import { ToastContainer } from "react-toastify";
 // import SponsorBookingForm from "./components/SponsorBookingForm";
 import { ApiDataProvider } from "./common/ApiContext";
 import PrivacyPolicy from "./components/privacyPolicy";
+import CookiePolicy from "./components/CookiePolicy";
 import ThankYouPage from "./components/thankyouPage";
 import TermsAndConditions from "./components/TermsAndConditions";
 import Error404 from "./components/Error404";
@@ -139,6 +140,7 @@ function App({ ssrData }) {
             <Route path="remind-me-later" element={<RemindMeLater />} />
             {/* <Route path="sponsor-booking" element={<SponsorBookingForm />} /> */}
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="cookie-policy" element={<CookiePolicy />} />
             <Route
               path="terms-and-conditions"
               element={<TermsAndConditions />}
