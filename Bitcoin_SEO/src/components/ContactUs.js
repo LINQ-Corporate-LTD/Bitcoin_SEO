@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "../assets/css/contactUs.css";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
+import CookieBanner from "./cookieBanner";
 import emailImage from "../assets/webCommonImages/icon-email.png";
 import emailIcon from "../assets/webCommonImages/msg.png";
 // const emailImage =
@@ -707,6 +708,7 @@ const ContactUs = () => {
 
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, Navigate } from "react-router-dom";
-
+import CookieBanner from "./cookieBanner";
 import Navbar from "./Navbar";
 import Footer from "../Footer";
 import '../../src/assets/css/thankYouPage.css'
@@ -30,6 +30,7 @@ const ThankYouPage = () => {
     }
     return (
         <>
+            <CookieBanner />
             <Navbar forceScrolled />
             <div style={{ opacity: 1 }}>
                 <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>

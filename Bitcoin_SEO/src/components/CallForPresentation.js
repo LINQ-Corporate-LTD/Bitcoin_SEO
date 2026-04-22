@@ -18,6 +18,7 @@ import Popup from "reactjs-popup";
 import "../assets/css/popUp.css";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
+import CookieBanner from "./cookieBanner";
 import callingSpeakerBg from "../assets/webImages/calling-all-speakers.webp";
 import beAPartOfOurBg from "../assets/webImages/be-a-part-of-our-multi-disciplined-agenda.webp";
 import iconNetwork from "../assets/webCommonImages/icon-network.png";
@@ -522,6 +523,7 @@ const CallForPresentation = () => {
 
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

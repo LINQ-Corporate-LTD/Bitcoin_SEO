@@ -14,6 +14,7 @@ import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
 import { useSSRData } from "../common/useSSRData";
 import { useApiData } from "../common/ApiContext";
+import CookieBanner from "./cookieBanner";
 
 const lockIcon = "https://img.icons8.com/ios-filled/50/ffffff/lock.png";
 
@@ -190,6 +191,7 @@ const PayOnline = () => {
 
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />

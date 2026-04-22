@@ -4,6 +4,8 @@ import Footer from "../Footer";
 import "../assets/css/privacyPolicy.css";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
+import CookieBanner from "./cookieBanner";
+
 const PrivacyPolicy = () => {
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200
@@ -25,6 +27,7 @@ const PrivacyPolicy = () => {
 
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

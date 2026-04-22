@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import PhoneInput from "react-phone-number-input";
+import CookieBanner from "./cookieBanner";
 import "react-phone-number-input/style.css";
 import countryList from "react-select-country-list";
 import { useNavigate } from "react-router-dom";
@@ -710,102 +711,37 @@ const CompanyRegistrationForm = () => {
   };
 
   return (
-    <div id="root">
-      <div className="PageForm_container__NA5Wr">
-        <div className="PageForm_header__7W2Cz">
-          <div
-            className="PageForm_headerInner__sdlhn"
-            style={{ maxWidth: "1070px" }}
-          >
-            <img onClick={() => navigate("/")} src={navLogos?.whiteLogo} alt="site logo"></img>
+    <>
+      <CookieBanner />
+      <div id="root">
+        <div className="PageForm_container__NA5Wr">
+          <div className="PageForm_header__7W2Cz">
+            <div
+              className="PageForm_headerInner__sdlhn"
+              style={{ maxWidth: "1070px" }}
+            >
+              <img onClick={() => navigate("/")} src={navLogos?.whiteLogo} alt="site logo"></img>
+            </div>
           </div>
-        </div>
-        <div className="BookingFormV2_container__XPZAc">
-          <div>
-            <div className="BookingFormV2_companyDetails__gy3Kt">
-              <h1>Registration</h1>
-              <form
-                action="#"
-                className="WDRM_2025_booking_form form_WDRM"
-                data-hs-cf-bound="true"
-                onSubmit={handleSubmit}
-              >
-                <div className="BookingFormV2_companyForm__2HuYv">
-                  <div className="BookingFormV2_bar__KQ2vi">
-                    <h2>Company details</h2>
-                  </div>
-                  <div className="BookingFormV2_companyFormInner__pqUBT">
-                    <div className="BookingFormV2_formRow__06cJs">
-                      <TextField
-                        label="Company name"
-                        type="companyName"
-                        variant="standard"
-                        className="BookingFormV2_bottomMargin__NlvW-"
-                        sx={{
-                          "&.MuiFormControl-root": {
-                            margin: "0px 25px 0px 0px",
-                          },
-                          "& .MuiInputLabel-root": {
-                            fontSize: "18px",
-                            fontWeight: 600,
-                            color: "#5e5e5e !important",
-                          },
-                          "& .MuiInput-underline:after": {
-                            borderBottomColor: "#9d9d9d",
-                          },
-                        }}
-                        id="companyName"
-                        value={companyData.companyName}
-                        onChange={(e) =>
-                          handleCompanyDataChange("companyName", e.target.value)
-                        }
-                        fullWidth
-                        error={submitAttempted && companyErrors.companyName}
-                        helperText={
-                          submitAttempted && companyErrors.companyName
-                            ? "Company name is required"
-                            : ""
-                        }
-                        slotProps={{
-                          formHelperText: {
-                            sx: {
-                              fontSize: "14px",
-                              marginLeft: 0,
-                              marginTop: "3px",
-                              color: "#d32f2f !important", // Red color for error text
-                            },
-                          },
-                        }}
-                      />
-
-                      <br></br>
-                      <TextField
-                        label="Web address"
-                        type="webAddress"
-                        variant="standard"
-                        sx={{
-                          "& .MuiInputLabel-root": {
-                            fontSize: "18px",
-                            fontWeight: 600,
-                            color: "#5e5e5e !important",
-                          },
-                          "& .MuiInput-underline:after": {
-                            borderBottomColor: "#9d9d9d",
-                          },
-                        }}
-                        id="webAddress"
-                        value={companyData.webAddress}
-                        onChange={(e) =>
-                          handleCompanyDataChange("webAddress", e.target.value)
-                        }
-                        fullWidth
-                      />
+          <div className="BookingFormV2_container__XPZAc">
+            <div>
+              <div className="BookingFormV2_companyDetails__gy3Kt">
+                <h1>Registration</h1>
+                <form
+                  action="#"
+                  className="WDRM_2025_booking_form form_WDRM"
+                  data-hs-cf-bound="true"
+                  onSubmit={handleSubmit}
+                >
+                  <div className="BookingFormV2_companyForm__2HuYv">
+                    <div className="BookingFormV2_bar__KQ2vi">
+                      <h2>Company details</h2>
                     </div>
-                    <div className="BookingFormV2_formRow__06cJs">
-                      <div className="BookingFormV2_formColumn__mzhg0">
+                    <div className="BookingFormV2_companyFormInner__pqUBT">
+                      <div className="BookingFormV2_formRow__06cJs">
                         <TextField
-                          label="Address"
-                          type="address"
+                          label="Company name"
+                          type="companyName"
                           variant="standard"
                           className="BookingFormV2_bottomMargin__NlvW-"
                           sx={{
@@ -821,16 +757,16 @@ const CompanyRegistrationForm = () => {
                               borderBottomColor: "#9d9d9d",
                             },
                           }}
-                          id="address"
-                          value={companyData.address}
+                          id="companyName"
+                          value={companyData.companyName}
                           onChange={(e) =>
-                            handleCompanyDataChange("address", e.target.value)
+                            handleCompanyDataChange("companyName", e.target.value)
                           }
                           fullWidth
-                          error={submitAttempted && companyErrors.address}
+                          error={submitAttempted && companyErrors.companyName}
                           helperText={
-                            submitAttempted && companyErrors.address
-                              ? "Address is required"
+                            submitAttempted && companyErrors.companyName
+                              ? "Company name is required"
                               : ""
                           }
                           slotProps={{
@@ -844,9 +780,76 @@ const CompanyRegistrationForm = () => {
                             },
                           }}
                         />
+
+                        <br></br>
+                        <TextField
+                          label="Web address"
+                          type="webAddress"
+                          variant="standard"
+                          sx={{
+                            "& .MuiInputLabel-root": {
+                              fontSize: "18px",
+                              fontWeight: 600,
+                              color: "#5e5e5e !important",
+                            },
+                            "& .MuiInput-underline:after": {
+                              borderBottomColor: "#9d9d9d",
+                            },
+                          }}
+                          id="webAddress"
+                          value={companyData.webAddress}
+                          onChange={(e) =>
+                            handleCompanyDataChange("webAddress", e.target.value)
+                          }
+                          fullWidth
+                        />
                       </div>
-                      <br></br>
-                      {/* <Autocomplete
+                      <div className="BookingFormV2_formRow__06cJs">
+                        <div className="BookingFormV2_formColumn__mzhg0">
+                          <TextField
+                            label="Address"
+                            type="address"
+                            variant="standard"
+                            className="BookingFormV2_bottomMargin__NlvW-"
+                            sx={{
+                              "&.MuiFormControl-root": {
+                                margin: "0px 25px 0px 0px",
+                              },
+                              "& .MuiInputLabel-root": {
+                                fontSize: "18px",
+                                fontWeight: 600,
+                                color: "#5e5e5e !important",
+                              },
+                              "& .MuiInput-underline:after": {
+                                borderBottomColor: "#9d9d9d",
+                              },
+                            }}
+                            id="address"
+                            value={companyData.address}
+                            onChange={(e) =>
+                              handleCompanyDataChange("address", e.target.value)
+                            }
+                            fullWidth
+                            error={submitAttempted && companyErrors.address}
+                            helperText={
+                              submitAttempted && companyErrors.address
+                                ? "Address is required"
+                                : ""
+                            }
+                            slotProps={{
+                              formHelperText: {
+                                sx: {
+                                  fontSize: "14px",
+                                  marginLeft: 0,
+                                  marginTop: "3px",
+                                  color: "#d32f2f !important", // Red color for error text
+                                },
+                              },
+                            }}
+                          />
+                        </div>
+                        <br></br>
+                        {/* <Autocomplete
                         options={countries}
                         getOptionLabel={(option) => option || ""} // For array of strings
                         renderInput={(params) => (
@@ -890,7 +893,7 @@ const CompanyRegistrationForm = () => {
                         }}
                         fullWidth
                       /> */}
-                      {/* <Autocomplete
+                        {/* <Autocomplete
                         options={countries}
                         getOptionLabel={(option) => option || ""}
                         renderInput={(params) => (
@@ -941,74 +944,148 @@ const CompanyRegistrationForm = () => {
                           Country is required
                         </div>
                       )} */}
-                      <FormControl
-                        fullWidth
-                        error={submitAttempted && companyErrors.country}
-                        variant="standard"
-                      >
-                        <Autocomplete
-                          options={countries}
-                          getOptionLabel={(option) => option || ""}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              label="Choose a country"
-                              variant="standard"
-                              error={submitAttempted && companyErrors.country}
-                              sx={{
-                                "& .MuiInputLabel-root": {
-                                  fontSize: "18px",
-                                  fontWeight: 600,
-                                  color: "#5e5e5e !important",
-                                },
-                                "& .MuiInput-underline:after": {
-                                  borderBottomColor: "#9d9d9d",
-                                },
-                                "& .MuiInput-underline:before": {
-                                  borderBottomColor:
-                                    submitAttempted && companyErrors.country
-                                      ? "#d32f2f !important"
-                                      : "#9d9d9d",
-                                },
-                                "& .MuiInputBase-input": {
-                                  color:
-                                    submitAttempted && companyErrors.country
-                                      ? "#d32f2f"
-                                      : "inherit",
-                                },
-                              }}
-                            />
-                          )}
-                          id="country"
-                          value={companyData.country}
-                          onChange={(event, newValue) => {
-                            handleCompanyDataChange("country", newValue);
-                          }}
-                        />
-                        {submitAttempted && companyErrors.country && (
-                          <FormHelperText
-                            sx={{
-                              fontSize: "14px",
-                              marginLeft: 0,
-                              marginTop: "3px",
-                              color: "#d32f2f !important",
-                            }}
-                          >
-                            Country is required
-                          </FormHelperText>
-                        )}
-                      </FormControl>
-                    </div>
-                    <div className="BookingFormV2_formRow__06cJs">
-                      <div className="BookingFormV2_formColumn__mzhg0">
-                        <TextField
-                          label="City"
-                          type="city"
+                        <FormControl
+                          fullWidth
+                          error={submitAttempted && companyErrors.country}
                           variant="standard"
+                        >
+                          <Autocomplete
+                            options={countries}
+                            getOptionLabel={(option) => option || ""}
+                            renderInput={(params) => (
+                              <TextField
+                                {...params}
+                                label="Choose a country"
+                                variant="standard"
+                                error={submitAttempted && companyErrors.country}
+                                sx={{
+                                  "& .MuiInputLabel-root": {
+                                    fontSize: "18px",
+                                    fontWeight: 600,
+                                    color: "#5e5e5e !important",
+                                  },
+                                  "& .MuiInput-underline:after": {
+                                    borderBottomColor: "#9d9d9d",
+                                  },
+                                  "& .MuiInput-underline:before": {
+                                    borderBottomColor:
+                                      submitAttempted && companyErrors.country
+                                        ? "#d32f2f !important"
+                                        : "#9d9d9d",
+                                  },
+                                  "& .MuiInputBase-input": {
+                                    color:
+                                      submitAttempted && companyErrors.country
+                                        ? "#d32f2f"
+                                        : "inherit",
+                                  },
+                                }}
+                              />
+                            )}
+                            id="country"
+                            value={companyData.country}
+                            onChange={(event, newValue) => {
+                              handleCompanyDataChange("country", newValue);
+                            }}
+                          />
+                          {submitAttempted && companyErrors.country && (
+                            <FormHelperText
+                              sx={{
+                                fontSize: "14px",
+                                marginLeft: 0,
+                                marginTop: "3px",
+                                color: "#d32f2f !important",
+                              }}
+                            >
+                              Country is required
+                            </FormHelperText>
+                          )}
+                        </FormControl>
+                      </div>
+                      <div className="BookingFormV2_formRow__06cJs">
+                        <div className="BookingFormV2_formColumn__mzhg0">
+                          <TextField
+                            label="City"
+                            type="city"
+                            variant="standard"
+                            sx={{
+                              "&.MuiFormControl-root": {
+                                margin: "0px 25px 0px 0px",
+                              },
+                              "& .MuiInputLabel-root": {
+                                fontSize: "18px",
+                                fontWeight: 600,
+                                color: "#5e5e5e !important",
+                              },
+                              "& .MuiInput-underline:after": {
+                                borderBottomColor: "#9d9d9d",
+                              },
+                            }}
+                            id="city"
+                            value={companyData.city}
+                            onChange={(e) =>
+                              handleCompanyDataChange("city", e.target.value)
+                            }
+                            fullWidth
+                            error={submitAttempted && companyErrors.city}
+                            helperText={
+                              submitAttempted && companyErrors.city
+                                ? "City is required"
+                                : ""
+                            }
+                            slotProps={{
+                              formHelperText: {
+                                sx: {
+                                  fontSize: "14px",
+                                  marginLeft: 0,
+                                  marginTop: "3px",
+                                  color: "#d32f2f !important", // Red color for error text
+                                },
+                              },
+                            }}
+                          />
+                          <TextField
+                            label={
+                              <>
+                                <span style={{ color: "#5e5e5e" }}>
+                                  State
+                                  <span
+                                    style={{
+                                      fontSize: "10px",
+                                      fontWeight: 500,
+                                      color: "#5e5e5e !important",
+                                    }}
+                                  >
+                                    (Optional)
+                                  </span>
+                                </span>
+                              </>
+                            }
+                            variant="standard"
+                            sx={{
+                              "& .MuiInputLabel-root": {
+                                fontSize: "18px",
+                                fontWeight: 600,
+                                color: "#5e5e5e !important",
+                              },
+                              "& .MuiInput-underline:after": {
+                                borderBottomColor: "#9d9d9d",
+                              },
+                            }}
+                            id="state"
+                            value={companyData.state}
+                            onChange={(e) =>
+                              handleCompanyDataChange("state", e.target.value)
+                            }
+                            fullWidth
+                          />
+                        </div>
+                        <TextField
+                          label="Postal/Zip code"
+                          type="postal/zip code"
+                          variant="standard"
+                          className="BookingFormV2_bottomMargin__NlvW-"
                           sx={{
-                            "&.MuiFormControl-root": {
-                              margin: "0px 25px 0px 0px",
-                            },
                             "& .MuiInputLabel-root": {
                               fontSize: "18px",
                               fontWeight: 600,
@@ -1018,16 +1095,16 @@ const CompanyRegistrationForm = () => {
                               borderBottomColor: "#9d9d9d",
                             },
                           }}
-                          id="city"
-                          value={companyData.city}
+                          id="postalCode"
+                          value={companyData.postalCode}
                           onChange={(e) =>
-                            handleCompanyDataChange("city", e.target.value)
+                            handleCompanyDataChange("postalCode", e.target.value)
                           }
                           fullWidth
-                          error={submitAttempted && companyErrors.city}
+                          error={submitAttempted && companyErrors.postalCode}
                           helperText={
-                            submitAttempted && companyErrors.city
-                              ? "City is required"
+                            submitAttempted && companyErrors.postalCode
+                              ? "Postal code is required"
                               : ""
                           }
                           slotProps={{
@@ -1041,111 +1118,249 @@ const CompanyRegistrationForm = () => {
                             },
                           }}
                         />
-                        <TextField
-                          label={
-                            <>
-                              <span style={{ color: "#5e5e5e" }}>
-                                State
-                                <span
-                                  style={{
-                                    fontSize: "10px",
-                                    fontWeight: 500,
-                                    color: "#5e5e5e !important",
-                                  }}
-                                >
-                                  (Optional)
-                                </span>
-                              </span>
-                            </>
-                          }
-                          variant="standard"
-                          sx={{
-                            "& .MuiInputLabel-root": {
-                              fontSize: "18px",
-                              fontWeight: 600,
-                              color: "#5e5e5e !important",
-                            },
-                            "& .MuiInput-underline:after": {
-                              borderBottomColor: "#9d9d9d",
-                            },
-                          }}
-                          id="state"
-                          value={companyData.state}
-                          onChange={(e) =>
-                            handleCompanyDataChange("state", e.target.value)
-                          }
-                          fullWidth
-                        />
                       </div>
-                      <TextField
-                        label="Postal/Zip code"
-                        type="postal/zip code"
-                        variant="standard"
-                        className="BookingFormV2_bottomMargin__NlvW-"
-                        sx={{
-                          "& .MuiInputLabel-root": {
-                            fontSize: "18px",
-                            fontWeight: 600,
-                            color: "#5e5e5e !important",
-                          },
-                          "& .MuiInput-underline:after": {
-                            borderBottomColor: "#9d9d9d",
-                          },
-                        }}
-                        id="postalCode"
-                        value={companyData.postalCode}
-                        onChange={(e) =>
-                          handleCompanyDataChange("postalCode", e.target.value)
-                        }
-                        fullWidth
-                        error={submitAttempted && companyErrors.postalCode}
-                        helperText={
-                          submitAttempted && companyErrors.postalCode
-                            ? "Postal code is required"
-                            : ""
-                        }
-                        slotProps={{
-                          formHelperText: {
-                            sx: {
-                              fontSize: "14px",
-                              marginLeft: 0,
-                              marginTop: "3px",
-                              color: "#d32f2f !important", // Red color for error text
-                            },
-                          },
-                        }}
-                      />
                     </div>
                   </div>
-                </div>
-                <div>
-                  {delegates.map((delegate, index) => (
-                    <div
-                      key={delegate.id}
-                      className="BookingFormV2_delegateForm__7l3nY"
-                    >
-                      <div className="BookingFormV2_bar__KQ2vi">
-                        <h2>Delegate {index + 1}</h2>
-                        {index > 0 && (
-                          <div className="BookingFormV2_delbtnContainer__g7D+b">
-                            <Button
-                              className="BookingFormV2_delBtn__3MPla"
-                              onClick={() => removeDelegate(delegate.id)}
-                            >
-                              <img src={closeBtn} alt="closeBtn"></img>
-                            </Button>
-                          </div>
-                        )}
-                      </div>
-                      <div className="BookingFormV2_delegateFormInner__PM9nL">
-                        <div>
+                  <div>
+                    {delegates.map((delegate, index) => (
+                      <div
+                        key={delegate.id}
+                        className="BookingFormV2_delegateForm__7l3nY"
+                      >
+                        <div className="BookingFormV2_bar__KQ2vi">
+                          <h2>Delegate {index + 1}</h2>
+                          {index > 0 && (
+                            <div className="BookingFormV2_delbtnContainer__g7D+b">
+                              <Button
+                                className="BookingFormV2_delBtn__3MPla"
+                                onClick={() => removeDelegate(delegate.id)}
+                              >
+                                <img src={closeBtn} alt="closeBtn"></img>
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                        <div className="BookingFormV2_delegateFormInner__PM9nL">
                           <div>
-                            <div className="BookingFormV2_formRow__06cJs">
-                              <div className="BookingFormV2_formColumn__mzhg0">
+                            <div>
+                              <div className="BookingFormV2_formRow__06cJs">
+                                <div className="BookingFormV2_formColumn__mzhg0">
+                                  <TextField
+                                    label="First name"
+                                    type="firstName"
+                                    variant="standard"
+                                    sx={{
+                                      "&.MuiFormControl-root": {
+                                        margin: "0px 25px 0px 0px",
+                                      },
+                                      "& .MuiInputLabel-root": {
+                                        fontSize: "18px",
+                                        fontWeight: 600,
+                                        color: "#5e5e5e !important",
+                                      },
+                                      "& .MuiInput-underline:after": {
+                                        borderBottomColor: "#9d9d9d",
+                                      },
+                                    }}
+                                    value={delegate.firstName}
+                                    onChange={(e) =>
+                                      handleDelegateChange(
+                                        delegate.id,
+                                        "firstName",
+                                        e.target.value,
+                                      )
+                                    }
+                                    fullWidth
+                                    error={getDelegateFieldError(
+                                      delegate.id,
+                                      "firstName",
+                                    )}
+                                    helperText={getDelegateFieldErrorMessage(
+                                      delegate.id,
+                                      "firstName",
+                                    )}
+                                    slotProps={{
+                                      formHelperText: {
+                                        sx: {
+                                          fontSize: "14px",
+                                          marginLeft: 0,
+                                          marginTop: "3px",
+                                          color: "#d32f2f !important",
+                                        },
+                                      },
+                                    }}
+                                  />
+                                  <TextField
+                                    label="Last name"
+                                    type="lastName"
+                                    variant="standard"
+                                    sx={{
+                                      "& .MuiInputLabel-root": {
+                                        fontSize: "18px",
+                                        fontWeight: 600,
+                                        color: "#5e5e5e !important",
+                                      },
+                                      "& .MuiInput-underline:before": {
+                                        borderBottomColor: "#9d9d9d",
+                                      },
+                                      "& .MuiInput-underline:after": {
+                                        borderBottomColor: "#9d9d9d",
+                                      },
+                                    }}
+                                    value={delegate.lastName}
+                                    onChange={(e) =>
+                                      handleDelegateChange(
+                                        delegate.id,
+                                        "lastName",
+                                        e.target.value,
+                                      )
+                                    }
+                                    fullWidth
+                                    error={getDelegateFieldError(
+                                      delegate.id,
+                                      "lastName",
+                                    )}
+                                    helperText={getDelegateFieldErrorMessage(
+                                      delegate.id,
+                                      "lastName",
+                                    )}
+                                    slotProps={{
+                                      formHelperText: {
+                                        sx: {
+                                          fontSize: "14px",
+                                          marginLeft: 0,
+                                          marginTop: "3px",
+                                          color: "#d32f2f !important",
+                                        },
+                                      },
+                                    }}
+                                  />
+                                </div>
+                                <div className="BookingFormV2_inputRow__-6MII">
+                                  <MuiTelInput
+                                    ref={phoneInputRef}
+                                    variant="standard"
+                                    label="Mobile"
+                                    defaultCountry="US"
+                                    sx={{
+                                      "& .MuiButtonBase-root": {
+                                        outline: "none",
+                                        position: "relative",
+                                        paddingRight: "16px",
+                                      },
+                                      "& .MuiButtonBase-root::after": {
+                                        content: '""',
+                                        position: "absolute",
+                                        right: "1px",
+                                        top: "50%",
+                                        transform: "translateY(-50%)",
+                                        borderLeft: "4px solid transparent",
+                                        borderRight: "4px solid transparent",
+                                        borderTop: "5px solid #5e5e5e",
+                                        pointerEvents: "none",
+                                      },
+                                      "& .MuiInputLabel-root": {
+                                        fontSize: "18px",
+                                        fontWeight: 600,
+                                        color: "#5e5e5e !important",
+                                      },
+                                      "& .MuiInput-underline:before": {
+                                        borderBottomColor: "#9d9d9d",
+                                      },
+                                      "& .MuiInput-underline:after": {
+                                        borderBottomColor: "#9d9d9d",
+                                      },
+                                    }}
+                                    value={delegate.mobile}
+                                    onChange={(value, info) => {
+                                      const minValue = "+1";
+                                      if (
+                                        !value ||
+                                        value.length < minValue.length
+                                      ) {
+                                        handleDelegateChange(
+                                          delegate.id,
+                                          "mobile",
+                                          minValue,
+                                        );
+                                        return;
+                                      }
+
+                                      const nationalNumber =
+                                        info?.nationalNumber || "";
+                                      const digitsOnly = nationalNumber.replace(
+                                        /\D/g,
+                                        "",
+                                      );
+                                      if (digitsOnly.length <= 10) {
+                                        handleDelegateChange(
+                                          delegate.id,
+                                          "mobile",
+                                          value,
+                                        );
+                                      }
+                                    }}
+                                    onFocus={(event) => {
+                                      setTimeout(() => {
+                                        const input = event.target;
+                                        if (input.selectionStart < 3) {
+                                          input.setSelectionRange(3, 3);
+                                        }
+                                      }, 0);
+                                    }}
+                                    inputProps={{
+                                      onKeyDown: (event) => {
+                                        const input = event.target;
+                                        const cursorPosition =
+                                          input.selectionStart;
+
+                                        if (
+                                          (event.key === "Backspace" ||
+                                            event.key === "Delete") &&
+                                          cursorPosition <= 3
+                                        ) {
+                                          event.preventDefault();
+                                        }
+
+                                        if (
+                                          ["ArrowLeft", "Home"].includes(
+                                            event.key,
+                                          ) &&
+                                          cursorPosition <= 3
+                                        ) {
+                                          event.preventDefault();
+                                          input.setSelectionRange(3, 3);
+                                        }
+                                      },
+                                    }}
+                                    fullWidth
+                                    error={getDelegateFieldError(
+                                      delegate.id,
+                                      "mobile",
+                                    )}
+                                    helperText={getDelegateFieldErrorMessage(
+                                      delegate.id,
+                                      "mobile",
+                                    )}
+                                    slotProps={{
+                                      formHelperText: {
+                                        sx: {
+                                          fontSize: "14px",
+                                          marginLeft: 0,
+                                          marginTop: "3px",
+                                          color: "#d32f2f !important",
+                                        },
+                                      },
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                              <div className="BookingFormV2_formRow__06cJs">
                                 <TextField
-                                  label="First name"
-                                  type="firstName"
+                                  label="Position"
+                                  type="position"
                                   variant="standard"
+                                  className="BookingFormV2_bottomMargin__NlvW-"
                                   sx={{
                                     "&.MuiFormControl-root": {
                                       margin: "0px 25px 0px 0px",
@@ -1159,335 +1374,123 @@ const CompanyRegistrationForm = () => {
                                       borderBottomColor: "#9d9d9d",
                                     },
                                   }}
-                                  value={delegate.firstName}
+                                  value={delegate.position}
                                   onChange={(e) =>
                                     handleDelegateChange(
                                       delegate.id,
-                                      "firstName",
+                                      "position",
                                       e.target.value,
                                     )
                                   }
                                   fullWidth
                                   error={getDelegateFieldError(
-                                    delegate.id,
-                                    "firstName",
-                                  )}
-                                  helperText={getDelegateFieldErrorMessage(
-                                    delegate.id,
-                                    "firstName",
-                                  )}
-                                  slotProps={{
-                                    formHelperText: {
-                                      sx: {
-                                        fontSize: "14px",
-                                        marginLeft: 0,
-                                        marginTop: "3px",
-                                        color: "#d32f2f !important",
-                                      },
-                                    },
-                                  }}
-                                />
-                                <TextField
-                                  label="Last name"
-                                  type="lastName"
-                                  variant="standard"
-                                  sx={{
-                                    "& .MuiInputLabel-root": {
-                                      fontSize: "18px",
-                                      fontWeight: 600,
-                                      color: "#5e5e5e !important",
-                                    },
-                                    "& .MuiInput-underline:before": {
-                                      borderBottomColor: "#9d9d9d",
-                                    },
-                                    "& .MuiInput-underline:after": {
-                                      borderBottomColor: "#9d9d9d",
-                                    },
-                                  }}
-                                  value={delegate.lastName}
-                                  onChange={(e) =>
-                                    handleDelegateChange(
-                                      delegate.id,
-                                      "lastName",
-                                      e.target.value,
-                                    )
-                                  }
-                                  fullWidth
-                                  error={getDelegateFieldError(
-                                    delegate.id,
-                                    "lastName",
-                                  )}
-                                  helperText={getDelegateFieldErrorMessage(
-                                    delegate.id,
-                                    "lastName",
-                                  )}
-                                  slotProps={{
-                                    formHelperText: {
-                                      sx: {
-                                        fontSize: "14px",
-                                        marginLeft: 0,
-                                        marginTop: "3px",
-                                        color: "#d32f2f !important",
-                                      },
-                                    },
-                                  }}
-                                />
-                              </div>
-                              <div className="BookingFormV2_inputRow__-6MII">
-                                <MuiTelInput
-                                  ref={phoneInputRef}
-                                  variant="standard"
-                                  label="Mobile"
-                                  defaultCountry="US"
-                                  sx={{
-                                    "& .MuiButtonBase-root": {
-                                      outline: "none",
-                                      position: "relative",
-                                      paddingRight: "16px",
-                                    },
-                                    "& .MuiButtonBase-root::after": {
-                                      content: '""',
-                                      position: "absolute",
-                                      right: "1px",
-                                      top: "50%",
-                                      transform: "translateY(-50%)",
-                                      borderLeft: "4px solid transparent",
-                                      borderRight: "4px solid transparent",
-                                      borderTop: "5px solid #5e5e5e",
-                                      pointerEvents: "none",
-                                    },
-                                    "& .MuiInputLabel-root": {
-                                      fontSize: "18px",
-                                      fontWeight: 600,
-                                      color: "#5e5e5e !important",
-                                    },
-                                    "& .MuiInput-underline:before": {
-                                      borderBottomColor: "#9d9d9d",
-                                    },
-                                    "& .MuiInput-underline:after": {
-                                      borderBottomColor: "#9d9d9d",
-                                    },
-                                  }}
-                                  value={delegate.mobile}
-                                  onChange={(value, info) => {
-                                    const minValue = "+1";
-                                    if (
-                                      !value ||
-                                      value.length < minValue.length
-                                    ) {
-                                      handleDelegateChange(
-                                        delegate.id,
-                                        "mobile",
-                                        minValue,
-                                      );
-                                      return;
-                                    }
-
-                                    const nationalNumber =
-                                      info?.nationalNumber || "";
-                                    const digitsOnly = nationalNumber.replace(
-                                      /\D/g,
-                                      "",
-                                    );
-                                    if (digitsOnly.length <= 10) {
-                                      handleDelegateChange(
-                                        delegate.id,
-                                        "mobile",
-                                        value,
-                                      );
-                                    }
-                                  }}
-                                  onFocus={(event) => {
-                                    setTimeout(() => {
-                                      const input = event.target;
-                                      if (input.selectionStart < 3) {
-                                        input.setSelectionRange(3, 3);
-                                      }
-                                    }, 0);
-                                  }}
-                                  inputProps={{
-                                    onKeyDown: (event) => {
-                                      const input = event.target;
-                                      const cursorPosition =
-                                        input.selectionStart;
-
-                                      if (
-                                        (event.key === "Backspace" ||
-                                          event.key === "Delete") &&
-                                        cursorPosition <= 3
-                                      ) {
-                                        event.preventDefault();
-                                      }
-
-                                      if (
-                                        ["ArrowLeft", "Home"].includes(
-                                          event.key,
-                                        ) &&
-                                        cursorPosition <= 3
-                                      ) {
-                                        event.preventDefault();
-                                        input.setSelectionRange(3, 3);
-                                      }
-                                    },
-                                  }}
-                                  fullWidth
-                                  error={getDelegateFieldError(
-                                    delegate.id,
-                                    "mobile",
-                                  )}
-                                  helperText={getDelegateFieldErrorMessage(
-                                    delegate.id,
-                                    "mobile",
-                                  )}
-                                  slotProps={{
-                                    formHelperText: {
-                                      sx: {
-                                        fontSize: "14px",
-                                        marginLeft: 0,
-                                        marginTop: "3px",
-                                        color: "#d32f2f !important",
-                                      },
-                                    },
-                                  }}
-                                />
-                              </div>
-                            </div>
-                            <div className="BookingFormV2_formRow__06cJs">
-                              <TextField
-                                label="Position"
-                                type="position"
-                                variant="standard"
-                                className="BookingFormV2_bottomMargin__NlvW-"
-                                sx={{
-                                  "&.MuiFormControl-root": {
-                                    margin: "0px 25px 0px 0px",
-                                  },
-                                  "& .MuiInputLabel-root": {
-                                    fontSize: "18px",
-                                    fontWeight: 600,
-                                    color: "#5e5e5e !important",
-                                  },
-                                  "& .MuiInput-underline:after": {
-                                    borderBottomColor: "#9d9d9d",
-                                  },
-                                }}
-                                value={delegate.position}
-                                onChange={(e) =>
-                                  handleDelegateChange(
                                     delegate.id,
                                     "position",
-                                    e.target.value,
-                                  )
-                                }
-                                fullWidth
-                                error={getDelegateFieldError(
-                                  delegate.id,
-                                  "position",
-                                )}
-                                helperText={getDelegateFieldErrorMessage(
-                                  delegate.id,
-                                  "position",
-                                )}
-                                slotProps={{
-                                  formHelperText: {
-                                    sx: {
-                                      fontSize: "14px",
-                                      marginLeft: 0,
-                                      marginTop: "3px",
-                                      color: "#d32f2f !important",
+                                  )}
+                                  helperText={getDelegateFieldErrorMessage(
+                                    delegate.id,
+                                    "position",
+                                  )}
+                                  slotProps={{
+                                    formHelperText: {
+                                      sx: {
+                                        fontSize: "14px",
+                                        marginLeft: 0,
+                                        marginTop: "3px",
+                                        color: "#d32f2f !important",
+                                      },
                                     },
-                                  },
-                                }}
-                              />
-                              <br></br>
-                              <TextField
-                                label="Email address"
-                                type="emailAddress"
-                                variant="standard"
-                                sx={{
-                                  "& .MuiInputLabel-root": {
-                                    fontSize: "18px",
-                                    fontWeight: 600,
-                                    color: "#5e5e5e !important",
-                                  },
-                                  "& .MuiInput-underline:after": {
-                                    borderBottomColor: "#9d9d9d",
-                                  },
-                                }}
-                                value={delegate.email}
-                                onChange={(e) =>
-                                  handleDelegateChange(
+                                  }}
+                                />
+                                <br></br>
+                                <TextField
+                                  label="Email address"
+                                  type="emailAddress"
+                                  variant="standard"
+                                  sx={{
+                                    "& .MuiInputLabel-root": {
+                                      fontSize: "18px",
+                                      fontWeight: 600,
+                                      color: "#5e5e5e !important",
+                                    },
+                                    "& .MuiInput-underline:after": {
+                                      borderBottomColor: "#9d9d9d",
+                                    },
+                                  }}
+                                  value={delegate.email}
+                                  onChange={(e) =>
+                                    handleDelegateChange(
+                                      delegate.id,
+                                      "email",
+                                      e.target.value,
+                                    )
+                                  }
+                                  fullWidth
+                                  error={getDelegateFieldError(
                                     delegate.id,
                                     "email",
-                                    e.target.value,
-                                  )
-                                }
-                                fullWidth
-                                error={getDelegateFieldError(
-                                  delegate.id,
-                                  "email",
-                                )}
-                                helperText={getDelegateFieldErrorMessage(
-                                  delegate.id,
-                                  "email",
-                                )}
-                                slotProps={{
-                                  formHelperText: {
-                                    sx: {
-                                      fontSize: "14px",
-                                      marginLeft: 0,
-                                      marginTop: "3px",
-                                      color: "#d32f2f !important",
+                                  )}
+                                  helperText={getDelegateFieldErrorMessage(
+                                    delegate.id,
+                                    "email",
+                                  )}
+                                  slotProps={{
+                                    formHelperText: {
+                                      sx: {
+                                        fontSize: "14px",
+                                        marginLeft: 0,
+                                        marginTop: "3px",
+                                        color: "#d32f2f !important",
+                                      },
                                     },
-                                  },
-                                }}
-                              />
+                                  }}
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="BookingFormV2_addbtnContainer__AsQQo">
-                  <Button
-                    variant="contained"
-                    className="BookingFormV2_delBtn__3MPla"
-                    onClick={addDelegate}
-                  >
-                    <img src={plusIcon} alt="plusIcon"></img>
-                    Add Delegate
-                  </Button>
-                </div>
-                <div className="BookingFormV2_submitContainer__qnA3B">
-                  <div>
-                    <input
-                      type="checkbox"
-                      checked={termsAgreement}
-                      onChange={(e) => {
-                        setTermsAgreement(e.target.checked);
-                        if (submitAttempted && e.target.checked) {
-                          setTermsError(false);
-                        }
-                      }}
-                    ></input>
-                    <label
-                      style={{
-                        color: submitAttempted && termsError ? "#b00020" : "",
-                      }}
+                    ))}
+                  </div>
+                  <div className="BookingFormV2_addbtnContainer__AsQQo">
+                    <Button
+                      variant="contained"
+                      className="BookingFormV2_delBtn__3MPla"
+                      onClick={addDelegate}
                     >
-                      Please tick to confirm your agreement to the&nbsp;
-                      <a
-                        href="/terms-and-conditions"
+                      <img src={plusIcon} alt="plusIcon"></img>
+                      Add Delegate
+                    </Button>
+                  </div>
+                  <div className="BookingFormV2_submitContainer__qnA3B">
+                    <div>
+                      <input
+                        type="checkbox"
+                        checked={termsAgreement}
+                        onChange={(e) => {
+                          setTermsAgreement(e.target.checked);
+                          if (submitAttempted && e.target.checked) {
+                            setTermsError(false);
+                          }
+                        }}
+                      ></input>
+                      <label
                         style={{
                           color: submitAttempted && termsError ? "#b00020" : "",
-                          borderColor:
-                            submitAttempted && termsError ? "#b00020" : "",
                         }}
                       >
-                        terms and conditions
-                      </a>
-                      {/* {submitAttempted && termsError && (
+                        Please tick to confirm your agreement to the&nbsp;
+                        <a
+                          href="/terms-and-conditions"
+                          style={{
+                            color: submitAttempted && termsError ? "#b00020" : "",
+                            borderColor:
+                              submitAttempted && termsError ? "#b00020" : "",
+                          }}
+                        >
+                          terms and conditions
+                        </a>
+                        {/* {submitAttempted && termsError && (
                         <span
                           style={{
                             display: "block",
@@ -1499,36 +1502,37 @@ const CompanyRegistrationForm = () => {
                           You must agree to the terms and conditions
                         </span>
                       )} */}
-                    </label>
+                      </label>
+                    </div>
+                    <input
+                      type="submit"
+                      className="BookingFormV2_submitBtn__nFF03"
+                      value={submitBtnCheck ? "Please Wait" : "Submit"}
+                    // onClick={() => navigate("/booking-form")}
+                    ></input>
                   </div>
-                  <input
-                    type="submit"
-                    className="BookingFormV2_submitBtn__nFF03"
-                    value={submitBtnCheck ? "Please Wait" : "Submit"}
-                  // onClick={() => navigate("/booking-form")}
-                  ></input>
-                </div>
-              </form>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div className="PageForm_footer__hOO1l">
+            <div
+              className="PageForm_footerInner__5Enax"
+              style={{ maxWidth: "1070px" }}
+            >
+              <p>
+                <span onClick={() => navigate("/privacy-policy")}>
+                  Privacy Policy
+                </span>
+                <span className="PageForm_divide__vwhn0">|</span>
+                ABCD Company
+              </p>
+              <p>©2026 Bitcoin Innovation & Market Evolution 2026</p>
             </div>
           </div>
         </div>
-        <div className="PageForm_footer__hOO1l">
-          <div
-            className="PageForm_footerInner__5Enax"
-            style={{ maxWidth: "1070px" }}
-          >
-            <p>
-              <span onClick={() => navigate("/privacy-policy")}>
-                Privacy Policy
-              </span>
-              <span className="PageForm_divide__vwhn0">|</span>
-              ABCD Company
-            </p>
-            <p>©2026 Bitcoin Innovation & Market Evolution 2026</p>
-          </div>
-        </div>
       </div>
-    </div>
+    </>
   );
 };
 

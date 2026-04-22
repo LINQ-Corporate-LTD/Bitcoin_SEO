@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Footer";
 import CountSection from "./CountSection";
+import CookieBanner from "./cookieBanner";
 import ForumSection from "./ForumSection";
 import HomeSpeakerSlider from "./HomeSpeakerSlider";
 import IndustryTrend from "./IndustryTrend";
@@ -109,6 +110,7 @@ const Home = () => {
 
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

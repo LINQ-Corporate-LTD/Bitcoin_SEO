@@ -493,6 +493,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import { useApiData } from "../../src/common/ApiContext";
+import CookieBanner from "./cookieBanner";
 const TOKEN_KEY = "slideShareToken";
 const EMAIL_KEY = "slideShareEmail";
 const EXPIRY_KEY = "slideShareExpiry";
@@ -500,12 +501,12 @@ const EXPIRY_KEY = "slideShareExpiry";
 const SlideShare = () => {
     const navigate = useNavigate();
     const {
-    homeVideoSettings,
-    eventDetails,
-    eventGeneralSettings,
-    themeSettings,
-  } = useApiData();
-  console.log('eventDetails: ', eventDetails);
+        homeVideoSettings,
+        eventDetails,
+        eventGeneralSettings,
+        themeSettings,
+    } = useApiData();
+    console.log('eventDetails: ', eventDetails);
 
     const [verify, setVerify] = useState("false");
     const [userEmail, setUserEmail] = useState("");
@@ -708,8 +709,10 @@ const SlideShare = () => {
     // ─── render ──────────────────────────────────────────────────────────────────
 
     return (
-        <div id="root">
-            {/* <Helmet>
+        <>
+            <CookieBanner />
+            <div id="root">
+                {/* <Helmet>
                 <title>{seoTitle}</title>
                 <meta name="description" content={seoDesc} />
                 <meta property="og:title" content={seoTitle} />
@@ -723,269 +726,270 @@ const SlideShare = () => {
                 />
             </Helmet> */}
 
-            <div style={{ opacity: 1 }}>
-                <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
-                    <Navbar forceScrolled />
+                <div style={{ opacity: 1 }}>
+                    <div style={{ marginTop: windowWidth > 1024 ? "120px" : "" }}>
+                        <Navbar forceScrolled />
 
-                    <div className="Slideshare_container__TrIvi">
-                        {/* ── top / auth section ── */}
-                        <div className="Slideshare_topContainer__Yu35o">
-                            <div
-                                className="Slideshare_authenticate__A8Vrd"
-                                style={{
-                                    display: verify === "true" ? "flex" : "",
-                                    flexDirection: verify === "true" ? "column" : "",
-                                    justifyContent: verify === "true" ? "center" : "",
-                                }}
-                            >
-                                {verify === "true" ? (
-                                    <>
-                                        <p
-                                            className="Slideshare_welcomePara__b7Kc2"
-                                            style={{ margin: "0px" }}
-                                        >
-                                            Welcome, <span>{userEmail}</span>
-                                        </p>
-                                        <div className="Slideshare_logoutContainer__RSKNv">
-                                            <p className="Slideshare_authPara3__Nefi0">
-                                                <span
-                                                    onClick={() => setIsOpenAttendees(true)}
-                                                    style={{ textDecoration: "underline", cursor: "pointer" }}
-                                                >
-                                                    Click here
-                                                </span>{" "}
-                                                to view a full list of delegates registered to attend{" "}
-                                                <span className="Slideshare_authPara3Span__zPzva">
-                                                    EV CHARGING UK 2026
-                                                </span>
+                        <div className="Slideshare_container__TrIvi">
+                            {/* ── top / auth section ── */}
+                            <div className="Slideshare_topContainer__Yu35o">
+                                <div
+                                    className="Slideshare_authenticate__A8Vrd"
+                                    style={{
+                                        display: verify === "true" ? "flex" : "",
+                                        flexDirection: verify === "true" ? "column" : "",
+                                        justifyContent: verify === "true" ? "center" : "",
+                                    }}
+                                >
+                                    {verify === "true" ? (
+                                        <>
+                                            <p
+                                                className="Slideshare_welcomePara__b7Kc2"
+                                                style={{ margin: "0px" }}
+                                            >
+                                                Welcome, <span>{userEmail}</span>
                                             </p>
-                                            <button onClick={handleLogout}>Logout</button>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <>
-                                        <h1>access the presentations</h1>
-                                        <p className="Slideshare_authPara1__ZI+o7">
-                                            Please verify below to access the{" "}
-                                            <span>presentations</span>.
-                                        </p>
-
-                                        {/* ── controlled form — no <form> submit ── */}
-                                        <form
-                                            onSubmit={(e) => {
-                                                e.preventDefault(); // ← prevents page reload
-                                                handleLogin();
-                                            }}
-                                            data-hs-cf-bound="true"
-                                            data-gtm-form-interact-id="0"
-                                        >
-                                            <div>
-                                                <div>
-                                                    <input
-                                                        type="email"
-                                                        placeholder="Email address *"
-                                                        value={emailInput}
-                                                        onChange={(e) => setEmailInput(e.target.value)}
-                                                        data-gtm-form-interact-field-id="0"
-                                                        required
-                                                    />
-                                                    <input
-                                                        type="password"
-                                                        placeholder="Password *"
-                                                        value={passwordInput}
-                                                        onChange={(e) => setPasswordInput(e.target.value)}
-                                                        data-gtm-form-interact-field-id="1"
-                                                        required
-                                                    />
-                                                </div>
+                                            <div className="Slideshare_logoutContainer__RSKNv">
+                                                <p className="Slideshare_authPara3__Nefi0">
+                                                    <span
+                                                        onClick={() => setIsOpenAttendees(true)}
+                                                        style={{ textDecoration: "underline", cursor: "pointer" }}
+                                                    >
+                                                        Click here
+                                                    </span>{" "}
+                                                    to view a full list of delegates registered to attend{" "}
+                                                    <span className="Slideshare_authPara3Span__zPzva">
+                                                        EV CHARGING UK 2026
+                                                    </span>
+                                                </p>
+                                                <button onClick={handleLogout}>Logout</button>
                                             </div>
-                                            <input
-                                                className="verify_btn"
-                                                type="submit"
-                                                value={isLoggingIn ? "Verifying…" : "Verify"}
-                                                disabled={isLoggingIn}
-                                                style={{
-                                                    opacity: isLoggingIn ? 0.7 : 1,
-                                                    cursor: isLoggingIn ? "not-allowed" : "pointer"
-                                                }}
-                                            />
-                                        </form>
-
-                                        <p className="Slideshare_authPara2__9QGA2">
-                                            If you do not have these details and would like to gain
-                                            access please email our delegates team at{" "}
-                                            <a href="mailto:delegates@iq-hub.com" style={{ display: "block" }}>
-                                                delegates@iq-hub.com
-                                            </a>
-                                        </p>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* ── slides list ── */}
-                        <div className="Slideshare_bottomContainer__oejp4">
-                            <div className="Slideshare_slidesContainer__jsZ-m">
-                                <div className="Slideshare_topSec__EeRby">
-                                    <h3>Presentations Viewer</h3>
-                                    <p>
-                                        The{" "}
-                                        <span style={{ fontWeight: 800 }}>
-                                            Bitcoin Innovation & Market Evolution 2026{" "}
-                                        </span>
-                                        is the only event delivering cutting-edge market intelligence
-                                        and sector-specific insights into innovative water treatment
-                                        technologies that enhance operational efficiency.
-                                    </p>
-                                </div>
-
-                                {slideShareList.map((slide, index) => (
-                                    <div
-                                        key={slide.id ?? index}
-                                        className="Slideshare_slide__QlPAx"
-                                        onClick={() => {
-                                            if (verify !== "true") return;
-                                            setActivePdf(slide.pptLink);
-                                            setActivePdfTitle(slide.heading);
-                                            setIsOpen(true);
-                                        }}
-                                        style={{ cursor: verify === "true" ? "pointer" : "default" }}
-                                    >
-                                        <div className="Slideshare_slideLeft__428RJ">
-                                            <img src={slide.pptImage} alt="thumbnail of the slide" />
-                                        </div>
-                                        <div className="Slideshare_slideRight__Zch8R">
-                                            <h5>{slide.heading}</h5>
-                                            <p>
-                                                {slide.author}, {slide.authorCompany}
+                                        </>
+                                    ) : (
+                                        <>
+                                            <h1>access the presentations</h1>
+                                            <p className="Slideshare_authPara1__ZI+o7">
+                                                Please verify below to access the{" "}
+                                                <span>presentations</span>.
                                             </p>
-                                        </div>
+
+                                            {/* ── controlled form — no <form> submit ── */}
+                                            <form
+                                                onSubmit={(e) => {
+                                                    e.preventDefault(); // ← prevents page reload
+                                                    handleLogin();
+                                                }}
+                                                data-hs-cf-bound="true"
+                                                data-gtm-form-interact-id="0"
+                                            >
+                                                <div>
+                                                    <div>
+                                                        <input
+                                                            type="email"
+                                                            placeholder="Email address *"
+                                                            value={emailInput}
+                                                            onChange={(e) => setEmailInput(e.target.value)}
+                                                            data-gtm-form-interact-field-id="0"
+                                                            required
+                                                        />
+                                                        <input
+                                                            type="password"
+                                                            placeholder="Password *"
+                                                            value={passwordInput}
+                                                            onChange={(e) => setPasswordInput(e.target.value)}
+                                                            data-gtm-form-interact-field-id="1"
+                                                            required
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <input
+                                                    className="verify_btn"
+                                                    type="submit"
+                                                    value={isLoggingIn ? "Verifying…" : "Verify"}
+                                                    disabled={isLoggingIn}
+                                                    style={{
+                                                        opacity: isLoggingIn ? 0.7 : 1,
+                                                        cursor: isLoggingIn ? "not-allowed" : "pointer"
+                                                    }}
+                                                />
+                                            </form>
+
+                                            <p className="Slideshare_authPara2__9QGA2">
+                                                If you do not have these details and would like to gain
+                                                access please email our delegates team at{" "}
+                                                <a href="mailto:delegates@iq-hub.com" style={{ display: "block" }}>
+                                                    delegates@iq-hub.com
+                                                </a>
+                                            </p>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* ── slides list ── */}
+                            <div className="Slideshare_bottomContainer__oejp4">
+                                <div className="Slideshare_slidesContainer__jsZ-m">
+                                    <div className="Slideshare_topSec__EeRby">
+                                        <h3>Presentations Viewer</h3>
+                                        <p>
+                                            The{" "}
+                                            <span style={{ fontWeight: 800 }}>
+                                                Bitcoin Innovation & Market Evolution 2026{" "}
+                                            </span>
+                                            is the only event delivering cutting-edge market intelligence
+                                            and sector-specific insights into innovative water treatment
+                                            technologies that enhance operational efficiency.
+                                        </p>
                                     </div>
-                                ))}
+
+                                    {slideShareList.map((slide, index) => (
+                                        <div
+                                            key={slide.id ?? index}
+                                            className="Slideshare_slide__QlPAx"
+                                            onClick={() => {
+                                                if (verify !== "true") return;
+                                                setActivePdf(slide.pptLink);
+                                                setActivePdfTitle(slide.heading);
+                                                setIsOpen(true);
+                                            }}
+                                            style={{ cursor: verify === "true" ? "pointer" : "default" }}
+                                        >
+                                            <div className="Slideshare_slideLeft__428RJ">
+                                                <img src={slide.pptImage} alt="thumbnail of the slide" />
+                                            </div>
+                                            <div className="Slideshare_slideRight__Zch8R">
+                                                <h5>{slide.heading}</h5>
+                                                <p>
+                                                    {slide.author}, {slide.authorCompany}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            {/* ── PDF modal ── */}
-            <Modal
-                isOpen={isOpen}
-                onRequestClose={() => setIsOpen(false)}
-                className="ReactModalPortal"
-                style={{
-                    content: {
-                        position: "absolute",
-                        inset: "40px 0px",
-                        border: "1px solid rgb(204, 204, 204)",
-                        background: "rgb(255, 255, 255)",
-                        overflow: "hidden",
-                        borderRadius: "8px",
-                        outline: "none",
-                        padding: "20px",
-                        width: "95%",
-                        maxWidth: "1200px",
-                        margin: "auto",
-                        maxHeight: "800px",
-                    },
-                    overlay: { backgroundColor: "rgba(0,0,0,0.55)", zIndex: 9999 },
-                }}
-            >
-                <div
-                    onClick={() => setIsOpen(false)}
-                    style={{ display: "flex", justifyContent: "flex-end", marginBottom: "10px" }}
+                {/* ── PDF modal ── */}
+                <Modal
+                    isOpen={isOpen}
+                    onRequestClose={() => setIsOpen(false)}
+                    className="ReactModalPortal"
+                    style={{
+                        content: {
+                            position: "absolute",
+                            inset: "40px 0px",
+                            border: "1px solid rgb(204, 204, 204)",
+                            background: "rgb(255, 255, 255)",
+                            overflow: "hidden",
+                            borderRadius: "8px",
+                            outline: "none",
+                            padding: "20px",
+                            width: "95%",
+                            maxWidth: "1200px",
+                            margin: "auto",
+                            maxHeight: "800px",
+                        },
+                        overlay: { backgroundColor: "rgba(0,0,0,0.55)", zIndex: 9999 },
+                    }}
                 >
-                    <button
-                        style={{
-                            border: "none",
-                            backgroundColor: "transparent",
-                            margin: "0px",
-                            padding: "0px",
-                            cursor: "pointer",
-                        }}
+                    <div
+                        onClick={() => setIsOpen(false)}
+                        style={{ display: "flex", justifyContent: "flex-end", marginBottom: "10px" }}
                     >
-                        <img
-                            src="https://www.uk.evcharging-infrastructure.com/images/icons/close-mustard.png"
-                            alt="close icon"
-                            width="18"
-                        />
-                    </button>
-                </div>
-                <div>
-                    <iframe title={activePdfTitle} src={activePdf} width="100%" height="700px" />
-                </div>
-            </Modal>
+                        <button
+                            style={{
+                                border: "none",
+                                backgroundColor: "transparent",
+                                margin: "0px",
+                                padding: "0px",
+                                cursor: "pointer",
+                            }}
+                        >
+                            <img
+                                src="https://www.uk.evcharging-infrastructure.com/images/icons/close-mustard.png"
+                                alt="close icon"
+                                width="18"
+                            />
+                        </button>
+                    </div>
+                    <div>
+                        <iframe title={activePdfTitle} src={activePdf} width="100%" height="700px" />
+                    </div>
+                </Modal>
 
-            {/* ── attendees modal ── */}
-            <Modal
-                isOpen={isOpenAttendees}
-                onRequestClose={() => setIsOpenAttendees(false)}
-                className="ReactModalPortal"
-                style={{
-                    content: {
-                        position: "absolute",
-                        inset: "40px",
-                        border: "1px solid rgb(204, 204, 204)",
-                        background: "rgb(255, 255, 255)",
-                        overflow: "auto",
-                        borderRadius: "4px",
-                        outline: "none",
-                        padding: "20px",
-                        width: "80%",
-                        maxWidth: "800px",
-                        margin: "auto",
-                        maxHeight: "600px",
-                    },
-                    overlay: { backgroundColor: "rgba(0,0,0,0.55)", zIndex: 9999 },
-                }}
-            >
-                <div
-                    onClick={() => setIsOpenAttendees(false)}
-                    style={{ display: "flex", justifyContent: "flex-end" }}
+                {/* ── attendees modal ── */}
+                <Modal
+                    isOpen={isOpenAttendees}
+                    onRequestClose={() => setIsOpenAttendees(false)}
+                    className="ReactModalPortal"
+                    style={{
+                        content: {
+                            position: "absolute",
+                            inset: "40px",
+                            border: "1px solid rgb(204, 204, 204)",
+                            background: "rgb(255, 255, 255)",
+                            overflow: "auto",
+                            borderRadius: "4px",
+                            outline: "none",
+                            padding: "20px",
+                            width: "80%",
+                            maxWidth: "800px",
+                            margin: "auto",
+                            maxHeight: "600px",
+                        },
+                        overlay: { backgroundColor: "rgba(0,0,0,0.55)", zIndex: 9999 },
+                    }}
                 >
-                    <button
-                        style={{
-                            border: "none",
-                            backgroundColor: "transparent",
-                            margin: "0px",
-                            padding: "0px",
-                            cursor: "pointer",
-                        }}
+                    <div
+                        onClick={() => setIsOpenAttendees(false)}
+                        style={{ display: "flex", justifyContent: "flex-end" }}
                     >
-                        <img
-                            src="https://www.uk.evcharging-infrastructure.com/images/icons/close-mustard.png"
-                            alt="close icon"
-                            width="18"
-                        />
-                    </button>
-                </div>
-                <div className="Slideshare_tableContainer__J6uzu">
-                    <h3>Registered Delegate: EV CHARGING UK 2026</h3>
-                    <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                        <thead>
-                            <tr style={{ backgroundColor: "#181818" }}>
-                                <td style={{ fontWeight: "700", color: "#ffffff" }}>Delegate Name</td>
-                                <td style={{ fontWeight: "700", color: "#ffffff" }}>Company</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {slideShareAttendeesList.map((delegate, index) => (
-                                <tr key={delegate.id ?? index}>
-                                    <td style={{ paddingTop: index === 0 ? "20px" : "" }}>
-                                        {delegate.delegateName}
-                                    </td>
-                                    <td style={{ paddingTop: index === 0 ? "20px" : "" }}>
-                                        {delegate.companyName}
-                                    </td>
+                        <button
+                            style={{
+                                border: "none",
+                                backgroundColor: "transparent",
+                                margin: "0px",
+                                padding: "0px",
+                                cursor: "pointer",
+                            }}
+                        >
+                            <img
+                                src="https://www.uk.evcharging-infrastructure.com/images/icons/close-mustard.png"
+                                alt="close icon"
+                                width="18"
+                            />
+                        </button>
+                    </div>
+                    <div className="Slideshare_tableContainer__J6uzu">
+                        <h3>Registered Delegate: EV CHARGING UK 2026</h3>
+                        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                            <thead>
+                                <tr style={{ backgroundColor: "#181818" }}>
+                                    <td style={{ fontWeight: "700", color: "#ffffff" }}>Delegate Name</td>
+                                    <td style={{ fontWeight: "700", color: "#ffffff" }}>Company</td>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </Modal>
+                            </thead>
+                            <tbody>
+                                {slideShareAttendeesList.map((delegate, index) => (
+                                    <tr key={delegate.id ?? index}>
+                                        <td style={{ paddingTop: index === 0 ? "20px" : "" }}>
+                                            {delegate.delegateName}
+                                        </td>
+                                        <td style={{ paddingTop: index === 0 ? "20px" : "" }}>
+                                            {delegate.companyName}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </Modal>
 
-            <Footer />
-        </div>
+                <Footer />
+            </div>
+        </>
     );
 };
 

@@ -14,6 +14,7 @@ import { FormControl, FormHelperText } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { useApiData } from "../common/ApiContext";
 import { usePageSeo } from "../common/usePageSeo";
+import CookieBanner from "./cookieBanner";
 // const logo =
 //   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
 // const plusIcon =
@@ -467,116 +468,119 @@ const RemindMeLater = () => {
   const seoImage = pageSeo.pageOgImage || null;
 
   return (
-    <div id="root">
-      <Helmet>
-        <title>{seoTitle}</title>
-        <meta name="description" content={seoDesc} />
-        <meta property="og:title" content={seoTitle} />
-        <meta property="og:description" content={seoDesc} />
-        <meta property="og:type" content="website" />
-        {seoImage && <meta property="og:image" content={seoImage} />}
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content={seoTitle} />
-        <meta name="twitter:description" content={seoDesc} />
-        {seoImage && <meta name="twitter:image" content={seoImage} />}
-        <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/remind-me-later" />
-      </Helmet>
-      <div className="PageForm_container__NA5Wr">
-        <div className="PageForm_header__7W2Cz">
-          <div
-            className="PageForm_headerInner__sdlhn"
-            style={{ maxWidth: "1070px" }}
-          >
-            <img onClick={() => navigate("/")} src={navLogos?.whiteLogo} alt="site logo"></img>
-          </div>
-        </div>
-        <div className="RemindMeLater_container__vWyw0">
-          <h1>Remind Me</h1>
-          <div className="RemindMeLater_addOns__nEVDz">
-            <div className="RemindMeLater_bar__tC12c">
-              <h2>Your thoughts on attending?</h2>.
-            </div>
-            <div className="cmxform" id="developForm">
-              <form id="PRG-(Remind me Later 2026)" data-hs-cf-bound="true">
-                <div className="RemindMeLater_addOnsInner__aBNYF">
-                  <div>
-                    <h2>I have not registered yet, because:</h2>
-                    <div>
-                      <div>
-                        <input type="checkbox" name="checkbox1"></input>
-                        <label>I'm checking my diary to see if I am available</label>
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <input type="checkbox" name="checkbox2"></input>
-                        <label>I'm waiting on colleagues to confirm their attendance</label>
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <input type="checkbox" name="checkbox3"></input>
-                        <label>I'll be booking closer to the time</label>
-                      </div>
-                    </div>
-                    <div className="RemindMeLater_otherContainer__y+rku">
-                      <div>
-                        <input type="checkbox" name="others" checked={showTextarea} onChange={(e) => setShowTextarea(e.target.checked)}></input>
-                        <label>Others</label>
-                      </div>
-                      {showTextarea && (
-                        <textarea name="others"></textarea>
-                      )}
-                    </div>
-                  </div>
-                  <div>
-                    <h2 style={{ marginTop: '20px' }}>I am mostly interested in:</h2>
-                    <div>
-                      <div>
-                        <input type="checkbox" name="checkbox4"></input>
-                        <label>Speaking opportunities</label>
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <input type="checkbox" name="checkbox5"></input>
-                        <label>Sponsorships and exhibition booths</label>
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <input type="checkbox" name="checkbox6"></input>
-                        <label>Delegate passes only</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="RemindMeLater_emailContainer__GGz3-">
-                    <div>
-                      <input type="text" name="email" placeholder="Email Address (Required)"></input>
-                    </div>
-                    <button type="submit">Remind Me</button>
-                  </div>
-                </div>
-              </form>
+    <>
+      <CookieBanner />
+      <div id="root">
+        <Helmet>
+          <title>{seoTitle}</title>
+          <meta name="description" content={seoDesc} />
+          <meta property="og:title" content={seoTitle} />
+          <meta property="og:description" content={seoDesc} />
+          <meta property="og:type" content="website" />
+          {seoImage && <meta property="og:image" content={seoImage} />}
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:title" content={seoTitle} />
+          <meta name="twitter:description" content={seoDesc} />
+          {seoImage && <meta name="twitter:image" content={seoImage} />}
+          <link rel="canonical" href="https://www.bitcoin-innovation-market-evolution.online/remind-me-later" />
+        </Helmet>
+        <div className="PageForm_container__NA5Wr">
+          <div className="PageForm_header__7W2Cz">
+            <div
+              className="PageForm_headerInner__sdlhn"
+              style={{ maxWidth: "1070px" }}
+            >
+              <img onClick={() => navigate("/")} src={navLogos?.whiteLogo} alt="site logo"></img>
             </div>
           </div>
-        </div>
-        <div className="PageForm_footer__hOO1l">
-          <div
-            className="PageForm_footerInner__5Enax"
-            style={{ maxWidth: "1070px" }}
-          >
-            <p>
-              <span onClick={() => navigate("/privacy-policy")} >Privacy Policy</span>
-              <span className="PageForm_divide__vwhn0">|</span>
-              ABCD Company
-            </p>
-            <p>©2026 Bitcoin Innovation & Market
-              Evolution 2026</p>
+          <div className="RemindMeLater_container__vWyw0">
+            <h1>Remind Me</h1>
+            <div className="RemindMeLater_addOns__nEVDz">
+              <div className="RemindMeLater_bar__tC12c">
+                <h2>Your thoughts on attending?</h2>.
+              </div>
+              <div className="cmxform" id="developForm">
+                <form id="PRG-(Remind me Later 2026)" data-hs-cf-bound="true">
+                  <div className="RemindMeLater_addOnsInner__aBNYF">
+                    <div>
+                      <h2>I have not registered yet, because:</h2>
+                      <div>
+                        <div>
+                          <input type="checkbox" name="checkbox1"></input>
+                          <label>I'm checking my diary to see if I am available</label>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <input type="checkbox" name="checkbox2"></input>
+                          <label>I'm waiting on colleagues to confirm their attendance</label>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <input type="checkbox" name="checkbox3"></input>
+                          <label>I'll be booking closer to the time</label>
+                        </div>
+                      </div>
+                      <div className="RemindMeLater_otherContainer__y+rku">
+                        <div>
+                          <input type="checkbox" name="others" checked={showTextarea} onChange={(e) => setShowTextarea(e.target.checked)}></input>
+                          <label>Others</label>
+                        </div>
+                        {showTextarea && (
+                          <textarea name="others"></textarea>
+                        )}
+                      </div>
+                    </div>
+                    <div>
+                      <h2 style={{ marginTop: '20px' }}>I am mostly interested in:</h2>
+                      <div>
+                        <div>
+                          <input type="checkbox" name="checkbox4"></input>
+                          <label>Speaking opportunities</label>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <input type="checkbox" name="checkbox5"></input>
+                          <label>Sponsorships and exhibition booths</label>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <input type="checkbox" name="checkbox6"></input>
+                          <label>Delegate passes only</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="RemindMeLater_emailContainer__GGz3-">
+                      <div>
+                        <input type="text" name="email" placeholder="Email Address (Required)"></input>
+                      </div>
+                      <button type="submit">Remind Me</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div className="PageForm_footer__hOO1l">
+            <div
+              className="PageForm_footerInner__5Enax"
+              style={{ maxWidth: "1070px" }}
+            >
+              <p>
+                <span onClick={() => navigate("/privacy-policy")} >Privacy Policy</span>
+                <span className="PageForm_divide__vwhn0">|</span>
+                ABCD Company
+              </p>
+              <p>©2026 Bitcoin Innovation & Market
+                Evolution 2026</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

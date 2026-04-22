@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "../Footer";
 import "./../assets/css/Error404.css";
+import CookieBanner from "./cookieBanner";
 import { Helmet } from "react-helmet-async";
 
 const Error404 = () => {
@@ -29,6 +30,7 @@ const Error404 = () => {
 
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

@@ -20,6 +20,7 @@ import benefitsBg from "../assets/webImages/benefits-who-should-attend.webp";
 import ketTakewaysBg from "../assets/webImages/keytakeaways-who-should-attend.webp";
 import arrowUpIcon from "../assets/webCommonImages/accordion-arrow-up.png";
 import arrowDownIcon from "../assets/webCommonImages/arrow-down-black.png";
+import CookieBanner from "./cookieBanner";
 
 // const arrowUpIcon =
 //   "https://www.desalination-resource-recovery.com/images/icons/accordion-arrow-up.png";
@@ -311,6 +312,7 @@ const WhoShouldAttend = () => {
 
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />

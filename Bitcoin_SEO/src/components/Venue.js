@@ -16,6 +16,7 @@ import bgImage from "../assets/webImages/venue-main-image.webp";
 import locationIcon from "../assets/webCommonImages/location-pin.png";
 import phoneIcon from "../assets/webCommonImages/icon-phone.png";
 import webIcon from "../assets/webCommonImages/icon-web.png";
+import CookieBanner from "./cookieBanner";
 
 // const bgImage =
 //   "https://www.frac-sand-conference.com/static/media/venue-image.ad9c328038bb8cdfb219.png";
@@ -123,6 +124,7 @@ const Venue = () => {
 
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

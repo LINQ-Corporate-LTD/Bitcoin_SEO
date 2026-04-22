@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
+import CookieBanner from "./cookieBanner";
+
 const Faq = () => {
   const [faqList, setFaqList] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
@@ -90,6 +92,7 @@ const Faq = () => {
 
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

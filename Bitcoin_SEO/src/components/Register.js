@@ -662,6 +662,7 @@ import { useApiData } from "../../src/common/ApiContext";
 import icon from "../../src/assets/images/group-icon.png";
 import { useSSRData } from "../common/useSSRData";
 import { usePageSeo } from "../common/usePageSeo";
+import CookieBanner from "./cookieBanner";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -895,6 +896,7 @@ const Register = () => {
 
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

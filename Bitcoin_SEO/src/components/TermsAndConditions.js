@@ -4,6 +4,8 @@ import Footer from "../Footer";
 import "../assets/css/TermsAndConditions.css";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
+import CookieBanner from "./cookieBanner";
+
 const TermsAndConditions = () => {
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200
@@ -26,6 +28,7 @@ const TermsAndConditions = () => {
   const seoImage = pageSeo.pageOgImage || null;
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />

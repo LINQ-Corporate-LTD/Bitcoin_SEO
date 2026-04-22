@@ -13,6 +13,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 // import { Navigation } from "swiper/modules";
 import Slider from "react-slick";
+import CookieBanner from "./cookieBanner";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
 const allTopics = [
@@ -285,6 +286,7 @@ const Attandees = () => {
 
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

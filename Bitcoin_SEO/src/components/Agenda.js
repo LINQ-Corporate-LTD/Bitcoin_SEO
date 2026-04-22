@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useApiData } from "../common/ApiContext";
 import { usePageSeo } from "../common/usePageSeo";
+import CookieBanner from "./cookieBanner";
 import speakerDummy from "../../src/assets/images/Speaker_photos/Speaker_dummy.jpg";
 import companyDummy from "../../src/assets/images/Speaker_photos/companyLogo_dummy.png";
 
@@ -733,6 +734,7 @@ const Agenda = () => {
 
   return (
     <>
+      <CookieBanner />
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />
