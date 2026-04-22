@@ -96,7 +96,7 @@ const TermsAndConditions = () => {
                 <div className="TermsAndConditions_divider__b7Fdc"></div>
                 c) The Organizer may, at its unchallengeable discretion, alter the Venue or cancel the Event, subject to timely notification to Attendees. In the event of cancellations by the Organizer, the Event may be rescheduled within a 12-month period, without entitlement to refunds.
                 <div className="TermsAndConditions_divider__b7Fdc"></div>
-                d) The Organizer expressly reserves the unimpeachable right to cancel any bookings and shall issue a full refund of fees paid.
+                d) The Organizer expressly reserves the right to cancel any bookings. In such cases, the Attendee shall be offered the option to attend a rescheduled Event or transfer their registration to a future event organised by the Organizer. No monetary refunds shall be issued.
                 <div className="TermsAndConditions_divider__b7Fdc"></div>
                 e) The Organizer shall not be liable for any indirect costs (including, but not limited to, travel and accommodation expenses) incurred by Attendees due to alterations in the Event schedule.
                 <div className="TermsAndConditions_divider__b7Fdc"></div>
@@ -142,7 +142,7 @@ const TermsAndConditions = () => {
             <div className="TermsAndConditions_section__zAzp-">
               <h4>11. Governing Law and Jurisdiction</h4>
               <p>
-                This Agreement shall be governed by and construed in accordance with the laws of the State of New York, without regard to its conflict of laws principles.
+                This Agreement shall be governed by and construed in accordance with the laws of the Republic of Singapore, without regard to its conflict of laws principles.
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
@@ -167,6 +167,7 @@ const TermsAndConditions = () => {
                 c) Attendees are exclusively accountable for their accommodation, travel, and other personal expenses.
                 <div className="TermsAndConditions_divider__b7Fdc"></div>
                 d) Attendee bookings are transferable but irrevocably non-cancellable. Any substitute Attendee must be approved by the Organizer and must assent to these Terms.
+                e)In cases where an Attendee is unable to attend due to a denied or delayed visa application, no monetary refund shall be issued. The Organizer shall, at its sole discretion, offer a credit toward a future event organised by the Organizer.
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
@@ -189,14 +190,14 @@ const TermsAndConditions = () => {
                 <div className="TermsAndConditions_divider__b7Fdc"></div>
                 e) All correspondence relating to this Agreement must be in written form.
                 <div className="TermsAndConditions_divider__b7Fdc"></div>
-                f) Any disputes arising under this Agreement shall be subject to binding arbitration in New York, U.S., in accordance with U.S. law.
+                f) Any disputes arising under this Agreement shall be subject to binding arbitration in Singapore, in accordance with the rules of the Singapore International Arbitration Centre (SIAC).
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
               <h4>17. Data Protection</h4>
               <p>
                 <div className="TermsAndConditions_divider__b7Fdc"></div>
-                (a) Personal data provided by Attendees shall be treated with the utmost confidentiality and utilized in accordance with the Data Protection Act 1998 and our Privacy Policy. This data may be shared within our Group and with external partners unless an opt-out is explicitly communicated by the Attendee.
+                (a) Personal data provided by Attendees shall be treated with the utmost confidentiality and handled in accordance with applicable data protection laws and our Privacy Policy, available at <a href="/privacy-policy" rel="noopener noreferrer" style={{ color: 'Privacy Policy' }}>Privacy Policy</a>. This data may be shared within our Group and with external partners unless an opt-out is explicitly communicated by the Attendee.
                 <div className="TermsAndConditions_divider__b7Fdc"></div>
                 (b) Personal data collected from Attendees shall be retained solely for the duration necessary for the purposes elucidated and in strict compliance with applicable data protection laws. Attendees shall be informed of the specific applications of their data, and all such data shall be handled with the highest degree of security and confidentiality.
               </p>
@@ -204,7 +205,7 @@ const TermsAndConditions = () => {
             <div className="TermsAndConditions_section__zAzp-">
               <h4>18. Dispute Resolution Mechanism</h4>
               <p>
-                In the event of a dispute, the Parties hereby unequivocally commit to engaging in good-faith negotiations for a period of 30 days. In the event that the dispute remains unresolved, it shall be referred to binding arbitration in New York, U.S., in accordance with U.S. law.
+                In the event of a dispute, the Parties hereby commit to engaging in good-faith negotiations for a period of 30 days. In the event that the dispute remains unresolved, it shall be referred to binding arbitration in Singapore, in accordance with the rules of the Singapore International Arbitration Centre (SIAC).
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
@@ -220,73 +221,67 @@ const TermsAndConditions = () => {
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
-              <h4>21. Cancellation by Attendee</h4>
-              <p>
-                Attendees retain the prerogative to cancel their participation, subject to the conditions explicitly enumerated in our Cancellation Policy, which may entail applicable penalties or partial refunds.
-              </p>
-            </div>
-            <div className="TermsAndConditions_section__zAzp-">
-              <h4>22. Indemnification Clause</h4>
+              <h4>21. Indemnification Clause</h4>
               <p>
                 Attendees hereby solemnly agree to indemnify the Organizer against all claims arising from damages caused by the Attendees.
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
-              <h4>23. Compliance with Health and Safety Regulations</h4>
+              <h4>22. Compliance with Health and Safety Regulations</h4>
               <p>
                 Attendees shall unquestionably comply with all health and safety regulations as mandated by the Venue, local authorities, or the Organizer.
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
-              <h4>24. Alterations to the Agenda or Speakers</h4>
+              <h4>23. Alterations to the Agenda or Speakers</h4>
               <p>
                 The Organizer hereby reserves the unequivocal right to effect alterations to the agenda or speakers and shall duly inform Attendees of any substantial changes.
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
-              <h4>25. Specific Terms for Networking or Matchmaking Services</h4>
+              <h4>24. Specific Terms for Networking or Matchmaking Services</h4>
               <p>
                 Attendees engaging in networking and matchmaking services at the Event affirmatively acknowledge and consent that the Organizer shall not be held responsible for any disputes or disagreements that may arise between Attendees who connect via these services. The Organizer provides these services exclusively as a facilitator, and any connections formed are undertaken at the sole discretion and risk of the Attendees.
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
-              <h4>26. Limitations on Marketing Activities by Attendees</h4>
+              <h4>25. Limitations on Marketing Activities by Attendees</h4>
               <p>
                 Marketing activities undertaken by Attendees, especially Exhibitors and Sponsors, shall be strictly subject by the Organizer.
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
-              <h4>27. Right to Refuse Admission</h4>
+              <h4>26. Right to Refuse Admission</h4>
               <p>
                 The Organizer unequivocally reserves the absolute right to refuse admission or eject Attendees for non-compliance with the Code of Conduct, or deems the Attendee to be a commercial risk to the Event.
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
-              <h4>28. Use of Event Materials Post-Event</h4>
+              <h4>27. Use of Event Materials Post-Event</h4>
               <p>
                 Guidelines pertaining to the post-event utilization of materials or recordings shall be provided by the Organizer.
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
-              <h4>29. Feedback and Complaints Procedure</h4>
+              <h4>28. Feedback and Complaints Procedure</h4>
               <p>
                 A detailed procedure for submitting feedback or complaints is readily available, with explicit provisions on how these matters shall be addressed.
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
-              <h4>30. Amendments to Terms and Conditions</h4>
+              <h4>29. Amendments to Terms and Conditions</h4>
               <p>
                 The Organizer unreservedly reserves the right to amend these Terms & Conditions at any time.
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
-              <h4>31. Severability Clause</h4>
+              <h4>30. Severability Clause</h4>
               <p>
                 In the event that any portion of this Agreement is determined to be unenforceable, the remainder of the Agreement shall remain valid and enforceable.
               </p>
             </div>
             <div className="TermsAndConditions_section__zAzp-">
-              <h4>32. Non-Discrimination Clause</h4>
+              <h4>31. Non-Discrimination Clause</h4>
               <p>
                 The Organizer is unwaveringly committed to providing an inclusive and respectful environment for all Attendees. Discrimination of any kind based on race, color, religion, gender, national origin, age, disability, or any other protected characteristic is sternly prohibited.
               </p>
