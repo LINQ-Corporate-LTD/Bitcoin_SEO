@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 import leftArrowIcon from '../assets/webCommonImages/icon-arrow-left.png'
 import rightArrowIcon from '../assets/webCommonImages/icon-arrow-right.png'
 
@@ -183,7 +183,7 @@ const News = () => {
   const seoImage = pageSeo.pageOgImage || null;
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

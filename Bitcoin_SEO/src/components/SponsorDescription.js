@@ -12,7 +12,7 @@ import LogoCarousel from "./LogoCarousel";
 import Error404 from "./Error404";
 import { useSSRData } from "../common/useSSRData";
 import { Helmet } from "react-helmet-async";
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 
 const toSlug = (str = "") =>
   str
@@ -220,7 +220,7 @@ const SponsorDescription = () => {
 
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       {/* ✅ STRICT: Render Helmet ONLY if exact backend data is available */}
       {metaTitle && metaDesc && (
         <Helmet>

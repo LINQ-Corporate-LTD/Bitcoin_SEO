@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 import mediaImage1 from "../assets/webImages/media1.webp";
 import mediaImage2 from "../assets/webImages/media-res2.webp";
 import emailIcon from "../assets/webCommonImages/msg.png";
@@ -77,7 +77,7 @@ const MediaPartners = () => {
 
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

@@ -12,7 +12,7 @@ import { Helmet } from "react-helmet-async";
 import toggle from "../../src/assets/webCommonImages/toggle.png";
 import cardLabel from "../../src/assets/webCommonImages/card-labels.png";
 import lockIcon from "../../src/assets/webCommonImages/lock.png";
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 
 // const ticket =
 //   "https://www.desalination-resource-recovery.com/images/ticket.svg";
@@ -982,7 +982,7 @@ const SponsorBookingForm = () => {
 
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

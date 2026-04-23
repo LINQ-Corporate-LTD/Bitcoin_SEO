@@ -639,7 +639,7 @@ import { Helmet } from "react-helmet-async";
 import { useSSRData } from "../common/useSSRData";
 import leftArrowIcon from '../assets/webCommonImages/icon-arrow-left.png'
 import rightArrowIcon from '../assets/webCommonImages/icon-arrow-right.png'
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 
 // const leftArrowIcon =
 //   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
@@ -866,7 +866,7 @@ const TrendDescriptionPage = () => {
 
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

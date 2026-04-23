@@ -493,7 +493,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import { useApiData } from "../../src/common/ApiContext";
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 const TOKEN_KEY = "slideShareToken";
 const EMAIL_KEY = "slideShareEmail";
 const EXPIRY_KEY = "slideShareExpiry";
@@ -710,7 +710,7 @@ const SlideShare = () => {
 
     return (
         <>
-            <CookieBanner />
+            {/* <CookieBanner /> */}
             <div id="root">
                 {/* <Helmet>
                 <title>{seoTitle}</title>

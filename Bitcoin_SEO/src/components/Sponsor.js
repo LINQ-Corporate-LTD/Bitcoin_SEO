@@ -18,7 +18,7 @@ import leftArrowIcon from '../assets/webCommonImages/icon-arrow-left.png'
 import rightArrowIcon from '../assets/webCommonImages/icon-arrow-right.png'
 import emailIcon from '../assets/webCommonImages/msg.png'
 import phoneIcon from '../assets/webCommonImages/phone-call.png'
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 
 // const leftArrowIcon =
 //   "https://www.desalination-resource-recovery.com/images/icons/icon-arrow-left.png";
@@ -352,7 +352,7 @@ const Sponsors = () => {
   // const seoDesc = "Exhibit or sponsor at Bitcoin Innovation & Market Evolution 2026 and connect with miners, exchanges, fintechs, regulators and blockchain leaders.";
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       <div id="root">
         <Helmet>
           <title>{seoTitle}</title>

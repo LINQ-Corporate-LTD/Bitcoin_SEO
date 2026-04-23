@@ -9,7 +9,7 @@ import { useSSRData } from "../common/useSSRData";
 import toggle from '../assets/webCommonImages/toggle.png'
 import cardLabel from '../assets/webCommonImages/card-labels.png'
 import lockIcon from '../assets/webCommonImages/lock.png'
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 // const logo =
 //   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
 
@@ -935,7 +935,7 @@ const BookingForm = () => {
 
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       <div id="root">
         <div className="PageForm_container__NA5Wr">
           <div className="PageForm_header__7W2Cz">
