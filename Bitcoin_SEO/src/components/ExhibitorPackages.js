@@ -5,7 +5,7 @@ import Sponsors7 from "../../src/assets/images/Sponsor/sponsor-image (1).png";
 import Navbar from "./Navbar";
 import LogoCarousel from "./LogoCarousel";
 import SubscribeForm from "./SubscribeForm";
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 import Footer from "../Footer";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -550,7 +550,7 @@ const ExhibitorPackages = () => {
 
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />

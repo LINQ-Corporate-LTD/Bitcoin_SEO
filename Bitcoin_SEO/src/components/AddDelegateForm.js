@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import PhoneInput from "react-phone-number-input";
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 import "react-phone-number-input/style.css";
 import countryList from "react-select-country-list";
 import { useNavigate } from "react-router-dom";
@@ -712,7 +712,7 @@ const CompanyRegistrationForm = () => {
 
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       <div id="root">
         <div className="PageForm_container__NA5Wr">
           <div className="PageForm_header__7W2Cz">

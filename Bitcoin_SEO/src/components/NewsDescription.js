@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Error404 from "./Error404";
 import { Helmet } from "react-helmet-async";
 import { useSSRData } from "../common/useSSRData";
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 import linkedInLogo from '../assets/webCommonImages/share-linkedIn.png'
 import whatsappLogo from '../assets/webCommonImages/share-whatsapp.png'
 import emailLogo from '../assets/webCommonImages/share-email.png'
@@ -290,7 +290,7 @@ Read the full article: ${currentUrl}`);
 
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       {seoTitle && seoDesc && (
         <Helmet>
           <title>{seoTitle}</title>

@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Error404 from "./Error404";
 import { Helmet } from "react-helmet-async";
 import { useSSRData } from "../common/useSSRData";
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 
 const SpeakerProfile = () => {
   const { slug } = useParams();
@@ -131,7 +131,7 @@ const SpeakerProfile = () => {
 
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       {/*
         ✅ CRITICAL SEO FIX:
         Render <Helmet> ONLY when seoTitle is a real non-empty string from the backend.

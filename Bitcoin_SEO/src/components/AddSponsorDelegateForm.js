@@ -18,7 +18,7 @@ import { useApiData } from "../common/ApiContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 import plusIcon from '../assets/webCommonImages/plus.png'
 import closeBtn from '../assets/webCommonImages/del-cross.png'
 import toggle from '../assets/webCommonImages/toggle.png'
@@ -1099,7 +1099,7 @@ const AddSponsorDelegateForm = () => {
 
     return (
       <>
-        <CookieBanner />
+        {/* <CookieBanner /> */}
         <Helmet>
           <title>{metaSeoTitle}</title>
           <meta name="debug-ssr" content="AddSponsorDelegateForm Step 2" />

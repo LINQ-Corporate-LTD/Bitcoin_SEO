@@ -14,7 +14,7 @@ import { FormControl, FormHelperText } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { useApiData } from "../common/ApiContext";
 import { usePageSeo } from "../common/usePageSeo";
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 // const logo =
 //   "https://harsh7541.pythonanywhere.com/media/mediabitcoin_logo_white.png";
 // const plusIcon =
@@ -469,7 +469,7 @@ const RemindMeLater = () => {
 
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       <div id="root">
         <Helmet>
           <title>{seoTitle}</title>
