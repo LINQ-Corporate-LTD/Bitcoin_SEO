@@ -27,37 +27,58 @@ const Navdata = () => {
   const navbarDataRaw = JSON.parse(localStorage.getItem("navbarData") || "[]");
   const detailedPermissions = JSON.parse(localStorage.getItem("detailed_permissions") || "{}");
 
-  // const permissions = JSON.parse(localStorage.getItem("permissions") || "[]");
-
   const navData = navbarDataRaw.map(module => ({
     ...module,
-    subItems: module.subItems ? module.subItems.filter(sub => {
-      const subPerms = detailedPermissions[sub.id] || [];
-      return subPerms.includes("view");
-    }) : []
-  })).filter(module => module.subItems.length > 0 || module.id === 'dashboard');
+    subItems: module.subItems
+      ? module.subItems.filter(sub => {
+        const subPerms = detailedPermissions[sub.id] || [];
+        return subPerms.includes("view");
+      })
+      : []
+  })).filter(module => {
+    return (
+      (module.link && module.link.trim() !== "") ||
+      module.subItems.length > 0 ||
+      module.id === "dashboard"
+    );
+  });
 
   const menuItems = [
     {
       label: "Menu",
       isHeader: true,
     },
-    ...navData.map(item => ({
-      ...item,
-      stateVariables: toggleState[item.id] || false,
-      click: function (e) {
-        e.preventDefault();
-        setToggleState(prev => {
-          const newState = {};
-          newState[item.id] = !prev[item.id];
-          return newState;
-        });
-        setIscurrentState(item.id);
-        updateIconSidebar(e);
-      }
-    }))
+    ...navData.map(item => {
+      const hasDirectLink = item.link && item.link.trim() !== "";
+
+      return {
+        ...item,
+        // If no direct link, keep subItems for dropdown; else clear them
+        subItems: hasDirectLink ? [] : item.subItems,
+        stateVariables: toggleState[item.id] || false,
+        click: function (e) {
+          e.preventDefault();
+
+          if (hasDirectLink) {
+            // ✅ Direct navigation if link exists
+            history(item.link);
+            setIscurrentState(item.id);
+          } else {
+            // ✅ Toggle dropdown if no link (fetch submodules)
+            setToggleState(prev => {
+              const newState = {};
+              newState[item.id] = !prev[item.id];
+              return newState;
+            });
+            setIscurrentState(item.id);
+            updateIconSidebar(e);
+          }
+        }
+      };
+    })
   ];
 
   return <React.Fragment>{menuItems}</React.Fragment>;
 };
+
 export default Navdata;
