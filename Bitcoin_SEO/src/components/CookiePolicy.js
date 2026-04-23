@@ -4,7 +4,7 @@ import Footer from "../Footer";
 import "../assets/css/cookiePolicy.css";
 import { Helmet } from "react-helmet-async";
 import { usePageSeo } from "../common/usePageSeo";
-import CookieBanner from "./cookieBanner";
+// import CookieBanner from "./cookieBanner";
 
 const CookiePolicy = () => {
   const [windowWidth, setWindowWidth] = useState(
@@ -27,7 +27,7 @@ const CookiePolicy = () => {
 
   return (
     <>
-      <CookieBanner />
+      {/* <CookieBanner /> */}
       {/* <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />
