@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from Event.models import eventAgenda, eventIndustryTrends,blockedEmailDomains
-
+from .models import SidebarModule
 class eventAgendaSerializer(serializers.ModelSerializer):
     class Meta:
         model = eventAgenda
@@ -60,3 +60,21 @@ class EmailVerificationSerializer(serializers.Serializer):
                 f"Emails from '{domain}' are not allowed."
             )
         return value
+    
+class SidebarSubModuleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SidebarModule
+        fields = ['id', 'name', 'link', 'id_attr', 'order']
+
+
+class SidebarModuleSerializer(serializers.ModelSerializer):
+    subItems = SidebarSubModuleSerializer(
+        source='submodules',
+        many=True,
+        read_only=True
+    )
+
+    class Meta:
+        model = SidebarModule
+        fields = ['id', 'name', 'icon', 'link', 'order', 'subItems']
+        # ✅ No stray 'return value' here

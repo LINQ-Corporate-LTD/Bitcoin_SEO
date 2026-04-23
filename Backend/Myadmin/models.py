@@ -530,6 +530,7 @@ class pastAttandeeHomeData(models.Model):
 class SidebarModule(models.Model):
     name = models.CharField(max_length=100)
     icon = models.CharField(max_length=100, null=True, blank=True)
+    link = models.CharField(max_length=100, blank=True, default="")
     order = models.IntegerField(default=0)
     isDelete = models.CharField(default="No", max_length=10)
 

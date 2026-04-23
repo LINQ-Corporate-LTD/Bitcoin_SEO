@@ -5903,6 +5903,7 @@ def getNavbarDataFun(request):
             'id': m.name.lower(),
             'label': m.name,
             'icon': m.icon,
+            'link': m.link or '',
             'subItems': sub_list
         })
     return JsonResponse({'status': True, 'navbarData': navbarData})
